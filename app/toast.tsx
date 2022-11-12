@@ -7,7 +7,7 @@ export default function Toast() {
   const [bannerHidden, setBannerHidden] = useState(true);
 
   useEffect(() => {
-    setBannerHidden(Cookies.get('mongo-banner-hidden') === 'true');
+    setBannerHidden(Cookies.get('template-banner-hidden') === 'true');
   }, []);
 
   return bannerHidden ? null : (
