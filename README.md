@@ -18,7 +18,7 @@ This is a starter template using the following stack:
 - Language - [TypeScript](https://www.typescriptlang.org)
 - Auth - [NextAuth.js](https://next-auth.js.org)
 - Database - [PlanetScale](https://planetscale.com)
-- Hosting - [Vercel](https://vercel.com/docs/concepts/next.js/overview)
+- Deployment - [Vercel](https://vercel.com/docs/concepts/next.js/overview)
 - Styling - [Tailwind CSS](https://tailwindcss.com)
 - Components - [Tremor](https://www.tremor.so)
 - Analytics - [Vercel Analytics](https://vercel.com/analytics)
