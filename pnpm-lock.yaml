@@ -5,6 +5,7 @@ specifiers:
   '@heroicons/react': ^2.0.13
   '@planetscale/database': ^1.4.0
   '@tremor/react': ^1.1.4
+  '@types/js-cookie': ^3.0.2
   '@types/node': 18.11.9
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.8
@@ -31,6 +32,7 @@ dependencies:
   '@heroicons/react': 2.0.13_react@18.2.0
   '@planetscale/database': 1.4.0
   '@tremor/react': 1.1.4_v2m5e27vhdewzwhryxwfaorcca
+  '@types/js-cookie': 3.0.2
   '@types/node': 18.11.9
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.8
@@ -350,6 +352,10 @@ packages:
 
   /@types/d3-time/2.1.1:
     resolution: {integrity: sha512-9MVYlmIgmRR31C5b4FVSWtuMmBHh2mOWQYfl7XAYOa8dsnb7iEmUmRSWSFgXFtkjxO65d7hTUHQC+RhR/9IWFg==}
+    dev: false
+
+  /@types/js-cookie/3.0.2:
+    resolution: {integrity: sha512-6+0ekgfusHftJNYpihfkMu8BWdeHs9EOJuGcSofErjstGPfPGEu9yTu4t460lTzzAMl2cM5zngQJqPMHbbnvYA==}
     dev: false
 
   /@types/json5/0.0.29:
