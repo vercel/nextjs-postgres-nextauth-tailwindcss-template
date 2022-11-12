@@ -1,4 +1,16 @@
-# Next.js 13 Admin Dashboard Starter
+![Banner](https://user-images.githubusercontent.com/9113740/201498152-b171abb8-9225-487a-821c-6ff49ee48579.png)
+
+<div align="center"><strong>Next.js 13 Admin Dashboard Template</strong></div>
+<div align="center">Built with the new `app` directory (beta).</div>
+<br />
+<div align="center">
+<a href="http://admin-dash-template.vercel.sh/">Demo</a>
+<span> · </span>
+<a href="https://vercel.com/docs/concepts/analytics/audiences/quickstart">Clone & Deploy</a>
+<span>
+</div>
+
+## Overview
 
 This is a starter template using the following stack:
 
