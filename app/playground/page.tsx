@@ -5,7 +5,7 @@ import {
   Flex,
   ColGrid,
   Title,
-  BarList,
+  BarList
 } from '@tremor/react';
 import Chart from './chart';
 
@@ -14,14 +14,14 @@ const website = [
   { name: '/contact', value: 751 },
   { name: '/gallery', value: 471 },
   { name: '/august-discount-offer', value: 280 },
-  { name: '/case-studies', value: 78 },
+  { name: '/case-studies', value: 78 }
 ];
 
 const shop = [
   { name: '/home', value: 453 },
   { name: '/imprint', value: 351 },
   { name: '/shop', value: 271 },
-  { name: '/pricing', value: 191 },
+  { name: '/pricing', value: 191 }
 ];
 
 const app = [
@@ -29,25 +29,25 @@ const app = [
   { name: '/product-features', value: 676 },
   { name: '/about', value: 564 },
   { name: '/login', value: 234 },
-  { name: '/downloads', value: 191 },
+  { name: '/downloads', value: 191 }
 ];
 
 const data = [
   {
     category: 'Website',
     stat: '10,234',
-    data: website,
+    data: website
   },
   {
     category: 'Online Shop',
     stat: '12,543',
-    data: shop,
+    data: shop
   },
   {
     category: 'Mobile App',
     stat: '2,543',
-    data: app,
-  },
+    data: app
+  }
 ];
 
 const dataFormatter = (number: number) =>
@@ -61,23 +61,23 @@ const categories: {
   {
     title: 'Sales',
     metric: '$ 12,699',
-    metricPrev: '$ 9,456',
+    metricPrev: '$ 9,456'
   },
   {
     title: 'Profit',
     metric: '$ 40,598',
-    metricPrev: '$ 45,564',
+    metricPrev: '$ 45,564'
   },
   {
     title: 'Customers',
     metric: '1,072',
-    metricPrev: '856',
-  },
+    metricPrev: '856'
+  }
 ];
 
 export default function PlaygroundPage() {
   return (
-    <main className="p-4 md:p-10">
+    <main className="p-4 md:p-10 mx-auto max-w-7xl">
       <ColGrid numColsSm={2} numColsLg={3} gapX="gap-x-6" gapY="gap-y-6">
         {categories.map((item) => (
           <Card key={item.title}>
