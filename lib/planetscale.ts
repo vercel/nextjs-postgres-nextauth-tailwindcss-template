@@ -10,14 +10,12 @@ interface User {
 }
 
 interface Database {
-  guestbook: User;
-  // Could add users from NextAuth here
-  // either manually or through an upcoming adapter
+  users: User;
   // https://github.com/nextauthjs/next-auth/issues/4922
 }
 
 export const queryBuilder = new Kysely<Database>({
   dialect: new PlanetScaleDialect({
-    url: process.env.DATABASE_URL,
-  }),
+    url: process.env.DATABASE_URL
+  })
 });

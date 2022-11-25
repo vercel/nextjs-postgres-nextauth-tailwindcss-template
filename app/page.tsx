@@ -1,22 +1,16 @@
 import { Card, Title, Text } from '@tremor/react';
+import { queryBuilder } from '../lib/planetscale';
 import UsersTable from './table';
 
-interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-}
-
-async function getUsers() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users');
-  const users: User[] = await res.json();
-
-  return users;
-}
+export const dynamic = 'force-static',
+  runtime = 'experimental-edge',
+  preferredRegion = 'home';
 
 export default async function IndexPage() {
-  const users = await getUsers();
+  const users = await queryBuilder
+    .selectFrom('users')
+    .select(['id', 'name', 'username', 'email'])
+    .execute();
 
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
