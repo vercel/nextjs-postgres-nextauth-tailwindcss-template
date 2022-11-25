@@ -2,7 +2,7 @@ import { Card, Title, Text } from '@tremor/react';
 import { queryBuilder } from '../lib/planetscale';
 import UsersTable from './table';
 
-export const dynamic = 'force-static',
+export const dynamic = 'force-dynamic',
   runtime = 'experimental-edge',
   preferredRegion = 'home';
 
