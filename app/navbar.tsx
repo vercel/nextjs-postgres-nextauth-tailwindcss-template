@@ -79,7 +79,7 @@ export default function Navbar({ user }: { user: any }) {
                       <span className="sr-only">Open user menu</span>
                       <Image
                         className="h-8 w-8 rounded-full"
-                        src={user?.image || 'https://avatar.tobi.sh/'}
+                        src={user?.image || 'https://avatar.vercel.sh/leerob'}
                         height={32}
                         width={32}
                         alt={`${user?.name || 'placeholder'} avatar`}
