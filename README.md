@@ -10,7 +10,7 @@
 <div align="center">
 <a href="http://admin-dash-template.vercel.sh/">Demo</a>
 <span> · </span>
-<a href="https://vercel.com/docs/concepts/analytics/audiences/quickstart">Clone & Deploy</a>
+<a href="https://vercel.com/templates/next.js/admin-dashboard-tailwind-planetscale-react-nextjs">Clone & Deploy</a>
 <span>
 </div>
 
