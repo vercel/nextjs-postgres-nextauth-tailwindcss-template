@@ -16,14 +16,6 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export function SignOut() {
-  return (
-    <button className="" onClick={() => signOut()}>
-      Sign out
-    </button>
-  );
-}
-
 export default function Navbar({ user }: { user: any }) {
   const pathname = usePathname();
 
