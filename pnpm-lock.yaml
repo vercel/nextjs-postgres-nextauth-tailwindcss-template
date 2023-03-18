@@ -4,7 +4,7 @@ specifiers:
   '@headlessui/react': ^1.7.12
   '@heroicons/react': ^2.0.16
   '@planetscale/database': ^1.5.0
-  '@tremor/react': ^2.0.0
+  '@tremor/react': ^2.0.1
   '@types/js-cookie': ^3.0.3
   '@types/node': 18.14.2
   '@types/react': 18.0.28
@@ -31,7 +31,7 @@ dependencies:
   '@headlessui/react': 1.7.12_biqbaboplfbrettd7655fr4n2y
   '@heroicons/react': 2.0.16_react@18.2.0
   '@planetscale/database': 1.5.0
-  '@tremor/react': 2.0.0_v2m5e27vhdewzwhryxwfaorcca
+  '@tremor/react': 2.0.1_v2m5e27vhdewzwhryxwfaorcca
   '@types/js-cookie': 3.0.3
   '@types/node': 18.14.2
   '@types/react': 18.0.28
@@ -338,8 +338,8 @@ packages:
       tslib: 2.5.0
     dev: false
 
-  /@tremor/react/2.0.0_v2m5e27vhdewzwhryxwfaorcca:
-    resolution: {integrity: sha512-F4UtSpBm6FZurWnv5A8lvr8NM3j6MCGLVz8LbfaQ9M36V53KTg0dNXuyjQf3Bhn+pNAK1nTi87JFIinDuZTy1Q==}
+  /@tremor/react/2.0.1_v2m5e27vhdewzwhryxwfaorcca:
+    resolution: {integrity: sha512-HXNpjnYGadiR6dmfvGmM9uNuQkGxj6e7ekC8eaVEHnaSL9I7T7OwFRWBGT/fbFXdhHGyVydPFl01HMTEUOm8Hg==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
