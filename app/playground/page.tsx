@@ -1,12 +1,4 @@
-import {
-  Card,
-  Metric,
-  Text,
-  Flex,
-  ColGrid,
-  Title,
-  BarList
-} from '@tremor/react';
+import { Card, Metric, Text, Flex, Grid, Title, BarList } from '@tremor/react';
 import Chart from './chart';
 
 const website = [
@@ -78,54 +70,47 @@ const categories: {
 export default function PlaygroundPage() {
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
-      <ColGrid numColsSm={2} numColsLg={3} gapX="gap-x-6" gapY="gap-y-6">
+      <Grid className="gap-6" numColsSm={2} numColsLg={3}>
         {categories.map((item) => (
           <Card key={item.title}>
-            <Flex alignItems="items-start">
+            <Flex alignItems="start">
               <Text>{item.title}</Text>
             </Flex>
             <Flex
-              justifyContent="justify-start"
-              alignItems="items-baseline"
-              spaceX="space-x-3"
-              truncate={true}
+              className="space-x-3 truncate"
+              justifyContent="start"
+              alignItems="baseline"
             >
               <Metric>{item.metric}</Metric>
-              <Text truncate={true}>from {item.metricPrev}</Text>
+              <Text className="truncate">from {item.metricPrev}</Text>
             </Flex>
           </Card>
         ))}
-      </ColGrid>
-      <ColGrid
-        numColsSm={2}
-        numColsLg={3}
-        gapX="gap-x-6"
-        gapY="gap-y-6"
-        marginTop="mt-8"
-      >
+      </Grid>
+      <Grid className="mt-8 gap-6" numColsSm={2} numColsLg={3}>
         {data.map((item) => (
           <Card key={item.category}>
             <Title>{item.category}</Title>
             <Flex
-              justifyContent="justify-start"
-              alignItems="items-baseline"
-              spaceX="space-x-2"
+              className="space-x-2"
+              justifyContent="start"
+              alignItems="baseline"
             >
               <Metric>{item.stat}</Metric>
               <Text>Total views</Text>
             </Flex>
-            <Flex marginTop="mt-6">
+            <Flex className="mt-6">
               <Text>Pages</Text>
-              <Text textAlignment="text-right">Views</Text>
+              <Text className="text-right">Views</Text>
             </Flex>
             <BarList
+              className="mt-2"
               data={item.data}
               valueFormatter={dataFormatter}
-              marginTop="mt-2"
             />
           </Card>
         ))}
-      </ColGrid>
+      </Grid>
       <Chart />
     </main>
   );

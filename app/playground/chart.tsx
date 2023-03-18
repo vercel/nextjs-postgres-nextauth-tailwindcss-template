@@ -6,18 +6,18 @@ const data = [
   {
     Month: 'Jan 21',
     Sales: 2890,
-    Profit: 2400,
+    Profit: 2400
   },
   {
     Month: 'Feb 21',
     Sales: 1890,
-    Profit: 1398,
+    Profit: 1398
   },
   {
     Month: 'Jan 22',
     Sales: 3890,
-    Profit: 2980,
-  },
+    Profit: 2980
+  }
 ];
 
 const valueFormatter = (number: number) =>
@@ -25,17 +25,16 @@ const valueFormatter = (number: number) =>
 
 export default function Chart() {
   return (
-    <Card marginTop="mt-8">
+    <Card className="mt-8">
       <Title>Performance</Title>
       <Text>Comparison between Sales and Profit</Text>
       <AreaChart
-        marginTop="mt-4"
+        className="mt-4 h-80"
         data={data}
         categories={['Sales', 'Profit']}
-        dataKey="Month"
+        index="Month"
         colors={['indigo', 'fuchsia']}
         valueFormatter={valueFormatter}
-        height="h-80"
       />
     </Card>
   );

@@ -24,7 +24,7 @@ export default async function IndexPage({
         A list of users retrieved from a MySQL database (PlanetScale).
       </Text>
       <Search />
-      <Card marginTop="mt-6">
+      <Card className="mt-6">
         {/* @ts-expect-error Server Component */}
         <UsersTable users={users} />
       </Card>
