@@ -25,17 +25,16 @@ const valueFormatter = (number: number) =>
 
 export default function Chart() {
   return (
-    <Card marginTop="mt-8">
+    <Card className="mt-8">
       <Title>Performance</Title>
       <Text>Comparison between Sales and Profit</Text>
       <AreaChart
-        marginTop="mt-4"
+        className="mt-4 h-80"
         data={data}
         categories={['Sales', 'Profit']}
-        dataKey="Month"
+        index="Month"
         colors={['indigo', 'fuchsia']}
         valueFormatter={valueFormatter}
-        height="h-80"
       />
     </Card>
   );
