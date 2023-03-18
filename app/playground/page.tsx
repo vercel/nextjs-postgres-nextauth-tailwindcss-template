@@ -1,12 +1,4 @@
-import {
-  Card,
-  Metric,
-  Text,
-  Flex,
-  Grid,
-  Title,
-  BarList
-} from '@tremor/react';
+import { Card, Metric, Text, Flex, Grid, Title, BarList } from '@tremor/react';
 import Chart from './chart';
 
 const website = [
@@ -95,11 +87,7 @@ export default function PlaygroundPage() {
           </Card>
         ))}
       </Grid>
-      <Grid
-        className="mt-8 gap-6"
-        numColsSm={2}
-        numColsLg={3}
-      >
+      <Grid className="mt-8 gap-6" numColsSm={2} numColsLg={3}>
         {data.map((item) => (
           <Card key={item.category}>
             <Title>{item.category}</Title>
