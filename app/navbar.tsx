@@ -179,22 +179,22 @@ export default function Navbar({ user }: { user: any }) {
                     </div>
                   </div>
                   <div className="mt-3 space-y-1">
-                    <Disclosure.Button
+                    <button
                       onClick={() => signOut()}
                       className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
                     >
                       Sign out
-                    </Disclosure.Button>
+                    </button>
                   </div>
                 </>
               ) : (
                 <div className="mt-3 space-y-1">
-                  <Disclosure.Button
+                  <button
                     onClick={() => signIn('github')}
                     className="flex w-full px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
                   >
                     Sign in
-                  </Disclosure.Button>
+                  </button>
                 </div>
               )}
             </div>
