@@ -53,11 +53,11 @@ Next, inside PlanetScale, create a users table based on the schema defined in th
 
 ```
 CREATE TABLE `users` (
-	`id` int NOT NULL AUTO_INCREMENT,
-	`email` varchar(255) NOT NULL,
-	`name` varchar(255),
-	`username` varchar(255),
-	PRIMARY KEY (`id`)
+  `id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `name` varchar(255),
+  `username` varchar(255),
+  PRIMARY KEY (`id`)
 );
 ```
 
