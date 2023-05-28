@@ -101,11 +101,12 @@ export default function Navbar({ user }: { user: any }) {
                               )}
                               onClick={() => signOut()}
                             >
-                              Sign out
+                              Cerrar Sesión
                             </button>
                           )}
                         </Menu.Item>
                       ) : (
+                        <>
                         <Menu.Item>
                           {({ active }) => (
                             <button
@@ -113,12 +114,13 @@ export default function Navbar({ user }: { user: any }) {
                                 active ? 'bg-gray-100' : '',
                                 'flex w-full px-4 py-2 text-sm text-gray-700'
                               )}
-                              onClick={() => signIn('github')}
+                              onClick={() => signIn('google')}
                             >
-                              Sign in
+                              Iniciar sesión
                             </button>
                           )}
                         </Menu.Item>
+                        </>
                       )}
                     </Menu.Items>
                   </Transition>
@@ -183,17 +185,17 @@ export default function Navbar({ user }: { user: any }) {
                       onClick={() => signOut()}
                       className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
                     >
-                      Sign out
+                      Cerrar Sesión
                     </button>
                   </div>
                 </>
               ) : (
                 <div className="mt-3 space-y-1">
                   <button
-                    onClick={() => signIn('github')}
+                    onClick={() => signIn('google')}
                     className="flex w-full px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
                   >
-                    Sign in
+                    Iniciar sesión
                   </button>
                 </div>
               )}

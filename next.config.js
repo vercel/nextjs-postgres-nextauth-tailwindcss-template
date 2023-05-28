@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['avatars.githubusercontent.com', 'avatar.vercel.sh']
+    domains: ['lh3.googleusercontent.com', 'avatar.vercel.sh'],
+    remotePatterns: [{
+      protocol: 'https',
+      hostname: 'lh3.googleusercontent.com',
+      pathname: '/*',
+    }]
   },
   experimental: {
     serverComponentsExternalPackages: ['@tremor/react']
