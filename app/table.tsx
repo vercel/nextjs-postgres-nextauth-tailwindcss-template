@@ -15,14 +15,20 @@ interface User {
   email: string;
 }
 
-export default async function UsersTable({ users }: { users: User[] }) {
+export default async function ProductsTable({ users }: { users: User[] }) {
   return (
     <Table>
       <TableHead>
         <TableRow>
-          <TableHeaderCell>Name</TableHeaderCell>
-          <TableHeaderCell>Username</TableHeaderCell>
-          <TableHeaderCell>Email</TableHeaderCell>
+          <TableHeaderCell>Compuesto</TableHeaderCell>
+          <TableHeaderCell>Nombre</TableHeaderCell>
+          <TableHeaderCell>Tipo</TableHeaderCell>
+          <TableHeaderCell>Grupo</TableHeaderCell>
+          <TableHeaderCell>Tratamiento para</TableHeaderCell>
+          <TableHeaderCell>Dosis</TableHeaderCell>
+          <TableHeaderCell>Cuándo</TableHeaderCell>
+          <TableHeaderCell>Cultivo</TableHeaderCell>
+          <TableHeaderCell>PS</TableHeaderCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -31,6 +37,24 @@ export default async function UsersTable({ users }: { users: User[] }) {
             <TableCell>{user.name}</TableCell>
             <TableCell>
               <Text>{user.username}</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{user.email}</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{user.email}</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{user.email}</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{user.email}</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{user.email}</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{user.email}</Text>
             </TableCell>
             <TableCell>
               <Text>{user.email}</Text>
