@@ -1,6 +1,5 @@
 import './globals.css';
 
-import { Analytics } from '@vercel/analytics/react';
 import Nav from './nav';
 import { Suspense } from 'react';
 
@@ -23,7 +22,6 @@ export default async function RootLayout({
           <Nav />
         </Suspense>
         {children}
-        <Analytics />
       </body>
     </html>
   );
