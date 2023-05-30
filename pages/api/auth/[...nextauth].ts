@@ -1,5 +1,5 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
-import GoogleProvider from "next-auth/providers/google";
+import GoogleProvider from 'next-auth/providers/google';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -9,10 +9,9 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      console.log({ user, account, profile, email, credentials })
-      return false
-    },
+    async signIn({ user }) {
+      return [process.env.EMAIL_VALID, process.env.EMAIL_ADMIN].includes(user.email ?? '');
+    }
   }
 };
 
