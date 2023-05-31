@@ -12,3 +12,13 @@ export interface Product {
   crop?: string;
   ps?: string;
 }
+
+export interface Registry {
+  id: Generated<number>;
+  product: Product;
+  crop?: string;
+  date?: Date;
+  for?: string;
+  dose?: string;
+  next?: string;
+}
