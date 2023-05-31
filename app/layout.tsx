@@ -4,9 +4,9 @@ import Nav from './nav';
 import { Suspense } from 'react';
 
 export const metadata = {
-  title: 'Fitoregis',
+  title: 'FitoRegis',
   description:
-    'Registro de cuidados fitosanitarios'
+    'Registro de datos fitosanitarios para el control de plagas y enfermedades en cultivos agrícolas.'
 };
 
 export default async function RootLayout({
