@@ -9,7 +9,7 @@ import Image from 'next/image';
 
 const navigation = [
   { name: 'Inicio', href: '/' },
-  { name: 'Registro', href: '/registro', authProtected: true }
+  { name: 'Registro', href: '/registro' }
 ];
 
 function classNames(...classes: string[]) {
@@ -18,10 +18,7 @@ function classNames(...classes: string[]) {
 
 export default function Navbar({ user }: { user: any }) {
   const pathname = usePathname();
-  const navigationFiltered = navigation.filter(({ authProtected }) => {
-    return !(authProtected && !user);
-
-  });
+  if (!user) signIn('google');
 
   return (
     <Disclosure as='nav' className='bg-white shadow-sm'>
@@ -54,7 +51,7 @@ export default function Navbar({ user }: { user: any }) {
                   </svg>
                 </div>
                 <div className='hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8'>
-                  {navigationFiltered.map((item) => (
+                  {navigation.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
@@ -148,7 +145,7 @@ export default function Navbar({ user }: { user: any }) {
 
           <Disclosure.Panel className='sm:hidden'>
             <div className='space-y-1 pt-2 pb-3'>
-              {navigationFiltered.map((item) => (
+              {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
                   as='a'

@@ -1,6 +1,5 @@
 import { Card, Metric, Text, Flex, Grid, Title, BarList } from '@tremor/react';
 import Chart from './chart';
-import Auth from '../../components/Auth';
 
 const website = [
   { name: '/home', value: 1230 },
@@ -70,7 +69,6 @@ const categories: {
 
 export default function PlaygroundPage() {
   return (
-    <Auth>
       <main className='p-4 md:p-10 mx-auto max-w-7xl'>
         <Grid className='gap-6' numColsSm={2} numColsLg={3}>
           {categories.map((item) => (
@@ -115,6 +113,5 @@ export default function PlaygroundPage() {
         </Grid>
         <Chart />
       </main>
-    </Auth>
   );
 }

@@ -3,11 +3,9 @@ import { queryBuilder } from '../lib/planetscale';
 import Search from './search';
 import ProductsTable from './table';
 
-export const dynamic = 'force-dynamic';
-
 export default async function IndexPage({
-  searchParams
-}: {
+                                          searchParams
+                                        }: {
   searchParams: { q: string };
 }) {
   const search = searchParams.q ?? '';
@@ -17,15 +15,14 @@ export default async function IndexPage({
     .where('name', 'like', `%${search}%`)
     .execute();
 
-  console.log(products);
   return (
-    <main className="p-4 md:p-10 mx-auto max-w-7xl">
+    <main className='p-4 md:p-10 mx-auto max-w-7xl'>
       <Title>Productos</Title>
       <Text>
         Listado de productos fitosanitarios
       </Text>
       <Search />
-      <Card className="mt-6">
+      <Card className='mt-6'>
         {/* @ts-expect-error Server Component */}
         <ProductsTable products={products} />
       </Card>
