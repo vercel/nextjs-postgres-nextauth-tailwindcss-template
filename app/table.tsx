@@ -8,20 +8,26 @@ import {
   Text
 } from '@tremor/react';
 
-interface User {
+interface Product {
   id: number;
+  compound?: string;
   name: string;
-  username: string;
-  email: string;
+  type?: string;
+  group?: string,
+  for?: string;
+  dose?: string;
+  when?: string;
+  crop?: string;
+  ps?: string;
 }
 
-export default async function ProductsTable({ users }: { users: User[] }) {
+export default async function ProductsTable({ products }: { products: Product[] }) {
   return (
     <Table>
       <TableHead>
         <TableRow>
-          <TableHeaderCell>Compuesto</TableHeaderCell>
           <TableHeaderCell>Nombre</TableHeaderCell>
+          <TableHeaderCell>Compuesto</TableHeaderCell>
           <TableHeaderCell>Tipo</TableHeaderCell>
           <TableHeaderCell>Grupo</TableHeaderCell>
           <TableHeaderCell>Tratamiento para</TableHeaderCell>
@@ -32,32 +38,32 @@ export default async function ProductsTable({ users }: { users: User[] }) {
         </TableRow>
       </TableHead>
       <TableBody>
-        {users.map((user) => (
-          <TableRow key={user.id}>
-            <TableCell>{user.name}</TableCell>
+        {products.map((product) => (
+          <TableRow key={product.id}>
+            <TableCell>{product.name}</TableCell>
             <TableCell>
-              <Text>{user.username}</Text>
+              <Text>{product.compound}</Text>
             </TableCell>
             <TableCell>
-              <Text>{user.email}</Text>
+              <Text>{product.type}</Text>
             </TableCell>
             <TableCell>
-              <Text>{user.email}</Text>
+              <Text>{product.group}</Text>
             </TableCell>
             <TableCell>
-              <Text>{user.email}</Text>
+              <Text>{product.for}</Text>
             </TableCell>
             <TableCell>
-              <Text>{user.email}</Text>
+              <Text>{product.dose}</Text>
             </TableCell>
             <TableCell>
-              <Text>{user.email}</Text>
+              <Text>{product.when}</Text>
             </TableCell>
             <TableCell>
-              <Text>{user.email}</Text>
+              <Text>{product.crop}</Text>
             </TableCell>
             <TableCell>
-              <Text>{user.email}</Text>
+              <Text>{product.ps}</Text>
             </TableCell>
           </TableRow>
         ))}

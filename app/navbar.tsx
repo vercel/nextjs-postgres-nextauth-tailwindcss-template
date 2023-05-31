@@ -8,8 +8,8 @@ import { signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
 
 const navigation = [
-  { name: 'Dashboard', href: '/' },
-  { name: 'Playground', href: '/playground' }
+  { name: 'Inicio', href: '/' },
+  { name: 'Registro', href: '/registro', authProtected: true }
 ];
 
 function classNames(...classes: string[]) {
@@ -18,39 +18,43 @@ function classNames(...classes: string[]) {
 
 export default function Navbar({ user }: { user: any }) {
   const pathname = usePathname();
+  const navigationFiltered = navigation.filter(({ authProtected }) => {
+    return !(authProtected && !user);
+
+  });
 
   return (
-    <Disclosure as="nav" className="bg-white shadow-sm">
+    <Disclosure as='nav' className='bg-white shadow-sm'>
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 justify-between">
-              <div className="flex">
-                <div className="flex flex-shrink-0 items-center">
+          <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+            <div className='flex h-16 justify-between'>
+              <div className='flex'>
+                <div className='flex flex-shrink-0 items-center'>
                   <svg
-                    width="32"
-                    height="32"
-                    viewBox="0 0 32 32"
-                    fill="none"
-                    className="text-gray-100"
-                    xmlns="http://www.w3.org/2000/svg"
+                    width='32'
+                    height='32'
+                    viewBox='0 0 32 32'
+                    fill='none'
+                    className='text-gray-100'
+                    xmlns='http://www.w3.org/2000/svg'
                   >
                     <rect
-                      width="100%"
-                      height="100%"
-                      rx="16"
-                      fill="currentColor"
+                      width='100%'
+                      height='100%'
+                      rx='16'
+                      fill='currentColor'
                     />
                     <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-                      fill="black"
+                      fillRule='evenodd'
+                      clipRule='evenodd'
+                      d='M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z'
+                      fill='black'
                     />
                   </svg>
                 </div>
-                <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-                  {navigation.map((item) => (
+                <div className='hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8'>
+                  {navigationFiltered.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
@@ -67,13 +71,14 @@ export default function Navbar({ user }: { user: any }) {
                   ))}
                 </div>
               </div>
-              <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                <Menu as="div" className="relative ml-3">
+              <div className='hidden sm:ml-6 sm:flex sm:items-center'>
+                <Menu as='div' className='relative ml-3'>
                   <div>
-                    <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
-                      <span className="sr-only">Abrir menú de usuario</span>
+                    <Menu.Button
+                      className='flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2'>
+                      <span className='sr-only'>Abrir menú de usuario</span>
                       <Image
-                        className="h-8 w-8 rounded-full"
+                        className='h-8 w-8 rounded-full'
                         src={user?.image || 'https://avatar.vercel.sh/leerob'}
                         height={32}
                         width={32}
@@ -83,14 +88,15 @@ export default function Navbar({ user }: { user: any }) {
                   </div>
                   <Transition
                     as={Fragment}
-                    enter="transition ease-out duration-200"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
+                    enter='transition ease-out duration-200'
+                    enterFrom='transform opacity-0 scale-95'
+                    enterTo='transform opacity-100 scale-100'
+                    leave='transition ease-in duration-75'
+                    leaveFrom='transform opacity-100 scale-100'
+                    leaveTo='transform opacity-0 scale-95'
                   >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items
+                      className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
                       {user ? (
                         <Menu.Item>
                           {({ active }) => (
@@ -107,44 +113,45 @@ export default function Navbar({ user }: { user: any }) {
                         </Menu.Item>
                       ) : (
                         <>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <button
-                              className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'flex w-full px-4 py-2 text-sm text-gray-700'
-                              )}
-                              onClick={() => signIn('google')}
-                            >
-                              Iniciar sesión
-                            </button>
-                          )}
-                        </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <button
+                                className={classNames(
+                                  active ? 'bg-gray-100' : '',
+                                  'flex w-full px-4 py-2 text-sm text-gray-700'
+                                )}
+                                onClick={() => signIn('google')}
+                              >
+                                Iniciar sesión
+                              </button>
+                            )}
+                          </Menu.Item>
                         </>
                       )}
                     </Menu.Items>
                   </Transition>
                 </Menu>
               </div>
-              <div className="-mr-2 flex items-center sm:hidden">
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
-                  <span className="sr-only">Open main menu</span>
+              <div className='-mr-2 flex items-center sm:hidden'>
+                <Disclosure.Button
+                  className='inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2'>
+                  <span className='sr-only'>Abrir menu principal</span>
                   {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                    <XMarkIcon className='block h-6 w-6' aria-hidden='true' />
                   ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                    <Bars3Icon className='block h-6 w-6' aria-hidden='true' />
                   )}
                 </Disclosure.Button>
               </div>
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 pt-2 pb-3">
-              {navigation.map((item) => (
+          <Disclosure.Panel className='sm:hidden'>
+            <div className='space-y-1 pt-2 pb-3'>
+              {navigationFiltered.map((item) => (
                 <Disclosure.Button
                   key={item.name}
-                  as="a"
+                  as='a'
                   href={item.href}
                   className={classNames(
                     pathname === item.href
@@ -158,42 +165,42 @@ export default function Navbar({ user }: { user: any }) {
                 </Disclosure.Button>
               ))}
             </div>
-            <div className="border-t border-gray-200 pt-4 pb-3">
+            <div className='border-t border-gray-200 pt-4 pb-3'>
               {user ? (
                 <>
-                  <div className="flex items-center px-4">
-                    <div className="flex-shrink-0">
+                  <div className='flex items-center px-4'>
+                    <div className='flex-shrink-0'>
                       <Image
-                        className="h-8 w-8 rounded-full"
+                        className='h-8 w-8 rounded-full'
                         src={user.image}
                         height={32}
                         width={32}
                         alt={`${user.name} avatar`}
                       />
                     </div>
-                    <div className="ml-3">
-                      <div className="text-base font-medium text-gray-800">
+                    <div className='ml-3'>
+                      <div className='text-base font-medium text-gray-800'>
                         {user.name}
                       </div>
-                      <div className="text-sm font-medium text-gray-500">
+                      <div className='text-sm font-medium text-gray-500'>
                         {user.email}
                       </div>
                     </div>
                   </div>
-                  <div className="mt-3 space-y-1">
+                  <div className='mt-3 space-y-1'>
                     <button
                       onClick={() => signOut()}
-                      className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+                      className='block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800'
                     >
                       Cerrar Sesión
                     </button>
                   </div>
                 </>
               ) : (
-                <div className="mt-3 space-y-1">
+                <div className='mt-3 space-y-1'>
                   <button
                     onClick={() => signIn('google')}
-                    className="flex w-full px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+                    className='flex w-full px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800'
                   >
                     Iniciar sesión
                   </button>
