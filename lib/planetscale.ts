@@ -2,7 +2,7 @@ import 'server-only';
 import { Generated, Kysely } from 'kysely';
 import { PlanetScaleDialect } from 'kysely-planetscale';
 
-import { Product } from '../models';
+import { Product, Registry } from '../models';
 
 interface User {
   id: Generated<number>;
@@ -14,6 +14,7 @@ interface User {
 interface Database {
   users: User;
   products: Product;
+  registry: Registry
   // https://github.com/nextauthjs/next-auth/issues/4922
 }
 

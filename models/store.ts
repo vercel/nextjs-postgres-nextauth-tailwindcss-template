@@ -15,10 +15,14 @@ export interface Product {
 
 export interface Registry {
   id: Generated<number>;
-  product: Product;
+  product: number;
   crop?: string;
-  date?: Date;
+  date?: string;
   for?: string;
   dose?: string;
   next?: string;
+}
+
+export interface RegistryResponse extends Omit<Registry, 'product'> {
+  name: string;
 }

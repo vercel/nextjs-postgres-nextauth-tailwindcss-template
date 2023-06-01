@@ -7,19 +7,7 @@ import {
   TableCell,
   Text
 } from '@tremor/react';
-
-interface Product {
-  id: number;
-  compound?: string;
-  name: string;
-  type?: string;
-  group?: string,
-  for?: string;
-  dose?: string;
-  when?: string;
-  crop?: string;
-  ps?: string;
-}
+import { Product } from 'models';
 
 export default async function ProductsTable({ products }: { products: Product[] }) {
   return (
@@ -39,7 +27,7 @@ export default async function ProductsTable({ products }: { products: Product[] 
       </TableHead>
       <TableBody>
         {products.map((product) => (
-          <TableRow key={product.id}>
+          <TableRow key={product.id.toString()}>
             <TableCell>{product.name}</TableCell>
             <TableCell>
               <Text>{product.compound}</Text>

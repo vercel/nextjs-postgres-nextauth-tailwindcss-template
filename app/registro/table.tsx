@@ -7,18 +7,18 @@ import {
   TableCell,
   Text
 } from '@tremor/react';
-import { Registry } from '../../models';
+import { RegistryResponse } from 'models';
+import { formatDate } from 'utils';
 
-export default async function RegistryTable({ registry }: { registry: Registry[] }) {
+export default async function RegistryTable({ registry }: { registry: RegistryResponse[] }) {
   return (
     <Table>
       <TableHead>
         <TableRow>
           <TableHeaderCell>Cultivo</TableHeaderCell>
+          <TableHeaderCell>Fecha</TableHeaderCell>
           <TableHeaderCell>Producto</TableHeaderCell>
           <TableHeaderCell>Para</TableHeaderCell>
-          <TableHeaderCell>Dosis</TableHeaderCell>
-          <TableHeaderCell>Tratamiento para</TableHeaderCell>
           <TableHeaderCell>Dosis</TableHeaderCell>
           <TableHeaderCell>Siguiente tratamiento en</TableHeaderCell>
         </TableRow>
@@ -28,7 +28,10 @@ export default async function RegistryTable({ registry }: { registry: Registry[]
           <TableRow key={row.id.toString()}>
             <TableCell>{row.crop}</TableCell>
             <TableCell>
-              <Text>{row.product?.name}</Text>
+            <Text>{formatDate(row.date)}</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{row.name}</Text>
             </TableCell>
             <TableCell>
               <Text>{row.for}</Text>
