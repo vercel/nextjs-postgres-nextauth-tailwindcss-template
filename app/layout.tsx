@@ -1,7 +1,8 @@
 import './globals.css';
 
-import Nav from './nav';
 import { Suspense } from 'react';
+import { getServerSession } from 'next-auth/next';
+import Navbar from './navbar';
 
 export const metadata = {
   title: 'FitoRegis',
@@ -9,20 +10,21 @@ export const metadata = {
     'Registro de datos fitosanitarios para el control de plagas y enfermedades en cultivos agrícolas.'
 };
 
-export default async function RootLayout({
-  children
-}: {
+const RootLayout = async ({ children }: {
   children: React.ReactNode;
-}) {
+}) => {
+  const session = await getServerSession();
+
   return (
-    <html lang="en" className="h-full bg-gray-50">
-      <body className="h-full">
-        <Suspense fallback="...">
-          {/* @ts-expect-error Server Component */}
-          <Nav />
-        </Suspense>
-        {children}
-      </body>
+    <html lang='en' className='h-full bg-gray-50'>
+    <body className='h-full'>
+    <Suspense fallback='...'>
+      <Navbar user={session?.user} />
+    </Suspense>
+    {Boolean(session?.user) && children}
+    </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
