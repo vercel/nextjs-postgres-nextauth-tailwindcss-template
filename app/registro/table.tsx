@@ -25,7 +25,7 @@ export default async function RegistryTable({ registry }: { registry: Registry[]
       </TableHead>
       <TableBody>
         {registry.map((row) => (
-          <TableRow key={row.id}>
+          <TableRow key={row.id.toString()}>
             <TableCell>{row.crop}</TableCell>
             <TableCell>
               <Text>{row.product?.name}</Text>
