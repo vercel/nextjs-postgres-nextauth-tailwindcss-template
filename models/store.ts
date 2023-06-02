@@ -21,6 +21,7 @@ export interface Registry {
   for?: string;
   dose?: string;
   next?: string;
+  aclarations?: string;
 }
 
 export interface RegistryResponse extends Omit<Registry, 'product'> {

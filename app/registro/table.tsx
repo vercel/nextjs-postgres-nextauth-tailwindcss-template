@@ -20,7 +20,8 @@ export default async function RegistryTable({ registry }: { registry: RegistryRe
           <TableHeaderCell>Producto</TableHeaderCell>
           <TableHeaderCell>Para</TableHeaderCell>
           <TableHeaderCell>Dosis</TableHeaderCell>
-          <TableHeaderCell>Siguiente tratamiento en</TableHeaderCell>
+          <TableHeaderCell>Siguiente en</TableHeaderCell>
+          <TableHeaderCell>Aclaraciones</TableHeaderCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -41,6 +42,9 @@ export default async function RegistryTable({ registry }: { registry: RegistryRe
             </TableCell>
             <TableCell>
               <Text>{row.next}</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{row.aclarations}</Text>
             </TableCell>
           </TableRow>
         ))}
