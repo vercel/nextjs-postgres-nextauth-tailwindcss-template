@@ -12,9 +12,8 @@ interface User {
 }
 
 interface Database {
-  users: User;
-  products: Product;
-  registry: Registry
+  productos: Product;
+  registro: Registry
   // https://github.com/nextauthjs/next-auth/issues/4922
 }
 

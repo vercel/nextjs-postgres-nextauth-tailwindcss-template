@@ -2,28 +2,28 @@ import { Generated } from 'kysely/dist/esm';
 
 export interface Product {
   id: Generated<number>;
-  compound?: string;
-  name: string;
-  type?: string;
-  group?: string,
-  for?: string;
-  dose?: string;
-  when?: string;
-  crop?: string;
+  compuestos?: string;
+  nombre: string;
+  tipo?: string;
+  grupo?: string,
+  para?: string;
+  dosis?: string;
+  cuando?: string;
+  cultivo?: string;
   ps?: string;
 }
 
 export interface Registry {
   id: Generated<number>;
-  product: number;
-  crop?: string;
-  date?: string;
-  for?: string;
-  dose?: string;
-  next?: string;
-  aclarations?: string;
+  productoid: number;
+  cultivo?: string;
+  fecha?: string;
+  para?: string;
+  dosis?: string;
+  siguiente?: string;
+  aclaraciones?: string;
 }
 
-export interface RegistryResponse extends Omit<Registry, 'product'> {
-  name: string;
+export interface RegistryResponse extends Omit<Registry, 'productoid'> {
+  nombre: string;
 }

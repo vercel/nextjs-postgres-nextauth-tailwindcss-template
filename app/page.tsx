@@ -10,9 +10,9 @@ export default async function IndexPage({
 }) {
   const search = searchParams.q ?? '';
   const products = await queryBuilder
-    .selectFrom('products')
-    .select(['id', 'name', 'compound', 'type', 'group', 'for', 'dose', 'when', 'crop', 'ps'])
-    .where('name', 'like', `%${search}%`)
+    .selectFrom('productos')
+    .select(['id', 'nombre', 'compuestos', 'tipo', 'grupo', 'para', 'dosis', 'cuando', 'cultivo', 'ps'])
+    .where('nombre', 'like', `%${search}%`)
     .execute();
 
   return (

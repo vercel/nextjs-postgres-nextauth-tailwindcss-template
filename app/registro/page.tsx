@@ -13,10 +13,10 @@ const RegistryPage = async ({ searchParams }: {
 }) => {
   const search = searchParams.q ?? '';
   const registry = await queryBuilder
-    .selectFrom('registry')
-    .innerJoin('products', 'registry.product', 'products.id')
-    .select(['registry.id', 'registry.crop', 'products.name', 'registry.for', 'registry.date', 'registry.for', 'registry.dose', 'registry.next'])
-    .where('registry.crop', 'like', `%${search}%`)
+    .selectFrom('registro')
+    .innerJoin('productos', 'registro.productoid', 'productos.id')
+    .select(['registro.id', 'registro.cultivo', 'productos.nombre', 'registro.para', 'registro.fecha', 'registro.dosis', 'registro.siguiente', 'registro.aclaraciones'])
+    .where('registro.cultivo', 'like', `%${search}%`)
     .execute();
 
   return (

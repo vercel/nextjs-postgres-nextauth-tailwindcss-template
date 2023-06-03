@@ -28,27 +28,27 @@ export default async function ProductsTable({ products }: { products: Product[] 
       <TableBody>
         {products.map((product) => (
           <TableRow key={product.id.toString()}>
-            <TableCell>{product.name}</TableCell>
+            <TableCell>{product.nombre}</TableCell>
             <TableCell>
-              <Text>{product.compound}</Text>
+              <Text>{product.compuestos}</Text>
             </TableCell>
             <TableCell>
-              <Text>{product.type}</Text>
+              <Text>{product.tipo}</Text>
             </TableCell>
             <TableCell>
-              <Text>{product.group}</Text>
+              <Text>{product.grupo}</Text>
             </TableCell>
             <TableCell>
-              <Text>{product.for}</Text>
+              <Text>{product.para}</Text>
             </TableCell>
             <TableCell>
-              <Text>{product.dose}</Text>
+              <Text>{product.dosis}</Text>
             </TableCell>
             <TableCell>
-              <Text>{product.when}</Text>
+              <Text>{product.cuando}</Text>
             </TableCell>
             <TableCell>
-              <Text>{product.crop}</Text>
+              <Text>{product.cultivo}</Text>
             </TableCell>
             <TableCell>
               <Text>{product.ps}</Text>

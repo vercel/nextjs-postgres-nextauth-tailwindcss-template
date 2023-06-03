@@ -27,24 +27,24 @@ export default async function RegistryTable({ registry }: { registry: RegistryRe
       <TableBody>
         {registry.map((row) => (
           <TableRow key={row.id.toString()}>
-            <TableCell>{row.crop}</TableCell>
+            <TableCell>{row.cultivo}</TableCell>
             <TableCell>
-            <Text>{formatDate(row.date)}</Text>
+            <Text>{formatDate(row.fecha)}</Text>
             </TableCell>
             <TableCell>
-              <Text>{row.name}</Text>
+              <Text>{row.nombre}</Text>
             </TableCell>
             <TableCell>
-              <Text>{row.for}</Text>
+              <Text>{row.para}</Text>
             </TableCell>
             <TableCell>
-              <Text>{row.dose}</Text>
+              <Text>{row.dosis}</Text>
             </TableCell>
             <TableCell>
-              <Text>{row.next}</Text>
+              <Text>{row.siguiente}</Text>
             </TableCell>
             <TableCell>
-              <Text>{row.aclarations}</Text>
+              <Text>{row.aclaraciones}</Text>
             </TableCell>
           </TableRow>
         ))}
