@@ -2,7 +2,7 @@ import { Generated } from 'kysely/dist/esm';
 
 export interface Product {
   id: Generated<number>;
-  compuestos?: string;
+  composicion?: string;
   nombre: string;
   tipo?: string;
   grupo?: string,
@@ -11,9 +11,10 @@ export interface Product {
   cuando?: string;
   cultivo?: string;
   ps?: string;
+  notas?: string;
 }
 
-export interface Registry {
+export interface Treatment {
   id: Generated<number>;
   productoid: number;
   cultivo?: string;
@@ -24,6 +25,6 @@ export interface Registry {
   aclaraciones?: string;
 }
 
-export interface RegistryResponse extends Omit<Registry, 'productoid'> {
+export interface TreatmentResponse extends Omit<Treatment, 'productoid'> {
   nombre: string;
 }

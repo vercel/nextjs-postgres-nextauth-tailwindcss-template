@@ -23,6 +23,7 @@ export default async function ProductsTable({ products }: { products: Product[] 
           <TableHeaderCell>Cuándo</TableHeaderCell>
           <TableHeaderCell>Cultivo</TableHeaderCell>
           <TableHeaderCell>PS</TableHeaderCell>
+          <TableHeaderCell>Notas</TableHeaderCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -30,7 +31,7 @@ export default async function ProductsTable({ products }: { products: Product[] 
           <TableRow key={product.id.toString()}>
             <TableCell>{product.nombre}</TableCell>
             <TableCell>
-              <Text>{product.compuestos}</Text>
+              <Text>{product.composicion}</Text>
             </TableCell>
             <TableCell>
               <Text>{product.tipo}</Text>
@@ -52,6 +53,9 @@ export default async function ProductsTable({ products }: { products: Product[] 
             </TableCell>
             <TableCell>
               <Text>{product.ps}</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{product.notas}</Text>
             </TableCell>
           </TableRow>
         ))}

@@ -7,10 +7,10 @@ import {
   TableCell,
   Text
 } from '@tremor/react';
-import { RegistryResponse } from 'models';
+import { TreatmentResponse } from 'models';
 import { formatDate } from 'utils';
 
-export default async function RegistryTable({ registry }: { registry: RegistryResponse[] }) {
+export default async function RegistryTable({ registry }: { registry: TreatmentResponse[] }) {
   return (
     <Table>
       <TableHead>

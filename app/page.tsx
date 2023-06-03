@@ -11,7 +11,7 @@ export default async function IndexPage({
   const search = searchParams.q ?? '';
   const products = await queryBuilder
     .selectFrom('productos')
-    .select(['id', 'nombre', 'compuestos', 'tipo', 'grupo', 'para', 'dosis', 'cuando', 'cultivo', 'ps'])
+    .select(['id', 'nombre', 'composicion', 'tipo', 'grupo', 'para', 'dosis', 'cuando', 'cultivo', 'ps', 'notas'])
     .where('nombre', 'like', `%${search}%`)
     .execute();
 

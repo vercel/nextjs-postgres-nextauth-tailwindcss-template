@@ -66,28 +66,30 @@ Asegúrate de reemplazar ID_de_tu_aplicación_de_Google y Clave_secreta_de_tu_ap
 5. Dentro de PlanetScale, crea las tablas necesarias.
 
 ```
-CREATE TABLE `products` (
+CREATE TABLE `productos` (
 	`id` int NOT NULL AUTO_INCREMENT,
-	`compound` varchar(255),
-	`name` varchar(255) NOT NULL,
-	`type` varchar(255),
-	`group` varchar(255),
-	`for` varchar(255),
-	`dose` varchar(255),
-	`when` varchar(255),
-	`crop` varchar(255),
+	`composicion` varchar(255),
+	`nombre` varchar(255) NOT NULL,
+	`tipo` varchar(255),
+	`grupo` varchar(255),
+	`para` varchar(255),
+	`dosis` varchar(255),
+	`cuando` varchar(255),
+	`cultivo` varchar(255),
 	`ps` varchar(255),
+	`notas` mediumtext,
 	PRIMARY KEY (`id`)
 ) 
 
-CREATE TABLE `registry` (
-	`id` int NOT NULL AUTO_INCREMENT,
-	`product` int NOT NULL,
-	`crop` varchar(255),
-	`date` date,
-	`for` varchar(255),
-	`dose` varchar(255),
-	`next` varchar(255),
+CREATE TABLE `tratamientos` (
+		`id` int NOT NULL AUTO_INCREMENT,
+	`productoid` int NOT NULL,
+	`cultivo` varchar(255),
+	`fecha` date,
+	`para` varchar(255),
+	`dosis` varchar(255),
+	`siguiente` varchar(255),
+	`aclaraciones` varchar(255),
 	PRIMARY KEY (`id`)
 ) 
 ```
