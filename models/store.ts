@@ -25,6 +25,12 @@ export interface Treatment {
   aclaraciones?: string;
 }
 
+export interface Dictionary {
+  id: Generated<number>;
+  palabra: string;
+  definicion?: string;
+}
+
 export interface TreatmentResponse extends Omit<Treatment, 'productoid'> {
   nombre: string;
 }

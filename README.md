@@ -92,6 +92,13 @@ CREATE TABLE `tratamientos` (
 	`aclaraciones` varchar(255),
 	PRIMARY KEY (`id`)
 ) 
+
+CREATE TABLE `diccionario` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`palabra` varchar(255) NOt NULL,
+	`definicion` varchar(255),
+	PRIMARY KEY (`id`)
+) 
 ```
 
 6. Finalmente, inicia el servidor de desarrollo:

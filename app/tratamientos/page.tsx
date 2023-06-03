@@ -17,6 +17,7 @@ const RegistryPage = async ({ searchParams }: {
     .innerJoin('productos', 'tratamientos.productoid', 'productos.id')
     .select(['tratamientos.id', 'tratamientos.cultivo', 'productos.nombre', 'tratamientos.para', 'tratamientos.fecha', 'tratamientos.dosis', 'tratamientos.siguiente', 'tratamientos.aclaraciones'])
     .where('tratamientos.cultivo', 'like', `%${search}%`)
+    .orderBy('tratamientos.fecha', 'desc')
     .execute();
 
   return (
