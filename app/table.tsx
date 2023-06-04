@@ -1,3 +1,4 @@
+'use client'
 import {
   Table,
   TableHead,
