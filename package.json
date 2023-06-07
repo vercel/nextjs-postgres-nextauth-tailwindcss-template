@@ -8,10 +8,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.14",
+    "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
     "@planetscale/database": "^1.7.0",
-    "@tremor/react": "^2.9.1",
+    "@tremor/react": "^2.11.0",
     "@types/js-cookie": "^3.0.3",
     "@types/node": "20.1.4",
     "@types/react": "18.2.6",
