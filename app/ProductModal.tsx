@@ -59,7 +59,7 @@ const ProductModal = ({ open, onClose }: { open: boolean, onClose: () => void })
                       </Dialog.Title>
                       <div className='mt-2'>
                         <label htmlFor='nombre' className='block text-sm font-medium text-gray-700'>Nombre</label>
-                        <TextInput name='nombre' id='nombre' />
+                        <TextInput placeholder='Introduce el nombre' name='nombre' id='nombre' required />
                         <label htmlFor='compuesto' className='block text-sm font-medium text-gray-700'>Compuesto</label>
                         <TextInput name='compuesto' id='compuesto' />
                         <label htmlFor='tipo' className='block text-sm font-medium text-gray-700'>Tipo</label>
