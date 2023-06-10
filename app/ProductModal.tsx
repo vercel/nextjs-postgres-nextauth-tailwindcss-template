@@ -4,6 +4,19 @@ import { Dialog, Transition } from '@headlessui/react';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import { TextInput } from '@tremor/react';
 
+const FIELDS = [
+{ id: 'nombre', label: 'Nombre', placeholder: 'Nombre del producto', required: true },
+{ id: 'compuesto', label: 'Compuesto', placeholder: 'Compuesto' },
+{ id: 'tipo', label: 'Tipo', placeholder: 'Tipo' },
+{ id: 'grupo', label: 'Grupo', placeholder: 'Grupo' },
+{ id: 'para', label: 'Tratamiento para', placeholder: 'Tratamiento para' },
+{ id: 'dosis', label: 'Dosis', placeholder: 'Dosis' },
+{ id: 'cuando', label: 'Cuándo', placeholder: 'Cuándo' },
+{ id: 'cultivo', label: 'Cultivo', placeholder: 'Cultivo' },
+{ id: 'ps', label: 'PS', placeholder: 'PS' },
+{ id: 'notas', label: 'Notas', placeholder: 'Notas', full: true }
+  ]
+
 const ProductModal = ({ open, onClose }: { open: boolean, onClose: () => void }) => {
   const cancelButtonRef = useRef(null);
 
@@ -40,7 +53,7 @@ const ProductModal = ({ open, onClose }: { open: boolean, onClose: () => void })
               leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
             >
               <Dialog.Panel
-                className='relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg'>
+                className='relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-7xl'>
                 <div className='bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4'>
                   <div className='sm:flex sm:items-start'>
                     <div
@@ -57,28 +70,13 @@ const ProductModal = ({ open, onClose }: { open: boolean, onClose: () => void })
                       >
                         Añadir producto
                       </Dialog.Title>
-                      <div className='mt-2'>
-                        <label htmlFor='nombre' className='block text-sm font-medium text-gray-700'>Nombre</label>
-                        <TextInput placeholder='Introduce el nombre' name='nombre' id='nombre' required />
-                        <label htmlFor='compuesto' className='block text-sm font-medium text-gray-700'>Compuesto</label>
-                        <TextInput name='compuesto' id='compuesto' />
-                        <label htmlFor='tipo' className='block text-sm font-medium text-gray-700'>Tipo</label>
-                        <TextInput name='tipo' id='tipo' />
-                        <label htmlFor='grupo' className='block text-sm font-medium text-gray-700'>Grupo</label>
-                        <TextInput name='grupo' id='grupo' />
-                        <label htmlFor='para' className='block text-sm font-medium text-gray-700'>Tratamiento
-                          para</label>
-                        <TextInput name='para' id='para' />
-                        <label htmlFor='dosis' className='block text-sm font-medium text-gray-700'>Dosis</label>
-                        <TextInput name='dosis' id='dosis' />
-                        <label htmlFor='cuando' className='block text-sm font-medium text-gray-700'>Cuándo</label>
-                        <TextInput name='cuando' id='cuando' />
-                        <label htmlFor='cultivo' className='block text-sm font-medium text-gray-700'>Cultivo</label>
-                        <TextInput name='cultivo' id='cultivo' />
-                        <label htmlFor='ps' className='block text-sm font-medium text-gray-700'>PS</label>
-                        <TextInput name='ps' id='ps' />
-                        <label htmlFor='notas' className='block text-sm font-medium text-gray-700'>Notas</label>
-                        <TextInput name='notas' id='notas' />
+                      <div className='mt-2 flex flex-wrap'>
+                        {FIELDS.map(({ id, label, placeholder, required, full }) => (
+                          <div className={`p-4 ${full ? 'w-full' : 'md:w-1/3' }`} key={id}>
+                            <label htmlFor={id} className='block text-sm font-medium text-gray-700'>{label}</label>
+                            <TextInput placeholder={placeholder} name={id} id={id} required={required} />
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
