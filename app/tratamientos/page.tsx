@@ -1,7 +1,8 @@
-import { Card, TableHeaderCell, Text, Title } from '@tremor/react';
+import { Card, Flex, Text, Title } from '@tremor/react';
+import { queryBuilder } from 'lib/planetscale';
 import RegistryTable from './table';
 import Search from '../search';
-import { queryBuilder } from 'lib/planetscale';
+import NewButton from './new-button';
 
 
 const dataFormatter = (number: number) =>
@@ -22,10 +23,13 @@ const RegistryPage = async ({ searchParams }: {
 
   return (
     <main className='p-4 md:p-10 mx-auto max-w-7xl'>
-      <Title>Registro</Title>
-      <Text>
-        Registro de tratamientos
-      </Text>
+      <Flex>
+        <div>
+          <Title>Tratamientos</Title>
+          <Text>Registro de tratamientos</Text>
+        </div>
+        <NewButton />
+      </Flex>
       <Search />
       <Card className='mt-6'>
         {/* @ts-expect-error Server Component */}
