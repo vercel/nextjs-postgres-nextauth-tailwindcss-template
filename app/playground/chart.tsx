@@ -20,10 +20,7 @@ const data = [
   }
 ];
 
-const valueFormatter = (number: number) =>
-  `$ ${Intl.NumberFormat('us').format(number).toString()}`;
-
-export default function Chart() {
+export default function Example() {
   return (
     <Card className="mt-8">
       <Title>Performance</Title>
@@ -34,7 +31,9 @@ export default function Chart() {
         categories={['Sales', 'Profit']}
         index="Month"
         colors={['indigo', 'fuchsia']}
-        valueFormatter={valueFormatter}
+        valueFormatter={(number: number) =>
+          `$ ${Intl.NumberFormat('us').format(number).toString()}`
+        }
       />
     </Card>
   );

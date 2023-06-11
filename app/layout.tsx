@@ -19,8 +19,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className="h-full bg-gray-50">
       <body className="h-full">
-        <Suspense fallback="...">
-          {/* @ts-expect-error Server Component */}
+        <Suspense>
           <Nav />
         </Suspense>
         {children}

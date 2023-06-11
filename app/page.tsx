@@ -25,7 +25,6 @@ export default async function IndexPage({
       </Text>
       <Search />
       <Card className="mt-6">
-        {/* @ts-expect-error Server Component */}
         <UsersTable users={users} />
       </Card>
     </main>

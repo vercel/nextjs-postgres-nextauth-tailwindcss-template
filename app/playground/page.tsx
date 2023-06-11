@@ -1,4 +1,6 @@
-import { Card, Metric, Text, Flex, Grid, Title, BarList } from '@tremor/react';
+'use client';
+
+import { Card, Metric, Text, Title, BarList, Flex, Grid } from '@tremor/react';
 import Chart from './chart';
 
 const website = [
@@ -42,59 +44,17 @@ const data = [
   }
 ];
 
-const dataFormatter = (number: number) =>
-  Intl.NumberFormat('us').format(number).toString();
-
-const categories: {
-  title: string;
-  metric: string;
-  metricPrev: string;
-}[] = [
-  {
-    title: 'Sales',
-    metric: '$ 12,699',
-    metricPrev: '$ 9,456'
-  },
-  {
-    title: 'Profit',
-    metric: '$ 40,598',
-    metricPrev: '$ 45,564'
-  },
-  {
-    title: 'Customers',
-    metric: '1,072',
-    metricPrev: '856'
-  }
-];
-
 export default function PlaygroundPage() {
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
-      <Grid className="gap-6" numColsSm={2} numColsLg={3}>
-        {categories.map((item) => (
-          <Card key={item.title}>
-            <Flex alignItems="start">
-              <Text>{item.title}</Text>
-            </Flex>
-            <Flex
-              className="space-x-3 truncate"
-              justifyContent="start"
-              alignItems="baseline"
-            >
-              <Metric>{item.metric}</Metric>
-              <Text className="truncate">from {item.metricPrev}</Text>
-            </Flex>
-          </Card>
-        ))}
-      </Grid>
-      <Grid className="mt-8 gap-6" numColsSm={2} numColsLg={3}>
+      <Grid numItemsSm={2} numItemsLg={3} className="gap-6">
         {data.map((item) => (
           <Card key={item.category}>
             <Title>{item.category}</Title>
             <Flex
-              className="space-x-2"
               justifyContent="start"
               alignItems="baseline"
+              className="space-x-2"
             >
               <Metric>{item.stat}</Metric>
               <Text>Total views</Text>
@@ -104,9 +64,11 @@ export default function PlaygroundPage() {
               <Text className="text-right">Views</Text>
             </Flex>
             <BarList
-              className="mt-2"
               data={item.data}
-              valueFormatter={dataFormatter}
+              valueFormatter={(number: number) =>
+                Intl.NumberFormat('us').format(number).toString()
+              }
+              className="mt-2"
             />
           </Card>
         ))}
