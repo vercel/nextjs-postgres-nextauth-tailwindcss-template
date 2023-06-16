@@ -4,7 +4,7 @@
   <img alt="Shows all of the tools in the stack for this template, also listed in the README file." src="https://user-images.githubusercontent.com/9113740/201498152-b171abb8-9225-487a-821c-6ff49ee48579.png">
 </picture>
 
-<div align="center"><strong>Next.js 13 Admin Dashboard Template</strong></div>
+<div align="center"><strong>Next.js 13 Admin Dashboard Template.Cool!</strong></div>
 <div align="center">Built with the Next.js App Router</div>
 <br />
 <div align="center">
