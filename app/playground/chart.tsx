@@ -34,6 +34,7 @@ export default function Example() {
         valueFormatter={(number: number) =>
           `$ ${Intl.NumberFormat('us').format(number).toString()}`
         }
+        yAxisWidth={60}
       />
     </Card>
   );
