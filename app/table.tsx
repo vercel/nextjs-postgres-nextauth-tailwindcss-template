@@ -15,7 +15,7 @@ interface User {
   email: string;
 }
 
-export default async function UsersTable({ users }: { users: User[] }) {
+export default function UsersTable({ users }: { users: User[] }) {
   return (
     <Table>
       <TableHead>
