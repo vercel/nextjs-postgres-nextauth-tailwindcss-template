@@ -21,7 +21,7 @@ This is a starter template using the following stack:
 - Framework - [Next.js 13](https://nextjs.org/13)
 - Language - [TypeScript](https://www.typescriptlang.org)
 - Auth - [NextAuth.js](https://next-auth.js.org)
-- Database - [PlanetScale](https://planetscale.com)
+- Database - [Vercel Postgres](https://vercel.com/postgres)
 - Deployment - [Vercel](https://vercel.com/docs/concepts/next.js/overview)
 - Styling - [Tailwind CSS](https://tailwindcss.com)
 - Components - [Tremor](https://www.tremor.so)
@@ -33,38 +33,23 @@ This template uses the new Next.js App Router. This includes support for enhance
 
 ## Getting Started
 
-After creating an account with PlanetScale, you'll need to create a new database and retrieve the `DATABASE_URL`. Optionally, you can use Vercel integration, which will add the `DATABASE_URL` to the environment variables for your project.
+During the deployment, Vercel will prompt you to create a new Postgres database. This will add the necessary environment variables to your project.
 
-This is the provided `.env.local.example` file, which you'll want to use to create your own `.env.local` file:
-
-```
-# https://vercel.com/integrations/planetscale
-DATABASE_URL=
-
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET= # Linux: `openssl rand -hex 32` or go to https://generate-secret.now.sh/32
-
-# https://next-auth.js.org/providers/github
-GITHUB_ID=
-GITHUB_SECRET=
-```
-
-Next, inside PlanetScale, create a users table based on the schema defined in this repository.
+Inside the Vercel Postgres dashboard, create a table based on the schema defined in this repository.
 
 ```
-CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) NOT NULL,
-  `name` varchar(255),
-  `username` varchar(255),
-  PRIMARY KEY (`id`)
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255) NOT NULL,
+  name VARCHAR(255),
+  username VARCHAR(255)
 );
 ```
 
 Insert a row for testing:
 
 ```
-INSERT INTO `users` (`id`, `email`, `name`, `username`) VALUES (1, 'me@site.com', 'Me', 'username');
+INSERT INTO users (id, email, name, username) VALUES (1, 'me@site.com', 'Me', 'username');
 ```
 
 Finally, run the following commands to start the development server:
