@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - '${HOST_DB_PORT}:${DB_PORT}'
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      # - db_data:/var/lib/postgresql/data
+    networks:
+      - appnetwork
+
+  api:
+    build: .
+    command: npm run dev
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      DATABASE_URL: ${DATABASE_URL}
+    volumes:
+      - ./src:/app/src
+    ports:
+      - ${HOST_APP_PORT}:${APP_PORT}
+    depends_on:
+      - db
+    networks:
+      - appnetwork
+
+networks:
+  appnetwork:

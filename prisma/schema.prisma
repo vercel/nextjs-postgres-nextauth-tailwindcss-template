@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Person {
+  id           String    @id @default(uuid())
+  name         String?
+  birth        DateTime?
+  sex          Sex?
+  profile      String?
+  phone_number String?
+  users        Users?
+
+  @@map("person")
+}
+
+enum Sex {
+  MALE
+  FEMALE
+}
+
+model Role {
+  id        String      @id @default(uuid())
+  role_name String
+  users     UsersRole[]
+  MenuRole  MenuRole[]
+
+  @@map("role")
+}
+
+model UsersRole {
+  users_id String
+  role_id  String
+  users    Users  @relation(fields: [users_id], references: [id])
+  role     Role   @relation(fields: [role_id], references: [id])
+
+  @@id([users_id, role_id])
+  @@map("user_role")
+}
+
+model Users {
+  id                String      @id @default(uuid())
+  username          String?
+  email             String      @unique
+  password          String?
+  nickname          String?
+  verified          Boolean     @default(false)
+  verification_code String?
+  provider          String?
+  social_id         String?
+  person_id         String?     @unique
+  ticket_cnt        Int?        @default(0)
+  is_shared         Boolean?    @default(false)
+  is_deleted        Boolean?    @default(false)
+  person            Person?     @relation(fields: [person_id], references: [id])
+  roles             UsersRole[]
+
+  @@map("users")
+}
+
+model Menu {
+  id          String     @id @default(uuid())
+  title       String
+  description String?
+  children    Menu[]     @relation("MenuToMenu")
+  parentId    String?
+  parent      Menu?      @relation("MenuToMenu", fields: [parentId], references: [id])
+  menuRoles   MenuRole[]
+
+  @@map("menu")
+}
+
+model MenuRole {
+  menu_id String
+  role_id String
+  menu    Menu   @relation(fields: [menu_id], references: [id])
+  role    Role   @relation(fields: [role_id], references: [id])
+
+  @@id([menu_id, role_id])
+  @@map("menu_role")
+}
