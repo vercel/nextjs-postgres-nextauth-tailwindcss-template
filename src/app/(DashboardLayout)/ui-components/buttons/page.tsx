@@ -1,18 +1,18 @@
-'use client';
+'use client'
 import {
-  Paper, Grid,
+  Paper,
+  Grid,
   Button,
   Box,
   Stack,
   IconButton,
   Fab,
   ButtonGroup,
-} from '@mui/material';
-import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
-import BaseCard from '@/app/(DashboardLayout)/components/shared/BaseCard';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-import { IconHome, IconTrash, IconUser } from '@tabler/icons-react';
-
+} from '@mui/material'
+import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer'
+import BaseCard from '@/app/(DashboardLayout)/components/shared/BaseCard'
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles'
+import { IconHome, IconTrash, IconUser } from '@tabler/icons-react'
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body1,
@@ -20,10 +20,10 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
   height: 60,
   lineHeight: '60px',
-}));
+}))
 
-const darkTheme = createTheme({ palette: { mode: 'dark' } });
-const lightTheme = createTheme({ palette: { mode: 'light' } });
+const darkTheme = createTheme({ palette: { mode: 'dark' } })
+const lightTheme = createTheme({ palette: { mode: 'light' } })
 
 const Buttons = () => {
   return (
@@ -50,18 +50,28 @@ const Buttons = () => {
             </Stack>
           </BaseCard>
         </Grid>
-        <Grid item xs={12} lg={6} >
+        <Grid item xs={12} lg={6}>
           <BaseCard title="Text Buttons">
             <Stack spacing={2} direction="row">
-              <Button variant="text" color="primary">Text</Button>
-              <Button variant="text" color="error">Text</Button>
-              <Button variant="text" color="secondary">Text</Button>
-              <Button variant="text" color="success">Text</Button>
-              <Button variant="text" color="warning">Text</Button>
+              <Button variant="text" color="primary">
+                Text
+              </Button>
+              <Button variant="text" color="error">
+                Text
+              </Button>
+              <Button variant="text" color="secondary">
+                Text
+              </Button>
+              <Button variant="text" color="success">
+                Text
+              </Button>
+              <Button variant="text" color="warning">
+                Text
+              </Button>
             </Stack>
           </BaseCard>
         </Grid>
-        <Grid item xs={12} lg={6} >
+        <Grid item xs={12} lg={6}>
           <BaseCard title="Outline Buttons">
             <Stack spacing={2} direction="row">
               <Button variant="outlined" color="primary">
@@ -82,9 +92,9 @@ const Buttons = () => {
             </Stack>
           </BaseCard>
         </Grid>
-        <Grid item xs={12} lg={6} >
+        <Grid item xs={12} lg={6}>
           <BaseCard title="Size Buttons">
-            <Box sx={{ "& button": { mx: 1 } }}>
+            <Box sx={{ '& button': { mx: 1 } }}>
               <Button color="primary" size="small" variant="contained">
                 small
               </Button>
@@ -97,7 +107,7 @@ const Buttons = () => {
             </Box>
           </BaseCard>
         </Grid>
-        <Grid item xs={12} lg={6} >
+        <Grid item xs={12} lg={6}>
           <BaseCard title="Icon Buttons">
             <Stack spacing={2} direction="row">
               <IconButton aria-label="delete" color="success">
@@ -128,7 +138,7 @@ const Buttons = () => {
           </BaseCard>
         </Grid>
         <Grid item xs={12} lg={6}>
-          <BaseCard title="Group Buttons">
+          <BaseCard title="NavigationGroup Buttons">
             <ButtonGroup
               variant="contained"
               aria-label="outlined primary button group"
@@ -140,7 +150,7 @@ const Buttons = () => {
           </BaseCard>
         </Grid>
         <Grid item xs={12} lg={6}>
-          <BaseCard title="Group Outline Buttons">
+          <BaseCard title="NavigationGroup Outline Buttons">
             <ButtonGroup variant="outlined" aria-label="outlined button group">
               <Button>One</Button>
               <Button>Two</Button>
@@ -149,9 +159,8 @@ const Buttons = () => {
           </BaseCard>
         </Grid>
       </Grid>
-
     </PageContainer>
-  );
-};
+  )
+}
 
-export default Buttons;
+export default Buttons

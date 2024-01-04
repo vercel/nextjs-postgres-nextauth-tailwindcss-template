@@ -1,5 +1,4 @@
 import {
-  Icon,
   IconBuildingStore,
   IconCalendar,
   IconFlagSearch,
@@ -9,22 +8,9 @@ import {
   IconTemplate,
   IconUser,
 } from '@tabler/icons-react'
+import { NavigationGroupType } from '@/app/(DashboardLayout)/layout/sidebar/navigation/NavigationGroup'
 
-type NavigationMainItem = {
-  id: number
-  title: string
-  icon: Icon
-  href: string
-  children?: NavigationSubItem[]
-}
-
-type NavigationSubItem = {
-  id: number
-  title: string
-  href: string
-}
-
-const NavigationItems: NavigationMainItem[] = [
+const Navigations: NavigationGroupType[] = [
   {
     id: 0,
     title: 'Dashboard',
@@ -106,7 +92,7 @@ const NavigationItems: NavigationMainItem[] = [
     id: 6,
     title: '관리자 설정',
     icon: IconSettings,
-    href: '/settings',
+    href: '/settings/accounts',
     children: [
       {
         id: 61,
@@ -129,7 +115,7 @@ const NavigationItems: NavigationMainItem[] = [
     id: 99,
     title: 'UI Template',
     icon: IconTemplate,
-    href: '/templates',
+    href: '/ui-components',
     children: [
       {
         id: 991,
@@ -175,4 +161,4 @@ const NavigationItems: NavigationMainItem[] = [
   },
 ]
 
-export default NavigationItems
+export default Navigations

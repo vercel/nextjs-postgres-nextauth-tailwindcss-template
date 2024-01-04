@@ -1,34 +1,23 @@
 import React from 'react'
-import NavigationItems from './NavigationItems'
+import Navigations from './navigation/Navigations'
 import { usePathname } from 'next/navigation'
 import { Box, List } from '@mui/material'
-import NavItem from './NavItem'
-import NavGroup from './NavGroup/NavGroup'
+import NavigationGroup from './navigation/NavigationGroup'
 
 const SidebarItems = ({ toggleMobileSidebar }: any) => {
-  const pathname = usePathname()
-  const pathDirect = pathname
+  const pathDirect = usePathname()
 
   return (
     <Box sx={{ px: 2 }}>
       <List sx={{ pt: 0 }} className="sidebarNav" component="div">
-        {NavigationItems.map((item) => {
-          // {/********SubHeader**********/}
-          // if (item.subheader) {
-          //   return <NavGroup item={item} key={item.subheader} />;
-
-          //   // {/********If Sub Menu**********/}
-          //   /* eslint no-else-return: "off" */
-          // } else {
-          return (
-            <NavItem
-              item={item}
-              key={item.id}
-              pathDirect={pathDirect}
-              onClick={toggleMobileSidebar}
-            />
-          )
-        })}
+        {Navigations.map((navigation) => (
+          <NavigationGroup
+            key={navigation.id}
+            navigation={navigation}
+            pathDirect={pathDirect}
+            onClick={toggleMobileSidebar}
+          />
+        ))}
       </List>
     </Box>
   )
