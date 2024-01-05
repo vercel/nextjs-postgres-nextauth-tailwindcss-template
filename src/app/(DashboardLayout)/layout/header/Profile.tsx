@@ -18,8 +18,11 @@ import {
   IconCurrencyDollar,
   IconShield,
 } from '@tabler/icons-react'
+import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const Profile = () => {
+  const router = useRouter()
   const [anchorEl2, setAnchorEl2] = useState(null)
   const handleClick2 = (event: any) => {
     setAnchorEl2(event.currentTarget)
@@ -63,6 +66,14 @@ const Profile = () => {
       lightcolor: errorlight,
     },
   ]
+
+  const handleLogout = async () => {
+    console.log('click logout')
+    const response = await signOut({
+      redirect: false,
+    })
+    router.push('/auth/sign-in')
+  }
 
   return (
     <Box>
@@ -154,7 +165,12 @@ const Profile = () => {
         </Box>
         <Divider />
         <Box mt={2}>
-          <Button fullWidth variant="contained" color="primary">
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={handleLogout}
+          >
             Logout
           </Button>
         </Box>

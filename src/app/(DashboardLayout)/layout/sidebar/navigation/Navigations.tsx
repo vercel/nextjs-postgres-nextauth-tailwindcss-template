@@ -77,7 +77,7 @@ const Navigations: NavigationGroupType[] = [
     href: '/events/banners',
     children: [
       {
-        id: 51,
+        id: 50,
         title: '배너 설정',
         href: '/events/banners',
       },

@@ -1,4 +1,5 @@
 import NextAuth, { CookiesOptions, NextAuthOptions, User } from 'next-auth'
+import { JWT } from 'next-auth/jwt'
 import Credentials from 'next-auth/providers/credentials'
 
 const cookies: Partial<CookiesOptions> = {
@@ -56,7 +57,6 @@ const handler = NextAuth({
         )
 
         const responseData: CommonResponse<Login> = await response.json()
-        console.log(responseData)
         if (response.ok && responseData) {
           const jwt = responseData.data.accessToken.replace(
             ACCESS_TOKEN_HEADER,
@@ -77,12 +77,16 @@ const handler = NextAuth({
   },
   cookies: cookies,
   callbacks: {
-    jwt: async ({ token, user }) => {
-      console.log('jwt : ' + token)
+    // jwt 만들 때 실행되는 옵션
+    jwt: async ({ token, user, account, profile }) => {
+      console.log('jwt', token, user, account, profile)
+      // TODO Validation 추가 예정
       return token
     },
+    // 유저 session 이 조회될 때마다 실행되는 옵션
     session: async ({ session, token }) => {
-      console.log('session : ' + session, token)
+      console.log('session', session, token)
+      // TODO Validation 추가 예정
       return session
     },
   },

@@ -15,7 +15,7 @@ import {
 import Image from 'next/image'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { FormEvent, useRef } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 
 const MainWrapper = styled('div')(() => ({
   display: 'flex',
@@ -101,20 +101,27 @@ const SignIn = () => {
     router.push('/')
   }
 
-  const idRef = useRef('')
-  const passwordRef = useRef('')
-
   const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl') || '/'
+  const [id, setId] = useState('')
+  const [password, setPassword] = useState('')
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.id === 'id') {
+      setId(event.target.value)
+    }
+    if (event.target.id === 'password') {
+      setPassword(event.target.value)
+    }
+  }
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const id = idRef.current
-    const password = passwordRef.current
+
+    const callbackUrl = searchParams.get('callbackUrl') || '/'
     const response = await signIn('credentials', {
-      id,
-      password,
+      id: id,
+      password: password,
       redirect: false,
-      callbackUrl,
+      callbackUrl: callbackUrl,
     })
 
     if (!response?.error) {
@@ -135,20 +142,22 @@ const SignIn = () => {
           />
           <LoginTextField
             id="id"
-            inputRef={idRef}
             label="아이디"
             sx={{
               marginTop: '52px',
             }}
+            onChange={handleChange}
+            value={id}
           />
           <LoginTextField
             id="password"
-            inputRef={passwordRef}
             label="비밀번호"
             type="password"
             sx={{
               marginTop: '12px',
             }}
+            onChange={handleChange}
+            value={password}
           />
           <AutoLoginFormGroup>
             <AutoLoginFormControlLabel
