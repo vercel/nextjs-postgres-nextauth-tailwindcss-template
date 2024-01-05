@@ -6,7 +6,6 @@ import {
   Button,
   Checkbox,
   Container,
-  ContainerProps,
   FormControlLabel,
   FormGroup,
   styled,
@@ -14,7 +13,9 @@ import {
   Theme,
 } from '@mui/material'
 import Image from 'next/image'
-import React from 'react'
+import { signIn, useSession } from 'next-auth/react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { FormEvent, useRef } from 'react'
 
 const MainWrapper = styled('div')(() => ({
   display: 'flex',
@@ -24,21 +25,14 @@ const MainWrapper = styled('div')(() => ({
   width: '100vw',
 }))
 
-const LoginContainer = styled(Container)<ContainerProps>(() => ({
+const LoginContainer = styled(Container)(() => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  maxWidth: '480px',
 }))
 
 const LoginForm = styled((props: Theme | any) => (
-  <Box
-    component="form"
-    method="POST"
-    action="/api/auth/callback/credentials"
-    autoComplete="off"
-    {...props}
-  />
+  <Box component="form" method="POST" autoComplete="off" {...props} />
 ))<BoxProps>(() => ({
   display: 'flex',
   flexDirection: 'column',
@@ -101,10 +95,37 @@ const LoginButton = styled(Button)(() => ({
 }))
 
 const SignIn = () => {
+  const router = useRouter()
+  const { data: session } = useSession()
+  if (session != null) {
+    router.push('/')
+  }
+
+  const idRef = useRef('')
+  const passwordRef = useRef('')
+
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl') || '/'
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const id = idRef.current
+    const password = passwordRef.current
+    const response = await signIn('credentials', {
+      id,
+      password,
+      redirect: false,
+      callbackUrl,
+    })
+
+    if (!response?.error) {
+      router.push(callbackUrl)
+    }
+  }
+
   return (
     <MainWrapper>
-      <LoginContainer>
-        <LoginForm>
+      <LoginContainer maxWidth="xs">
+        <LoginForm onSubmit={handleSubmit}>
           <Image
             src="/images/logos/login-logo.svg"
             alt="login-logo"
@@ -114,6 +135,7 @@ const SignIn = () => {
           />
           <LoginTextField
             id="id"
+            inputRef={idRef}
             label="아이디"
             sx={{
               marginTop: '52px',
@@ -121,6 +143,7 @@ const SignIn = () => {
           />
           <LoginTextField
             id="password"
+            inputRef={passwordRef}
             label="비밀번호"
             type="password"
             sx={{
