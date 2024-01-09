@@ -6,7 +6,7 @@ declare module 'thunder-order' {
    * @property message    결과 메시지
    * @property data       응답 데이터
    */
-  interface Response<T> {
+  interface ResponseData<T> {
     resultCode: string
     message: string
     data?: T

@@ -20,6 +20,7 @@ import { Page } from 'thunder-order'
 import { AdminAccount } from 'thunder-order/accounts'
 import AccountListItem from '@/app/(DashboardLayout)/settings/accounts/components/AccountListItem'
 import Box from '@mui/material/Box'
+import { signOut } from 'next-auth/react'
 
 const accounts = [
   {
@@ -86,11 +87,9 @@ const AccountList = () => {
     queryFn: () =>
       fetch(`/api/accounts?page=${pageNumber}&size=${pageSize}`).then(
         (response) => {
-          if (response.status === 401) {
-            router.push('/auth/sign-in')
-            return
+          if (response.status == 401) {
+            return Promise.reject(new Error())
           }
-
           return response.json()
         },
       ),

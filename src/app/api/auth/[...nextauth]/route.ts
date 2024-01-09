@@ -28,10 +28,6 @@ interface Login {
 
 export const ACCESS_TOKEN_HEADER = 'Bearer '
 
-const nowTime = () => {
-  return new Date().getTime() / 1000
-}
-
 export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
@@ -84,19 +80,10 @@ export const authOptions: AuthOptions = {
   callbacks: {
     // jwt 만들 때 실행되는 옵션
     jwt: async ({ token, user }: { token: JWT; user: User }) => {
-      if (nowTime() > token.exp!) {
-        await signOut()
-        throw Error('Access Token Expired')
-      }
       return { ...token, ...user }
     },
     // 유저 session 이 조회될 때마다 실행되는 옵션
     session: async ({ session, token }: { session: Session; token: JWT }) => {
-      console.log('session', session, token)
-      if (nowTime() > token.exp!) {
-        await signOut()
-        throw Error('Access Token Expired')
-      }
       return { ...session, ...token }
     },
   },

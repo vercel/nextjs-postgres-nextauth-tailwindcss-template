@@ -1,79 +1,42 @@
 'use server'
 
 import { getServerSession } from 'next-auth/next'
-import {
-  ACCESS_TOKEN_HEADER,
-  authOptions,
-} from '@/app/api/auth/[...nextauth]/route'
-import { Page, Response } from 'thunder-order'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { AdminAccount } from 'thunder-order/accounts'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 import { formatPhoneNumber } from '@/utils/phoneNumber'
+import {
+  badRequestError,
+  created,
+  getFetch,
+  noAuthorizationError,
+  ok,
+  postFetch,
+} from '@/app/api/common'
+import { Page, ResponseData } from 'thunder-order'
+import { Account } from 'next-auth'
 
 const getAdminAccounts = async (
   token: string,
   pageNumber: number,
   pageSize: number,
-) => {
-  try {
-    const responseData: Response<Page<AdminAccount>> = await fetch(
-      `${process.env.SERVER_URL}/api/v1/admin/accounts?pageNumber=${
-        pageNumber - 1
-      }&pageSize=${pageSize}`,
-      {
-        headers: {
-          Accept: 'application/json',
-          Authorization: `${ACCESS_TOKEN_HEADER}${token}`,
-        },
-      },
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Server returned Error ' + response.status)
-        }
-        return response.json()
-      })
-      .then((json) => json.data)
-      .catch((error) =>
-        console.error('There was a problem with the Fetch operation', error),
-      )
+): Promise<ResponseData<Page<Account>>> =>
+  await getFetch({
+    version: 'v1',
+    path: `/accounts?pageNumber=${pageNumber - 1}&pageSize=${pageSize}`,
+    token,
+  })
 
-    // console.log(responseData)
-    return responseData
-  } catch (error) {
-    throw error
-  }
-}
-
-const setAdminAccount = async (token: string, adminAccount: AdminAccount) => {
-  try {
-    const responseData: Response<undefined> = await fetch(
-      `${process.env.SERVER_URL}/api/v1/admin/accounts`,
-      {
-        headers: {
-          Accept: 'application/json',
-          Authorization: `${ACCESS_TOKEN_HEADER}${token}`,
-        },
-        body: JSON.stringify(adminAccount),
-      },
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Server returned Error ' + response.status)
-        }
-        return response.json()
-      })
-      .then((json) => json.data)
-      .catch((error) =>
-        console.error('There was a problem with the Fetch operation', error),
-      )
-
-    // console.log(responseData)
-    return responseData
-  } catch (error) {
-    throw error
-  }
-}
+const setAdminAccount = async (
+  token: string,
+  adminAccount: AdminAccount,
+): Promise<ResponseData<undefined>> =>
+  await postFetch({
+    version: 'v1',
+    path: '/accounts',
+    token,
+    body: adminAccount,
+  })
 
 const validation = (adminAccount: AdminAccount) => {
   if (adminAccount.id === '') {
@@ -95,52 +58,28 @@ const validation = (adminAccount: AdminAccount) => {
 export const GET = async (request: NextRequest) => {
   const session = await getServerSession(authOptions)
   if (session == null || session.token == null) {
-    return NextResponse.json({ error: 'No Authorization' }, { status: 401 })
+    return noAuthorizationError()
   }
 
   const { searchParams } = new URL(request.url)
-  try {
-    const responseData = await getAdminAccounts(
-      session.token!,
-      Number(searchParams.get('page')),
-      Number(searchParams.get('size')),
-    )
-
-    return NextResponse.json({
-      data: responseData,
-      message: 'Success',
-    })
-  } catch (error) {
-    return NextResponse.json({ error: error }, { status: 500 })
-  }
+  const responseData = await getAdminAccounts(
+    session.token!,
+    Number(searchParams.get('page')),
+    Number(searchParams.get('size')),
+  )
+  return ok(responseData)
 }
 
 export const POST = async (request: NextRequest) => {
   const session = await getServerSession(authOptions)
   if (session == null || session.token == null) {
-    return NextResponse.json({ error: 'No Authorization' }, { status: 401 })
+    return noAuthorizationError()
   }
-  const adminAccount = await request.json().then((json) => JSON.parse(json))
+  const adminAccount = await request.json()
   if (!validation(adminAccount)) {
-    return NextResponse.json(
-      { error: 'Bad Request. Invalid values.' },
-      { status: 400 },
-    )
+    return badRequestError('Bad Request. Invalid values.')
   }
 
-  try {
-    const responseData = await setAdminAccount(session.token!, adminAccount)
-
-    return NextResponse.json(
-      {
-        data: responseData,
-        message: 'Success',
-      },
-      {
-        status: 201,
-      },
-    )
-  } catch (error) {
-    return NextResponse.json({ error: error }, { status: 500 })
-  }
+  const responseData = await setAdminAccount(session.token!, adminAccount)
+  return created(responseData)
 }
