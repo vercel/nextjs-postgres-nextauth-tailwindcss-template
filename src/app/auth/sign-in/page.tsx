@@ -15,7 +15,7 @@ import {
 import Image from 'next/image'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 
 const MainWrapper = styled('div')(() => ({
   display: 'flex',
@@ -96,10 +96,12 @@ const LoginButton = styled(Button)(() => ({
 
 const SignIn = () => {
   const router = useRouter()
-  const { data: session } = useSession()
-  if (session != null) {
-    router.push('/')
-  }
+  const { data: session, status } = useSession()
+  useEffect(() => {
+    if (status != 'loading' && session != null) {
+      router.push('/')
+    }
+  }, [session, status])
 
   const searchParams = useSearchParams()
   const [id, setId] = useState('')

@@ -1,11 +1,12 @@
 'use client'
 import { styled, Container, Box } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '@/app/(DashboardLayout)/layout/header/Header'
 import Sidebar from '@/app/(DashboardLayout)/layout/sidebar/Sidebar'
 import Footer from './layout/footer/page'
 import { useSession } from 'next-auth/react'
 import { usePathname, useRouter } from 'next/navigation'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const MainWrapper = styled('div')(() => ({
   display: 'flex',
@@ -33,11 +34,18 @@ export default function RootLayout({
 }) {
   const router = useRouter()
   const pathDirect = usePathname()
-  const { data: session } = useSession()
-  if (session == null && !pathDirect.startsWith('/ui-components')) {
-    router.push('/auth/sign-in')
-  }
+  const { data: session, status } = useSession()
+  useEffect(() => {
+    if (
+      status != 'loading' &&
+      session == null &&
+      !pathDirect.startsWith('/ui-components')
+    ) {
+      router.push('/auth/sign-in')
+    }
+  }, [session, status])
 
+  const queryClient = new QueryClient()
   const [isSidebarOpen, setSidebarOpen] = useState(true)
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false)
   return (
@@ -70,7 +78,9 @@ export default function RootLayout({
           {/* ------------------------------------------- */}
           {/* Page Route */}
           {/* ------------------------------------------- */}
-          <Box sx={{ minHeight: 'calc(100vh - 170px)' }}>{children}</Box>
+          <QueryClientProvider client={queryClient}>
+            <Box sx={{ minHeight: 'calc(100vh - 170px)' }}>{children}</Box>
+          </QueryClientProvider>
           {/* ------------------------------------------- */}
           {/* End Page */}
           {/* ------------------------------------------- */}

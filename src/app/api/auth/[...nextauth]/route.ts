@@ -1,6 +1,7 @@
-import NextAuth, { CookiesOptions, NextAuthOptions, User } from 'next-auth'
+import NextAuth, { AuthOptions, CookiesOptions, Session, User } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import Credentials from 'next-auth/providers/credentials'
+import { signOut } from 'next-auth/react'
 
 const cookies: Partial<CookiesOptions> = {
   sessionToken: {
@@ -25,9 +26,13 @@ interface Login {
   accessToken: string
 }
 
-const ACCESS_TOKEN_HEADER = 'Bearer '
+export const ACCESS_TOKEN_HEADER = 'Bearer '
 
-const handler = NextAuth({
+const nowTime = () => {
+  return new Date().getTime() / 1000
+}
+
+export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     Credentials({
@@ -78,21 +83,27 @@ const handler = NextAuth({
   cookies: cookies,
   callbacks: {
     // jwt 만들 때 실행되는 옵션
-    jwt: async ({ token, user, account, profile }) => {
-      console.log('jwt', token, user, account, profile)
-      // TODO Validation 추가 예정
-      return token
+    jwt: async ({ token, user }: { token: JWT; user: User }) => {
+      if (nowTime() > token.exp!) {
+        await signOut()
+        throw Error('Access Token Expired')
+      }
+      return { ...token, ...user }
     },
     // 유저 session 이 조회될 때마다 실행되는 옵션
-    session: async ({ session, token }) => {
+    session: async ({ session, token }: { session: Session; token: JWT }) => {
       console.log('session', session, token)
-      // TODO Validation 추가 예정
-      return session
+      if (nowTime() > token.exp!) {
+        await signOut()
+        throw Error('Access Token Expired')
+      }
+      return { ...session, ...token }
     },
   },
   pages: {
     signIn: '/auth/sign-in',
   },
-})
+}
 
+const handler = NextAuth(authOptions)
 export { handler as GET, handler as POST }

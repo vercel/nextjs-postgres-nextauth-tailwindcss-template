@@ -31,42 +31,6 @@ const Profile = () => {
     setAnchorEl2(null)
   }
 
-  const theme = useTheme()
-  const primary = theme.palette.primary.main
-  const primarylight = theme.palette.primary.light
-  const error = theme.palette.error.main
-  const errorlight = theme.palette.error.light
-  const success = theme.palette.success.main
-  const successlight = theme.palette.success.light
-
-  /*profile data*/
-  const profiledata = [
-    {
-      href: '/',
-      title: 'My Profile',
-      subtitle: 'Account Settings',
-      icon: <IconCurrencyDollar width="20" height="20" />,
-      color: primary,
-      lightcolor: primarylight,
-    },
-    {
-      href: '/',
-      title: 'My Inbox',
-      subtitle: 'Messages & Emails',
-      icon: <IconShield width="20" height="20" />,
-      color: success,
-      lightcolor: successlight,
-    },
-    {
-      href: '/',
-      title: 'My Tasks',
-      subtitle: 'To-do and Daily Tasks',
-      icon: <IconCreditCard width="20" height="20" />,
-      color: error,
-      lightcolor: errorlight,
-    },
-  ]
-
   const handleLogout = async () => {
     console.log('click logout')
     const response = await signOut({
@@ -153,13 +117,7 @@ const Profile = () => {
               <ListItemText primary="Edit Profile" />
             </ListItemButton>
             <ListItemButton component="a" href="#">
-              <ListItemText primary="Account" />
-            </ListItemButton>
-            <ListItemButton component="a" href="#">
               <ListItemText primary="Change Password" />
-            </ListItemButton>
-            <ListItemButton component="a" href="#">
-              <ListItemText primary="My Settings" />
             </ListItemButton>
           </List>
         </Box>

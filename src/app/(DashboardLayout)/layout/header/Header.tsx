@@ -46,8 +46,6 @@ const Header = ({ toggleMobileSidebar }: ItemType) => {
           <IconMenu2 width="20" height="20" />
         </IconButton>
 
-        <Search />
-
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
           <Profile />
