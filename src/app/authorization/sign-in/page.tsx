@@ -4,12 +4,7 @@ import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup, TextFiel
 import Image from 'next/image'
 import styles from './page.module.css'
 import { useState } from 'react'
-
-type TextFieldState = {
-  value: string;
-  isError: boolean;
-  errorMessage: string;
-}
+import { TextFieldState } from 'thunder-order'
 
 const SignIn = () => {
   const [idField, setIdField] = useState<TextFieldState>({
