@@ -1,19 +1,34 @@
-import {
-  Box,
-  BoxProps,
-  Button,
-  Checkbox,
-  Container,
-  FormControlLabel,
-  FormGroup,
-  styled,
-  TextField,
-  Theme,
-} from '@mui/material'
+"use client"
+
+import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup, TextField } from '@mui/material'
 import Image from 'next/image'
 import styles from './page.module.css'
+import { useState } from 'react'
+
+type TextFieldState = {
+  value: string;
+  isError: boolean;
+  errorMessage: string;
+}
 
 const SignIn = () => {
+  const [idField, setIdField] = useState<TextFieldState>({
+    value: '',
+    isError: false,
+    errorMessage: '',
+  });
+  const [passwordField, setPasswordField] = useState<TextFieldState>({
+    value: '',
+    isError: false,
+    errorMessage: '',
+  });
+  const [isAutoLogin, setAutoLogin] = useState<boolean>(false)
+
+  const onSubmit = () => {}
+  const onChangeId = () => {}
+  const onChangePassword = () => {}
+  const onClickAutoLogin = () => {}
+
   return (
     <div className={styles.mainWrapper}>
       <Container
@@ -36,6 +51,10 @@ const SignIn = () => {
             id="id"
             label="아이디"
             className={styles.textField}
+            onChange={onChangeId}
+            error={idField.isError}
+            helperText={idField.errorMessage}
+            value={idField.value}
             sx={{
               marginTop: '52px',
             }}
@@ -45,6 +64,10 @@ const SignIn = () => {
             label="비밀번호"
             type="password"
             className={styles.textField}
+            onChange={onChangePassword}
+            error={passwordField.isError}
+            helperText={passwordField.errorMessage}
+            value={passwordField.value}
             sx={{
               marginTop: '12px',
             }}
@@ -52,7 +75,10 @@ const SignIn = () => {
           <FormGroup className={styles.checkboxGroup}>
             <FormControlLabel
               className={styles.checkboxLabel}
-              control={<Checkbox className={styles.checkbox} />}
+              control={<Checkbox
+                className={styles.checkbox}
+                checked={isAutoLogin}
+              />}
               label="자동로그인"
             />
           </FormGroup>
