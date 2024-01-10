@@ -1,12 +1,14 @@
-import React from 'react'
+import { ReactNode } from 'react'
 
-const AuthorizedLayout = ({ children }: {
-  children: React.ReactNode
-}) => {
+type Props = {
+  children: ReactNode;
+  modal: ReactNode;
+}
+const AuthorizedLayout = ({ children, modal }: Props) => {
   return (
     <div>
-      로그인 인증된 레이아웃
       {children}
+      {modal}
     </div>
   )
 }
