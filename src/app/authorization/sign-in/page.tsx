@@ -1,95 +1,69 @@
+import {
+  Box,
+  BoxProps,
+  Button,
+  Checkbox,
+  Container,
+  FormControlLabel,
+  FormGroup,
+  styled,
+  TextField,
+  Theme,
+} from '@mui/material'
 import Image from 'next/image'
 import styles from './page.module.css'
 
-export default function Home() {
+const SignIn = () => {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+    <div className={styles.mainWrapper}>
+      <Container
+        maxWidth={"xs"}
+        className={styles.container}>
+        <Box
+          component="form"
+          method={"POST"}
+          autoComplete={"off"}
+          className={styles.form}
+        >
+          <Image
+            src="/images/logos/login-logo.svg"
+            alt="login-logo"
+            width={208}
+            height={120}
+            priority
+          />
+          <TextField
+            id="id"
+            label="아이디"
+            className={styles.textField}
+            sx={{
+              marginTop: '52px',
+            }}
+          />
+          <TextField
+            id="password"
+            label="비밀번호"
+            type="password"
+            className={styles.textField}
+            sx={{
+              marginTop: '12px',
+            }}
+          />
+          <FormGroup className={styles.checkboxGroup}>
+            <FormControlLabel
+              className={styles.checkboxLabel}
+              control={<Checkbox className={styles.checkbox} />}
+              label="자동로그인"
             />
-          </a>
-        </div>
-      </div>
+          </FormGroup>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+          <Button type="submit" variant="contained" className={styles.button}>
+            로그인
+          </Button>
+        </Box>
+      </Container>
+    </div>
   )
 }
+
+export default SignIn;
