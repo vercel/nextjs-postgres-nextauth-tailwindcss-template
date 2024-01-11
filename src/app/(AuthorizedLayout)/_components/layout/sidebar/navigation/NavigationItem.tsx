@@ -14,13 +14,16 @@ interface ItemType {
   pathDirect: string
 }
 
+
+
 const NavigationItem = ({ navigation, pathDirect }: ItemType) => {
+  const isSelected = pathDirect.startsWith(navigation.href)
   return (
     <ListSubheader key={navigation.id} disableSticky className={styles.navigationItem}>
       <ListItemButton
         component={Link}
         href={navigation.href}
-        selected={pathDirect === navigation.href}
+        selected={isSelected}
       >
         <ListItemIcon
           sx={{

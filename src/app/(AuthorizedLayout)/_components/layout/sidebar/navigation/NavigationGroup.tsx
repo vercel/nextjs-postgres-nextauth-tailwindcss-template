@@ -1,6 +1,5 @@
 import { Collapse, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import Link from 'next/link'
-import { MouseEvent } from 'react'
 import { Icon } from '@tabler/icons-react'
 import styles from './navigationGroup.module.css'
 import NavigationItem, {
@@ -18,7 +17,6 @@ export type NavigationGroupType = {
 interface ItemType {
   navigation: NavigationGroupType
   pathDirect: string
-  onClick: (event: MouseEvent<HTMLElement>) => void
 }
 
 /**
@@ -30,14 +28,14 @@ interface ItemType {
 const pathSelected = (navigation: NavigationGroupType, pathDirect: string) => {
   if (navigation.children) {
     return (
-      navigation.children.findIndex((item) => pathDirect === item.href) > -1
+      navigation.children.findIndex((item) => pathDirect.startsWith(item.href)) > -1
     )
   }
 
   return pathDirect === navigation.href
 }
 
-const NavigationGroup = ({ navigation, pathDirect, onClick }: ItemType) => {
+const NavigationGroup = ({ navigation, pathDirect }: ItemType) => {
   const Icon = navigation.icon
   const itemIcon = <Icon stroke={1.5} size="1.3rem" />
   const isSelected = pathSelected(navigation, pathDirect)
@@ -51,7 +49,6 @@ const NavigationGroup = ({ navigation, pathDirect, onClick }: ItemType) => {
           // disabled={navigation.disabled}
           selected={isSelected}
           // target={navigation.external ? "_blank" : ""}
-          onClick={onClick}
         >
           <ListItemIcon
             sx={{

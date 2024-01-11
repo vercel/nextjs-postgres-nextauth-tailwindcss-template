@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation'
 import { Box, List } from '@mui/material'
 import NavigationGroup, { NavigationGroupType } from './navigation/NavigationGroup'
 
-const SidebarItems = ({ toggleMobileSidebar }: any) => {
+const SidebarItems = () => {
   const pathDirect = usePathname()
   return (
     <Box sx={{ px: 2 }}>
@@ -13,7 +13,6 @@ const SidebarItems = ({ toggleMobileSidebar }: any) => {
             key={navigation.id}
             navigation={navigation}
             pathDirect={pathDirect}
-            onClick={toggleMobileSidebar}
           />
         ))}
       </List>
