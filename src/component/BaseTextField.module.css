@@ -1,0 +1,21 @@
+.textField {
+    width: 100%;
+}
+
+.textField :global(label.Mui-focused) {
+    color: #000000;
+}
+
+.textField :global(.MuiOutlinedInput-root) {
+    border-radius: 12px;
+    background-color: #FAFAFA;
+    border-color: #000000
+}
+
+.textField :global(.MuiOutlinedInput-root):hover fieldset {
+    border-color: #F80069;
+}
+
+.textField :global(.MuiOutlinedInput-root):global(.Mui-focused) fieldset {
+    border-color: #F80069;
+}

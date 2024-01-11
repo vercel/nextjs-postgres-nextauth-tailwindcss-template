@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
-import { TextFieldState } from 'thunder-order'
 import { useState } from 'react'
-import { Button, Stack, TextField } from '@mui/material'
+import { Button, Stack } from '@mui/material'
 import BaseCard from '@/component/BaseCard'
 import styles from './page.module.css'
+import BaseTextField, { TextFieldState } from '@/component/BaseTextField'
 
 type AdminAccountRegisterState = {
   id: TextFieldState;
@@ -61,42 +61,30 @@ export default function AdminAccountRegisterView() {
     >
       <>
         <Stack spacing={3}>
-          <TextField
+          <BaseTextField
             id="id"
             label="ID"
-            variant="outlined"
-            value={registerData.id.value}
-            error={registerData.id.isError}
-            helperText={registerData.id.errorMessage}
+            state={registerData.id}
             onChange={onChangeId}
           />
-          <TextField
+          <BaseTextField
             id="password"
             label="Password"
             type="password"
-            variant="outlined"
-            value={registerData.password.value}
-            error={registerData.password.isError}
-            helperText={registerData.password.errorMessage}
+            state={registerData.password}
             onChange={onChangePassword}
           />
-          <TextField
+          <BaseTextField
             id="name"
             label="이름"
-            variant="outlined"
-            value={registerData.name.value}
-            error={registerData.name.isError}
-            helperText={registerData.name.errorMessage}
+            state={registerData.name}
             onChange={onChangeName}
           />
-          <TextField
+          <BaseTextField
             id="phoneNumber"
             label="연락처"
             type="tel"
-            variant="outlined"
-            value={registerData.phoneNumber.value}
-            error={registerData.phoneNumber.isError}
-            helperText={registerData.phoneNumber.errorMessage}
+            state={registerData.phoneNumber}
             onChange={onChangePhoneNumber}
           />
         </Stack>

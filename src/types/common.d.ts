@@ -24,10 +24,4 @@ declare module 'thunder-order' {
     elements: number
     contents: T[]
   }
-
-  type TextFieldState = {
-    value: string;
-    isError: boolean;
-    errorMessage: string;
-  }
 }

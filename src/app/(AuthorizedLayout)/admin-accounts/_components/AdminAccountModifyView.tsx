@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
 import React, { useState } from 'react'
-import { Button, Modal, Stack, TextField, Typography } from '@mui/material'
+import { Button, Modal, Stack } from '@mui/material'
 import BaseCard from '@/component/BaseCard'
-import { TextFieldState } from 'thunder-order'
 import styles from './adminAccountModify.module.css'
+import BaseTextField, { TextFieldState } from '@/component/BaseTextField'
 
 type Props = {
   id: string;
@@ -64,23 +64,17 @@ const AdminAccountModifyView = (
       >
         <>
           <Stack spacing={3}>
-            <TextField
+            <BaseTextField
               id="name"
               label="이름"
-              variant="outlined"
-              value={modifyData.name.value}
-              error={modifyData.name.isError}
-              helperText={modifyData.name.errorMessage}
+              state={modifyData.name}
               onChange={onChangeName}
             />
-            <TextField
+            <BaseTextField
               id="phoneNumber"
               label="연락처"
               type="tel"
-              variant="outlined"
-              value={modifyData.phoneNumber.value}
-              error={modifyData.phoneNumber.isError}
-              helperText={modifyData.phoneNumber.errorMessage}
+              state={modifyData.phoneNumber}
               onChange={onChangePhoneNumber}
             />
           </Stack>
