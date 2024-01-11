@@ -1,0 +1,17 @@
+.appBar {
+    box-shadow: none;
+    background-color: #fff;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+
+.toolbar {
+    width: 100%;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+@media (min-width: 1200px) {
+    .appBar {
+        min-height: 70px;
+    }
+}

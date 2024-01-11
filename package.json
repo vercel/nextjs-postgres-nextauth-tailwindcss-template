@@ -14,16 +14,20 @@
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.15.3",
     "@mui/material": "^5.15.3",
+    "@tabler/icons-react": "^2.45.0",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-responsive": "^9.0.2"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-responsive": "^8.0.8",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "prop-types": "^15.8.1",
     "typescript": "^5"
   }
 }

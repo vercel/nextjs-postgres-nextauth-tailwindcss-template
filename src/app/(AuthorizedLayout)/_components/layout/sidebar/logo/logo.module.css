@@ -1,0 +1,10 @@
+.logo {
+    height: 40px;
+    width: 180px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+}

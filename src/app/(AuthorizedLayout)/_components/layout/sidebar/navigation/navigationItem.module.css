@@ -1,0 +1,21 @@
+.navigationItem {
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 26px;
+    letter-spacing: 0.8333em;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: rgba(0, 0, 0, 0.87);
+    padding-left: 30px;
+}
+
+.navigationItem :global(.MuiButtonBase-root):global(.Mui-selected) {
+    background-color: rgba(245, 164, 197, 0.2);
+}
+
+.navigationItem :global(.MuiButtonBase-root):global(.Mui-selected):hover {
+    background-color: rgba(245, 164, 197, 0.2);
+}
+

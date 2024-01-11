@@ -1,0 +1,14 @@
+.wrapper {
+    display: flex;
+    min-height: 100dvh;
+    width: 100dvw;
+}
+
+.page {
+    display: flex;
+    flex-grow: 1;
+    padding-bottom: 60px;
+    flex-direction: column;
+    z-index: 1;
+    background-color: transparent;
+}

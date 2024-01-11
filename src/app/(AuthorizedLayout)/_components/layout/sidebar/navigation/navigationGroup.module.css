@@ -1,0 +1,26 @@
+.navigationGroup {
+    padding: 0;
+}
+
+.navigationGroup :global(.MuiButtonBase-root) {
+    white-space: nowrap;
+    margin-bottom: 5px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.navigationGroup :global(.MuiButtonBase-root):hover {
+    background-color: #f61776;
+    color: #D5FF2E;
+}
+
+.navigationGroup :global(.MuiButtonBase-root):global(.Mui-selected) {
+    color: white;
+    background-color: #F80069;
+}
+
+.navigationGroup :global(.MuiButtonBase-root):global(.Mui-selected):hover {
+    background-color: #F80069;
+    color: white;
+}
