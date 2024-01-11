@@ -4,8 +4,10 @@ import React, { useState } from 'react'
 import { Button, Modal, Stack, TextField, Typography } from '@mui/material'
 import BaseCard from '@/component/BaseCard'
 import { TextFieldState } from 'thunder-order'
+import styles from './adminAccountModify.module.css'
 
 type Props = {
+  id: string;
   open: boolean;
 }
 
@@ -16,9 +18,11 @@ type AdminAccountModifyState = {
   isValidated: boolean;
 }
 
-const AdminAccountModifyModal = ({ open }: Props) => {
+const AdminAccountModifyView = (
+  { id, open }: Props,
+) => {
   const [modifyData] = useState<AdminAccountModifyState>({
-    id: '',
+    id: id,
     name: {
       value: '',
       isError: false,
@@ -45,6 +49,8 @@ const AdminAccountModifyModal = ({ open }: Props) => {
     >
       <BaseCard
         title="관리자 정보 수정"
+        subtitle={`ID : ${modifyData.id}`}
+        className={styles.baseCard}
         action={
           <Button
             variant="contained"
@@ -58,8 +64,6 @@ const AdminAccountModifyModal = ({ open }: Props) => {
       >
         <>
           <Stack spacing={3}>
-            <Typography variant="h4">{modifyData.id}</Typography>
-
             <TextField
               id="name"
               label="이름"
@@ -86,4 +90,4 @@ const AdminAccountModifyModal = ({ open }: Props) => {
   )
 }
 
-export default AdminAccountModifyModal
+export default AdminAccountModifyView

@@ -11,6 +11,7 @@ type Props = {
   headSubtitle?: string | ReactNode;
   children?: ReactNode;
   middleContent?: string | ReactNode;
+  className?: string;
 };
 
 const DashboardCard = ({
@@ -23,13 +24,14 @@ const DashboardCard = ({
  headTitle,
  headSubtitle,
  middleContent,
+  className,
 }: Props) => {
   return (
-    <Card sx={{ padding: 0 }} elevation={9} variant={undefined}>
+    <Card sx={{ padding: 0 }} elevation={9} variant={undefined} className={className}>
       {cardHeading ? (
         <CardContent>
-          <Typography variant="h4">{headTitle}</Typography>
-          <Typography variant="subtitle2" color="textSecondary">
+          <Typography variant="h5">{headTitle}</Typography>
+          <Typography variant="subtitle1" color="textSecondary">
             {headSubtitle}
           </Typography>
         </CardContent>
@@ -44,10 +46,9 @@ const DashboardCard = ({
               mb={3}
             >
               <Box>
-                {title ? <Typography variant="h4">{title}</Typography> : ""}
-
+                {title ? <Typography variant="h5">{title}</Typography> : ""}
                 {subtitle ? (
-                  <Typography variant="subtitle2" color="textSecondary">
+                  <Typography variant="subtitle1" color="textSecondary">
                     {subtitle}
                   </Typography>
                 ) : (

@@ -4,6 +4,7 @@ import { TextFieldState } from 'thunder-order'
 import { useState } from 'react'
 import { Button, Stack, TextField } from '@mui/material'
 import BaseCard from '@/component/BaseCard'
+import styles from './page.module.css'
 
 type AdminAccountRegisterState = {
   id: TextFieldState;
@@ -46,6 +47,7 @@ export default function AdminAccountRegisterView() {
   return (
     <BaseCard
       title="관리자 계정 등록"
+      className={styles.baseCard}
       action={
         <Button
           variant="contained"

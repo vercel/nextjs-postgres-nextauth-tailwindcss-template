@@ -1,7 +1,12 @@
-import AdminAccountModifyModal from '@/app/(AuthorizedLayout)/admin-accounts/_components/AdminAccountModifyModal'
+import AdminAccountModifyView from '@/app/(AuthorizedLayout)/admin-accounts/_components/AdminAccountModifyView'
 
-export default function AdminAccountModifyView() {
+export default function AdminAccountModifyPage(
+  { params }: { params: { id: string }}
+) {
   return (
-    <AdminAccountModifyModal open={true} />
+    <AdminAccountModifyView
+      id={params.id}
+      open={true}
+    />
   )
 }

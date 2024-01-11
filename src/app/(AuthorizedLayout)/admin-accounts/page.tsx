@@ -1,3 +1,5 @@
 export default function AdminAccountListView() {
-  return null
+  return (
+    <h2>관리자 계정 관리</h2>
+  )
 }
