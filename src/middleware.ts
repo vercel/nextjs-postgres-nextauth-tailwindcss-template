@@ -1,7 +1,7 @@
 import {auth, authOptions} from "./auth"
 import {NextResponse} from "next/server";
 
-const redirectSignIn = () => NextResponse.redirect(`${process.env.BASE_URL}${authOptions.pages.signIn}`);
+const redirectSignIn = () => NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}${authOptions.pages.signIn}`);
 
 export async function middleware() {
     const session = await auth();

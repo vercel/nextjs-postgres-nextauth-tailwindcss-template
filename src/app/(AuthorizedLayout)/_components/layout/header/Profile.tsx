@@ -14,8 +14,11 @@ import {
   Menu,
   Typography
 } from '@mui/material'
+import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const Profile = () => {
+  const router = useRouter()
   const [anchorEl2, setAnchorEl2] = useState(null)
   const handleClick2 = (event: any) => {
     setAnchorEl2(event.currentTarget)
@@ -25,7 +28,16 @@ const Profile = () => {
   }
 
   const handleLogout = async () => {
-    console.log('click logout')
+    signOut({
+      redirect: false
+    })
+    .then((response) => {
+      console.log(`response:${response}`)
+      router.replace('/')
+    })
+    .catch((error) => {
+      console.log(`error:${error}`)
+    })
   }
 
   return (
@@ -38,8 +50,8 @@ const Profile = () => {
         aria-haspopup="true"
         sx={{
           ...(typeof anchorEl2 === 'object' && {
-            borderRadius: '9px',
-          }),
+            borderRadius: '9px'
+          })
         }}
         onClick={handleClick2}
       >
@@ -48,16 +60,16 @@ const Profile = () => {
           alt={'ProfileImg'}
           sx={{
             width: 30,
-            height: 30,
+            height: 30
           }}
         />
         <Box
           sx={{
             display: {
               xs: 'none',
-              sm: 'flex',
+              sm: 'flex'
             },
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
           <Typography
@@ -72,7 +84,7 @@ const Profile = () => {
             variant="h5"
             fontWeight="700"
             sx={{
-              ml: 1,
+              ml: 1
             }}
           >
             Julia
@@ -96,8 +108,8 @@ const Profile = () => {
             width: '360px',
             p: 2,
             pb: 2,
-            pt: 0,
-          },
+            pt: 0
+          }
         }}
       >
         <Box pt={0}>

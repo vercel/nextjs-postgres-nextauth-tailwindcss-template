@@ -6,10 +6,8 @@ import styles from './page.module.css'
 import { ChangeEvent, FormEventHandler, useState } from 'react'
 import BaseTextField, { TextFieldState } from '@/component/BaseTextField'
 import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 
 const SignIn = () => {
-  const router = useRouter();
   const [idField, setIdField] = useState<TextFieldState>({
     value: '',
     isError: false,
@@ -29,7 +27,7 @@ const SignIn = () => {
 
     // TODO Password 단방향 암호화 로직 추가
 
-    const callbackUrl = `${process.env.NEXT_PUBLIC_LOCAL}/dashboard`
+    const callbackUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`
     await signIn("credentials", {
       username: idField.value,
       password: passwordField.value,
