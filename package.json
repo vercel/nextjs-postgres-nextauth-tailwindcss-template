@@ -6,28 +6,41 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "mock": "npx tsx watch ./src/mocks/http.ts"
   },
   "dependencies": {
+    "@auth/core": "^0.20.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@faker-js/faker": "^8.3.1",
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.15.3",
     "@mui/material": "^5.15.3",
     "@tabler/icons-react": "^2.45.0",
     "next": "14.0.4",
+    "next-auth": "5.0.0-beta.4",
     "react": "^18",
     "react-dom": "^18",
     "react-responsive": "^9.0.2"
   },
   "devDependencies": {
+    "@mswjs/http-middleware": "^0.9.2",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-responsive": "^8.0.8",
+    "cors": "^2.8.5",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "express": "^4.18.2",
+    "msw": "^2.0.14",
     "prop-types": "^15.8.1",
     "typescript": "^5"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

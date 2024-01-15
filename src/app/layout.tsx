@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Head from 'next/head'
+import {MSWComponent} from "@/app/_component/MSWComponent";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,12 +19,14 @@ export default function RootLayout({
   return (
     <html lang="en">
     <Head>
+      <title>번개오더 - 관리자</title>
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
     </Head>
     <body className={inter.className}>
+        <MSWComponent />
         {children}
     </body>
     </html>

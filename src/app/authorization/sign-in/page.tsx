@@ -3,10 +3,13 @@
 import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup } from '@mui/material'
 import Image from 'next/image'
 import styles from './page.module.css'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, FormEventHandler, useState } from 'react'
 import BaseTextField, { TextFieldState } from '@/component/BaseTextField'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const SignIn = () => {
+  const router = useRouter();
   const [idField, setIdField] = useState<TextFieldState>({
     value: '',
     isError: false,
@@ -19,17 +22,47 @@ const SignIn = () => {
   });
   const [isAutoLogin, setAutoLogin] = useState<boolean>(false)
 
-  const onSubmit = () => {}
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+
+    // TODO 자동 로그인 처리 기능 추가
+
+    // TODO Password 단방향 암호화 로직 추가
+
+    const callbackUrl = `${process.env.NEXT_PUBLIC_LOCAL}/dashboard`
+    await signIn("credentials", {
+      username: idField.value,
+      password: passwordField.value,
+      redirect: true,
+      callbackUrl
+    })
+      .then((response) => {
+        console.log(`response:${response}`)
+      })
+      .catch((error) => {
+        console.log(`error:${error}`)
+        alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+      })
+  };
+
   const onChangeId = (event: ChangeEvent<HTMLInputElement>) => {
+    let errorMessage = '';
+    // TODO ID 입력값 유효성 체크 로직 추가 필요
+
     setIdField({
-      ...idField,
-      value: event.target.value
+      value: event.target.value,
+      isError: errorMessage !== '',
+      errorMessage: errorMessage,
     })
   }
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    let errorMessage = '';
+    // TODO Password 입력값 유효성 체크 로직 추가 필요
+
     setPasswordField({
-      ...passwordField,
-      value: event.target.value
+      value: event.target.value,
+      isError: errorMessage !== '',
+      errorMessage: errorMessage,
     })
   }
   const onClickAutoLogin = (event: ChangeEvent<HTMLInputElement>) => {
@@ -43,8 +76,8 @@ const SignIn = () => {
         className={styles.container}>
         <Box
           component="form"
-          method={"POST"}
-          autoComplete={"off"}
+          method={'POST'}
+          autoComplete={'off'}
           className={styles.form}
           onSubmit={onSubmit}
         >
@@ -61,7 +94,7 @@ const SignIn = () => {
             onChange={onChangeId}
             state={idField}
             sx={{
-              marginTop: '52px',
+              marginTop: '52px'
             }}
           />
           <BaseTextField
@@ -71,7 +104,7 @@ const SignIn = () => {
             onChange={onChangePassword}
             state={passwordField}
             sx={{
-              marginTop: '12px',
+              marginTop: '12px'
             }}
           />
           <FormGroup className={styles.checkboxGroup}>
