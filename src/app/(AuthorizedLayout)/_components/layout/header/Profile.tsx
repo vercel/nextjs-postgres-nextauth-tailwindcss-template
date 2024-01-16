@@ -14,12 +14,14 @@ import {
   Menu,
   Typography
 } from '@mui/material'
-import { signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 const Profile = () => {
   const router = useRouter()
+  const { data: session, status } = useSession({ required: true })
   const [anchorEl2, setAnchorEl2] = useState(null)
+
   const handleClick2 = (event: any) => {
     setAnchorEl2(event.currentTarget)
   }
@@ -38,6 +40,10 @@ const Profile = () => {
     .catch((error) => {
       console.log(`error:${error}`)
     })
+  }
+
+  if (status === 'loading') {
+    return null
   }
 
   return (
@@ -87,7 +93,7 @@ const Profile = () => {
               ml: 1
             }}
           >
-            Julia
+            {session.user.id}
           </Typography>
           <IconChevronDown width="20" height="20" />
         </Box>

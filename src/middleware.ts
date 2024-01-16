@@ -1,10 +1,11 @@
-import {auth, authOptions} from "./auth"
+import { auth, SIGN_IN_PAGE_PATH } from './auth'
 import {NextResponse} from "next/server";
 
-const redirectSignIn = () => NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}${authOptions.pages.signIn}`);
+const redirectSignIn = () => NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}${SIGN_IN_PAGE_PATH}`);
 
 export async function middleware() {
     const session = await auth();
+    console.log("middleware session", session)
     if (!session) {
         return redirectSignIn();
     }
