@@ -1,13 +1,10 @@
 import { auth, SIGN_IN_PAGE_PATH } from './auth'
-import {NextResponse} from "next/server";
-
-const redirectSignIn = () => NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}${SIGN_IN_PAGE_PATH}`);
+import { NextResponse } from 'next/server'
 
 export async function middleware() {
     const session = await auth();
-    console.log("middleware session", session)
     if (!session) {
-        return redirectSignIn();
+        return NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}${SIGN_IN_PAGE_PATH}`);
     }
 
     // TODO Session Validation 로직 추가

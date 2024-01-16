@@ -5,9 +5,18 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import { ChangeEvent, FormEventHandler, useState } from 'react'
 import BaseTextField, { TextFieldState } from '@/component/BaseTextField'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
+import { redirect } from 'next/navigation'
+import Navigations from '@/app/(AuthorizedLayout)/_components/layout/sidebar/navigation/Navigations'
+
+const DASHBOARD_PAGE_PATH = Navigations[0].href
 
 const SignIn = () => {
+  const { data: session } = useSession();
+  if (session?.user) {
+    redirect(DASHBOARD_PAGE_PATH)
+  }
+
   const [idField, setIdField] = useState<TextFieldState>({
     value: '',
     isError: false,
@@ -27,7 +36,7 @@ const SignIn = () => {
 
     // TODO Password 단방향 암호화 로직 추가
 
-    const callbackUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`
+    const callbackUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${DASHBOARD_PAGE_PATH}`
     await signIn("credentials", {
       username: idField.value,
       password: passwordField.value,

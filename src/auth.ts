@@ -1,7 +1,8 @@
-import NextAuth, { User } from 'next-auth'
+import NextAuth, { Session, User } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { ResponseData } from 'thunder-order'
 import { jwtDecode } from 'jwt-decode'
+import { JWT } from '@auth/core/jwt'
 
 type Login = {
   accessToken: string;
@@ -10,6 +11,7 @@ type Login = {
 const ACCESS_TOKEN_HEADER = 'Bearer '
 export const SIGN_IN_PAGE_PATH = '/authorization/sign-in'
 
+// noinspection JSUnusedGlobalSymbols
 export const {
   handlers: { GET, POST },
   auth,
@@ -21,9 +23,7 @@ export const {
   },
   providers: [
     CredentialsProvider({
-      authorize: async function(
-        credentials: Record<string, string> | undefined
-      ): Promise<User | null> {
+      authorize: async function(credentials): Promise<User | null> {
         const authResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/admin/login`, {
           method: 'POST',
           headers: {
@@ -66,12 +66,16 @@ export const {
       session: Session,
       token: JWT,
     }): Session {
+      if (token === undefined) {
+        return session
+      }
+
       return {
         ...session,
-        accessToken: token.accessToken,
+        accessToken: String(token.accessToken),
         user: {
-          id: token.sub,
-          auth: token.auth,
+          id: String(token.sub),
+          auth: String(token.auth),
         }
       }
     },

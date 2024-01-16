@@ -5,4 +5,12 @@ declare module 'next-auth' {
     id: string,
     token: string,
   }
+
+  interface Session extends DefaultSession {
+    accessToken: string | undefined,
+    user: {
+      id: string,
+      auth: string
+    }
+  }
 }
