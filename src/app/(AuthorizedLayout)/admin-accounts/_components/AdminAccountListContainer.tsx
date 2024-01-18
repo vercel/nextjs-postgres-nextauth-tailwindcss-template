@@ -5,12 +5,12 @@ import AdminAccountListView from '@/app/(AuthorizedLayout)/admin-accounts/_compo
 import { Box, Container } from '@mui/material'
 import React from 'react'
 
-const AdminAccountListContainer = async ({ pageParameters }: PageProperties): Promise<JSX.Element> => {
+const AdminAccountListContainer = async ({ pageParameters }: PageProperties) => {
   let initPageParameter = { ...pageParameters }
   if (initPageParameter.page === undefined) {
     initPageParameter = {
       ...initPageParameter,
-      page: 0
+      page: 1
     }
   }
 

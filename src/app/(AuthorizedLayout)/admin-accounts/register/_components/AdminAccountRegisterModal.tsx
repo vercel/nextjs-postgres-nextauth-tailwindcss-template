@@ -2,16 +2,17 @@
 
 import { ChangeEvent, useState } from 'react'
 import { Stack } from '@mui/material'
-import styles from './register.module.css'
+import styles from './adminAccountRegister.module.css'
 import BaseTextField, { TextFieldState } from '@/app/_components/BaseTextField'
 import { useRouter } from 'next/navigation'
 import BaseModal from '@/app/_components/BaseModal'
 import { BasicButton } from '@/app/_components/BasicButton'
-import { formatPhoneNumber } from '@/utils/phoneNumber'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { postAdminAccount } from '@/app/(AuthorizedLayout)/admin-accounts/_lib/postAdminAccount'
+import { postAdminAccount } from '@/app/(AuthorizedLayout)/admin-accounts/register/_lib/postAdminAccount'
 import { useSession } from 'next-auth/react'
-import { ACCESS_TOKEN_HEADER } from '@/auth'
+import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
+import { idValidated, nameValidated, passwordValidated } from '@/app/(AuthorizedLayout)/admin-accounts/_lib/validated'
+import { invalidateAdminAccountsQueries } from '@/app/(AuthorizedLayout)/admin-accounts/_lib/invalidateQueries'
 
 type AdminAccountRegisterState = {
   id: TextFieldState;
@@ -23,8 +24,7 @@ type AdminAccountRegisterState = {
 
 export default function AdminAccountRegisterView() {
   const router = useRouter()
-  const { data: session } = useSession();
-  const queryClient = useQueryClient()
+  const { data: session } = useSession()
   const [registerData, setRegisterData] = useState<AdminAccountRegisterState>({
     id: {
       value: '',
@@ -47,12 +47,13 @@ export default function AdminAccountRegisterView() {
       errorMessage: ''
     },
     isValidated: false
-  });
+  })
 
+  const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: async (registerData: AdminAccountRegisterState) => {
       if (!registerData.isValidated) {
-        return;
+        return
       }
 
       return await postAdminAccount({
@@ -62,42 +63,24 @@ export default function AdminAccountRegisterView() {
         phoneNumber: registerData.phoneNumber.value
       }, session)
     },
-    async onSuccess(response, variable) {
+    async onSuccess(response) {
       if (!response?.ok) {
-        alert('관리자 계정 등록이 실패하였습니다.');
-        return;
+        alert('관리자 계정 등록이 실패하였습니다.')
+        return
       }
 
-      const queryCache = queryClient.getQueryCache()
-      queryCache.getAll()
-        .map(cache => cache.queryKey)
-        .filter((queryKey) => queryKey[0] === 'admin-accounts')
-        .forEach((queryKey) => {
-          queryClient.invalidateQueries({
-            queryKey: queryKey
-          })
-        })
-      router.back();
+      await invalidateAdminAccountsQueries(queryClient)
+      router.back()
     },
     onError(error) {
-      console.dir(error);
-      alert('관리자 계정 등록이 실패하였습니다.');
+      console.dir(error)
+      alert('관리자 계정 등록이 실패하였습니다.')
     }
   })
 
-  const onRegister = async () => {
-    mutation.mutate(registerData)
-  }
-
   const onChangeId = (event: ChangeEvent<HTMLInputElement>) => {
     const id = event.target.value
-
-    // TODO ID 입력값 유효성 체크 로직 추가 필요
-    let errorMessage = '';
-    if (id === '') {
-      errorMessage = 'ID를 입력해주세요.'
-    }
-
+    const errorMessage = idValidated(id)
     setRegisterData((prev) => ({
       ...prev,
       id: {
@@ -106,58 +89,38 @@ export default function AdminAccountRegisterView() {
         errorMessage: errorMessage
       }
     }))
-    onValidated();
+    onValidated()
   }
+
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    const password  = event.target.value
-
-    // TODO ID 입력값 유효성 체크 로직 추가 필요
-    let errorMessage = '';
-    if (password === '') {
-      errorMessage = '비밀번호를 입력해주세요.'
-    }
-
+    const password = event.target.value
+    const errorMessage = passwordValidated(password)
     setRegisterData((prev) => ({
       ...prev,
       password: {
         value: password,
         isError: errorMessage !== '',
         errorMessage: errorMessage
-      },
+      }
     }))
-    onValidated();
+    onValidated()
   }
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     const name = event.target.value
-
-    // TODO ID 입력값 유효성 체크 로직 추가 필요
-    let errorMessage = '';
-    if (name === '') {
-      errorMessage = '이름을 입력해주세요.'
-    }
-
+    const errorMessage = nameValidated(name)
     setRegisterData((prev) => ({
       ...prev,
       name: {
         value: name,
         isError: errorMessage !== '',
         errorMessage: errorMessage
-      },
+      }
     }))
-    onValidated();
+    onValidated()
   }
   const onChangePhoneNumber = (event: ChangeEvent<HTMLInputElement>) => {
-    const phoneNumber = event.target.value;
-
-    // TODO ID 입력값 유효성 체크 로직 추가 필요
-    let errorMessage = '';
-    if (phoneNumber === '') {
-      errorMessage = '연락처를 입력해주세요'
-    }
-    else if (formatPhoneNumber(phoneNumber) === undefined) {
-      errorMessage = '잘못된 연락처를 입력하였습니다'
-    }
-
+    const phoneNumber = event.target.value
+    const errorMessage = nameValidated(phoneNumber)
     setRegisterData((prev) => ({
       ...prev,
       phoneNumber: {
@@ -166,18 +129,13 @@ export default function AdminAccountRegisterView() {
         errorMessage: errorMessage
       }
     }))
-    onValidated();
+    onValidated()
   }
 
   const onValidated = () => {
-    const isValidated = Object.entries(registerData)
-      .filter(([key, value]) => key !== 'isValidated')
-      .map(([key, value]) => value as TextFieldState)
-      .every(value => !value.isError)
-
     setRegisterData((prev) => ({
       ...prev,
-      isValidated: isValidated
+      isValidated: isValidated(registerData)
     }))
   }
 
@@ -219,11 +177,11 @@ export default function AdminAccountRegisterView() {
           />
           <BasicButton
             label={'등록하기'}
-            onClick={onRegister}
+            onClick={() => mutation.mutate(registerData)}
             disabled={!registerData.isValidated}
             sx={{
               height: '56px',
-              borderRadius: '12px',
+              borderRadius: '12px'
             }}
           />
         </Stack>

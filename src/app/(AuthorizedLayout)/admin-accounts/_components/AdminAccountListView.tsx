@@ -1,6 +1,6 @@
 'use client'
 
-import React, { ChangeEvent, useEffect } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import {
   Container,
   Pagination,
@@ -23,13 +23,15 @@ import AdminAccountListItem from '@/app/(AuthorizedLayout)/admin-accounts/_compo
 import { SIGN_IN_PAGE_PATH, SIGN_OUT_PAGE_PATH } from '@/auth'
 
 const AdminAccountListView = ({ pageParameters }: PageProperties) => {
+  const [page, setPage] = useState(pageParameters.page)
+
   const router = useRouter()
   const {
     data: adminAccountPage,
     isError,
     error
   } = useQuery<Response, Error, Page<AdminAccount>, [_1: string, pageParameters: PageParameters]>({
-    queryKey: ['admin-accounts', pageParameters],
+    queryKey: ['admin-accounts', { page: page }],
     queryFn: getAdminAccounts,
     staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준
     gcTime: 300 * 1000,
@@ -41,15 +43,14 @@ const AdminAccountListView = ({ pageParameters }: PageProperties) => {
         router.replace(SIGN_OUT_PAGE_PATH)
       }
     }
-
   }, [isError])
-  console.log(adminAccountPage)
 
   const handlerPageChange = (
     event: ChangeEvent<unknown>,
     page: number,
   ): void => {
-    router.push(`/admin-accounts?page=${page-1}`)
+    router.push(`/admin-accounts?page=${page}`)
+    setPage(page)
   }
 
   return (
@@ -134,7 +135,7 @@ const AdminAccountListView = ({ pageParameters }: PageProperties) => {
               marginTop: '20px;'
             }}
             count={adminAccountPage?.pages}
-            page={pageParameters.page + 1}
+            page={page}
             onChange={handlerPageChange}
           />
         </Container>

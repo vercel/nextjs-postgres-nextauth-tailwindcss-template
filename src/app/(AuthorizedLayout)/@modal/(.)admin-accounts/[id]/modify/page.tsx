@@ -1,16 +1,13 @@
 'use client'
 
-import ModifyModal from '@/app/(AuthorizedLayout)/admin-accounts/_components/ModifyModal'
+import AdminAccountModifyContainer
+  from '@/app/(AuthorizedLayout)/admin-accounts/[id]/modify/_components/AdminAccountModifyContainer'
 
 const AdminAccountModifyModalPage = (
-  { params }: { params: { id: string }}
+  { params }: { params: { id: string } }
 ) => {
-  return (
-    <ModifyModal
-      id={params.id}
-      open={true}
-    />
-  )
+  // @ts-ignore
+  return <AdminAccountModifyContainer id={params.id} />
 }
 
 export default AdminAccountModifyModalPage

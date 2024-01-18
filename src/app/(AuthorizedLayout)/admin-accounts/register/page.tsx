@@ -2,9 +2,9 @@ import AdminAccountListContainer from '@/app/(AuthorizedLayout)/admin-accounts/_
 import { PageProperties } from '@/models/common'
 import React from 'react'
 
-const Page = async ({ pageParameters }: PageProperties) => {
+const AdminAccountRegisterPage = async ({ pageParameters }: PageProperties) => {
   // @ts-ignore
   return <AdminAccountListContainer pageParameters={pageParameters} />
 }
 
-export default Page;
+export default AdminAccountRegisterPage;

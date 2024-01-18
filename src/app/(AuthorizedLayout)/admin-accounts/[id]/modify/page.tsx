@@ -1,12 +1,12 @@
-import ModifyModal from '@/app/(AuthorizedLayout)/admin-accounts/_components/ModifyModal'
+import AdminAccountListContainer from '@/app/(AuthorizedLayout)/admin-accounts/_components/AdminAccountListContainer'
+import React from 'react'
+import { PageProperties } from '@/models/common'
 
-export default function AdminAccountModifyPage(
-  { params }: { params: { id: string }}
-) {
-  return (
-    <ModifyModal
-      id={params.id}
-      open={true}
-    />
-  )
+const AdminAccountModifyPage = async ({ pageParameters }: PageProperties) => {
+  console.log("AdminAccountModifyPage", pageParameters)
+
+  // @ts-ignore
+  return <AdminAccountListContainer pageParameters={pageParameters} />
 }
+
+export default AdminAccountModifyPage;

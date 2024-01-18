@@ -1,6 +1,6 @@
 import { auth } from '@/auth'
 
-const NO_AUTHORIZED = new Error("NO_AUTHORIZED")
+export const NO_AUTHORIZED = new Error("NO_AUTHORIZED")
 
 export const getSessionToken = async () => {
   try {
