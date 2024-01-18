@@ -1,0 +1,14 @@
+.adminAccountIdColumn {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    width: 100%;
+}
+
+.adminAccountIdColumn h6 {
+    flex-shrink: 1;
+}
+
+.adminAccountIdColumn .editButton {
+    cursor: pointer;
+}

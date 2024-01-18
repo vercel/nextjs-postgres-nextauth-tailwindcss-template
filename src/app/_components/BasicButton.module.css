@@ -1,0 +1,15 @@
+.button:global(.MuiButton-contained) {
+    background-color: #F80069;
+    color: #D5FF2E;
+}
+
+.button:global(.MuiButton-contained.Mui-disabled) {
+    color: rgba(0, 0, 0, 0.26);
+    box-shadow: none;
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+.formButton {
+    height: 56px;
+    border-radius: 12px;
+}

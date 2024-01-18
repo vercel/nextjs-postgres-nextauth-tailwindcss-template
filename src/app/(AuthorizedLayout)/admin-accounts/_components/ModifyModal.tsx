@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react'
 import { Button, Modal, Stack } from '@mui/material'
-import BaseCard from '@/component/BaseCard'
-import styles from './adminAccountModify.module.css'
-import BaseTextField, { TextFieldState } from '@/component/BaseTextField'
+import BaseCard from '@/app/_components/BaseCard'
+import styles from './modify.module.css'
+import BaseTextField, { TextFieldState } from '@/app/_components/BaseTextField'
 
 type Props = {
   id: string;
@@ -18,7 +18,7 @@ type AdminAccountModifyState = {
   isValidated: boolean;
 }
 
-const AdminAccountModifyView = (
+const ModifyModal = (
   { id, open }: Props,
 ) => {
   const [modifyData] = useState<AdminAccountModifyState>({
@@ -84,4 +84,4 @@ const AdminAccountModifyView = (
   )
 }
 
-export default AdminAccountModifyView
+export default ModifyModal

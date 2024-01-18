@@ -14,7 +14,7 @@ import {
   Menu,
   Typography
 } from '@mui/material'
-import { signOut, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 const Profile = () => {
@@ -30,16 +30,7 @@ const Profile = () => {
   }
 
   const handleLogout = async () => {
-    signOut({
-      redirect: false
-    })
-    .then((response) => {
-      console.log(`response:${response}`)
-      router.replace('/')
-    })
-    .catch((error) => {
-      console.log(`error:${error}`)
-    })
+    router.push("/sign-out")
   }
 
   if (status === 'loading') {

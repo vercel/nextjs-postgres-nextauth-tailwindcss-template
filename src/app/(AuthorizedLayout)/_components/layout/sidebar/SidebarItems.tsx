@@ -1,3 +1,5 @@
+"use client"
+
 import Navigations from './navigation/Navigations'
 import { usePathname } from 'next/navigation'
 import { Box, List } from '@mui/material'

@@ -4,7 +4,7 @@ import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup } from '@
 import Image from 'next/image'
 import styles from './page.module.css'
 import { ChangeEvent, FormEventHandler, useState } from 'react'
-import BaseTextField, { TextFieldState } from '@/component/BaseTextField'
+import BaseTextField, { TextFieldState } from '@/app/_components/BaseTextField'
 import { signIn, useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
 import Navigations from '@/app/(AuthorizedLayout)/_components/layout/sidebar/navigation/Navigations'

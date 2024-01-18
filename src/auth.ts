@@ -1,15 +1,16 @@
 import NextAuth, { Session, User } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { ResponseData } from 'thunder-order'
 import { jwtDecode } from 'jwt-decode'
 import { JWT } from '@auth/core/jwt'
+import { ResponseData } from '@/models/common'
 
 type Login = {
   accessToken: string;
 }
 
-const ACCESS_TOKEN_HEADER = 'Bearer '
+export const ACCESS_TOKEN_HEADER = 'Bearer '
 export const SIGN_IN_PAGE_PATH = '/authorization/sign-in'
+export const SIGN_OUT_PAGE_PATH = '/authorization/sign-out'
 
 // noinspection JSUnusedGlobalSymbols
 export const {

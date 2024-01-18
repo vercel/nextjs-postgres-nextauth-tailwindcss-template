@@ -1,0 +1,10 @@
+.container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100dvw;
+    height: 100dvh;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    z-index: 2000;
+}
