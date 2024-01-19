@@ -1,4 +1,4 @@
-import { PageProperties } from '@/models/common'
+import { PageProperties } from '@/app/(AuthorizedLayout)/_models/common'
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import { getAdminAccounts } from '@/app/(AuthorizedLayout)/admin-accounts/_lib/getAdminAccounts'
 import AdminAccountListView from '@/app/(AuthorizedLayout)/admin-accounts/_components/AdminAccountListView'

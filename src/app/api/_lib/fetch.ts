@@ -1,7 +1,7 @@
 import { getSessionToken } from '@/app/(AuthorizedLayout)/_lib/session'
 import { ACCESS_TOKEN_HEADER } from '@/auth'
 import { NextResponse } from 'next/server'
-import { ResponseData } from '@/models/common'
+import { ResponseData } from '@/app/(AuthorizedLayout)/_models/common'
 
 export const serverFetch = async (
   version: string,

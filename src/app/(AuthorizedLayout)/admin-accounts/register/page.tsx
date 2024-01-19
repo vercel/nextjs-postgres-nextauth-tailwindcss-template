@@ -1,5 +1,5 @@
 import AdminAccountListContainer from '@/app/(AuthorizedLayout)/admin-accounts/_components/AdminAccountListContainer'
-import { PageProperties } from '@/models/common'
+import { PageProperties } from '@/app/(AuthorizedLayout)/_models/common'
 import React from 'react'
 
 const AdminAccountRegisterPage = async ({ pageParameters }: PageProperties) => {

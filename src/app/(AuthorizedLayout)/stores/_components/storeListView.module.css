@@ -1,0 +1,106 @@
+.searchContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+    border: 1px solid #999999;
+    border-radius: 12px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    padding: 30px 20px;
+}
+
+.searchFirstRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.searchField {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.searchCondition {
+    width: 100px;
+}
+
+.searchCondition :global(.MuiOutlinedInput-input) {
+    padding: 5px 14px;
+    height: 35px;
+    line-height: 35px;
+}
+
+.searchValue :global(.MuiOutlinedInput-input) {
+    min-width: 100px;
+    max-width: 200px;
+    padding: 5px 14px;
+    height: 35px;
+}
+
+.searchDateContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.searchDateLabel {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.searchDateBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 10px;
+    align-items: center;
+}
+
+.searchDate {
+    width: 150px;
+    text-align: center;
+}
+
+.searchDate :global(.MuiOutlinedInput-input) {
+    padding: 5px;
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 35px;
+    height: 35px;
+    text-align: center;
+}
+
+.checkboxGroupContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    line-height: 35px;
+}
+
+.checkboxGroupLabel {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.checkboxGroup {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.searchLastRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}

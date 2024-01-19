@@ -12,7 +12,7 @@ import {
   TableRow,
   Typography
 } from '@mui/material'
-import { Page, PageParameters, PageProperties, ResponseData } from '@/models/common'
+import { Page, PageParameters, PageProperties, ResponseData } from '@/app/(AuthorizedLayout)/_models/common'
 import BaseCard from '@/app/_components/BaseCard'
 import { BasicButton } from '@/app/_components/BasicButton'
 import { AdminAccount } from '@/app/(AuthorizedLayout)/admin-accounts/_models/AdminAccount'

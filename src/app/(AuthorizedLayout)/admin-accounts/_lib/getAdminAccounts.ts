@@ -1,4 +1,4 @@
-import { PageParameters } from '@/models/common'
+import { PageParameters } from '@/app/(AuthorizedLayout)/_models/common'
 import { NO_AUTHORIZED } from '@/app/(AuthorizedLayout)/_lib/session'
 
 export const getAdminAccounts = async ({ queryKey }: { queryKey: [_1: string, pageParameters: PageParameters]}) => {

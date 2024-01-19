@@ -2,7 +2,7 @@ import NextAuth, { Session, User } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { jwtDecode } from 'jwt-decode'
 import { JWT } from '@auth/core/jwt'
-import { ResponseData } from '@/models/common'
+import { ResponseData } from '@/app/(AuthorizedLayout)/_models/common'
 
 type Login = {
   accessToken: string;

@@ -1,6 +1,6 @@
 import AdminAccountListContainer from '@/app/(AuthorizedLayout)/admin-accounts/_components/AdminAccountListContainer'
 import React from 'react'
-import { PageProperties } from '@/models/common'
+import { PageProperties } from '@/app/(AuthorizedLayout)/_models/common'
 
 const AdminAccountModifyPage = async ({ pageParameters }: PageProperties) => {
   console.log("AdminAccountModifyPage", pageParameters)
