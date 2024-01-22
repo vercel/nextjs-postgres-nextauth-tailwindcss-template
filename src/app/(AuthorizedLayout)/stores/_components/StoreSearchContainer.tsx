@@ -1,5 +1,5 @@
 import React from 'react'
-import { StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import { StorePageParameters, StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/store'
 import { Box, Container } from '@mui/material'
 import styles from '@/app/(AuthorizedLayout)/stores/_components/storeListView.module.css'
 import StoreSearchField from '@/app/(AuthorizedLayout)/stores/_components/StoreSearchField'
@@ -8,7 +8,12 @@ import StoreSearchStatus from '@/app/(AuthorizedLayout)/stores/_components/Store
 import StoreSearchMenuCategory from '@/app/(AuthorizedLayout)/stores/_components/StoreSearchMenuCategory'
 import { BasicButton } from '@/app/_components/BasicButton'
 
-const StoreSearchContainer = ({ pageParameters, setPageParameters }: StoreSearchProps) => {
+type Props = {
+  handlerRouter: (pageParameters: StorePageParameters) => void
+} & StoreSearchProps
+
+
+const StoreSearchContainer = ({ pageParameters, setPageParameters, handlerRouter }: Props) => {
   return (
     <Container className={styles.searchContainer}>
       <Box className={styles.searchFirstRow}>
@@ -21,7 +26,13 @@ const StoreSearchContainer = ({ pageParameters, setPageParameters }: StoreSearch
         <BasicButton
           label={'조회하기'}
           disabled={false}
-          onClick={() => {}}
+          onClick={() => {
+            setPageParameters((prev) => ({
+              ...prev,
+              page: 1
+            }))
+            handlerRouter(pageParameters)
+          }}
           sx={{ width: '250px' }}
         />
       </Box>

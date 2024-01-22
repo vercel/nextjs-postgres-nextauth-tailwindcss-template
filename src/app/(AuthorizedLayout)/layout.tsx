@@ -32,12 +32,9 @@ const AuthorizedLayout = ({ children, modal }: Props) => {
             {/* ------------------------------------------- */}
             {/* PageContent */}
             {/* ------------------------------------------- */}
-            <Container
-              sx={{
-                paddingTop: '20px',
-                maxWidth: '1200px',
-              }}
-            >
+            <Container maxWidth={'xl'} sx={{
+              paddingTop: '20px',
+            }}>
               {/* ------------------------------------------- */}
               {/* Page Route */}
               {/* ------------------------------------------- */}

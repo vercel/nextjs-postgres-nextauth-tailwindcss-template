@@ -16,7 +16,7 @@ import { Page } from '@/app/(AuthorizedLayout)/_models/common'
 
 type Props = {
   page: number,
-  storePage: Page<StoreResponse>,
+  storePage: Page<StoreResponse> | undefined,
   handlerPageChange: (
     event: ChangeEvent<unknown>,
     page: number
@@ -92,6 +92,11 @@ const StoreListTable = ({ page, storePage, handlerPageChange }: Props) => {
               </TableCell>
               <TableCell>
                 <Typography color="textSecondary" variant="h6">
+                  보건증 만기일
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography color="textSecondary" variant="h6">
                   이미지
                 </Typography>
               </TableCell>
@@ -107,7 +112,7 @@ const StoreListTable = ({ page, storePage, handlerPageChange }: Props) => {
               ))
               : (
                 <TableRow>
-                  <TableCell colSpan={9} align={'center'} sx={{height: '300px'}}>
+                  <TableCell colSpan={10} align={'center'} sx={{height: '300px'}}>
                     <Typography color="textSecondary" sx={{ fontSize: '1.5rem', fontWeight: '500' }}>
                       조회된 매장이 없습니다.
                     </Typography>

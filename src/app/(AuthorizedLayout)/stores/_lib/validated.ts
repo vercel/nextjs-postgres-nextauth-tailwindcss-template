@@ -1,4 +1,4 @@
-import { formatPhoneNumber } from '@/utils/phoneNumber'
+import { formatPhoneNumber } from '@/app/(AuthorizedLayout)/_lib/phoneNumber'
 
 export const storeIdValidated = (storeId: string) => {
   let errorMessage = '';

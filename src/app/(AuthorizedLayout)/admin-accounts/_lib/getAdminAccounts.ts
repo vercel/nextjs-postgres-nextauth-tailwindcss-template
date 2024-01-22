@@ -4,7 +4,6 @@ import { NO_AUTHORIZED } from '@/app/(AuthorizedLayout)/_lib/session'
 export const getAdminAccounts = async ({ queryKey }: { queryKey: [_1: string, pageParameters: PageParameters]}) => {
   const [_1, pageParameters] = queryKey
   const { page: pageNumber } = pageParameters
-  console.log(pageNumber)
   const pageSize = 3
   const response = await fetch(`/api/admin-accounts?pageNumber=${pageNumber - 1}&pageSize=${pageSize}`, {
     next: {

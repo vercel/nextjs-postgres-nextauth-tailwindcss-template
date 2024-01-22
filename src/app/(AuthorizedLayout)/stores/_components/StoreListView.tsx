@@ -5,30 +5,30 @@ import BaseCard from '@/app/_components/BaseCard'
 import { BasicButton } from '@/app/_components/BasicButton'
 import { useRouter } from 'next/navigation'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
-import { StoreResponse, StorePageProperties } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import { StoreResponse, StorePageProperties, StorePageParameters } from '@/app/(AuthorizedLayout)/stores/_models/store'
 import StoreSearchContainer from '@/app/(AuthorizedLayout)/stores/_components/StoreSearchContainer'
 import StoreListTable from '@/app/(AuthorizedLayout)/stores/_components/StoreListTable'
 import { Page } from '@/app/(AuthorizedLayout)/_models/common'
 import { Box, Typography } from '@mui/material'
+import { useQuery } from '@tanstack/react-query'
+import { getStores } from '@/app/(AuthorizedLayout)/stores/_lib/getStores'
 
 const StoreListView = ({ pageParameters: initPageParameters }: StorePageProperties) => {
   const [pageParameters, setPageParameters] = useState(initPageParameters)
-  const { page } = pageParameters
+  const [searchPageParameters, setSearchPageParameters] = useState(initPageParameters)
+  const { page } = searchPageParameters
 
   const router = useRouter()
-  const isError = false
-  const error = { message: '' }
-  const storePage = { pages: 1, elements: 0, contents: [] } as Page<StoreResponse>
-  // const {
-  //   data: storePage,
-  //   isError,
-  //   error
-  // } = useQuery<Response, Error, Page<Store>, [_1: string, pageParameters: StorePageParameters]>({
-  //   queryKey: ['stores', pageParameters],
-  //   queryFn: getStores,
-  //   staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준
-  //   gcTime: 300 * 1000,
-  // })
+  const {
+    data: storePage,
+    isError,
+    error
+  } = useQuery<Response, Error, Page<StoreResponse>, [_1: string, pageParameters: StorePageParameters]>({
+    queryKey: ['stores', pageParameters],
+    queryFn: getStores,
+    staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준
+    gcTime: 300 * 1000,
+  })
 
   useEffect(() => {
     if (isError) {
@@ -42,15 +42,21 @@ const StoreListView = ({ pageParameters: initPageParameters }: StorePageProperti
     event: ChangeEvent<unknown>,
     page: number,
   ): void => {
-    const searchParams = new URLSearchParams(...Object.entries(pageParameters))
-    router.push(`/stores?${searchParams.toString()}`)
     setPageParameters((prev) => ({
       ...prev,
       page: page
     }))
+    handlerRouter(pageParameters)
   }
 
-  console.log(pageParameters)
+  const handlerRouter = (pageParameters: StorePageParameters) => {
+    const searchParams = new URLSearchParams(...Object.entries(pageParameters))
+    router.push(`/stores?${searchParams.toString()}`)
+
+    setPageParameters(pageParameters)
+    setSearchPageParameters(pageParameters)
+  }
+
   return (
     <>
       <BaseCard
@@ -70,7 +76,11 @@ const StoreListView = ({ pageParameters: initPageParameters }: StorePageProperti
             진행중 : 0건
           </Typography>
         </Box>
-        <StoreSearchContainer pageParameters={pageParameters} setPageParameters={setPageParameters} />
+        <StoreSearchContainer
+          pageParameters={searchPageParameters}
+          setPageParameters={setSearchPageParameters}
+          handlerRouter={handlerRouter}
+        />
         <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItem: 'center' }}>
           <BasicButton
             label={'다운로드'}

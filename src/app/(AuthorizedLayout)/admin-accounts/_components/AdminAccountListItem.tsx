@@ -3,7 +3,7 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import { format } from 'date-fns/format'
 import { TableCell, Typography } from '@mui/material'
 import { AdminAccount } from '@/app/(AuthorizedLayout)/admin-accounts/_models/AdminAccount'
-import { formatPhoneNumber } from '@/utils/phoneNumber'
+import { formatPhoneNumber } from '@/app/(AuthorizedLayout)/_lib/phoneNumber'
 import styles from './adminAccountListItem.module.css'
 
 interface Props {
