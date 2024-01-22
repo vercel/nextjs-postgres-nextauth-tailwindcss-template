@@ -11,12 +11,12 @@ import {
   Typography
 } from '@mui/material'
 import StoreListItem from '@/app/(AuthorizedLayout)/stores/_components/StoreListItem'
-import { Store } from '@/app/(AuthorizedLayout)/stores/_models/Store'
+import { StoreResponse } from '@/app/(AuthorizedLayout)/stores/_models/store'
 import { Page } from '@/app/(AuthorizedLayout)/_models/common'
 
 type Props = {
   page: number,
-  storePage: Page<Store>,
+  storePage: Page<StoreResponse>,
   handlerPageChange: (
     event: ChangeEvent<unknown>,
     page: number

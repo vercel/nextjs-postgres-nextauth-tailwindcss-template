@@ -1,0 +1,55 @@
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.label {
+    width: 100px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 35px;
+}
+
+.requiredLabel {
+    width: 100px;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 35px;
+}
+
+.textField {
+    flex-grow: 1;
+}
+
+.bankAccountFieldGroup {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.bankTextField {
+    width: 120px;
+}
+
+.accountHolderTextField {
+    flex-grow: 1;
+}
+
+.radioGroup {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.file {
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    height: 0;
+    width: 0;
+}

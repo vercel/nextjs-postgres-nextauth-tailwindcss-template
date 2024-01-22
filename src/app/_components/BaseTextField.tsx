@@ -9,13 +9,19 @@ import styles from './BaseTextField.module.css'
  *
  * @property value         값
  * @property isError       에러 여부
- * @property errorMesssage 에러 메시지
+ * @property errorMessage  에러 메시지
  */
 export type TextFieldState = {
   value: string;
   isError: boolean;
   errorMessage: string;
 }
+
+export const initBaseState = (value?: string) => ({
+  value: value ?? '',
+  isError: false,
+  errorMessage: ''
+})
 
 const BaseTextField = (props: {state : TextFieldState} & TextFieldProps) => {
   return (

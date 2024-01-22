@@ -2,7 +2,7 @@ import { PageParameters } from '@/app/(AuthorizedLayout)/_models/common'
 import { Dispatch, SetStateAction } from 'react'
 
 /**
- * 매장.
+ * 매장 목록 응답 Data.
  *
  * @property id                       매장 ID
  * @property createDate               등록일
@@ -15,7 +15,7 @@ import { Dispatch, SetStateAction } from 'react'
  * @property healthCertExpirationDate 보건증 만기일
  * @property imageUrl                 이미지 URL
  */
-export interface Store {
+export interface StoreResponse {
   id: string,
   createDate: Date,
   name: string,

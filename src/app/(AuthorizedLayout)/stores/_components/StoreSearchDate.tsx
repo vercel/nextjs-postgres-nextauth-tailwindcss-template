@@ -1,5 +1,5 @@
 import React from 'react'
-import { StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/Store'
+import { StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/store'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import 'dayjs/locale/ko'

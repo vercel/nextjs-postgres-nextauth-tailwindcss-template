@@ -5,7 +5,7 @@ import BaseCard from '@/app/_components/BaseCard'
 import { BasicButton } from '@/app/_components/BasicButton'
 import { useRouter } from 'next/navigation'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
-import { Store, StorePageProperties } from '@/app/(AuthorizedLayout)/stores/_models/Store'
+import { StoreResponse, StorePageProperties } from '@/app/(AuthorizedLayout)/stores/_models/store'
 import StoreSearchContainer from '@/app/(AuthorizedLayout)/stores/_components/StoreSearchContainer'
 import StoreListTable from '@/app/(AuthorizedLayout)/stores/_components/StoreListTable'
 import { Page } from '@/app/(AuthorizedLayout)/_models/common'
@@ -18,7 +18,7 @@ const StoreListView = ({ pageParameters: initPageParameters }: StorePageProperti
   const router = useRouter()
   const isError = false
   const error = { message: '' }
-  const storePage = { pages: 1, elements: 0, contents: [] } as Page<Store>
+  const storePage = { pages: 1, elements: 0, contents: [] } as Page<StoreResponse>
   // const {
   //   data: storePage,
   //   isError,

@@ -1,6 +1,6 @@
 import { PageParameters } from '@/app/(AuthorizedLayout)/_models/common'
 import { NO_AUTHORIZED } from '@/app/(AuthorizedLayout)/_lib/session'
-import { StorePageParameters } from '@/app/(AuthorizedLayout)/stores/_models/Store'
+import { StorePageParameters } from '@/app/(AuthorizedLayout)/stores/_models/store'
 
 export const getStores = async ({ queryKey }: { queryKey: [_1: string, pageParameters: StorePageParameters]}) => {
   const [_1, pageParameters] = queryKey

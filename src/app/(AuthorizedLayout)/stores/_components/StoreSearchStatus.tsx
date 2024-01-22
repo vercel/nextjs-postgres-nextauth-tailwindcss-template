@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react'
 import styles from '@/app/(AuthorizedLayout)/stores/_components/storeListView.module.css'
 import { Box, Checkbox, FormControlLabel, FormGroup, Typography } from '@mui/material'
-import { StoreSearchProps, StoreStatus } from '@/app/(AuthorizedLayout)/stores/_models/Store'
+import { StoreSearchProps, StoreStatus } from '@/app/(AuthorizedLayout)/stores/_models/store'
 
 const StoreSearchStatus = ({ pageParameters, setPageParameters }: StoreSearchProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/Store'
+import { StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/store'
 import { Box, Container } from '@mui/material'
 import styles from '@/app/(AuthorizedLayout)/stores/_components/storeListView.module.css'
 import StoreSearchField from '@/app/(AuthorizedLayout)/stores/_components/StoreSearchField'

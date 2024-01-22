@@ -4,7 +4,7 @@ import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup } from '@
 import Image from 'next/image'
 import styles from './page.module.css'
 import { ChangeEvent, FormEventHandler, useState } from 'react'
-import BaseTextField, { TextFieldState } from '@/app/_components/BaseTextField'
+import BaseTextField, { initBaseState, TextFieldState } from '@/app/_components/BaseTextField'
 import { signIn, useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
 import Navigations from '@/app/(AuthorizedLayout)/_components/layout/sidebar/navigation/Navigations'
@@ -17,16 +17,8 @@ const SignIn = () => {
     redirect(DASHBOARD_PAGE_PATH)
   }
 
-  const [idField, setIdField] = useState<TextFieldState>({
-    value: '',
-    isError: false,
-    errorMessage: '',
-  });
-  const [passwordField, setPasswordField] = useState<TextFieldState>({
-    value: '',
-    isError: false,
-    errorMessage: '',
-  });
+  const [idField, setIdField] = useState<TextFieldState>(initBaseState());
+  const [passwordField, setPasswordField] = useState<TextFieldState>(initBaseState());
   const [isAutoLogin, setAutoLogin] = useState<boolean>(false)
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {

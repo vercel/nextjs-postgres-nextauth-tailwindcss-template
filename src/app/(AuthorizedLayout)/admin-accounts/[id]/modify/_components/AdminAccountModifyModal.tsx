@@ -3,7 +3,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { Stack } from '@mui/material'
 import styles from './adminAccountModify.module.css'
-import BaseTextField, { TextFieldState } from '@/app/_components/BaseTextField'
+import BaseTextField, { initBaseState, TextFieldState } from '@/app/_components/BaseTextField'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { AdminAccount } from '@/app/(AuthorizedLayout)/admin-accounts/_models/AdminAccount'
 import { getAdminAccount } from '@/app/(AuthorizedLayout)/admin-accounts/[id]/modify/_lib/getAdminAccount'
@@ -50,16 +50,8 @@ const AdminAccountModifyModal = ({ id }: Props) => {
 
   const [modifyData, setModifyData] = useState<AdminAccountModifyState>({
     id: id,
-    name: {
-      value: adminAccount?.name ?? '',
-      isError: false,
-      errorMessage: ''
-    },
-    phoneNumber: {
-      value: adminAccount?.phoneNumber ?? '',
-      isError: false,
-      errorMessage: ''
-    },
+    name: initBaseState(adminAccount?.name),
+    phoneNumber: initBaseState(adminAccount?.phoneNumber),
     isValidated: false
   });
 
@@ -75,7 +67,7 @@ const AdminAccountModifyModal = ({ id }: Props) => {
         phoneNumber: modifyData.phoneNumber.value
       }, session)
     },
-    async onSuccess(response, variable) {
+    async onSuccess(response) {
       if (!response?.ok) {
         alert('관리자 계정 정보 변경이 실패하였습니다.');
         return;

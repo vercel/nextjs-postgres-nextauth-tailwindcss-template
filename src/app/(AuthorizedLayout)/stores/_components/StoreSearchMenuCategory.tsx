@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react'
 import styles from '@/app/(AuthorizedLayout)/stores/_components/storeListView.module.css'
 import { Box, Checkbox, FormControlLabel, FormGroup, Typography } from '@mui/material'
-import { MenuCategory, StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/Store'
+import { MenuCategory, StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/store'
 
 const StoreSearchMenuCategory = ({ pageParameters, setPageParameters }: StoreSearchProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {

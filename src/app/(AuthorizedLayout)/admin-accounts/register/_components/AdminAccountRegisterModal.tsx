@@ -3,7 +3,7 @@
 import { ChangeEvent, useState } from 'react'
 import { Stack } from '@mui/material'
 import styles from './adminAccountRegister.module.css'
-import BaseTextField, { TextFieldState } from '@/app/_components/BaseTextField'
+import BaseTextField, { initBaseState, TextFieldState } from '@/app/_components/BaseTextField'
 import { useRouter } from 'next/navigation'
 import BaseModal from '@/app/_components/BaseModal'
 import { BasicButton } from '@/app/_components/BasicButton'
@@ -13,6 +13,8 @@ import { useSession } from 'next-auth/react'
 import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
 import { idValidated, nameValidated, passwordValidated } from '@/app/(AuthorizedLayout)/admin-accounts/_lib/validated'
 import { invalidateAdminAccountsQueries } from '@/app/(AuthorizedLayout)/admin-accounts/_lib/invalidateQueries'
+import { Session } from 'next-auth'
+import { SIGN_OUT_PAGE_PATH } from '@/auth'
 
 type AdminAccountRegisterState = {
   id: TextFieldState;
@@ -20,50 +22,46 @@ type AdminAccountRegisterState = {
   name: TextFieldState;
   phoneNumber: TextFieldState;
   isValidated: boolean;
+  session: Session;
 }
 
-export default function AdminAccountRegisterView() {
+const initState = (session: Session) => ({
+  id: initBaseState(),
+  password: initBaseState(),
+  name: initBaseState(),
+  phoneNumber: initBaseState(),
+  isValidated: false,
+  session: session,
+})
+
+const onRegisterData = async (registerData: AdminAccountRegisterState) => {
+  if (!registerData.isValidated) {
+    return
+  }
+
+  return await postAdminAccount({
+    id: registerData.id.value,
+    password: registerData.password.value,
+    name: registerData.name.value,
+    phoneNumber: registerData.phoneNumber.value
+  }, registerData.session)
+}
+
+const AdminAccountRegisterModal = () => {
   const router = useRouter()
   const { data: session } = useSession()
-  const [registerData, setRegisterData] = useState<AdminAccountRegisterState>({
-    id: {
-      value: '',
-      isError: false,
-      errorMessage: ''
-    },
-    password: {
-      value: '',
-      isError: false,
-      errorMessage: ''
-    },
-    name: {
-      value: '',
-      isError: false,
-      errorMessage: ''
-    },
-    phoneNumber: {
-      value: '',
-      isError: false,
-      errorMessage: ''
-    },
-    isValidated: false
-  })
+  const [registerData, setRegisterData] = useState<AdminAccountRegisterState>(initState(session!))
 
   const queryClient = useQueryClient()
   const mutation = useMutation({
-    mutationFn: async (registerData: AdminAccountRegisterState) => {
-      if (!registerData.isValidated) {
+    mutationFn: onRegisterData,
+    async onSuccess(response) {
+      if (response?.status === 401) {
+        alert("로그인이 필요한 서비스입니다.")
+        router.push(SIGN_OUT_PAGE_PATH)
         return
       }
 
-      return await postAdminAccount({
-        id: registerData.id.value,
-        password: registerData.password.value,
-        name: registerData.name.value,
-        phoneNumber: registerData.phoneNumber.value
-      }, session)
-    },
-    async onSuccess(response) {
       if (!response?.ok) {
         alert('관리자 계정 등록이 실패하였습니다.')
         return
@@ -189,3 +187,5 @@ export default function AdminAccountRegisterView() {
     </BaseModal>
   )
 }
+
+export default AdminAccountRegisterModal

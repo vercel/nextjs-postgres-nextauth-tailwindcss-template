@@ -5,7 +5,7 @@ import {
   StorePageParameters,
   StoreSearchCondition,
   StoreSearchProps
-} from '@/app/(AuthorizedLayout)/stores/_models/Store'
+} from '@/app/(AuthorizedLayout)/stores/_models/store'
 
 const StoreSearchField = ({ pageParameters, setPageParameters }: StoreSearchProps) => {
   const handleSearchConditionChange = (

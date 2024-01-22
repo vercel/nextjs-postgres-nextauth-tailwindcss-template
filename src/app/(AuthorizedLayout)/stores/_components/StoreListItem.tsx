@@ -2,10 +2,10 @@ import TableRow from '@mui/material/TableRow'
 import { format } from 'date-fns/format'
 import { TableCell, Typography } from '@mui/material'
 import styles from './storeListItem.module.css'
-import { Store } from '@/app/(AuthorizedLayout)/stores/_models/Store'
+import { StoreResponse } from '@/app/(AuthorizedLayout)/stores/_models/store'
 
 interface Props {
-  store: Store,
+  store: StoreResponse,
 }
 
 const StoreListItem = ({ store }: Props) => {
