@@ -5,16 +5,13 @@ import styles from './storeTextField.module.css'
 import { StoreRegisterState } from '@/app/(AuthorizedLayout)/stores/register/_components/StoreRegisterModal'
 
 type Props = {
-  registerData: StoreRegisterState,
-  setRegisterData: Dispatch<SetStateAction<StoreRegisterState>>
+  data: string,
+  setData: (category: string) => void,
 }
 
-const StoreCategoryRadioGroup = ({ registerData, setRegisterData }: Props) => {
+const StoreCategoryRadioGroup = ({ data, setData }: Props) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setRegisterData((prev) => ({
-      ...prev,
-      category: event.target.value
-    }))
+    setData(event.target.value)
   }
 
   return (
@@ -26,7 +23,7 @@ const StoreCategoryRadioGroup = ({ registerData, setRegisterData }: Props) => {
       </Box>
       <Box className={styles.container}>
         <RadioGroup className={styles.radioGroup}
-                    value={registerData.category}
+                    value={data}
                     onChange={handleChange}>
           <FormControlLabel
             control={<Radio value={'MEALS'} />}

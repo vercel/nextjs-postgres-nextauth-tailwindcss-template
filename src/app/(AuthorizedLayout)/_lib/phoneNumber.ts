@@ -1,4 +1,8 @@
-export const formatPhoneNumber = (input: string): string | undefined => {
+export const formatPhoneNumber = (input?: string): string | undefined => {
+  if (input === undefined) {
+    return undefined
+  }
+
   const cleanInput = input.replaceAll(/[^0-9]/g, '')
   let result = ''
   const length = cleanInput.length

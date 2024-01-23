@@ -2,30 +2,36 @@
 
 import React, { ChangeEvent, useState } from 'react'
 import { Stack } from '@mui/material'
-import styles from './storeRegister.module.css'
+import styles from './storeModify.module.css'
 import { initBaseState, TextFieldState } from '@/app/_components/BaseTextField'
 import { useRouter } from 'next/navigation'
 import BaseModal from '@/app/_components/BaseModal'
-import { BasicButton } from '@/app/_components/BasicButton'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
 import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
 import {
   businessLocationValidated,
   nameValidated,
-  storeIdValidated, storeTelValidated
+  storeTelValidated
 } from '@/app/(AuthorizedLayout)/stores/_lib/validated'
 import { Session } from 'next-auth'
-import { postStore } from '@/app/(AuthorizedLayout)/stores/register/_lib/postStore'
 import { invalidateStoresQueries } from '@/app/(AuthorizedLayout)/stores/_lib/invalidateQueries'
 import StoreTextField from '@/app/(AuthorizedLayout)/stores/_components/StoreTextField'
 import StoreImageField from '@/app/(AuthorizedLayout)/stores/_components/StoreImageField'
 import StoreBankAccountFieldGroup from '@/app/(AuthorizedLayout)/stores/_components/StoreBankAccountFieldGroup'
 import StoreCategoryRadioGroup from '@/app/(AuthorizedLayout)/stores/_components/StoreCategoryRadioGroup'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
+import { putStore } from '@/app/(AuthorizedLayout)/stores/[storeId]/modify/_lib/putStore'
+import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
+import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeDetail'
+import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/hook/useStoreDetail'
+
+type Props = {
+  storeId: string
+}
 
 /**
- * 매장 등록 State.
+ * 매장 정보 변경 State.
  *
  * @property storeId          매장 ID
  * @property name             매장명
@@ -39,8 +45,8 @@ import { SIGN_OUT_PAGE_PATH } from '@/auth'
  * @property isValidated      유효성 체크 통과 여부
  * @property session          세션 정보
  */
-export type StoreRegisterState = {
-  storeId: TextFieldState,
+type StoreModifyState = {
+  storeId: string,
   storeName: TextFieldState,
   imageUrl: string,
   storeTel: TextFieldState,
@@ -53,46 +59,50 @@ export type StoreRegisterState = {
   session: Session,
 }
 
-const initState = (session: Session) => ({
-  storeId: initBaseState(),
-  storeName: initBaseState(),
-  imageUrl: '',
-  storeTel: initBaseState(),
-  bank: initBaseState(),
-  accountNumber: initBaseState(),
-  accountHolder: initBaseState(),
-  businessLocation: initBaseState(),
-  category: 'MEALS',
-  isValidated: false,
+const initState = (storeId: string, storeDetail: StoreDetailResponse, session: Session) => ({
+  storeId: storeId,
+  storeName: initBaseState(storeDetail.storeName),
+  imageUrl: storeDetail.imageUrl,
+  storeTel: initBaseState(storeDetail.storeTel),
+  bank: initBaseState(storeDetail.bank),
+  accountNumber: initBaseState(storeDetail.accountNumber),
+  accountHolder: initBaseState(storeDetail.accountHolder),
+  businessLocation: initBaseState(storeDetail.businessLocation),
+  category: storeDetail.category,
+  isValidated: true,
   session: session,
 })
 
-const onRegisterData = async (registerData: StoreRegisterState) => {
-  if (!registerData.isValidated) {
+const onModifyData = async (modifyData: StoreModifyState) => {
+  if (!modifyData.isValidated) {
     return
   }
 
-  return await postStore({
-    storeId: registerData.storeId.value,
-    storeName: registerData.storeName.value,
-    imageUrl: registerData.imageUrl,
-    storeTel: registerData.storeTel.value,
-    bank: registerData.bank.value,
-    accountNumber: registerData.accountNumber.value,
-    accountHolder: registerData.accountHolder.value,
-    businessLocation: registerData.businessLocation.value,
-    category: registerData.category,
-  }, registerData.session)
+  return await putStore(modifyData.storeId, {
+    storeName: modifyData.storeName.value,
+    imageUrl: modifyData.imageUrl,
+    storeTel: modifyData.storeTel.value,
+    bank: modifyData.bank.value,
+    accountNumber: modifyData.accountNumber.value,
+    accountHolder: modifyData.accountHolder.value,
+    businessLocation: modifyData.businessLocation.value,
+    category: modifyData.category,
+  }, modifyData.session)
 }
 
-const StoreRegisterModal = ({ params }: { params: { storeId: string } }) => {
+const StoreModifyModal = ({ storeId }: Props) => {
   const router = useRouter()
+  const storeDetail = useStoreDetail(storeId)
+  if (storeDetail == null) {
+    return 'Loading....'
+  }
+
   const { data: session } = useSession()
-  const [registerData, setRegisterData] = useState<StoreRegisterState>(initState(session!))
+  const [modifyData, setModifyData] = useState<StoreModifyState>(initState(storeId, storeDetail, session!))
 
   const queryClient = useQueryClient()
   const mutation = useMutation({
-    mutationFn: onRegisterData,
+    mutationFn: onModifyData,
     async onSuccess(response) {
       if (response?.status === 401) {
         alert("로그인이 필요한 서비스입니다.")
@@ -101,7 +111,7 @@ const StoreRegisterModal = ({ params }: { params: { storeId: string } }) => {
       }
 
       if (!response?.ok) {
-        alert('매장 등록이 실패하였습니다.')
+        alert('매장 정보 변경이 실패하였습니다.')
         return
       }
 
@@ -110,28 +120,14 @@ const StoreRegisterModal = ({ params }: { params: { storeId: string } }) => {
     },
     onError(error) {
       console.dir(error)
-      alert('매장 등록이 실패하였습니다.')
+      alert('매장 정보 변경이 실패하였습니다.')
     }
   })
-
-  const onChangeStoreId = (event: ChangeEvent<HTMLInputElement>) => {
-    const storeId = event.target.value
-    const errorMessage = storeIdValidated(storeId)
-    setRegisterData((prev) => ({
-      ...prev,
-      storeId: {
-        value: storeId,
-        isError: errorMessage !== '',
-        errorMessage: errorMessage
-      }
-    }))
-    onValidated()
-  }
 
   const onChangeStoreName = (event: ChangeEvent<HTMLInputElement>) => {
     const storeName = event.target.value
     const errorMessage = nameValidated(storeName)
-    setRegisterData((prev) => ({
+    setModifyData((prev) => ({
       ...prev,
       storeName: {
         value: storeName,
@@ -145,7 +141,7 @@ const StoreRegisterModal = ({ params }: { params: { storeId: string } }) => {
   const onChangeStoreTel = (event: ChangeEvent<HTMLInputElement>) => {
     const storeTel = event.target.value
     const errorMessage = storeTelValidated(storeTel)
-    setRegisterData((prev) => ({
+    setModifyData((prev) => ({
       ...prev,
       storeTel: {
         value: storeTel,
@@ -159,7 +155,7 @@ const StoreRegisterModal = ({ params }: { params: { storeId: string } }) => {
   const onChangeBusinessLocation = (event: ChangeEvent<HTMLInputElement>) => {
     const businessLocation = event.target.value
     const errorMessage = businessLocationValidated(businessLocation)
-    setRegisterData((prev) => ({
+    setModifyData((prev) => ({
       ...prev,
       businessLocation: {
         value: businessLocation,
@@ -171,15 +167,16 @@ const StoreRegisterModal = ({ params }: { params: { storeId: string } }) => {
   }
 
   const onValidated = () => {
-    setRegisterData((prev) => ({
+    setModifyData((prev) => ({
       ...prev,
-      isValidated: isValidated(registerData)
+      isValidated: isValidated(modifyData)
     }))
   }
 
   return (
     <BaseModal
-      title="매장 등록"
+      title="매장 정보 변경"
+      subtitle={storeId}
       className={styles.container}
       handleClose={() => {
         router.back()
@@ -188,60 +185,68 @@ const StoreRegisterModal = ({ params }: { params: { storeId: string } }) => {
       <>
         <Stack spacing={1}>
           <StoreTextField
-            id={"storeId"}
-            label={"매장ID"}
-            placeHolder={"영문(소문자)+숫자만"}
-            state={registerData.storeId}
-            onChange={onChangeStoreId}
-            required
-          />
-          <StoreTextField
             id={"storeName"}
             label={"매장명"}
             placeHolder={"최대 60글자"}
-            state={registerData.storeName}
+            state={modifyData.storeName}
             onChange={onChangeStoreName}
             required
           />
           <StoreImageField
             id={"imageUrl"}
             label={"이미지"}
-            registerData={registerData}
-            setRegisterData={setRegisterData}
+            data={modifyData.imageUrl}
+            setData={(imageUrl) => {
+              setModifyData((prev) => ({ ...prev, imageUrl: imageUrl }))
+            }}
           />
           <StoreTextField
             id={"storeTel"}
             label={"매장 전화번호"}
             placeHolder={"대표번호"}
-            state={registerData.storeTel}
+            state={modifyData.storeTel}
             onChange={onChangeStoreTel}
           />
           <StoreBankAccountFieldGroup
-            registerData={registerData}
-            setRegisterData={setRegisterData}
+            data={{
+              bank: modifyData.bank,
+              accountNumber: modifyData.accountNumber,
+              accountHolder: modifyData.accountHolder,
+            }}
+            setData={{
+              bank: (bankState) => {
+                setModifyData((prev) => ({ ...prev, bank: bankState }))
+              },
+              accountNumber: (accountNumberState) => {
+                setModifyData((prev) => ({ ...prev, accountNumber: accountNumberState }))
+              },
+              accountHolder: (accountHolderState) => {
+                setModifyData((prev) => ({ ...prev, accountHolder: accountHolderState }))
+              },
+            }}
             onValidated={onValidated}
           />
           <StoreTextField
             id={"businessLocation"}
             label={"영업 소재지"}
             placeHolder={"서울시 중구"}
-            state={registerData.businessLocation}
+            state={modifyData.businessLocation}
             onChange={onChangeBusinessLocation}
           />
-          <StoreCategoryRadioGroup registerData={registerData} setRegisterData={setRegisterData} />
-          <BasicButton
-            label={'등록하기'}
-            onClick={() => mutation.mutate(registerData)}
-            disabled={!registerData.isValidated}
-            sx={{
-              height: '56px',
-              borderRadius: '12px'
+          <StoreCategoryRadioGroup
+            data={modifyData.category}
+            setData={(category) => {
+              setModifyData((prev) => ({ ...prev, category: category }))
             }}
           />
+          <StoreConfirmButton
+            isValidated={modifyData.isValidated}
+            handelCancel={() => router.back()}
+            handleConfirm={() => mutation.mutate(modifyData)} />
         </Stack>
       </>
     </BaseModal>
   )
 }
 
-export default StoreRegisterModal
+export default StoreModifyModal

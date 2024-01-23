@@ -2,7 +2,7 @@
  * 매장 등록 요청 Data.
  *
  * @property storeId          매장 ID
- * @property storeName             매장명
+ * @property storeName         매장명
  * @property imageUrl         이미지 URL
  * @property storeTel         매장 전화번호
  * @property bank             은행명

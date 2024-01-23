@@ -16,6 +16,7 @@ import {
 } from '@mui/material'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { SIGN_OUT_PAGE_PATH } from '@/auth'
 
 const Profile = () => {
   const router = useRouter()
@@ -30,7 +31,7 @@ const Profile = () => {
   }
 
   const handleLogout = async () => {
-    router.push("/sign-out")
+    router.push(SIGN_OUT_PAGE_PATH)
   }
 
   if (status === 'loading') {

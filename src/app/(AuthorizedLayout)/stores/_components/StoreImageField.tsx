@@ -1,6 +1,6 @@
 'use client'
 
-import React, { ChangeEventHandler, Dispatch, SetStateAction, useRef } from 'react'
+import React, { ChangeEventHandler, Dispatch, ReactNode, SetStateAction, useRef } from 'react'
 import { Box, FormControl, InputAdornment, OutlinedInput, TextField, Typography } from '@mui/material'
 import styles from './storeTextField.module.css'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
@@ -11,11 +11,11 @@ import { StoreRegisterState } from '@/app/(AuthorizedLayout)/stores/register/_co
 type Props = {
   id: string,
   label: string,
-  registerData: StoreRegisterState,
-  setRegisterData: Dispatch<SetStateAction<StoreRegisterState>>,
+  data: string,
+  setData: (imageUrl: string) => void,
 }
 
-const StoreImageField = ({ id, label, registerData, setRegisterData }: Props) => {
+const StoreImageField = ({ id, label, data, setData }: Props) => {
   const imageRef = useRef<HTMLInputElement>(null)
 
   const handleClick = () => {
@@ -29,10 +29,7 @@ const StoreImageField = ({ id, label, registerData, setRegisterData }: Props) =>
 
       // TODO 이미지 S3 업로드 기능 추가 필요.
 
-      setRegisterData((prev) => ({
-        ...prev,
-        imageUrl: file.name
-      }))
+      setData(file.name)
     }
   }
 
@@ -47,7 +44,7 @@ const StoreImageField = ({ id, label, registerData, setRegisterData }: Props) =>
         InputProps={{
           endAdornment: <CloudUploadIcon />
         }}
-        value={registerData.imageUrl}
+        value={data}
         onClick={handleClick}
       />
       <input

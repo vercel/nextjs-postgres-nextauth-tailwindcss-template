@@ -206,7 +206,7 @@ const StoreBusinessModifyModal = ({ params }: { params: { storeId: string } }) =
           <StoreImageField
             id={"imageUrl"}
             label={"이미지"}
-            registerData={registerData}
+            data={registerData}
             setRegisterData={setRegisterData}
           />
           <StoreTextField

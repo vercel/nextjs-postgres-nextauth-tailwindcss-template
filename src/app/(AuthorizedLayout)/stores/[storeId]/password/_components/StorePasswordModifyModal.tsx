@@ -2,11 +2,11 @@
 
 import React, { ChangeEvent, useState } from 'react'
 import { Stack } from '@mui/material'
-import styles from './storeRegister.module.css'
+import styles from './storePasswordModify.module.css'
 import { initBaseState, TextFieldState } from '@/app/_components/BaseTextField'
 import { useRouter } from 'next/navigation'
 import BaseModal from '@/app/_components/BaseModal'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
 import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
 import { confirmPasswordValidated, passwordValidated } from '@/app/(AuthorizedLayout)/stores/_lib/validated'
@@ -27,7 +27,7 @@ type Props = {
  * @property password         비밀번호
  * @property confirmPassword  비밀번호 확인
  */
-export type StorePasswordModifyState = {
+type StorePasswordModifyState = {
   storeId: string,
   password: TextFieldState,
   confirmPassword: TextFieldState,
@@ -58,7 +58,6 @@ const StorePasswordModifyModal = ({ storeId }: Props) => {
   const { data: session } = useSession()
   const [modifyData, setModifyData] = useState<StorePasswordModifyState>(initState(storeId, session!))
 
-  const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: onModifyData,
     async onSuccess(response) {

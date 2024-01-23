@@ -206,8 +206,10 @@ const StoreRegisterModal = () => {
           <StoreImageField
             id={"imageUrl"}
             label={"이미지"}
-            registerData={registerData}
-            setRegisterData={setRegisterData}
+            data={registerData.imageUrl}
+            setData={(imageUrl) => {
+              setRegisterData((prev) => ({ ...prev, imageUrl: imageUrl }))
+            }}
           />
           <StoreTextField
             id={"storeTel"}
@@ -217,8 +219,22 @@ const StoreRegisterModal = () => {
             onChange={onChangeStoreTel}
           />
           <StoreBankAccountFieldGroup
-            registerData={registerData}
-            setRegisterData={setRegisterData}
+            data={{
+              bank: registerData.bank,
+              accountNumber: registerData.accountNumber,
+              accountHolder: registerData.accountHolder,
+            }}
+            setData={{
+              bank: (bankState) => {
+                setRegisterData((prev) => ({ ...prev, bank: bankState }))
+              },
+              accountNumber: (accountNumberState) => {
+                setRegisterData((prev) => ({ ...prev, accountNumber: accountNumberState }))
+              },
+              accountHolder: (accountHolderState) => {
+                setRegisterData((prev) => ({ ...prev, accountHolder: accountHolderState }))
+              },
+            }}
             onValidated={onValidated}
           />
           <StoreTextField
@@ -228,7 +244,12 @@ const StoreRegisterModal = () => {
             state={registerData.businessLocation}
             onChange={onChangeBusinessLocation}
           />
-          <StoreCategoryRadioGroup registerData={registerData} setRegisterData={setRegisterData} />
+          <StoreCategoryRadioGroup
+            data={registerData.category}
+            setData={(category) => {
+              setRegisterData((prev) => ({ ...prev, category: category }))
+            }}
+          />
           <BasicButton
             label={'등록하기'}
             onClick={() => mutation.mutate(registerData)}

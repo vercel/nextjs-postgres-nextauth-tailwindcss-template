@@ -1,6 +1,6 @@
 import React, { ChangeEvent, Dispatch, SetStateAction } from 'react'
 import { Box, Typography } from '@mui/material'
-import BaseTextField from '@/app/_components/BaseTextField'
+import BaseTextField, { TextFieldState } from '@/app/_components/BaseTextField'
 import styles from './storeTextField.module.css'
 import { StoreRegisterState } from '@/app/(AuthorizedLayout)/stores/register/_components/StoreRegisterModal'
 import {
@@ -10,55 +10,54 @@ import {
 } from '@/app/(AuthorizedLayout)/stores/_lib/validated'
 
 type Props = {
-  registerData: StoreRegisterState,
-  setRegisterData: Dispatch<SetStateAction<StoreRegisterState>>,
+  data: {
+    bank: TextFieldState,
+    accountNumber: TextFieldState,
+    accountHolder: TextFieldState,
+  },
+  setData: {
+    bank: (bankState: TextFieldState) => void,
+    accountNumber: (accountNumberState: TextFieldState) => void,
+    accountHolder: (accountHolderState: TextFieldState) => void,
+  },
   onValidated: () => void
 }
 
 const StoreBankAccountFieldGroup = ({
-  registerData,
-  setRegisterData,
+  data,
+  setData,
   onValidated
 }: Props) => {
   const onChangeBank = (event: ChangeEvent<HTMLInputElement>) => {
     const bank = event.target.value
     const errorMessage = bankValidated(bank)
-    setRegisterData((prev) => ({
-      ...prev,
-      bank: {
-        value: bank,
-        isError: errorMessage !== '',
-        errorMessage: errorMessage
-      }
-    }))
+    setData.bank({
+      value: bank,
+      isError: errorMessage !== '',
+      errorMessage: errorMessage
+    })
     onValidated()
   }
 
   const onChangeAccountHolder = (event: ChangeEvent<HTMLInputElement>) => {
     const accountHolder = event.target.value
     const errorMessage = accountHolderValidated(accountHolder)
-    setRegisterData((prev) => ({
-      ...prev,
-      accountHolder: {
-        value: accountHolder,
-        isError: errorMessage !== '',
-        errorMessage: errorMessage
-      }
-    }))
+    setData.accountHolder({
+      value: accountHolder,
+      isError: errorMessage !== '',
+      errorMessage: errorMessage
+    })
     onValidated()
   }
 
   const onChangeAccountNumber = (event: ChangeEvent<HTMLInputElement>) => {
     const accountNumber = event.target.value
     const errorMessage = accountNumberValidated(accountNumber)
-    setRegisterData((prev) => ({
-      ...prev,
-      accountNumber: {
-        value: accountNumber,
-        isError: errorMessage !== '',
-        errorMessage: errorMessage
-      }
-    }))
+    setData.accountNumber({
+      value: accountNumber,
+      isError: errorMessage !== '',
+      errorMessage: errorMessage
+    })
     onValidated()
   }
 
@@ -72,14 +71,14 @@ const StoreBankAccountFieldGroup = ({
           <BaseTextField
             id={'bank'}
             placeholder={'은행'}
-            state={registerData.bank}
+            state={data.bank}
             onChange={onChangeBank}
             className={styles.bankTextField}
           />
           <BaseTextField
             id={'accountHolder'}
             placeholder={'예금주'}
-            state={registerData.accountHolder}
+            state={data.accountHolder}
             onChange={onChangeAccountHolder}
             className={styles.accountHolderTextField}
           />
@@ -91,7 +90,7 @@ const StoreBankAccountFieldGroup = ({
         <BaseTextField
           id={'accountNumber'}
           placeholder={'계좌번호'}
-          state={registerData.accountNumber}
+          state={data.accountNumber}
           onChange={onChangeAccountNumber}
           className={styles.textField}
         />
