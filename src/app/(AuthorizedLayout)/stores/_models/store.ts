@@ -4,9 +4,9 @@ import { Dispatch, SetStateAction } from 'react'
 /**
  * 매장 목록 응답 Data.
  *
- * @property id                       매장 ID
+ * @property storeId                       매장 ID
  * @property createDate               등록일
- * @property name                     매장명
+ * @property storeName                     매장명
  * @property categoryName             메뉴구분
  * @property isBusinessRegistered     사업자 등록 여부
  * @property menuCount                메뉴 수
@@ -16,9 +16,9 @@ import { Dispatch, SetStateAction } from 'react'
  * @property imageUrl                 이미지 URL
  */
 export interface StoreResponse {
-  id: string,
+  storeId: string,
   createDate: Date,
-  name: string,
+  storeName: string,
   categoryName: string,
   isBusinessRegistered: boolean,
   menuCount: number,

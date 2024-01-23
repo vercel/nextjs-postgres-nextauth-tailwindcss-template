@@ -4,6 +4,7 @@ import { TableCell, Typography } from '@mui/material'
 import styles from './storeListItem.module.css'
 import { StoreResponse } from '@/app/(AuthorizedLayout)/stores/_models/store'
 import { formatDate } from '@/app/(AuthorizedLayout)/_lib/date'
+import Link from 'next/link'
 
 interface Props {
   store: StoreResponse,
@@ -11,13 +12,13 @@ interface Props {
 
 const StoreListItem = ({ store }: Props) => {
   return (
-    <TableRow key={store.id}>
+    <TableRow key={store.storeId}>
       <TableCell className={styles.tableColumn}>
-        <div className={styles.adminAccountIdColumn}>
+        <Link href={`/stores/${store.storeId}`}>
           <Typography fontSize="h6" fontWeight={600}>
-            {store.id}
+            {store.storeId}
           </Typography>
-        </div>
+        </Link>
       </TableCell>
       <TableCell className={styles.tableColumn}>
         <Typography fontSize="15px" fontWeight={500}>
@@ -25,9 +26,11 @@ const StoreListItem = ({ store }: Props) => {
         </Typography>
       </TableCell>
       <TableCell className={styles.tableColumn}>
-        <Typography variant="h6" fontWeight={600}>
-          {store.name}
-        </Typography>
+        <Link href={`/stores/${store.storeId}`}>
+          <Typography variant="h6" fontWeight={600}>
+            {store.storeName}
+          </Typography>
+        </Link>
       </TableCell>
       <TableCell className={styles.tableColumn}>
         <Typography fontSize="15px" fontWeight={500}>

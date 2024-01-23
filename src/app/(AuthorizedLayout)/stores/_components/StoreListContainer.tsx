@@ -3,7 +3,7 @@ import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query
 import { Box, Container } from '@mui/material'
 import StoreListView from './StoreListView'
 import { getStores } from '@/app/(AuthorizedLayout)/stores/_lib/getStores'
-import styles from '@/app/(AuthorizedLayout)/stores/_components/storeListView.module.css'
+import styles from '@/app/(AuthorizedLayout)/stores/_components/storeList.module.css'
 
 const StoreListContainer = async ({ pageParameters }: StorePageProperties) => {
   let initPageParameter = { ...pageParameters }

@@ -1,5 +1,5 @@
 import React, { ChangeEvent, Dispatch, SetStateAction } from 'react'
-import styles from '@/app/(AuthorizedLayout)/stores/_components/storeListView.module.css'
+import styles from '@/app/(AuthorizedLayout)/stores/_components/storeList.module.css'
 import { Box, FormControl, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material'
 import {
   StorePageParameters,

@@ -11,7 +11,7 @@ export const getStores = async ({ queryKey }: { queryKey: [_1: string, pageParam
   const response = await fetch(`/api/stores?${searchParams.toString()}`, {
     next: {
       tags: [
-        'getStores',
+        'stores',
         ...Object.values(pageParameters)
       ]
     }

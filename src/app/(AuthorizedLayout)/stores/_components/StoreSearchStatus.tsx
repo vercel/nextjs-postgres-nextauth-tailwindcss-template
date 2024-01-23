@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import styles from '@/app/(AuthorizedLayout)/stores/_components/storeListView.module.css'
+import styles from '@/app/(AuthorizedLayout)/stores/_components/storeList.module.css'
 import { Box, Checkbox, FormControlLabel, FormGroup, Typography } from '@mui/material'
 import { StoreSearchProps, StoreStatus } from '@/app/(AuthorizedLayout)/stores/_models/store'
 

@@ -3,7 +3,7 @@ import { StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/store'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import 'dayjs/locale/ko'
-import styles from './storeListView.module.css'
+import styles from './storeList.module.css'
 import { Box, Typography } from '@mui/material'
 
 const StoreSearchDate = ({ pageParameters, setPageParameters }: StoreSearchProps) => {

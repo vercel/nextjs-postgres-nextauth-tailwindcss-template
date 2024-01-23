@@ -1,7 +1,7 @@
 import React from 'react'
 import { StorePageParameters, StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/store'
 import { Box, Container } from '@mui/material'
-import styles from '@/app/(AuthorizedLayout)/stores/_components/storeListView.module.css'
+import styles from '@/app/(AuthorizedLayout)/stores/_components/storeList.module.css'
 import StoreSearchField from '@/app/(AuthorizedLayout)/stores/_components/StoreSearchField'
 import StoreSearchDate from '@/app/(AuthorizedLayout)/stores/_components/StoreSearchDate'
 import StoreSearchStatus from '@/app/(AuthorizedLayout)/stores/_components/StoreSearchStatus'
