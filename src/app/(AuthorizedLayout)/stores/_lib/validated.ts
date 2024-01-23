@@ -1,4 +1,5 @@
 import { formatPhoneNumber } from '@/app/(AuthorizedLayout)/_lib/phoneNumber'
+import { passwordRegex } from '@/app/(AuthorizedLayout)/_lib/string'
 
 export const storeIdValidated = (storeId: string) => {
   let errorMessage = '';
@@ -9,6 +10,7 @@ export const storeIdValidated = (storeId: string) => {
   }
   return errorMessage
 }
+
 export const nameValidated = (name: string) => {
   let errorMessage = '';
   if (name === '') {
@@ -55,6 +57,28 @@ export const businessLocationValidated = (businessLocation: string) => {
   let errorMessage = '';
   if (businessLocation !== '' && Buffer.byteLength(businessLocation) > 255) {
     errorMessage = '영업 소재지를 확인해주세요.'
+  }
+  return errorMessage
+}
+
+export const passwordValidated = (password: string) => {
+  let errorMessage = '';
+  if (password === '') {
+    errorMessage = '비밀번호를 입력해주세요.'
+  } else if (!password.match(passwordRegex)) {
+    errorMessage = '비밀번호를 확인해주세요.'
+  }
+  return errorMessage
+}
+
+export const confirmPasswordValidated = (password: string, confirmPassword: string) => {
+  let errorMessage = '';
+  if (confirmPassword === '') {
+    errorMessage = '비밀번호 확인을 입력해주세요.'
+  } else if (!confirmPassword.match(passwordRegex)) {
+    errorMessage = '비밀번호 확인을 확인해주세요.'
+  } else if (password !== confirmPassword) {
+    errorMessage = '비밀번호가 일치하지 않습니다.'
   }
   return errorMessage
 }

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ChangeEventHandler } from 'react'
+import React, { ChangeEventHandler } from 'react'
 import { Box, Typography } from '@mui/material'
 import BaseTextField, { TextFieldState } from '@/app/_components/BaseTextField'
 import styles from './storeTextField.module.css'
@@ -9,10 +9,19 @@ type Props = {
   placeHolder?: string,
   state: TextFieldState,
   onChange: ChangeEventHandler<HTMLInputElement>,
-  required?: boolean
+  required?: boolean,
+  type?: string
 }
 
-const StoreTextField = ({ id, label, placeHolder, state, onChange, required }: Props) => {
+const StoreTextField = ({
+  id,
+  label,
+  placeHolder,
+  state,
+  onChange,
+  required,
+  type = 'text'
+}: Props) => {
   return (
     <Box className={styles.container}>
       <Typography className={required ? styles.requiredLabel : styles.label}>
@@ -21,6 +30,7 @@ const StoreTextField = ({ id, label, placeHolder, state, onChange, required }: P
       <BaseTextField
         id={id}
         placeholder={placeHolder}
+        type={type}
         state={state}
         onChange={onChange}
         className={styles.textField}

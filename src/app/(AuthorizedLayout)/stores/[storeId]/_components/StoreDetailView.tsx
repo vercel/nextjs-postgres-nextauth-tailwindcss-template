@@ -69,7 +69,7 @@ const StoreDetailView = ({ storeId }: Props) => {
             label={'비밀번호 변경'}
             disabled={false}
             onClick={() => {
-              // router.push(`/stores/register`)
+              router.push(`/stores/${storeId}/password`)
             }}
           />
         </Container>

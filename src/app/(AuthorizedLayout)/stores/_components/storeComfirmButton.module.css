@@ -1,0 +1,43 @@
+.buttonGroup {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding-top: 10px;
+    width: 100%;
+}
+
+.cancelButton {
+    border-radius: 4px;
+    width: 48%;
+    height: 50px;
+    font-size: 1.2rem;
+}
+
+.cancelButton:global(.MuiButton-contained) {
+    background-color: #696868;
+    color: #fff;
+}
+
+.cancelButton:global(.MuiButton-contained.Mui-disabled) {
+    color: rgba(0, 0, 0, 0.26);
+    box-shadow: none;
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+.confirmButton {
+    border-radius: 4px;
+    width: 48%;
+    height: 50px;
+    font-size: 1.2rem;
+}
+
+.confirmButton:global(.MuiButton-contained) {
+    background-color: #F80069;
+    color: #D5FF2E;
+}
+
+.confirmButton:global(.MuiButton-contained.Mui-disabled) {
+    color: rgba(0, 0, 0, 0.26);
+    box-shadow: none;
+    background-color: rgba(0, 0, 0, 0.12);
+}
