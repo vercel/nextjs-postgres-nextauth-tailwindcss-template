@@ -1,9 +1,9 @@
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import { getStoreDetail } from '@/app/(AuthorizedLayout)/stores/[storeId]/_lib/getStoreDetail'
-import StoreModifyModal from '@/app/(AuthorizedLayout)/stores/[storeId]/modify/_components/StoreModifyModal'
+import StoreManagerModifyModal from './StoreManagerModifyModal'
 import { StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
 
-const StoreModifyContainer = async ({ storeId }: StoreProps) => {
+const StoreManagerModifyContainer = async ({ storeId }: StoreProps) => {
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
     queryKey: ['stores', 'detail', storeId],
@@ -13,9 +13,9 @@ const StoreModifyContainer = async ({ storeId }: StoreProps) => {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <StoreModifyModal storeId={storeId} />
+      <StoreManagerModifyModal storeId={storeId} />
     </HydrationBoundary>
   )
 }
 
-export default StoreModifyContainer
+export default StoreManagerModifyContainer

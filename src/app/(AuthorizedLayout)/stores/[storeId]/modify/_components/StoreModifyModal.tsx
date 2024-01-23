@@ -1,6 +1,6 @@
 'use client'
 
-import React, { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { Stack } from '@mui/material'
 import styles from './storeModify.module.css'
 import { initBaseState, TextFieldState } from '@/app/_components/BaseTextField'
@@ -25,10 +25,9 @@ import { putStore } from '@/app/(AuthorizedLayout)/stores/[storeId]/modify/_lib/
 import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
 import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeDetail'
 import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/hook/useStoreDetail'
-
-type Props = {
-  storeId: string
-}
+import { StoreModifyFormState } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeModifyFormState'
+import { StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
+import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
 
 /**
  * 매장 정보 변경 State.
@@ -42,11 +41,8 @@ type Props = {
  * @property accountHolder    예금주
  * @property businessLocation 영업 소재지
  * @property category         메뉴구분
- * @property isValidated      유효성 체크 통과 여부
- * @property session          세션 정보
  */
 type StoreModifyState = {
-  storeId: string,
   storeName: TextFieldState,
   imageUrl: string,
   storeTel: TextFieldState,
@@ -55,20 +51,18 @@ type StoreModifyState = {
   accountHolder: TextFieldState,
   businessLocation: TextFieldState,
   category: string,
-  isValidated: boolean,
-  session: Session,
-}
+} & StoreModifyFormState
 
-const initState = (storeId: string, storeDetail: StoreDetailResponse, session: Session) => ({
+const initState = (storeId: string, session: Session, storeDetail?: StoreDetailResponse) => ({
   storeId: storeId,
-  storeName: initBaseState(storeDetail.storeName),
-  imageUrl: storeDetail.imageUrl,
-  storeTel: initBaseState(storeDetail.storeTel),
-  bank: initBaseState(storeDetail.bank),
-  accountNumber: initBaseState(storeDetail.accountNumber),
-  accountHolder: initBaseState(storeDetail.accountHolder),
-  businessLocation: initBaseState(storeDetail.businessLocation),
-  category: storeDetail.category,
+  storeName: initBaseState(storeDetail?.storeName ?? ''),
+  imageUrl: storeDetail?.imageUrl ?? '',
+  storeTel: initBaseState(storeDetail?.storeTel ?? ''),
+  bank: initBaseState(storeDetail?.bank ?? ''),
+  accountNumber: initBaseState(storeDetail?.accountNumber ?? ''),
+  accountHolder: initBaseState(storeDetail?.accountHolder ?? ''),
+  businessLocation: initBaseState(storeDetail?.businessLocation ?? ''),
+  category: storeDetail?.category ?? 'MEALS',
   isValidated: true,
   session: session,
 })
@@ -90,15 +84,11 @@ const onModifyData = async (modifyData: StoreModifyState) => {
   }, modifyData.session)
 }
 
-const StoreModifyModal = ({ storeId }: Props) => {
+const StoreModifyModal = ({ storeId }: StoreProps) => {
   const router = useRouter()
   const storeDetail = useStoreDetail(storeId)
-  if (storeDetail == null) {
-    return 'Loading....'
-  }
-
   const { data: session } = useSession()
-  const [modifyData, setModifyData] = useState<StoreModifyState>(initState(storeId, storeDetail, session!))
+  const [modifyData, setModifyData] = useState<StoreModifyState>(initState(storeId, session!, storeDetail))
 
   const queryClient = useQueryClient()
   const mutation = useMutation({
@@ -171,6 +161,10 @@ const StoreModifyModal = ({ storeId }: Props) => {
       ...prev,
       isValidated: isValidated(modifyData)
     }))
+  }
+
+  if (storeDetail == null) {
+    return <Loading />
   }
 
   return (

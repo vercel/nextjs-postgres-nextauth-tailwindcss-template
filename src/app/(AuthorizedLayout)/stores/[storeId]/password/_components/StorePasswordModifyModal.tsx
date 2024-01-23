@@ -15,25 +15,19 @@ import StoreTextField from '@/app/(AuthorizedLayout)/stores/_components/StoreTex
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import { putStorePassword } from '@/app/(AuthorizedLayout)/stores/[storeId]/password/_lib/putStorePassword'
 import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
-
-type Props = {
-  storeId: string
-}
+import { StoreModifyFormState } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeModifyFormState'
+import { StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
 
 /**
  * 매장 비밀번호 변경 State.
  *
- * @property storeId          매장 ID
  * @property password         비밀번호
  * @property confirmPassword  비밀번호 확인
  */
 type StorePasswordModifyState = {
-  storeId: string,
   password: TextFieldState,
   confirmPassword: TextFieldState,
-  isValidated: boolean,
-  session: Session,
-}
+} & StoreModifyFormState
 
 const initState = (storeId: string, session: Session) => ({
   storeId: storeId,
@@ -53,7 +47,7 @@ const onModifyData = async (modifyData: StorePasswordModifyState) => {
   }, modifyData.session)
 }
 
-const StorePasswordModifyModal = ({ storeId }: Props) => {
+const StorePasswordModifyModal = ({ storeId }: StoreProps) => {
   const router = useRouter()
   const { data: session } = useSession()
   const [modifyData, setModifyData] = useState<StorePasswordModifyState>(initState(storeId, session!))

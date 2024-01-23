@@ -3,12 +3,10 @@ import { Box, Container } from '@mui/material'
 import StoreDetailView from './StoreDetailView'
 import styles from '@/app/(AuthorizedLayout)/stores/_components/storeList.module.css'
 import { getStoreDetail } from '@/app/(AuthorizedLayout)/stores/[storeId]/_lib/getStoreDetail'
+import { StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
 
-type Props = {
-  storeId: string
-}
 
-const StoreDetailContainer = async ({ storeId }: Props) => {
+const StoreDetailContainer = async ({ storeId }: StoreProps) => {
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
     queryKey: ['stores', 'detail', storeId],
