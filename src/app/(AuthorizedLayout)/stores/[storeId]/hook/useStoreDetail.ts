@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'
-import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeDetail'
+import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/response'
 import { getStoreDetail } from '@/app/(AuthorizedLayout)/stores/[storeId]/_lib/getStoreDetail'
 import { useEffect } from 'react'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'

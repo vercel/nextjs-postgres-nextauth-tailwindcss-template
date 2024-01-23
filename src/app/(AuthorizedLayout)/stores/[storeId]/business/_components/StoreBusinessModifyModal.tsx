@@ -14,7 +14,7 @@ import { invalidateStoresQueries } from '@/app/(AuthorizedLayout)/stores/_lib/in
 import StoreTextField from '@/app/(AuthorizedLayout)/stores/_components/StoreTextField'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
-import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeDetail'
+import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/response'
 import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/hook/useStoreDetail'
 import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
 import { StoreModifyFormState } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeModifyFormState'
@@ -80,7 +80,7 @@ const StoreBusinessModifyModal = ({ storeId }: StoreProps) => {
       }
 
       if (!response?.ok) {
-        alert('매장 사업자 정보 변경이 실패하였습니다.')
+        alert('사업자 정보 변경이 실패하였습니다.')
         return
       }
 
@@ -89,7 +89,7 @@ const StoreBusinessModifyModal = ({ storeId }: StoreProps) => {
     },
     onError(error) {
       console.dir(error)
-      alert('매장 사업자 정보 변경이 실패하였습니다.')
+      alert('사업자 정보 변경이 실패하였습니다.')
     }
   })
 

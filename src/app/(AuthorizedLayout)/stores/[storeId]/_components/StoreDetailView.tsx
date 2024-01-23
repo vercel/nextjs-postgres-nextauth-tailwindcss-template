@@ -12,7 +12,7 @@ import StoreMenuContainer from '@/app/(AuthorizedLayout)/stores/[storeId]/_compo
 import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/hook/useStoreDetail'
 import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
 import { StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
-import StoreDocumentContainer from './StoreDocumentContainer'
+import StoreDocumentsContainer from './StoreDocumentContainer'
 
 const StoreDetailView = ({ storeId }: StoreProps) => {
   const router = useRouter()
@@ -48,7 +48,10 @@ const StoreDetailView = ({ storeId }: StoreProps) => {
             storeDetail={storeDetail}
             handlerEdit={() => router.push(`/stores/${storeId}/business`)}
           />
-          <StoreDocumentContainer storeDetail={storeDetail} handlerEdit={() => {}} />
+          <StoreDocumentsContainer
+            storeDetail={storeDetail}
+            handlerEdit={() => router.push(`/stores/${storeId}/documents`)}
+          />
           <StoreMenuContainer storeDetail={storeDetail} handleRouter={() => {}} />
           <BasicButton
             label={'비밀번호 변경'}

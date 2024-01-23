@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { formatPhoneNumber } from '@/app/(AuthorizedLayout)/_lib/phoneNumber'
 import { menuCategoryName } from '@/app/(AuthorizedLayout)/stores/_lib/menuCategory'
 import { BasicButton } from '@/app/_components/BasicButton'
-import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeDetail'
+import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/response'
 
 type Props = {
   storeDetail: StoreDetailResponse,

@@ -1,6 +1,6 @@
 import styles from '@/app/(AuthorizedLayout)/stores/[storeId]/_components/storeDetail.module.css'
 import { Box, Container, Typography } from '@mui/material'
-import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeDetail'
+import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/response'
 import React from 'react'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 

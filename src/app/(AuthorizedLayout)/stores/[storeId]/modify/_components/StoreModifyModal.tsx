@@ -23,7 +23,7 @@ import StoreCategoryRadioGroup from '@/app/(AuthorizedLayout)/stores/_components
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import { putStore } from '@/app/(AuthorizedLayout)/stores/[storeId]/modify/_lib/putStore'
 import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
-import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeDetail'
+import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/response'
 import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/hook/useStoreDetail'
 import { StoreModifyFormState } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeModifyFormState'
 import { StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'

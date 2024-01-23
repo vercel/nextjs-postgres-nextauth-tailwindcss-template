@@ -2,7 +2,7 @@ import styles from '@/app/(AuthorizedLayout)/stores/[storeId]/_components/storeD
 import { Box, Container, Typography } from '@mui/material'
 import { formatPhoneNumber } from '@/app/(AuthorizedLayout)/_lib/phoneNumber'
 import { BasicButton } from '@/app/_components/BasicButton'
-import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeDetail'
+import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/response'
 import React from 'react'
 
 type Props = {

@@ -2,7 +2,7 @@ import styles from '@/app/(AuthorizedLayout)/stores/[storeId]/_components/storeD
 import { Box, Container, Typography } from '@mui/material'
 import Link from 'next/link'
 import { BasicButton } from '@/app/_components/BasicButton'
-import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeDetail'
+import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/response'
 import React from 'react'
 import { isNotEmpty } from '@/app/(AuthorizedLayout)/_lib/string'
 
