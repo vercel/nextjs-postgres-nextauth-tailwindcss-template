@@ -18,7 +18,7 @@ const StoreBusinessContainer = ({ storeDetail, handlerEdit }: Props) => {
         <Typography className={styles.title}>
           사업자 정보
         </Typography>
-        {isNotEmpty(storeDetail.businessImageUrl) ? (
+        {isNotEmpty(storeDetail.businessRegistrationUrl) ? (
           <Typography className={styles.contents}>
             [<Link href={''}>
             <u>사업자 등록증 보기</u>

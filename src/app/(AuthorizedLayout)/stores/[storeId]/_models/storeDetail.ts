@@ -17,7 +17,7 @@ import { MenuCategory } from '@/app/(AuthorizedLayout)/stores/_models/store'
  * @property businessName                상호명
  * @property businessNumber              사업자 등록번호
  * @property owner                       대표자명
- * @property businessImageUrl            사업자 등록증 이미지 URL
+ * @property businessRegistrationUrl     사업자 등록증 이미지 URL
  * @property healthCertRegisterDate      보건증 등록일
  * @property healthCertExpirationDate    보건증 만기일
  * @property healthCertImageUrl          보건증 이미지 URL
@@ -40,7 +40,7 @@ export interface StoreDetailResponse {
   businessName: string,
   businessNumber: string,
   owner: string,
-  businessImageUrl?: string,
+  businessRegistrationUrl?: string,
   healthCertRegisterDate?: Date,
   healthCertExpirationDate?: Date,
   healthCertImageUrl?: string,

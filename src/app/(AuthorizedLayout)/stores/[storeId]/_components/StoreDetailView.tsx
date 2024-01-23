@@ -44,7 +44,10 @@ const StoreDetailView = ({ storeId }: StoreProps) => {
             storeDetail={storeDetail}
             handlerEdit={() => router.push(`/stores/${storeId}/manager`)}
           />
-          <StoreBusinessContainer storeDetail={storeDetail} handlerEdit={() => {}} />
+          <StoreBusinessContainer
+            storeDetail={storeDetail}
+            handlerEdit={() => router.push(`/stores/${storeId}/business`)}
+          />
           <StoreDocumentContainer storeDetail={storeDetail} handlerEdit={() => {}} />
           <StoreMenuContainer storeDetail={storeDetail} handleRouter={() => {}} />
           <BasicButton
