@@ -28,10 +28,14 @@ const StoreDetailView = ({ storeId }: StoreProps) => {
 
   const queryClient = useQueryClient()
   const mutation = useMutation({
-    mutationFn: async (deleteData: StoreDeleteData) => await deleteStore(
-      deleteData.storeId,
-      deleteData.session
-    ),
+    mutationFn: async (deleteData: StoreDeleteData) => {
+      if (confirm('매장을 삭제하시겠습니까?')) {
+        return await deleteStore(
+          deleteData.storeId,
+          deleteData.session
+        )
+      }
+    },
     async onSuccess(response) {
       if (response?.status === 401) {
         alert("로그인이 필요한 서비스입니다.")
@@ -40,7 +44,7 @@ const StoreDetailView = ({ storeId }: StoreProps) => {
       }
 
       if (!response?.ok) {
-        alert('매장 정보 변경이 실패하였습니다.')
+        alert('매장 삭제가 실패하였습니다.')
         return null
       }
 
@@ -49,7 +53,7 @@ const StoreDetailView = ({ storeId }: StoreProps) => {
     },
     onError(error) {
       console.dir(error)
-      alert('매장 정보 변경이 실패하였습니다.')
+      alert('매장 삭제가 실패하였습니다.')
     }
   })
 
@@ -65,7 +69,7 @@ const StoreDetailView = ({ storeId }: StoreProps) => {
           <BasicButton
             label={'삭제'}
             disabled={false}
-            onClick={() => () => mutation.mutate({
+            onClick={() => mutation.mutate({
               storeId: storeId,
               isValidated: true,
               session: session

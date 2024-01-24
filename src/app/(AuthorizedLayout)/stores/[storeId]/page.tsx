@@ -1,8 +1,14 @@
 import StoreDetailContainer from './_components/StoreDetailContainer'
+import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
+import React, { Suspense } from 'react'
 
-const StoreDetailPage = async ({ params }: { params: { storeId: string } }) => {
-  // @ts-ignore
-  return <StoreDetailContainer storeId={params.storeId} />
+const StoreDetailPage = ({ params }: { params: { storeId: string } }) => {
+  return (
+    <Suspense fallback={<Loading />}>
+      {/* @ts-expect-error Server Component */}
+      <StoreDetailContainer storeId={params.storeId} />
+    </Suspense>
+  )
 }
 
 export default StoreDetailPage
