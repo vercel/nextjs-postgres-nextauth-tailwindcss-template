@@ -5,12 +5,11 @@ import styles from '@/app/(AuthorizedLayout)/stores/_components/storeList.module
 import { getStoreDetail } from '@/app/(AuthorizedLayout)/stores/[storeId]/_lib/getStoreDetail'
 import { StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
 
-
 const StoreDetailContainer = async ({ storeId }: StoreProps) => {
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
     queryKey: ['stores', 'detail', storeId],
-    queryFn: getStoreDetail,
+    queryFn: getStoreDetail
   })
   const dehydratedState = dehydrate(queryClient)
 

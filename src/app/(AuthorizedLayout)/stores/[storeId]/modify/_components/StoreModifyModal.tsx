@@ -1,20 +1,18 @@
 'use client'
 
-import { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { Stack } from '@mui/material'
 import styles from './storeModify.module.css'
 import { initBaseState, TextFieldState } from '@/app/_components/BaseTextField'
 import { useRouter } from 'next/navigation'
 import BaseModal from '@/app/_components/BaseModal'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useSession } from 'next-auth/react'
 import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
 import {
   businessLocationValidated,
   nameValidated,
   storeTelValidated
 } from '@/app/(AuthorizedLayout)/stores/_lib/validated'
-import { Session } from 'next-auth'
 import { invalidateStoresQueries } from '@/app/(AuthorizedLayout)/stores/_lib/invalidateQueries'
 import StoreTextField from '@/app/(AuthorizedLayout)/stores/_components/StoreTextField'
 import StoreImageField from '@/app/(AuthorizedLayout)/stores/_components/StoreImageField'
@@ -23,10 +21,9 @@ import StoreCategoryRadioGroup from '@/app/(AuthorizedLayout)/stores/_components
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import { putStore } from '@/app/(AuthorizedLayout)/stores/[storeId]/modify/_lib/putStore'
 import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
-import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/response'
-import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/hook/useStoreDetail'
+import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/_hooks/useStoreDetail'
 import { StoreModifyFormState } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeModifyFormState'
-import { StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
+import { StoreModifyFormStateInitProps, StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
 import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
 
 /**
@@ -53,7 +50,11 @@ type StoreModifyState = {
   category: string,
 } & StoreModifyFormState
 
-const initState = (storeId: string, session: Session, storeDetail?: StoreDetailResponse) => ({
+const initState = ({
+   storeId,
+   session,
+   storeDetail
+}: StoreModifyFormStateInitProps) => ({
   storeId: storeId,
   storeName: initBaseState(storeDetail?.storeName ?? ''),
   imageUrl: storeDetail?.imageUrl ?? '',
@@ -86,9 +87,14 @@ const onModifyData = async (modifyData: StoreModifyState) => {
 
 const StoreModifyModal = ({ storeId }: StoreProps) => {
   const router = useRouter()
-  const storeDetail = useStoreDetail(storeId)
-  const { data: session } = useSession()
-  const [modifyData, setModifyData] = useState<StoreModifyState>(initState(storeId, session!, storeDetail))
+  const { storeDetail, session, isLoading } = useStoreDetail(storeId)
+  const [modifyData, setModifyData] = useState<StoreModifyState>(
+    initState({
+      storeId,
+      session,
+      storeDetail
+    })
+  )
 
   const queryClient = useQueryClient()
   const mutation = useMutation({
@@ -163,7 +169,7 @@ const StoreModifyModal = ({ storeId }: StoreProps) => {
     }))
   }
 
-  if (storeDetail == null) {
+  if (isLoading || storeDetail === undefined) {
     return <Loading />
   }
 

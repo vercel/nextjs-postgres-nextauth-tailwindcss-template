@@ -36,7 +36,7 @@ const StoreListView = ({ pageParameters: initPageParameters }: StorePageProperti
         router.replace(SIGN_OUT_PAGE_PATH)
       }
     }
-  }, [isError])
+  }, [isError, error, router])
 
   const handlerPageChange = (
     event: ChangeEvent<unknown>,

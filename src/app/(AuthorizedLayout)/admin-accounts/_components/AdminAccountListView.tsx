@@ -12,7 +12,7 @@ import {
   TableRow,
   Typography
 } from '@mui/material'
-import { Page, PageParameters, PageProperties, ResponseData } from '@/app/(AuthorizedLayout)/_models/common'
+import { Page, PageParameters, PageProperties } from '@/app/(AuthorizedLayout)/_models/common'
 import BaseCard from '@/app/_components/BaseCard'
 import { BasicButton } from '@/app/_components/BasicButton'
 import { AdminAccount } from '@/app/(AuthorizedLayout)/admin-accounts/_models/AdminAccount'
@@ -20,7 +20,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getAdminAccounts } from '@/app/(AuthorizedLayout)/admin-accounts/_lib/getAdminAccounts'
 import { useRouter } from 'next/navigation'
 import AdminAccountListItem from '@/app/(AuthorizedLayout)/admin-accounts/_components/AdminAccountListItem'
-import { SIGN_IN_PAGE_PATH, SIGN_OUT_PAGE_PATH } from '@/auth'
+import { SIGN_OUT_PAGE_PATH } from '@/auth'
 
 const AdminAccountListView = ({ pageParameters }: PageProperties) => {
   const [page, setPage] = useState(pageParameters.page)
@@ -43,7 +43,7 @@ const AdminAccountListView = ({ pageParameters }: PageProperties) => {
         router.replace(SIGN_OUT_PAGE_PATH)
       }
     }
-  }, [isError])
+  }, [isError, error, router])
 
   const handlerPageChange = (
     event: ChangeEvent<unknown>,

@@ -1,12 +1,14 @@
 import AdminAccountListContainer from '@/app/(AuthorizedLayout)/admin-accounts/_components/AdminAccountListContainer'
-import React from 'react'
-import { PageProperties } from '@/app/(AuthorizedLayout)/_models/common'
+import React, { Suspense } from 'react'
+import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
 
-const AdminAccountModifyPage = async ({ pageParameters }: PageProperties) => {
-  console.log("AdminAccountModifyPage", pageParameters)
-
-  // @ts-ignore
-  return <AdminAccountListContainer pageParameters={pageParameters} />
+const AdminAccountModifyPage = () => {
+  return (
+    <Suspense fallback={<Loading />}>
+      {/* @ts-expect-error Server Component */}
+      <AdminAccountListContainer pageParameters={{ page: 1 }}/>
+    </Suspense>
+  )
 }
 
 export default AdminAccountModifyPage;

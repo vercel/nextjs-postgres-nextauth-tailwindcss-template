@@ -7,18 +7,15 @@ import { initBaseState, TextFieldState } from '@/app/_components/BaseTextField'
 import { useRouter } from 'next/navigation'
 import BaseModal from '@/app/_components/BaseModal'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useSession } from 'next-auth/react'
 import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
-import { Session } from 'next-auth'
 import { invalidateStoresQueries } from '@/app/(AuthorizedLayout)/stores/_lib/invalidateQueries'
 import StoreTextField from '@/app/(AuthorizedLayout)/stores/_components/StoreTextField'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
-import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/response'
-import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/hook/useStoreDetail'
+import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/_hooks/useStoreDetail'
 import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
 import { StoreModifyFormState } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeModifyFormState'
-import { StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
+import { StoreModifyFormStateInitProps, StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
 import { putStoreBusiness } from '@/app/(AuthorizedLayout)/stores/[storeId]/business/_lib/putStoreBusiness'
 import {
   businessNameValidated,
@@ -40,7 +37,11 @@ type StoreBusinessModifyState = {
   businessRegistrationUrl: string,
 } & StoreModifyFormState
 
-const initState = (storeId: string, session: Session, storeDetail?: StoreDetailResponse) => ({
+const initState = ({
+  storeId,
+  session,
+  storeDetail
+}: StoreModifyFormStateInitProps) => ({
   storeId: storeId,
   businessName: initBaseState(storeDetail?.businessName ?? ''),
   businessNumber: initBaseState(storeDetail?.businessNumber ?? ''),
@@ -65,9 +66,14 @@ const onModifyData = async (modifyData: StoreBusinessModifyState) => {
 
 const StoreBusinessModifyModal = ({ storeId }: StoreProps) => {
   const router = useRouter()
-  const storeDetail = useStoreDetail(storeId)
-  const { data: session } = useSession()
-  const [modifyData, setModifyData] = useState<StoreBusinessModifyState>(initState(storeId, session!, storeDetail))
+  const { storeDetail, session, isLoading } = useStoreDetail(storeId)
+  const [modifyData, setModifyData] = useState<StoreBusinessModifyState>(
+    initState({
+      storeId,
+      session,
+      storeDetail
+    })
+  )
 
   const queryClient = useQueryClient()
   const mutation = useMutation({
@@ -142,7 +148,7 @@ const StoreBusinessModifyModal = ({ storeId }: StoreProps) => {
     }))
   }
 
-  if (storeDetail == null) {
+  if (isLoading || storeDetail === undefined) {
     return <Loading />
   }
 

@@ -8,5 +8,5 @@ import { Session } from 'next-auth'
  */
 export type FormState = {
   isValidated: boolean,
-  session: Session,
+  session: Session | null,
 }

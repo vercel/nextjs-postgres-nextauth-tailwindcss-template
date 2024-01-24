@@ -15,10 +15,10 @@ import StoreTextField from '@/app/(AuthorizedLayout)/stores/_components/StoreTex
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
 import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/response'
-import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/hook/useStoreDetail'
+import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/_hooks/useStoreDetail'
 import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
 import { StoreModifyFormState } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeModifyFormState'
-import { StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
+import { StoreModifyFormStateInitProps, StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
 import { putStoreManager } from '@/app/(AuthorizedLayout)/stores/[storeId]/manager/_lib/putStoreManager'
 import {
   managerNameValidated,
@@ -36,7 +36,11 @@ type StoreManagerModifyState = {
   managerPhoneNumber: TextFieldState,
 } & StoreModifyFormState
 
-const initState = (storeId: string, session: Session, storeDetail?: StoreDetailResponse) => ({
+const initState = ({
+   storeId,
+   session,
+   storeDetail
+}: StoreModifyFormStateInitProps) => ({
   storeId: storeId,
   managerName: initBaseState(storeDetail?.managerName ?? ''),
   managerPhoneNumber: initBaseState(storeDetail?.managerPhoneNumber ?? ''),
@@ -57,9 +61,14 @@ const onModifyData = async (modifyData: StoreManagerModifyState) => {
 
 const StoreManagerModifyModal = ({ storeId }: StoreProps) => {
   const router = useRouter()
-  const storeDetail = useStoreDetail(storeId)
-  const { data: session } = useSession()
-  const [modifyData, setModifyData] = useState<StoreManagerModifyState>(initState(storeId, session!, storeDetail))
+  const { storeDetail, session, isLoading } = useStoreDetail(storeId)
+  const [modifyData, setModifyData] = useState<StoreManagerModifyState>(
+    initState({
+      storeId,
+      session,
+      storeDetail
+    })
+  )
 
   const queryClient = useQueryClient()
   const mutation = useMutation({
@@ -120,7 +129,7 @@ const StoreManagerModifyModal = ({ storeId }: StoreProps) => {
     }))
   }
 
-  if (storeDetail == null) {
+  if (isLoading || storeDetail === undefined) {
     return <Loading />
   }
 

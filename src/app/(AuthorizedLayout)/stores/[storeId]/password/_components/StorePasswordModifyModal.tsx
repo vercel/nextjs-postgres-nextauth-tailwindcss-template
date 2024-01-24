@@ -29,7 +29,10 @@ type StorePasswordModifyState = {
   confirmPassword: TextFieldState,
 } & StoreModifyFormState
 
-const initState = (storeId: string, session: Session) => ({
+const initState = ({ storeId, session }: {
+  storeId: string,
+  session: Session | null
+}) => ({
   storeId: storeId,
   password: initBaseState(),
   confirmPassword: initBaseState(),
@@ -50,7 +53,12 @@ const onModifyData = async (modifyData: StorePasswordModifyState) => {
 const StorePasswordModifyModal = ({ storeId }: StoreProps) => {
   const router = useRouter()
   const { data: session } = useSession()
-  const [modifyData, setModifyData] = useState<StorePasswordModifyState>(initState(storeId, session!))
+  const [modifyData, setModifyData] = useState<StorePasswordModifyState>(
+    initState({
+      storeId,
+      session
+    })
+  )
 
   const mutation = useMutation({
     mutationFn: onModifyData,

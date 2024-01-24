@@ -1,10 +1,14 @@
-import React from 'react'
-import { StorePageProperties } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import React, { Suspense } from 'react'
 import StoreListContainer from '@/app/(AuthorizedLayout)/stores/_components/StoreListContainer'
+import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
 
-const StoreListPage = async ({ pageParameters }: StorePageProperties) => {
-  // @ts-ignore
-  return <StoreListContainer pageParameters={pageParameters} />
+const StoreListPage = () => {
+  return (
+    <Suspense fallback={<Loading />}>
+      {/* @ts-expect-error Server Component */}
+      <StoreListContainer />
+    </Suspense>
+  )
 }
 
 export default StoreListPage

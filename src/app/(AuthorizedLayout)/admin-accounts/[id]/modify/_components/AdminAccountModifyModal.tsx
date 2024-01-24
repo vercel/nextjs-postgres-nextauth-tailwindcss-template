@@ -46,7 +46,7 @@ const AdminAccountModifyModal = ({ id }: Props) => {
         router.replace(SIGN_OUT_PAGE_PATH)
       }
     }
-  }, [isError])
+  }, [isError, error, router])
 
   const [modifyData, setModifyData] = useState<AdminAccountModifyState>({
     id: id,
