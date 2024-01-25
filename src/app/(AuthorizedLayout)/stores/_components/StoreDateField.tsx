@@ -32,7 +32,7 @@ const StoreDateField = ({ label, data, setData }: Props) => {
       >
         <DatePicker
           value={data}
-          format="YYYY-MM-DD"
+          format="YYYY. MM. DD"
           className={styles.textField}
           onChange={handleDateChange}
         />

@@ -24,7 +24,7 @@ const AdminAccountListItem = ({ adminAccount, onModifyClick }: Props) => {
       </TableCell>
       <TableCell>
         <Typography fontSize="15px" fontWeight={500}>
-          {format(adminAccount.lastUpdatedAt!, 'yyyy-MM-dd')}
+          {format(adminAccount.lastUpdatedAt!, 'yyyy. MM. dd')}
         </Typography>
       </TableCell>
       <TableCell>

@@ -33,14 +33,14 @@ const StoreSearchDate = ({ pageParameters, setPageParameters }: StoreSearchProps
         <Box className={styles.searchDateBox}>
           <DatePicker
             value={pageParameters.createdStartDate}
-            format="YYYY-MM-DD"
+            format="YYYY. MM. DD"
             className={styles.searchDate}
             onChange={handleStartDateChange}
           />
           <Typography className={styles.searchDateLabel}>~</Typography>
           <DatePicker
             value={pageParameters.createdEndDate}
-            format="YYYY-MM-DD"
+            format="YYYY. MM. DD"
             className={styles.searchDate}
             onChange={handleEndDateChange}
           />
