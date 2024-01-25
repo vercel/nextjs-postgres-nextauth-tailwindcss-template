@@ -37,6 +37,7 @@ const useStoreDetail = (storeId: string) => {
     }
   }, [storeDetail, isLoading, isError, error, router])
 
+  console.log('storeDetail', storeDetail)
   return {
     storeDetail: storeDetail,
     session: session,

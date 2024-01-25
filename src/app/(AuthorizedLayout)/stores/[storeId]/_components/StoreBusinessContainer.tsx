@@ -20,7 +20,8 @@ const StoreBusinessContainer = ({ storeDetail, handlerEdit }: Props) => {
         </Typography>
         {isNotEmpty(storeDetail.businessRegistrationUrl) ? (
           <Typography className={styles.contents}>
-            [<Link href={''}>
+            [<Link target="_blank"
+                   href={`/api/stores/${storeDetail.storeId}/documents/BUSINESS_REGISTRATION/files/${storeDetail.businessRegistrationUrl}`}>
             <u>사업자 등록증 보기</u>
           </Link>]
           </Typography>

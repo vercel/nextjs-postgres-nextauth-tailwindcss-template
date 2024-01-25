@@ -1,8 +1,8 @@
-import StoreDetailContainer from "../_components/StoreDetailContainer";
 import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
 import React, { Suspense } from 'react'
+import StoreDetailContainer from '@/app/(AuthorizedLayout)/stores/[storeId]/_components/StoreDetailContainer'
 
-const StorePasswordModifyPage = async ({ params }: { params: { storeId: string } }) => {
+const StoreDetailImagePage = ({ params }: { params: { storeId: string } }) => {
   return (
     <Suspense fallback={<Loading />}>
       {/* @ts-expect-error Server Component */}
@@ -11,4 +11,4 @@ const StorePasswordModifyPage = async ({ params }: { params: { storeId: string }
   )
 }
 
-export default StorePasswordModifyPage;
+export default StoreDetailImagePage

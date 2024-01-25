@@ -13,7 +13,8 @@ import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
 import {
   businessLocationValidated,
   nameValidated,
-  storeIdValidated, storeTelValidated
+  storeIdValidated,
+  storeTelValidated
 } from '@/app/(AuthorizedLayout)/stores/_lib/validated'
 import { Session } from 'next-auth'
 import { postStore } from '@/app/(AuthorizedLayout)/stores/register/_lib/postStore'
@@ -23,6 +24,8 @@ import StoreImageField from '@/app/(AuthorizedLayout)/stores/_components/StoreIm
 import StoreBankAccountFieldGroup from '@/app/(AuthorizedLayout)/stores/_components/StoreBankAccountFieldGroup'
 import StoreCategoryRadioGroup from '@/app/(AuthorizedLayout)/stores/_components/StoreCategoryRadioGroup'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
+import { FileInputState } from '@/app/(AuthorizedLayout)/_models/state'
+import { postStoreImage } from '@/app/(AuthorizedLayout)/stores/_lib/postStoreImage'
 
 /**
  * 매장 등록 State.
@@ -42,7 +45,7 @@ import { SIGN_OUT_PAGE_PATH } from '@/auth'
 export type StoreRegisterState = {
   storeId: TextFieldState,
   storeName: TextFieldState,
-  imageUrl: string,
+  imageUrl: FileInputState,
   storeTel: TextFieldState,
   bank: TextFieldState,
   accountNumber: TextFieldState,
@@ -56,7 +59,10 @@ export type StoreRegisterState = {
 const initState = (session: Session) => ({
   storeId: initBaseState(),
   storeName: initBaseState(),
-  imageUrl: '',
+  imageUrl: {
+    name: '',
+    file: null
+  },
   storeTel: initBaseState(),
   bank: initBaseState(),
   accountNumber: initBaseState(),
@@ -72,10 +78,15 @@ const onRegisterData = async (registerData: StoreRegisterState) => {
     return
   }
 
+  if (registerData.imageUrl.file) {
+    const result = await postStoreImage(registerData.imageUrl.file, registerData.session)
+    registerData.imageUrl.name = result.data
+  }
+
   return await postStore({
     storeId: registerData.storeId.value,
     storeName: registerData.storeName.value,
-    imageUrl: registerData.imageUrl,
+    imageUrl: registerData.imageUrl.name,
     storeTel: registerData.storeTel.value,
     bank: registerData.bank.value,
     accountNumber: registerData.accountNumber.value,

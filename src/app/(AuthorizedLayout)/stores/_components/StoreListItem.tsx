@@ -5,6 +5,7 @@ import styles from './storeListItem.module.css'
 import { StoreResponse } from '@/app/(AuthorizedLayout)/stores/_models/store'
 import { formatDate } from '@/app/(AuthorizedLayout)/_lib/date'
 import Link from 'next/link'
+import StoreImageModal from '@/app/(AuthorizedLayout)/stores/_components/StoreImageModal'
 
 interface Props {
   store: StoreResponse,
@@ -63,16 +64,18 @@ const StoreListItem = ({ store }: Props) => {
         </Typography>
       </TableCell>
       <TableCell className={styles.tableColumn}>
-        <Typography fontSize="15px" fontWeight={500}>
-          {store.imageUrl
-            ? (
-              <Typography fontSize="15px" fontWeight={500}>
-                <u>보기</u>
-              </Typography>
-            )
-            : '-'
-          }
-        </Typography>
+        {store.imageUrl
+          ? (
+            <StoreImageModal
+              label={
+                <Typography fontSize="15px" fontWeight={500}><u>보기</u></Typography>
+              }
+              storeId={store.storeId}
+              imageName={store.imageUrl}
+            />
+          )
+          : (<Typography fontSize="15px" fontWeight={500}>-</Typography>)
+        }
       </TableCell>
     </TableRow>
   )

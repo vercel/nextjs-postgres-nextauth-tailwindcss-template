@@ -10,3 +10,11 @@ export type FormState = {
   isValidated: boolean,
   session: Session | null,
 }
+
+/**
+ * 파일 Input State
+ */
+export type FileInputState = {
+  name: string,
+  file?: File | null,
+}

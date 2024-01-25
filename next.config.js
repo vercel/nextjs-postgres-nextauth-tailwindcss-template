@@ -5,6 +5,11 @@ const nextConfig = {
   compiler: {
     emotion: true,
   },
+  images: {
+    domains: [
+      'localhost',
+    ],
+  },
   async rewrites() {
     return [
       {

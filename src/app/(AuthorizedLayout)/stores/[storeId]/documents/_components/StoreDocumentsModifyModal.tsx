@@ -18,6 +18,8 @@ import StoreImageField from '@/app/(AuthorizedLayout)/stores/_components/StoreIm
 import { putStoreDocuments } from '@/app/(AuthorizedLayout)/stores/[storeId]/documents/_lib/putStoreDocuments'
 import StoreDateField from '../../../_components/StoreDateField'
 import { formatDate } from '@/app/(AuthorizedLayout)/_lib/date'
+import { FileInputState } from '@/app/(AuthorizedLayout)/_models/state'
+import { postStoreDocumentFile } from '@/app/(AuthorizedLayout)/stores/[storeId]/_lib/postStoreDocumentFile'
 
 /**
  * 매장 필수서류 정보 변경 State.
@@ -28,10 +30,10 @@ import { formatDate } from '@/app/(AuthorizedLayout)/_lib/date'
  *  @property businessReportCertUrl  영업신고증 URL
  */
 type StoreDocumentsModifyState = {
-  healthCertUrl: string,
+  healthCertUrl: FileInputState,
   healthCertRegisterDate: string,
-  carRegistrationCertUrl: string,
-  businessReportCertUrl: string,
+  carRegistrationCertUrl: FileInputState,
+  businessReportCertUrl: FileInputState,
 } & StoreModifyFormState
 
 const initState = ({
@@ -40,10 +42,19 @@ const initState = ({
    storeDetail
 }: StoreModifyFormStateInitProps) => ({
   storeId: storeId,
-  healthCertUrl: storeDetail?.healthCertUrl ?? '',
+  healthCertUrl: {
+    name: storeDetail?.healthCertUrl ?? '',
+    file: null
+  },
   healthCertRegisterDate: formatDate(storeDetail?.healthCertRegisterDate) ?? '',
-  carRegistrationCertUrl: storeDetail?.carRegistrationCertUrl ?? '',
-  businessReportCertUrl: storeDetail?.businessReportCertUrl ?? '',
+  carRegistrationCertUrl: {
+  name: storeDetail?.carRegistrationCertUrl ?? '',
+    file: null
+  },
+  businessReportCertUrl: {
+    name: storeDetail?.businessReportCertUrl ?? '',
+    file: null
+  },
   isValidated: true,
   session: session,
 })
@@ -53,11 +64,41 @@ const onModifyData = async (modifyData: StoreDocumentsModifyState) => {
     return
   }
 
+  if (modifyData.healthCertUrl.file) {
+    const result = await postStoreDocumentFile({
+      storeId: modifyData.storeId,
+      storeDocumentType: 'HEALTH_CERT',
+      file: modifyData.healthCertUrl.file,
+      session: modifyData.session
+    })
+    modifyData.healthCertUrl.name = result.data
+  }
+
+  if (modifyData.carRegistrationCertUrl.file) {
+    const result = await postStoreDocumentFile({
+      storeId: modifyData.storeId,
+      storeDocumentType: 'CAR_REGISTRATION_CERT',
+      file: modifyData.carRegistrationCertUrl.file,
+      session: modifyData.session
+    })
+    modifyData.carRegistrationCertUrl.name = result.data
+  }
+
+  if (modifyData.businessReportCertUrl.file) {
+    const result = await postStoreDocumentFile({
+      storeId: modifyData.storeId,
+      storeDocumentType: 'BUSINESS_REPORT_CERT',
+      file: modifyData.businessReportCertUrl.file,
+      session: modifyData.session
+    })
+    modifyData.businessReportCertUrl.name = result.data
+  }
+
   return await putStoreDocuments(modifyData.storeId, {
-    healthCertUrl: modifyData.healthCertUrl,
+    healthCertUrl: modifyData.healthCertUrl.name,
     healthCertRegisterDate: modifyData.healthCertRegisterDate,
-    carRegistrationCertUrl: modifyData.carRegistrationCertUrl,
-    businessReportCertUrl: modifyData.businessReportCertUrl,
+    carRegistrationCertUrl: modifyData.carRegistrationCertUrl.name,
+    businessReportCertUrl: modifyData.businessReportCertUrl.name,
   }, modifyData.session)
 }
 

@@ -24,6 +24,27 @@ export const serverFetch = async (
   return responseBody(response)
 }
 
+export const serverFileFetch = async (
+  version: string,
+  path: string,
+  requestInit: RequestInit
+) => {
+  console.log('serverFileFetch', version, path, requestInit)
+  const accessToken = await getSessionToken()
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/${version}/admin${path}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `${ACCESS_TOKEN_HEADER}${accessToken}`
+      },
+      ...requestInit
+    }
+  )
+
+
+  return response.blob()
+}
+
 const responseBody = async (response: Response) => {
   if (response.status === 401) {
     return NextResponse.json({ message: 'NO_AUTHORIZED' }, { status: 401 })

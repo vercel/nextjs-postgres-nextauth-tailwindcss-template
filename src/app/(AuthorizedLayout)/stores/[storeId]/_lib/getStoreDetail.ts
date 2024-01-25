@@ -14,7 +14,6 @@ export const getStoreDetail = async ({ queryKey }: {
     }
   })
 
-  console.log("getStoreDetail response", response)
   if (response.status === 401) {
     throw NO_AUTHORIZED
   }

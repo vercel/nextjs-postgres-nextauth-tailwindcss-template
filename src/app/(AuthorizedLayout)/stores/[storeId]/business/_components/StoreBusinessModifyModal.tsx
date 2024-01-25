@@ -23,6 +23,8 @@ import {
   ownerValidated
 } from '@/app/(AuthorizedLayout)/stores/[storeId]/business/_lib/validated'
 import StoreImageField from '@/app/(AuthorizedLayout)/stores/_components/StoreImageField'
+import { FileInputState } from '@/app/(AuthorizedLayout)/_models/state'
+import { postStoreDocumentFile } from '@/app/(AuthorizedLayout)/stores/[storeId]/_lib/postStoreDocumentFile'
 
 /**
  * 매장 담당자 정보 변경 State.
@@ -34,7 +36,7 @@ type StoreBusinessModifyState = {
   businessName: TextFieldState,
   businessNumber: TextFieldState,
   owner: TextFieldState,
-  businessRegistrationUrl: string,
+  businessRegistrationUrl: FileInputState,
 } & StoreModifyFormState
 
 const initState = ({
@@ -46,7 +48,10 @@ const initState = ({
   businessName: initBaseState(storeDetail?.businessName ?? ''),
   businessNumber: initBaseState(storeDetail?.businessNumber ?? ''),
   owner: initBaseState(storeDetail?.owner ?? ''),
-  businessRegistrationUrl: storeDetail?.businessRegistrationUrl ?? '',
+  businessRegistrationUrl: {
+    name: storeDetail?.businessRegistrationUrl ?? '',
+    file: null
+  },
   isValidated: true,
   session: session,
 })
@@ -56,11 +61,21 @@ const onModifyData = async (modifyData: StoreBusinessModifyState) => {
     return
   }
 
+  if (modifyData.businessRegistrationUrl.file) {
+    const result = await postStoreDocumentFile({
+      storeId: modifyData.storeId,
+      storeDocumentType: 'BUSINESS_REGISTRATION',
+      file: modifyData.businessRegistrationUrl.file,
+      session: modifyData.session
+    })
+    modifyData.businessRegistrationUrl.name = result.data
+  }
+
   return await putStoreBusiness(modifyData.storeId, {
     businessName: modifyData.businessName.value,
     businessNumber: modifyData.businessNumber.value,
     owner: modifyData.owner.value,
-    businessRegistrationUrl: modifyData.businessRegistrationUrl,
+    businessRegistrationUrl: modifyData.businessRegistrationUrl.name,
   }, modifyData.session)
 }
 

@@ -1,8 +1,8 @@
 /**
  매장 정보 변경 요청 Data.
 
- @property storeName         매장명
- @property imageUrl         이미지 URL
+ @property storeName        매장명
+ @property storeImageUrl    이미지 URL
  @property storeTel         매장 전화번호
  @property bank             은행명
  @property accountNumber    계좌번호
@@ -12,7 +12,7 @@
  */
 export interface StoreModifyRequest {
   storeName: string,
-  imageUrl: string,
+  storeImageUrl: string,
   storeTel: string,
   bank: string,
   accountNumber: string,

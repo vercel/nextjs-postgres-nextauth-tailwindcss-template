@@ -1,6 +1,6 @@
 'use client'
 
-import React, { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { Stack } from '@mui/material'
 import styles from './storeModify.module.css'
 import { initBaseState, TextFieldState } from '@/app/_components/BaseTextField'
@@ -25,6 +25,8 @@ import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/_hooks/use
 import { StoreModifyFormState } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeModifyFormState'
 import { StoreModifyFormStateInitProps, StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
 import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
+import { FileInputState } from '@/app/(AuthorizedLayout)/_models/state'
+import { postStoreImage } from '@/app/(AuthorizedLayout)/stores/_lib/postStoreImage'
 
 /**
  * 매장 정보 변경 State.
@@ -41,7 +43,7 @@ import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
  */
 type StoreModifyState = {
   storeName: TextFieldState,
-  imageUrl: string,
+  imageUrl: FileInputState,
   storeTel: TextFieldState,
   bank: TextFieldState,
   accountNumber: TextFieldState,
@@ -57,7 +59,10 @@ const initState = ({
 }: StoreModifyFormStateInitProps) => ({
   storeId: storeId,
   storeName: initBaseState(storeDetail?.storeName ?? ''),
-  imageUrl: storeDetail?.imageUrl ?? '',
+  imageUrl: {
+    name: storeDetail?.imageUrl ?? '',
+    file: null
+  },
   storeTel: initBaseState(storeDetail?.storeTel ?? ''),
   bank: initBaseState(storeDetail?.bank ?? ''),
   accountNumber: initBaseState(storeDetail?.accountNumber ?? ''),
@@ -73,9 +78,14 @@ const onModifyData = async (modifyData: StoreModifyState) => {
     return
   }
 
+  if (modifyData.imageUrl.file) {
+    const result = await postStoreImage(modifyData.imageUrl.file, modifyData.session)
+    modifyData.imageUrl.name = result.data
+  }
+
   return await putStore(modifyData.storeId, {
     storeName: modifyData.storeName.value,
-    imageUrl: modifyData.imageUrl,
+    storeImageUrl: modifyData.imageUrl.name,
     storeTel: modifyData.storeTel.value,
     bank: modifyData.bank.value,
     accountNumber: modifyData.accountNumber.value,

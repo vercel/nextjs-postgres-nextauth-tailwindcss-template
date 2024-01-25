@@ -1,0 +1,5 @@
+export type StoreDocumentType =
+  'BUSINESS_REGISTRATION' |
+  'HEALTH_CERT' |
+  'CAR_REGISTRATION_CERT' |
+  'BUSINESS_REPORT_CERT'

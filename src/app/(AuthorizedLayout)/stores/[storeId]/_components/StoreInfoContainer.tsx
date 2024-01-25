@@ -5,6 +5,7 @@ import { formatPhoneNumber } from '@/app/(AuthorizedLayout)/_lib/phoneNumber'
 import { menuCategoryName } from '@/app/(AuthorizedLayout)/stores/_lib/menuCategory'
 import { BasicButton } from '@/app/_components/BasicButton'
 import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/response'
+import StoreImageModal from '@/app/(AuthorizedLayout)/stores/_components/StoreImageModal'
 
 type Props = {
   storeDetail: StoreDetailResponse,
@@ -35,9 +36,11 @@ const StoreInfoContainer = ({ storeDetail, handlerEdit }: Props) => {
           이미지
         </Typography>
         {storeDetail.imageUrl !== '' ? (
-          <Link className={styles.contents} href={''}>
-            <u>이미지</u>
-          </Link>
+          <StoreImageModal
+            label={<u>이미지</u>}
+            storeId={storeDetail.storeId}
+            imageName={storeDetail.imageUrl}
+          />
         ) : null}
       </Box>
       <Box className={styles.row}>

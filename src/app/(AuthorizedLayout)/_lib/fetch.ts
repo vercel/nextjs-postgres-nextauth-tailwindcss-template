@@ -18,3 +18,20 @@ export const clientFetch = async (
     }
   )
 }
+
+export const clientMultipartFetch = async (
+  version: string,
+  path: string,
+  requestInit: RequestInit,
+  session?: Session | null
+) => {
+  console.log('clientMultipartFetch', version, path, requestInit, session)
+  return await fetch(
+    `/server-api/${version}/admin${path}`, {
+      headers: {
+        Authorization: `${ACCESS_TOKEN_HEADER}${session?.accessToken}`
+      },
+      ...requestInit
+    }
+  )
+}
