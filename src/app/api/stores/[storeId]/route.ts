@@ -7,7 +7,7 @@ export const GET = async (
 ) => {
   return await serverFetch(
     'v1',
-    `/store/${params.storeId}/detail`,
+    `/stores/${params.storeId}/detail`,
     {}
   )
 }

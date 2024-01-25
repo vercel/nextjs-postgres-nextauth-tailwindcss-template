@@ -8,7 +8,7 @@ export const putStoreBusiness = async (
   session?: Session | null
 ) => await clientFetch(
   `v1`,
-  `/store/${storeId}/business`,
+  `/stores/${storeId}/business`,
   {
     method: 'PUT',
     body: JSON.stringify(request)

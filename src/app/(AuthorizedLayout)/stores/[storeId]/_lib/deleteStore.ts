@@ -6,7 +6,7 @@ export const deleteStore = async (
   session?: Session | null
 ) => await clientFetch(
   `v1`,
-  `/store/${storeId}`,
+  `/stores/${storeId}`,
   {
     method: 'DELETE',
   },

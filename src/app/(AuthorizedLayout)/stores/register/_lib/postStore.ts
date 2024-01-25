@@ -8,7 +8,7 @@ export const postStore = async (
   session?: Session | null
 ) => await clientFetch(
   `v1`,
-  `/store`,
+  `/stores`,
   {
     method: 'POST',
     body: JSON.stringify(request)

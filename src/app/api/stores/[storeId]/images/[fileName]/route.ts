@@ -7,7 +7,7 @@ export const GET = async (
 ) => {
   const blob = await serverFileFetch(
     'v1',
-    `/store/${params.storeId}/images/${params.fileName}`,
+    `/stores/${params.storeId}/images/${params.fileName}`,
     {}
   )
   const headers = new Headers();

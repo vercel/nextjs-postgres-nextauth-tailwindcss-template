@@ -6,7 +6,7 @@ export const GET = async (request: NextRequest) => {
   console.log('api get', searchParams)
   return await serverFetch(
     'v1',
-   `/store?${searchParams}`,
+   `/stores?${searchParams}`,
     {}
   )
 }

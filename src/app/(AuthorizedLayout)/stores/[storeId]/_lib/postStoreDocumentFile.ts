@@ -15,7 +15,7 @@ export const postStoreDocumentFile = async ({ storeId, storeDocumentType, file, 
 
   const response = await clientMultipartFetch(
     `v1`,
-    `/store/${storeId}/documents/${storeDocumentType}/files`,
+    `/stores/${storeId}/documents/${storeDocumentType}/files`,
     {
       method: 'POST',
       body: formData
