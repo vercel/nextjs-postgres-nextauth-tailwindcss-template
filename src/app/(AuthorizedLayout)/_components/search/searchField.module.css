@@ -1,0 +1,23 @@
+.searchField {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.searchCondition {
+    width: 100px;
+}
+
+.searchCondition :global(.MuiOutlinedInput-input) {
+    padding: 5px 14px;
+    height: 35px;
+    line-height: 35px;
+}
+
+.searchValue :global(.MuiOutlinedInput-input) {
+    min-width: 100px;
+    max-width: 200px;
+    padding: 5px 14px;
+    height: 35px;
+}

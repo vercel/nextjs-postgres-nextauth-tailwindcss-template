@@ -1,0 +1,34 @@
+.searchDateContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.searchDateLabel {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.searchDateBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 10px;
+    align-items: center;
+}
+
+.searchDate {
+    width: 160px;
+    text-align: center;
+}
+
+.searchDate :global(.MuiOutlinedInput-input) {
+    padding: 5px;
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 35px;
+    height: 35px;
+    text-align: center;
+}

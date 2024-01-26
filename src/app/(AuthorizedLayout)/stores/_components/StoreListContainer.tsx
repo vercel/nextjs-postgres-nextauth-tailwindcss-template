@@ -1,9 +1,8 @@
-import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
-import { Box, Container } from '@mui/material'
+import { QueryClient } from '@tanstack/react-query'
 import StoreListView from './StoreListView'
 import { getStores } from '@/app/(AuthorizedLayout)/stores/_lib/getStores'
-import styles from '@/app/(AuthorizedLayout)/stores/_components/storeList.module.css'
 import { StorePageParameters } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import ListContainer from '../../_components/container/ListContainer'
 
 const StoreListContainer = async () => {
   const initPageParameter = {
@@ -29,18 +28,13 @@ const StoreListContainer = async () => {
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
     queryKey: ['stores', initPageParameter],
-    queryFn: getStores,
+    queryFn: getStores
   })
-  const dehydratedState = dehydrate(queryClient)
 
   return (
-    <Container className={styles.container}>
-      <Box mt={3}>
-        <HydrationBoundary state={dehydratedState}>
-          <StoreListView pageParameters={initPageParameter} />
-        </HydrationBoundary>
-      </Box>
-    </Container>
+    <ListContainer queryClient={queryClient}>
+      <StoreListView pageParameters={initPageParameter} />
+    </ListContainer>
   )
 }
 

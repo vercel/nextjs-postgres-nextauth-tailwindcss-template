@@ -1,9 +1,10 @@
 import React from 'react'
 import { MenuItem } from '@mui/material'
-import { StoreSearchCondition, StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import { MenuSearchProps } from '@/app/(AuthorizedLayout)/stores/menus/_models/props'
 import SearchField from '@/app/(AuthorizedLayout)/_components/search/SearchField'
+import { StoreSearchCondition } from '@/app/(AuthorizedLayout)/stores/_models/store'
 
-const StoreSearchField = ({ pageParameters, setPageParameters }: StoreSearchProps) => {
+const MenuSearchField = ({ pageParameters, setPageParameters }: MenuSearchProps) => {
   return (
     <SearchField
       searchCondition={pageParameters.searchCondition}
@@ -23,8 +24,9 @@ const StoreSearchField = ({ pageParameters, setPageParameters }: StoreSearchProp
     >
       <MenuItem value={'STORE_NAME'}>매장명</MenuItem>
       <MenuItem value={'STORE_ID'}>매장 ID</MenuItem>
+      <MenuItem value={'MENU_NAME'}>메뉴명</MenuItem>
     </SearchField>
   )
 }
 
-export default StoreSearchField
+export default MenuSearchField

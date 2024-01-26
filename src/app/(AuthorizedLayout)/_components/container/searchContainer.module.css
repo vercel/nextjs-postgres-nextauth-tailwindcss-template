@@ -1,0 +1,25 @@
+.searchContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+    border: 1px solid #999999;
+    border-radius: 12px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    padding: 30px 20px;
+}
+
+.searchFirstRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.searchLastRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}

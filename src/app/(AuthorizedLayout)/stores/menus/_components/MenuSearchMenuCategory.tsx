@@ -1,8 +1,8 @@
 import React from 'react'
-import { StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import { MenuSearchProps } from '@/app/(AuthorizedLayout)/stores/menus/_models/props'
 import SearchMenuCategory from '@/app/(AuthorizedLayout)/_components/search/SearchMenuCategory'
 
-const StoreSearchMenuCategory = ({ pageParameters, setPageParameters }: StoreSearchProps) => {
+const MenuSearchMenuCategory = ({ pageParameters, setPageParameters }: MenuSearchProps) => {
   return (
     <SearchMenuCategory
       menuCategories={pageParameters.menuCategories}
@@ -16,4 +16,4 @@ const StoreSearchMenuCategory = ({ pageParameters, setPageParameters }: StoreSea
   )
 }
 
-export default StoreSearchMenuCategory
+export default MenuSearchMenuCategory

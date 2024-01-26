@@ -1,12 +1,12 @@
 import React from 'react'
-import { StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/store'
 import 'dayjs/locale/ko'
+import { MenuSearchProps } from '@/app/(AuthorizedLayout)/stores/menus/_models/props'
 import SearchDate from '@/app/(AuthorizedLayout)/_components/search/SearchDate'
 
-const StoreSearchDate = ({ pageParameters, setPageParameters }: StoreSearchProps) => {
+const MenuSearchDate = ({ pageParameters, setPageParameters }: MenuSearchProps) => {
   return (
     <SearchDate
-      label={"등록일"}
+      label={"등록/수정일"}
       startDate={pageParameters.createdStartDate}
       endDate={pageParameters.createdEndDate}
       setStartDate={(startDate) => {
@@ -25,4 +25,4 @@ const StoreSearchDate = ({ pageParameters, setPageParameters }: StoreSearchProps
   )
 }
 
-export default StoreSearchDate
+export default MenuSearchDate
