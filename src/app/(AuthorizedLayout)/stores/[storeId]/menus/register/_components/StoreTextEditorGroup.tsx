@@ -7,10 +7,18 @@ import ReactQuill, { Quill, ReactQuillProps } from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import dynamic from 'next/dynamic'
 import { ImageResize } from 'quill-image-resize-module-ts'
+import { useSession } from 'next-auth/react'
+import {
+  postStoreMenuDescriptionImage
+} from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_lib/postStoreMenuDescriptionImage'
+import {
+  storeMenuDescriptionImageUrl
+} from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_lib/storeMenuDescriptionImage'
 
 Quill.register('modules/ImageResize', ImageResize);
 
 type Props = {
+  storeId: string,
   label: ReactNode,
   placeholder?: string,
   data: string,
@@ -68,11 +76,13 @@ const QuillNoSSRWrapper = dynamic(
 );
 
 const StoreTextareaGroup = ({
+  storeId,
   label,
   placeholder,
   data,
   setData
 }: Props) => {
+  const { data: session } = useSession()
   const quillInstance = useRef<ReactQuill>(null);
 
   const imageHandler = () => {
@@ -85,13 +95,17 @@ const StoreTextareaGroup = ({
       const file: File | null = input.files ? input.files[0] : null;
       if (!file) return;
       const { name } = file;
-      const imageFile = URL.createObjectURL(file)
       const editor = quillInstance.current?.getEditor();
       const range = editor?.getSelection() ?? false;
       if (!range) return;
 
-      // const { path } = await uploadFile(mediaForm);
-      editor?.insertEmbed(range.index, 'image', imageFile);
+      const result = await postStoreMenuDescriptionImage({
+        storeId,
+        file,
+        session
+      });
+      const imagePath = result.data
+      editor?.insertEmbed(range.index, 'image', storeMenuDescriptionImageUrl(storeId, imagePath));
       editor?.setSelection({
         index: range.index + 1,
         length: range.length + 1,

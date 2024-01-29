@@ -185,6 +185,7 @@ const StoreMenuRegisterModal = ({ storeId }: StoreProps) => {
             }}
           />
           <StoreTextEditorGroup
+            storeId={storeId}
             label={'상품설명'}
             placeholder={"상품설명(선택사항)"}
             data={registerData.description}
