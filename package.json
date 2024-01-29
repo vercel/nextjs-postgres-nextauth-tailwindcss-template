@@ -27,6 +27,9 @@
     "jwt-decode": "^4.0.0",
     "next": "14.0.4",
     "next-auth": "5.0.0-beta.4",
+    "quill-image-compress": "^1.2.30",
+    "quill-image-resize": "^3.0.9",
+    "quill-image-resize-module-ts": "^3.0.3",
     "react": "^18",
     "react-dom": "^18",
     "react-helmet-async": "^2.0.4",
@@ -52,6 +55,7 @@
     "express": "^4.18.2",
     "msw": "^2.0.14",
     "prop-types": "^15.8.1",
+    "react-quill": "^2.0.0",
     "typescript": "^5"
   },
   "msw": {

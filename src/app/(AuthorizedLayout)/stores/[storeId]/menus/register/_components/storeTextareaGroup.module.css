@@ -1,0 +1,36 @@
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.label {
+    width: 120px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 35px;
+}
+
+.textarea {
+    flex-grow: 1;
+    box-sizing: border-box;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    border-radius: 4px 4px 0 4px;
+    border: 1px solid #B0B8C4;
+    background-color: #fff;
+    padding: 5px;
+}
+
+.textarea:hover,
+.textarea:active,
+.textarea:focus,
+.textarea:focus-visible {
+    border-color: #F80069;
+    outline: 1px solid #F80069;
+}

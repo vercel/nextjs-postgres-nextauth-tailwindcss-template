@@ -2,7 +2,7 @@ import React, { ChangeEvent, Dispatch, SetStateAction } from 'react'
 import { Box, Typography } from '@mui/material'
 import BaseTextField, { TextFieldState } from '@/app/_components/BaseTextField'
 import styles from './storeTextField.module.css'
-import { StoreRegisterState } from '@/app/(AuthorizedLayout)/stores/register/_components/StoreRegisterModal'
+import { StoreRegisterState } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/register/_components/StoreRegisterModal'
 import {
   accountHolderValidated,
   accountNumberValidated,

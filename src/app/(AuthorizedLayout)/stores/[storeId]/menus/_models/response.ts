@@ -8,9 +8,9 @@
  * @property price       가격
  */
 interface StoreMenuDetailResponse {
-  id: string,
+  id: number,
   createdDate: Date,
   imageUrl: string,
   name: string,
-  price: string,
+  price: number,
 }

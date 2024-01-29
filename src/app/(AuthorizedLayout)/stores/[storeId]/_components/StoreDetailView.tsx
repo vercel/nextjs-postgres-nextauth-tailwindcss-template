@@ -94,7 +94,9 @@ const StoreDetailView = ({ storeId }: StoreProps) => {
             storeDetail={storeDetail}
             handlerEdit={() => router.push(`/stores/${storeId}/documents`)}
           />
-          <StoreMenuContainer storeDetail={storeDetail} handleRouter={() => {}} />
+          <StoreMenuContainer storeDetail={storeDetail} handleRouter={() => {
+            router.push(`/stores/${storeId}/menus`)
+          }} />
           <BasicButton
             label={'비밀번호 변경'}
             disabled={false}

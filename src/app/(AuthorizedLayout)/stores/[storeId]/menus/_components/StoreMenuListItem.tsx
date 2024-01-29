@@ -1,21 +1,27 @@
 import TableRow from '@mui/material/TableRow'
 import { format } from 'date-fns/format'
-import { TableCell, Typography } from '@mui/material'
-import styles from './menuListItem.module.css'
+import { Button, TableCell, Typography } from '@mui/material'
+import styles from './storeMenuListItem.module.css'
 import Link from 'next/link'
 import StoreImageModal from '@/app/(AuthorizedLayout)/stores/_components/StoreImageModal'
 
 interface Props {
-  menu: MenuResponse,
+  menu: StoreMenuDetailResponse,
 }
 
-const MenuListItem = ({ menu }: Props) => {
+const StoreMenuListItem = ({ menu }: Props) => {
   return (
-    <TableRow key={menu.storeId}>
+    <TableRow key={menu.id}>
       <TableCell className={styles.tableColumn}>
         <Typography fontSize="15px" fontWeight={500}>
           {format(menu.createdDate!, 'yyyy. MM. dd')}
         </Typography>
+      </TableCell>
+      <TableCell className={styles.tableColumn}>
+        {menu.imageUrl
+          ? (null)
+          : (<Typography fontSize="15px" fontWeight={500}>-</Typography>)
+        }
       </TableCell>
       <TableCell className={styles.tableColumn}>
         <Link href={`/menu/${menu.id}/modify`}>
@@ -25,28 +31,15 @@ const MenuListItem = ({ menu }: Props) => {
         </Link>
       </TableCell>
       <TableCell className={styles.tableColumn}>
-        {menu.imageUrl
-          ? null
-          : (<Typography fontSize="15px" fontWeight={500}>-</Typography>)
-        }
-      </TableCell>
-      <TableCell className={styles.tableColumn}>
         <Typography fontSize="15px" fontWeight={500}>
           {menu.price.toLocaleString('ko')}
         </Typography>
       </TableCell>
       <TableCell className={styles.tableColumn}>
-        <Typography fontSize="15px" fontWeight={500}>
-          {menu.storeName}
-        </Typography>
-      </TableCell>
-      <TableCell className={styles.tableColumn}>
-        <Typography fontSize="15px" fontWeight={500}>
-          {menu.categoryName}
-        </Typography>
+        <Button>수정</Button>
       </TableCell>
     </TableRow>
   )
 }
 
-export default MenuListItem
+export default StoreMenuListItem

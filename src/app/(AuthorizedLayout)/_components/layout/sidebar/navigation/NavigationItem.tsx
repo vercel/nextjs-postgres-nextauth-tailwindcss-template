@@ -11,13 +11,12 @@ export type NavigationItemType = {
 
 interface ItemType {
   navigation: NavigationItemType
-  pathDirect: string
+  isSelected: boolean
 }
 
 
 
-const NavigationItem = ({ navigation, pathDirect }: ItemType) => {
-  const isSelected = pathDirect.startsWith(navigation.href)
+const NavigationItem = ({ navigation, isSelected }: ItemType) => {
   return (
     <ListSubheader key={navigation.id} disableSticky className={styles.navigationItem}>
       <ListItemButton

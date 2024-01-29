@@ -1,7 +1,7 @@
 import { NO_AUTHORIZED } from '@/app/(AuthorizedLayout)/_lib/session'
 
-export const getStoreMenuDetails = async ({ queryKey }: { queryKey: [_1: string, storeId: string]}) => {
-  const [_1, storeId] = queryKey
+export const getStoreMenuDetails = async ({ queryKey }: { queryKey: [_1: string, _2: string, storeId: string]}) => {
+  const [_1, _2, storeId] = queryKey
   const response = await fetch(`/api/stores/${storeId}/menus`, {
     next: {
       tags: [

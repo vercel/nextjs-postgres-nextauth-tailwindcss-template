@@ -40,6 +40,18 @@ const NavigationGroup = ({ navigation, pathDirect }: ItemType) => {
   const itemIcon = <Icon stroke={1.5} size="1.3rem" />
   const isSelected = pathSelected(navigation, pathDirect)
 
+  const isItemSelected = (subNavigation: NavigationItemType) => {
+    if (navigation.children === undefined) {
+      return false
+    }
+
+    const selectItemType = navigation.children
+      .filter((navigationItem) => pathDirect.startsWith(navigationItem.href))
+      .sort((a,b) => b.href.length - a.href.length)
+      .at(0)
+    return selectItemType?.id === subNavigation.id
+  }
+
   return (
     <List component="div" disablePadding key={navigation.id}>
       <ListItem className={styles.navigationGroup}>
@@ -70,7 +82,7 @@ const NavigationGroup = ({ navigation, pathDirect }: ItemType) => {
             <NavigationItem
               key={subNavigation.id}
               navigation={subNavigation}
-              pathDirect={pathDirect}
+              isSelected={isItemSelected(subNavigation)}
             />
           ))}
         </Collapse>

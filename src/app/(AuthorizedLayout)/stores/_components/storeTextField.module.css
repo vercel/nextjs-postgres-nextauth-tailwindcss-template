@@ -25,6 +25,14 @@
     flex-grow: 1;
 }
 
+.textField :global(.MuiOutlinedInput-root):hover fieldset {
+    border-color: #F80069;
+}
+
+.textField :global(.MuiOutlinedInput-root):global(.Mui-focused) fieldset {
+    border-color: #F80069;
+}
+
 .bankAccountFieldGroup {
     flex-grow: 1;
     display: flex;

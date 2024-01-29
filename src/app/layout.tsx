@@ -4,6 +4,7 @@ import './globals.css'
 import Head from 'next/head'
 import {MSWComponent} from "@/app/_components/MSWComponent";
 import AuthSession from '@/app/_components/AuthSession';
+import React from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,10 +27,10 @@ export default function RootLayout({
       />
     </Head>
     <body className={inter.className}>
-        <MSWComponent />
-        <AuthSession>
-          {children}
-        </AuthSession>
+    <MSWComponent />
+    <AuthSession>
+      {children}
+    </AuthSession>
     </body>
     </html>
   )
