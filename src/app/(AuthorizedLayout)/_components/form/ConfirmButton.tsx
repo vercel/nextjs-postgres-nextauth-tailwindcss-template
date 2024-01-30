@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Button } from '@mui/material'
-import styles from './storeComfirmButton.module.css'
+import styles from './comfirmButton.module.css'
 
 type Props = {
   isValidated: boolean,
@@ -9,7 +9,7 @@ type Props = {
   confirmLabel?: string
 }
 
-const StoreConfirmButton = ({ isValidated, handelCancel, confirmLabel, handleConfirm }: Props) => {
+const ConfirmButton = ({ isValidated, handelCancel, confirmLabel, handleConfirm }: Props) => {
   return (
     <Box className={styles.buttonGroup}>
       <Button
@@ -31,4 +31,4 @@ const StoreConfirmButton = ({ isValidated, handelCancel, confirmLabel, handleCon
   )
 }
 
-export default StoreConfirmButton
+export default ConfirmButton

@@ -14,7 +14,7 @@ import { Session } from 'next-auth'
 import TextField from '@/app/(AuthorizedLayout)/_components/form/TextField'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import { putStorePassword } from '@/app/(AuthorizedLayout)/stores/[storeId]/password/_lib/putStorePassword'
-import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
+import ConfirmButton from '@/app/(AuthorizedLayout)/_components/form/ConfirmButton'
 import { StoreModifyFormState } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeModifyFormState'
 import { StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
 
@@ -143,7 +143,7 @@ const StorePasswordModifyModal = ({ storeId }: StoreProps) => {
             state={modifyData.confirmPassword}
             onChange={onChangeConfirmPassword}
           />
-          <StoreConfirmButton
+          <ConfirmButton
             isValidated={modifyData.isValidated}
             handelCancel={() => router.back()}
             handleConfirm={() => mutation.mutate(modifyData)} />

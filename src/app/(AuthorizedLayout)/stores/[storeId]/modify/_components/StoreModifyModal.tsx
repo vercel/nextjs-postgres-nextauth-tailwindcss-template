@@ -20,7 +20,7 @@ import StoreBankAccountFieldGroup from '@/app/(AuthorizedLayout)/stores/_compone
 import StoreCategoryRadioGroup from '@/app/(AuthorizedLayout)/stores/_components/StoreCategoryRadioGroup'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import { putStore } from '@/app/(AuthorizedLayout)/stores/[storeId]/modify/_lib/putStore'
-import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
+import ConfirmButton from '@/app/(AuthorizedLayout)/_components/form/ConfirmButton'
 import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/_hooks/useStoreDetail'
 import { StoreModifyFormState } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeModifyFormState'
 import { StoreModifyFormStateInitProps, StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
@@ -249,7 +249,7 @@ const StoreModifyModal = ({ storeId }: StoreProps) => {
               setModifyData((prev) => ({ ...prev, category: category }))
             }}
           />
-          <StoreConfirmButton
+          <ConfirmButton
             isValidated={modifyData.isValidated}
             handelCancel={() => router.back()}
             handleConfirm={() => mutation.mutate(modifyData)} />

@@ -3,7 +3,7 @@ import { format } from 'date-fns/format'
 import { TableCell, Typography } from '@mui/material'
 import styles from './storeMenuListItem.module.css'
 import Link from 'next/link'
-import { storeMenuImageUrl } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_lib/storeMenuImageUrl'
+import { storeMenuImageUrl } from '@/app/(AuthorizedLayout)/stores/_lib/storeMenuImageUrl'
 import Image from 'next/image'
 
 interface Props {
@@ -27,7 +27,7 @@ const StoreMenuListItem = ({ storeId, menu }: Props) => {
               width={0}
               height={0}
               sizes={"100%"}
-              alt={storeId}
+              alt={menu.name}
               className={styles.image}
             />
           )

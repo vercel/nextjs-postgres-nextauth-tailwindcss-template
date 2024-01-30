@@ -28,7 +28,7 @@ import StoreTextareaGroup from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/
 import StoreTextEditorGroup
   from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_components/StoreTextEditorGroup'
 import { postStoreMenuImage } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_lib/postStoreMenuImage'
-import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
+import ConfirmButton from '@/app/(AuthorizedLayout)/_components/form/ConfirmButton'
 
 /**
  * 메뉴 등록 State.
@@ -201,7 +201,7 @@ const StoreMenuRegisterModal = ({ storeId }: StoreProps) => {
               } as StoreMenuRegisterState))
             }}
           />
-          <StoreConfirmButton
+          <ConfirmButton
             isValidated={registerData.isValidated}
             handelCancel={() => router.back()}
             handleConfirm={() => {

@@ -13,7 +13,7 @@ import {
 } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_lib/postStoreMenuDescriptionImage'
 import {
   storeMenuDescriptionImageUrl
-} from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_lib/storeMenuImageUrl'
+} from '@/app/(AuthorizedLayout)/stores/_lib/storeMenuImageUrl'
 
 Quill.register('modules/ImageResize', ImageResize);
 

@@ -13,7 +13,7 @@ import { Session } from 'next-auth'
 import { invalidateStoresQueries } from '@/app/(AuthorizedLayout)/stores/_lib/invalidateQueries'
 import TextField from '@/app/(AuthorizedLayout)/_components/form/TextField'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
-import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
+import ConfirmButton from '@/app/(AuthorizedLayout)/_components/form/ConfirmButton'
 import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/response'
 import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/_hooks/useStoreDetail'
 import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
@@ -156,7 +156,7 @@ const StoreManagerModifyModal = ({ storeId }: StoreProps) => {
             state={modifyData.managerPhoneNumber}
             onChange={onChangeManagerPhoneNumber}
           />
-          <StoreConfirmButton
+          <ConfirmButton
             isValidated={modifyData.isValidated}
             handelCancel={() => router.back()}
             handleConfirm={() => mutation.mutate(modifyData)} />

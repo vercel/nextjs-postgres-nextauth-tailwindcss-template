@@ -3,7 +3,8 @@ import { format } from 'date-fns/format'
 import { TableCell, Typography } from '@mui/material'
 import styles from './menuListItem.module.css'
 import Link from 'next/link'
-import StoreImageModal from '@/app/(AuthorizedLayout)/stores/_components/StoreImageModal'
+import Image from 'next/image'
+import { storeMenuImageUrl } from '@/app/(AuthorizedLayout)/stores/_lib/storeMenuImageUrl'
 
 interface Props {
   menu: MenuResponse,
@@ -18,7 +19,7 @@ const MenuListItem = ({ menu }: Props) => {
         </Typography>
       </TableCell>
       <TableCell className={styles.tableColumn}>
-        <Link href={`/menu/${menu.id}/modify`}>
+        <Link href={`/menus/${menu.id}`}>
           <Typography variant="h6" fontWeight={600}>
             {menu.name}
           </Typography>
@@ -26,7 +27,16 @@ const MenuListItem = ({ menu }: Props) => {
       </TableCell>
       <TableCell className={styles.tableColumn}>
         {menu.imageUrl
-          ? null
+          ? (
+            <Image
+              src={storeMenuImageUrl(menu.storeId, menu.imageUrl)}
+              width={0}
+              height={0}
+              sizes={"100%"}
+              alt={menu.name}
+              className={styles.image}
+            />
+          )
           : (<Typography fontSize="15px" fontWeight={500}>-</Typography>)
         }
       </TableCell>

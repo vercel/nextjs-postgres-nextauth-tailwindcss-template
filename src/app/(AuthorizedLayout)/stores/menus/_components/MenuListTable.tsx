@@ -49,32 +49,32 @@ const MenuListTable = ({ page, menuPage, handlerPageChange }: Props) => {
         >
           <TableHead>
             <TableRow>
-              <TableCell>
+              <TableCell sx={{ textAlign: 'center'}}>
                 <Typography color="textSecondary" variant="h6">
                   등록일
                 </Typography>
               </TableCell>
-              <TableCell>
+              <TableCell sx={{ textAlign: 'center'}}>
                 <Typography color="textSecondary" variant="h6">
                   메뉴명
                 </Typography>
               </TableCell>
-              <TableCell>
+              <TableCell sx={{ textAlign: 'center'}}>
                 <Typography color="textSecondary" variant="h6">
                   이미지
                 </Typography>
               </TableCell>
-              <TableCell>
+              <TableCell sx={{ textAlign: 'center'}}>
                 <Typography color="textSecondary" variant="h6">
                   가격
                 </Typography>
               </TableCell>
-              <TableCell>
+              <TableCell sx={{ textAlign: 'center'}}>
                 <Typography color="textSecondary" variant="h6">
                   매장명
                 </Typography>
               </TableCell>
-              <TableCell>
+              <TableCell sx={{ textAlign: 'center'}}>
                 <Typography color="textSecondary" variant="h6">
                   메뉴구분
                 </Typography>

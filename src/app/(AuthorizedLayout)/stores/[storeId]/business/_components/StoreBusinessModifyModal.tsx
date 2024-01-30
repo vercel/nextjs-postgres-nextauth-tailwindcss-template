@@ -11,7 +11,7 @@ import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
 import { invalidateStoresQueries } from '@/app/(AuthorizedLayout)/stores/_lib/invalidateQueries'
 import TextField from '@/app/(AuthorizedLayout)/_components/form/TextField'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
-import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
+import ConfirmButton from '@/app/(AuthorizedLayout)/_components/form/ConfirmButton'
 import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/_hooks/useStoreDetail'
 import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
 import { StoreModifyFormState } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeModifyFormState'
@@ -204,7 +204,7 @@ const StoreBusinessModifyModal = ({ storeId }: StoreProps) => {
               setModifyData((prev) => ({ ...prev, businessRegistrationUrl: businessRegistrationUrl }))
             }}
           />
-          <StoreConfirmButton
+          <ConfirmButton
             isValidated={modifyData.isValidated}
             handelCancel={() => router.back()}
             handleConfirm={() => mutation.mutate(modifyData)} />

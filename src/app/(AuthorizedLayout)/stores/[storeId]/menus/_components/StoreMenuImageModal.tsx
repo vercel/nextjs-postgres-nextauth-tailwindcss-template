@@ -4,7 +4,7 @@ import { ReactNode, useState } from 'react'
 import { Box, Modal } from '@mui/material'
 import Image from 'next/image'
 import styles from './storeMenuImageModal.module.css'
-import { storeMenuImageUrl } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_lib/storeMenuImageUrl'
+import { storeMenuImageUrl } from '@/app/(AuthorizedLayout)/stores/_lib/storeMenuImageUrl'
 
 type Props = {
   label: ReactNode,
