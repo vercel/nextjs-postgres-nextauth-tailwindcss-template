@@ -14,7 +14,7 @@ import {
   storeTelValidated
 } from '@/app/(AuthorizedLayout)/stores/_lib/validated'
 import { invalidateStoresQueries } from '@/app/(AuthorizedLayout)/stores/_lib/invalidateQueries'
-import StoreTextField from '@/app/(AuthorizedLayout)/stores/_components/StoreTextField'
+import TextField from '@/app/(AuthorizedLayout)/_components/form/TextField'
 import StoreImageField from '@/app/(AuthorizedLayout)/stores/_components/StoreImageField'
 import StoreBankAccountFieldGroup from '@/app/(AuthorizedLayout)/stores/_components/StoreBankAccountFieldGroup'
 import StoreCategoryRadioGroup from '@/app/(AuthorizedLayout)/stores/_components/StoreCategoryRadioGroup'
@@ -194,7 +194,7 @@ const StoreModifyModal = ({ storeId }: StoreProps) => {
     >
       <>
         <Stack spacing={1}>
-          <StoreTextField
+          <TextField
             id={"storeName"}
             label={"매장명"}
             placeHolder={"최대 60글자"}
@@ -210,7 +210,7 @@ const StoreModifyModal = ({ storeId }: StoreProps) => {
               setModifyData((prev) => ({ ...prev, imageUrl: imageUrl }))
             }}
           />
-          <StoreTextField
+          <TextField
             id={"storeTel"}
             label={"매장 전화번호"}
             placeHolder={"대표번호"}
@@ -236,7 +236,7 @@ const StoreModifyModal = ({ storeId }: StoreProps) => {
             }}
             onValidated={onValidated}
           />
-          <StoreTextField
+          <TextField
             id={"businessLocation"}
             label={"영업 소재지"}
             placeHolder={"서울시 중구"}

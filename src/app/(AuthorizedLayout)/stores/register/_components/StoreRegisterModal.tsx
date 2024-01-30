@@ -19,7 +19,7 @@ import {
 import { Session } from 'next-auth'
 import { postStore } from '@/app/(AuthorizedLayout)/stores/register/_lib/postStore'
 import { invalidateStoresQueries } from '@/app/(AuthorizedLayout)/stores/_lib/invalidateQueries'
-import StoreTextField from '@/app/(AuthorizedLayout)/stores/_components/StoreTextField'
+import TextField from '@/app/(AuthorizedLayout)/_components/form/TextField'
 import StoreImageField from '@/app/(AuthorizedLayout)/stores/_components/StoreImageField'
 import StoreCategoryRadioGroup from '@/app/(AuthorizedLayout)/stores/_components/StoreCategoryRadioGroup'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
@@ -198,7 +198,7 @@ const StoreRegisterModal = () => {
     >
       <>
         <Stack spacing={1}>
-          <StoreTextField
+          <TextField
             id={"storeId"}
             label={"매장ID"}
             placeHolder={"영문(소문자)+숫자만"}
@@ -206,7 +206,7 @@ const StoreRegisterModal = () => {
             onChange={onChangeStoreId}
             required
           />
-          <StoreTextField
+          <TextField
             id={"storeName"}
             label={"매장명"}
             placeHolder={"최대 60글자"}
@@ -222,7 +222,7 @@ const StoreRegisterModal = () => {
               setRegisterData((prev) => ({ ...prev, imageUrl: imageUrl }))
             }}
           />
-          <StoreTextField
+          <TextField
             id={"storeTel"}
             label={"매장 전화번호"}
             placeHolder={"대표번호"}
@@ -248,7 +248,7 @@ const StoreRegisterModal = () => {
             }}
             onValidated={onValidated}
           />
-          <StoreTextField
+          <TextField
             id={"businessLocation"}
             label={"영업 소재지"}
             placeHolder={"서울시 중구"}

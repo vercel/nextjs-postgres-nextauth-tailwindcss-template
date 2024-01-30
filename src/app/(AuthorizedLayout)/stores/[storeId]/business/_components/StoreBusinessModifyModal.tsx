@@ -9,7 +9,7 @@ import BaseModal from '@/app/_components/BaseModal'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
 import { invalidateStoresQueries } from '@/app/(AuthorizedLayout)/stores/_lib/invalidateQueries'
-import StoreTextField from '@/app/(AuthorizedLayout)/stores/_components/StoreTextField'
+import TextField from '@/app/(AuthorizedLayout)/_components/form/TextField'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
 import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/_hooks/useStoreDetail'
@@ -178,19 +178,19 @@ const StoreBusinessModifyModal = ({ storeId }: StoreProps) => {
     >
       <>
         <Stack spacing={1}>
-          <StoreTextField
+          <TextField
             id={"businessName"}
             label={"상호명"}
             state={modifyData.businessName}
             onChange={onChangeBusinessName}
           />
-          <StoreTextField
+          <TextField
             id={"businessNumber"}
             label={"사업자 등록 번호"}
             state={modifyData.businessNumber}
             onChange={onChangeBusinessNumber}
           />
-          <StoreTextField
+          <TextField
             id={"owner"}
             label={"대표자명"}
             state={modifyData.owner}

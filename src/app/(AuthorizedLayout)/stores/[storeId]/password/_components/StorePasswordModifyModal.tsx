@@ -11,7 +11,7 @@ import { useSession } from 'next-auth/react'
 import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
 import { confirmPasswordValidated, passwordValidated } from '@/app/(AuthorizedLayout)/stores/_lib/validated'
 import { Session } from 'next-auth'
-import StoreTextField from '@/app/(AuthorizedLayout)/stores/_components/StoreTextField'
+import TextField from '@/app/(AuthorizedLayout)/_components/form/TextField'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import { putStorePassword } from '@/app/(AuthorizedLayout)/stores/[storeId]/password/_lib/putStorePassword'
 import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
@@ -127,7 +127,7 @@ const StorePasswordModifyModal = ({ storeId }: StoreProps) => {
     >
       <>
         <Stack spacing={1}>
-          <StoreTextField
+          <TextField
             id={"password"}
             label={"비밀번호"}
             type={'password'}
@@ -135,7 +135,7 @@ const StorePasswordModifyModal = ({ storeId }: StoreProps) => {
             state={modifyData.password}
             onChange={onChangePassword}
           />
-          <StoreTextField
+          <TextField
             id={"confirmPassword"}
             label={"비밀번호 확인"}
             type={'password'}

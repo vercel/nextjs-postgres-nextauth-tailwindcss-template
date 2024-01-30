@@ -11,7 +11,7 @@ import { useSession } from 'next-auth/react'
 import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
 import { Session } from 'next-auth'
 import { invalidateStoresQueries } from '@/app/(AuthorizedLayout)/stores/_lib/invalidateQueries'
-import StoreTextField from '@/app/(AuthorizedLayout)/stores/_components/StoreTextField'
+import TextField from '@/app/(AuthorizedLayout)/_components/form/TextField'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import StoreConfirmButton from '@/app/(AuthorizedLayout)/stores/_components/StoreConfirmButton'
 import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/response'
@@ -144,13 +144,13 @@ const StoreManagerModifyModal = ({ storeId }: StoreProps) => {
     >
       <>
         <Stack spacing={1}>
-          <StoreTextField
+          <TextField
             id={"managerName"}
             label={"이름"}
             state={modifyData.managerName}
             onChange={onChangeManagerName}
           />
-          <StoreTextField
+          <TextField
             id={"managerPhoneNumber"}
             label={"연락처"}
             state={modifyData.managerPhoneNumber}

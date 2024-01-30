@@ -1,6 +1,6 @@
 import TableRow from '@mui/material/TableRow'
 import { format } from 'date-fns/format'
-import { Button, TableCell, Typography } from '@mui/material'
+import { TableCell, Typography } from '@mui/material'
 import styles from './storeMenuListItem.module.css'
 import Link from 'next/link'
 import { storeMenuImageUrl } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_lib/storeMenuImageUrl'
@@ -47,7 +47,7 @@ const StoreMenuListItem = ({ storeId, menu }: Props) => {
         </Typography>
       </TableCell>
       <TableCell className={styles.tableColumn}>
-        <Button>수정</Button>
+        <Link href={`/stores/${storeId}/menus/${menu.id}`}>수정</Link>
       </TableCell>
     </TableRow>
   )

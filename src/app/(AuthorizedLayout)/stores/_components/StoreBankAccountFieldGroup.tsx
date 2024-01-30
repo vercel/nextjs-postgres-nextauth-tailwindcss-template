@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react'
 import { Box, Typography } from '@mui/material'
 import BaseTextField, { TextFieldState } from '@/app/_components/BaseTextField'
-import styles from './storeTextField.module.css'
+import styles from '../../_components/form/textField.module.css'
 import {
   accountHolderValidated,
   accountNumberValidated,

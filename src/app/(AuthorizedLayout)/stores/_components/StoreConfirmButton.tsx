@@ -5,10 +5,11 @@ import styles from './storeComfirmButton.module.css'
 type Props = {
   isValidated: boolean,
   handelCancel: () => void,
-  handleConfirm: () => void
+  handleConfirm: () => void,
+  confirmLabel?: string
 }
 
-const StoreConfirmButton = ({ isValidated, handelCancel, handleConfirm }: Props) => {
+const StoreConfirmButton = ({ isValidated, handelCancel, confirmLabel, handleConfirm }: Props) => {
   return (
     <Box className={styles.buttonGroup}>
       <Button
@@ -25,7 +26,7 @@ const StoreConfirmButton = ({ isValidated, handelCancel, handleConfirm }: Props)
         onClick={handleConfirm}
         disabled={!isValidated}
         className={styles.confirmButton}
-      >등록</Button>
+      >{ confirmLabel ? confirmLabel : '등록' }</Button>
     </Box>
   )
 }

@@ -1,7 +1,7 @@
 import React, { ChangeEventHandler } from 'react'
 import { Box, Typography } from '@mui/material'
 import BaseTextField, { TextFieldState } from '@/app/_components/BaseTextField'
-import styles from './storeTextField.module.css'
+import styles from './textField.module.css'
 
 type Props = {
   id: string,
@@ -13,7 +13,7 @@ type Props = {
   type?: string
 }
 
-const StoreTextField = ({
+const TextField = ({
   id,
   label,
   placeHolder,
@@ -39,4 +39,4 @@ const StoreTextField = ({
   )
 }
 
-export default StoreTextField
+export default TextField

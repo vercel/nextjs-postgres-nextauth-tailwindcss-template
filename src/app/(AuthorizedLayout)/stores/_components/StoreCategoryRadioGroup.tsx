@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react'
 import { Box, FormControlLabel, Radio, RadioGroup, Typography } from '@mui/material'
-import styles from './storeTextField.module.css'
+import styles from '../../_components/form/textField.module.css'
 
 type Props = {
   data: string,

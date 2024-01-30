@@ -2,7 +2,7 @@
 
 import React, { ChangeEventHandler, useRef } from 'react'
 import { Box, TextField, Typography } from '@mui/material'
-import styles from './storeTextField.module.css'
+import styles from '../../_components/form/textField.module.css'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { FileInputState } from '@/app/(AuthorizedLayout)/_models/state'
 
