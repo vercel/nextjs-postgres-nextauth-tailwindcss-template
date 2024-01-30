@@ -74,8 +74,8 @@ const onRegisterData = async (registerData: StoreMenuRegisterState) => {
   }
 
   return await postStoreMenu(registerData.storeId, {
-    menuName: registerData.menuName.value,
-    menuEnglishName: registerData.menuEnglishName.value,
+    name: registerData.menuName.value,
+    englishName: registerData.menuEnglishName.value,
     price: registerData.price.value === '' ? 0 : Number(registerData.price.value),
     imageUrl: registerData.imageUrl.name,
     allergies: registerData.allergies,

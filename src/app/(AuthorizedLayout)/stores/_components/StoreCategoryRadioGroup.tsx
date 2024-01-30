@@ -1,8 +1,6 @@
-import React, { ChangeEvent, Dispatch, SetStateAction } from 'react'
-import { Box, Checkbox, FormControlLabel, FormGroup, Radio, RadioGroup, Typography } from '@mui/material'
-import BaseTextField from '@/app/_components/BaseTextField'
+import React, { ChangeEvent } from 'react'
+import { Box, FormControlLabel, Radio, RadioGroup, Typography } from '@mui/material'
 import styles from './storeTextField.module.css'
-import { StoreRegisterState } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/register/_components/StoreRegisterModal'
 
 type Props = {
   data: string,

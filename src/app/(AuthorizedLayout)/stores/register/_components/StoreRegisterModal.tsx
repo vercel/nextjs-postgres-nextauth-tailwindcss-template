@@ -21,11 +21,11 @@ import { postStore } from '@/app/(AuthorizedLayout)/stores/register/_lib/postSto
 import { invalidateStoresQueries } from '@/app/(AuthorizedLayout)/stores/_lib/invalidateQueries'
 import StoreTextField from '@/app/(AuthorizedLayout)/stores/_components/StoreTextField'
 import StoreImageField from '@/app/(AuthorizedLayout)/stores/_components/StoreImageField'
-import StoreBankAccountFieldGroup from '@/app/(AuthorizedLayout)/stores/_components/StoreBankAccountFieldGroup'
 import StoreCategoryRadioGroup from '@/app/(AuthorizedLayout)/stores/_components/StoreCategoryRadioGroup'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import { FileInputState } from '@/app/(AuthorizedLayout)/_models/state'
 import { postStoreImage } from '@/app/(AuthorizedLayout)/stores/_lib/postStoreImage'
+import StoreBankAccountFieldGroup from '@/app/(AuthorizedLayout)/stores/_components/StoreBankAccountFieldGroup'
 
 /**
  * 매장 등록 State.
