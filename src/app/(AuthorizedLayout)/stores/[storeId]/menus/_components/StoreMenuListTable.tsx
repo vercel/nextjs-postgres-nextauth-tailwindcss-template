@@ -3,10 +3,11 @@ import { Container, Table, TableBody, TableCell, TableContainer, TableHead, Tabl
 import StoreMenuListItem from './StoreMenuListItem'
 
 type Props = {
+  storeId: string,
   menus: StoreMenuDetailResponse[]
 }
 
-const StoreMenuListTable = ({ menus }: Props) => {
+const StoreMenuListTable = ({ storeId, menus }: Props) => {
   return (
     <Container
       sx={{
@@ -33,22 +34,22 @@ const StoreMenuListTable = ({ menus }: Props) => {
         >
           <TableHead>
             <TableRow>
-              <TableCell>
+              <TableCell sx={{ textAlign: 'center' }}>
                 <Typography color="textSecondary" variant="h6">
                   등록일
                 </Typography>
               </TableCell>
-              <TableCell>
+              <TableCell sx={{ textAlign: 'center' }}>
                 <Typography color="textSecondary" variant="h6">
                   이미지
                 </Typography>
               </TableCell>
-              <TableCell>
+              <TableCell sx={{ textAlign: 'center' }}>
                 <Typography color="textSecondary" variant="h6">
                   메뉴명
                 </Typography>
               </TableCell>
-              <TableCell>
+              <TableCell sx={{ textAlign: 'center' }}>
                 <Typography color="textSecondary" variant="h6">
                   가격
                 </Typography>
@@ -62,6 +63,7 @@ const StoreMenuListTable = ({ menus }: Props) => {
               ? menus.map((menu) => (
                 <StoreMenuListItem
                   key={menu.id}
+                  storeId={storeId}
                   menu={menu}
                 />
               ))

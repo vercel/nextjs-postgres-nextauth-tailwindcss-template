@@ -3,13 +3,15 @@ import { format } from 'date-fns/format'
 import { Button, TableCell, Typography } from '@mui/material'
 import styles from './storeMenuListItem.module.css'
 import Link from 'next/link'
-import StoreImageModal from '@/app/(AuthorizedLayout)/stores/_components/StoreImageModal'
+import { storeMenuImageUrl } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_lib/storeMenuImageUrl'
+import Image from 'next/image'
 
 interface Props {
+  storeId: string,
   menu: StoreMenuDetailResponse,
 }
 
-const StoreMenuListItem = ({ menu }: Props) => {
+const StoreMenuListItem = ({ storeId, menu }: Props) => {
   return (
     <TableRow key={menu.id}>
       <TableCell className={styles.tableColumn}>
@@ -19,7 +21,16 @@ const StoreMenuListItem = ({ menu }: Props) => {
       </TableCell>
       <TableCell className={styles.tableColumn}>
         {menu.imageUrl
-          ? (null)
+          ? (
+            <Image
+              src={storeMenuImageUrl(storeId, menu.imageUrl)}
+              width={0}
+              height={0}
+              sizes={"100%"}
+              alt={storeId}
+              className={styles.image}
+            />
+          )
           : (<Typography fontSize="15px" fontWeight={500}>-</Typography>)
         }
       </TableCell>

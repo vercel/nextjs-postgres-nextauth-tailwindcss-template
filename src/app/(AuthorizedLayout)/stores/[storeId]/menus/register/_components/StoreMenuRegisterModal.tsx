@@ -27,6 +27,7 @@ import { priceValidated } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/
 import StoreTextareaGroup from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/register/_components/StoreTextareaGroup'
 import StoreTextEditorGroup
   from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/register/_components/StoreTextEditorGroup'
+import { postStoreMenuImage } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_lib/postStoreMenuImage'
 
 /**
  * 매장 등록 State.
@@ -69,7 +70,10 @@ const onRegisterData = async (registerData: StoreMenuRegisterState) => {
   }
 
   if (registerData.imageUrl.file) {
-    const result = await postStoreImage(registerData.imageUrl.file, registerData.session)
+    const result = await postStoreMenuImage({
+      storeId: registerData.storeId,
+      file: registerData.imageUrl.file,
+      session: registerData.session })
     registerData.imageUrl.name = result.data
   }
 

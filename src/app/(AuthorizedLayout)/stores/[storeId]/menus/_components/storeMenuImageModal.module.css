@@ -1,0 +1,14 @@
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    max-height: 80dvh;
+    position: relative;
+    object-fit: cover;
+}

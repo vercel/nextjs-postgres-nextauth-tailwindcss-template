@@ -52,7 +52,7 @@ const StoreMenuDetailView = ({ storeId }: StoreProps) => {
               router.push(`/stores/${storeId}/menus/register`)
             }}
           />
-          <StoreMenuListTable menus={menus}/>
+          <StoreMenuListTable storeId={storeId} menus={menus}/>
         </Container>
       </BaseCard>
     </>
