@@ -5,9 +5,8 @@ import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import { useSession } from 'next-auth/react'
-import { getStoreMenu } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuId]/_lib/getStoreMenu'
-import { StoreMenuResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuId]/_models/response'
 import { getMenu } from '@/app/(AuthorizedLayout)/stores/menus/[menuId]/_lib/getMenu'
+import { MenuResponse } from '@/app/(AuthorizedLayout)/stores/menus/[menuId]/_models/response'
 
 const useMenu = (menuId: number) => {
   const router = useRouter()
