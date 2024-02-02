@@ -1,15 +1,16 @@
 import React, { ChangeEvent } from 'react'
 import { Box, FormControlLabel, Radio, RadioGroup, Typography } from '@mui/material'
 import styles from '../../_components/form/textField.module.css'
+import { MenuCategory } from '@/app/(AuthorizedLayout)/stores/_models/props'
 
 type Props = {
   data: string,
-  setData: (category: string) => void,
+  setData: (category: MenuCategory) => void,
 }
 
 const StoreCategoryRadioGroup = ({ data, setData }: Props) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setData(event.target.value)
+    setData(event.target.value as MenuCategory)
   }
 
   return (

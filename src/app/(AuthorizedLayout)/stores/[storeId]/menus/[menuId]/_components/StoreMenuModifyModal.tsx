@@ -20,7 +20,7 @@ const StoreMenuModifyModal = ({ menuId, storeId }: StoreMenuProps) => {
         name: storeMenu.name,
         englishName: storeMenu.englishName,
         price: storeMenu.price,
-        imageUrl: storeMenu.imageUrl,
+        imagePath: storeMenu.imageUrl,
         allergies: storeMenu.allergies,
         description: storeMenu.description,
         createdDate: storeMenu.createdDate,

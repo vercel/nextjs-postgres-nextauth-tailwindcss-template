@@ -5,17 +5,17 @@ import styles from '../../_components/form/textField.module.css'
 import {
   accountHolderValidated,
   accountNumberValidated,
-  bankValidated
+  bankNameValidated
 } from '@/app/(AuthorizedLayout)/stores/_lib/validated'
 
 type Props = {
   data: {
-    bank: TextFieldState,
+    bankName: TextFieldState,
     accountNumber: TextFieldState,
     accountHolder: TextFieldState,
   },
   setData: {
-    bank: (bankState: TextFieldState) => void,
+    bankName: (bankState: TextFieldState) => void,
     accountNumber: (accountNumberState: TextFieldState) => void,
     accountHolder: (accountHolderState: TextFieldState) => void,
   },
@@ -27,11 +27,11 @@ const StoreBankAccountFieldGroup = ({
   setData,
   onValidated
 }: Props) => {
-  const onChangeBank = (event: ChangeEvent<HTMLInputElement>) => {
-    const bank = event.target.value
-    const errorMessage = bankValidated(bank)
-    setData.bank({
-      value: bank,
+  const onChangeBankName = (event: ChangeEvent<HTMLInputElement>) => {
+    const bankName = event.target.value
+    const errorMessage = bankNameValidated(bankName)
+    setData.bankName({
+      value: bankName,
       isError: errorMessage !== '',
       errorMessage: errorMessage
     })
@@ -68,11 +68,11 @@ const StoreBankAccountFieldGroup = ({
         </Typography>
         <Box className={styles.bankAccountFieldGroup}>
           <BaseTextField
-            id={'bank'}
+            id={'bankName'}
             placeholder={'은행'}
-            state={data.bank}
-            onChange={onChangeBank}
-            className={styles.bankTextField}
+            state={data.bankName}
+            onChange={onChangeBankName}
+            className={styles.bankNameTextField}
           />
           <BaseTextField
             id={'accountHolder'}

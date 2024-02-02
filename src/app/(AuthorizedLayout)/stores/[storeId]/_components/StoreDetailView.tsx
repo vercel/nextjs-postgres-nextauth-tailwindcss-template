@@ -31,7 +31,7 @@ const StoreDetailView = ({ storeId }: StoreProps) => {
     mutationFn: async (deleteData: StoreDeleteData) => {
       if (confirm('매장을 삭제하시겠습니까?')) {
         return await deleteStore(
-          deleteData.storeId,
+          deleteData.id,
           deleteData.session
         )
       }
@@ -70,7 +70,7 @@ const StoreDetailView = ({ storeId }: StoreProps) => {
             label={'삭제'}
             disabled={false}
             onClick={() => mutation.mutate({
-              storeId: storeId,
+              id: storeId,
               isValidated: true,
               session: session
             })}

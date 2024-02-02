@@ -6,7 +6,7 @@ export type StoreProps = {
 }
 
 export type StoreModifyFormStateInitProps = {
-  storeId: string,
+  id: string,
   session: Session | null,
   storeDetail: StoreDetailResponse | undefined
 }

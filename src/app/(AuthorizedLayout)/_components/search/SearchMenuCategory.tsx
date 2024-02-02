@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react'
 import styles from '@/app/(AuthorizedLayout)/_components/search/searchMenuCategory.module.css'
 import { Box, Checkbox, FormControlLabel, FormGroup, Typography } from '@mui/material'
-import { MenuCategory } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import { MenuCategory } from '@/app/(AuthorizedLayout)/stores/_models/props'
 
 type Props = {
   menuCategories: MenuCategory[],

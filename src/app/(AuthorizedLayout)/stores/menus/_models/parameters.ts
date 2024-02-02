@@ -1,5 +1,5 @@
 import { PageParameters } from '@/app/(AuthorizedLayout)/_models/common'
-import { MenuCategory } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import { MenuCategory } from '@/app/(AuthorizedLayout)/stores/_models/props'
 
 export type MenuSearchCondition = 'STORE_NAME' | 'STORE_ID' | 'MENU_NAME'
 

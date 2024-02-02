@@ -55,7 +55,7 @@ const initState = (storeId: string, session: Session | null) => ({
   menuName: initBaseState(),
   menuEnglishName: initBaseState(),
   price: initBaseState(),
-  imageUrl: {
+  imagePath: {
     name: '',
     file: null
   },
@@ -82,7 +82,7 @@ const onRegisterData = async (registerData: StoreMenuRegisterState) => {
     name: registerData.menuName.value,
     englishName: registerData.menuEnglishName.value,
     price: registerData.price.value === '' ? 0 : Number(registerData.price.value),
-    imageUrl: registerData.imageUrl.name,
+    imagePath: registerData.imageUrl.name,
     allergies: registerData.allergies,
     description: registerData.description,
   }, registerData.session)
@@ -175,7 +175,7 @@ const StoreMenuRegisterModal = ({ storeId }: StoreProps) => {
             label={"이미지"}
             data={registerData.imageUrl}
             setData={(imageUrl) => {
-              setRegisterData((prev) => ({ ...prev, imageUrl: imageUrl }))
+              setRegisterData((prev) => ({ ...prev, imagePath: imageUrl }))
             }}
           />
           <StoreTextareaGroup

@@ -45,7 +45,7 @@ const onModifyData = async (modifyData: StorePasswordModifyState) => {
     return
   }
 
-  return await putStorePassword(modifyData.storeId, {
+  return await putStorePassword(modifyData.id, {
     password: modifyData.password.value
   }, modifyData.session)
 }
@@ -55,7 +55,7 @@ const StorePasswordModifyModal = ({ storeId }: StoreProps) => {
   const { data: session } = useSession()
   const [modifyData, setModifyData] = useState<StorePasswordModifyState>(
     initState({
-      storeId,
+      id: id,
       session
     })
   )

@@ -1,7 +1,7 @@
 import { QueryClient } from '@tanstack/react-query'
 import StoreListView from './StoreListView'
 import { getStores } from '@/app/(AuthorizedLayout)/stores/_lib/getStores'
-import { StorePageParameters } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import { StorePageParameters } from '@/app/(AuthorizedLayout)/stores/_models/props'
 import ListContainer from '../../_components/container/ListContainer'
 
 const StoreListContainer = async () => {

@@ -11,8 +11,8 @@ import {
   Typography
 } from '@mui/material'
 import StoreListItem from '@/app/(AuthorizedLayout)/stores/_components/StoreListItem'
-import { StoreResponse } from '@/app/(AuthorizedLayout)/stores/_models/store'
 import { Page } from '@/app/(AuthorizedLayout)/_models/common'
+import { StoreResponse } from '@/app/(AuthorizedLayout)/stores/_models/response'
 
 type Props = {
   page: number,

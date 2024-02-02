@@ -37,11 +37,11 @@ type StoreManagerModifyState = {
 } & StoreModifyFormState
 
 const initState = ({
-   storeId,
+   id,
    session,
    storeDetail
 }: StoreModifyFormStateInitProps) => ({
-  storeId: storeId,
+  storeId: id,
   managerName: initBaseState(storeDetail?.managerName ?? ''),
   managerPhoneNumber: initBaseState(storeDetail?.managerPhoneNumber ?? ''),
   isValidated: true,
@@ -53,7 +53,7 @@ const onModifyData = async (modifyData: StoreManagerModifyState) => {
     return
   }
 
-  return await putStoreManager(modifyData.storeId, {
+  return await putStoreManager(modifyData.id, {
     managerName: modifyData.managerName.value,
     managerPhoneNumber: modifyData.managerPhoneNumber.value,
   }, modifyData.session)
@@ -64,7 +64,7 @@ const StoreManagerModifyModal = ({ storeId }: StoreProps) => {
   const { storeDetail, session, isLoading } = useStoreDetail(storeId)
   const [modifyData, setModifyData] = useState<StoreManagerModifyState>(
     initState({
-      storeId,
+      id: storeId,
       session,
       storeDetail
     })

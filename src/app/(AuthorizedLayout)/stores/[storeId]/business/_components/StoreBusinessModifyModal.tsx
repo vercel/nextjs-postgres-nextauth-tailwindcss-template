@@ -40,11 +40,11 @@ type StoreBusinessModifyState = {
 } & StoreModifyFormState
 
 const initState = ({
-  storeId,
+  id,
   session,
   storeDetail
 }: StoreModifyFormStateInitProps) => ({
-  storeId: storeId,
+  storeId: id,
   businessName: initBaseState(storeDetail?.businessName ?? ''),
   businessNumber: initBaseState(storeDetail?.businessNumber ?? ''),
   owner: initBaseState(storeDetail?.owner ?? ''),
@@ -63,7 +63,7 @@ const onModifyData = async (modifyData: StoreBusinessModifyState) => {
 
   if (modifyData.businessRegistrationUrl.file) {
     const result = await postStoreDocumentFile({
-      storeId: modifyData.storeId,
+      storeId: modifyData.id,
       storeDocumentType: 'BUSINESS_REGISTRATION',
       file: modifyData.businessRegistrationUrl.file,
       session: modifyData.session
@@ -71,7 +71,7 @@ const onModifyData = async (modifyData: StoreBusinessModifyState) => {
     modifyData.businessRegistrationUrl.name = result.data
   }
 
-  return await putStoreBusiness(modifyData.storeId, {
+  return await putStoreBusiness(modifyData.id, {
     businessName: modifyData.businessName.value,
     businessNumber: modifyData.businessNumber.value,
     owner: modifyData.owner.value,
@@ -84,7 +84,7 @@ const StoreBusinessModifyModal = ({ storeId }: StoreProps) => {
   const { storeDetail, session, isLoading } = useStoreDetail(storeId)
   const [modifyData, setModifyData] = useState<StoreBusinessModifyState>(
     initState({
-      storeId,
+      id: storeId,
       session,
       storeDetail
     })

@@ -2,10 +2,10 @@ import TableRow from '@mui/material/TableRow'
 import { format } from 'date-fns/format'
 import { TableCell, Typography } from '@mui/material'
 import styles from './storeListItem.module.css'
-import { StoreResponse } from '@/app/(AuthorizedLayout)/stores/_models/store'
 import { formatDate } from '@/app/(AuthorizedLayout)/_lib/date'
 import Link from 'next/link'
 import StoreImageModal from '@/app/(AuthorizedLayout)/stores/_components/StoreImageModal'
+import { StoreResponse } from '@/app/(AuthorizedLayout)/stores/_models/response'
 
 interface Props {
   store: StoreResponse,
@@ -13,29 +13,29 @@ interface Props {
 
 const StoreListItem = ({ store }: Props) => {
   return (
-    <TableRow key={store.storeId}>
+    <TableRow key={store.id}>
       <TableCell className={styles.tableColumn}>
-        <Link href={`/stores/${store.storeId}`}>
+        <Link href={`/stores/${store.id}`}>
           <Typography fontSize="h6" fontWeight={600}>
-            {store.storeId}
+            {store.id}
           </Typography>
         </Link>
       </TableCell>
       <TableCell className={styles.tableColumn}>
         <Typography fontSize="15px" fontWeight={500}>
-          {format(store.createDate!, 'yyyy. MM. dd')}
+          {format(store.createdDate!, 'yyyy. MM. dd')}
         </Typography>
       </TableCell>
       <TableCell className={styles.tableColumn}>
-        <Link href={`/stores/${store.storeId}`}>
+        <Link href={`/stores/${store.id}`}>
           <Typography variant="h6" fontWeight={600}>
-            {store.storeName}
+            {store.name}
           </Typography>
         </Link>
       </TableCell>
       <TableCell className={styles.tableColumn}>
         <Typography fontSize="15px" fontWeight={500}>
-          {store.categoryName}
+          {store.menuCategoryName}
         </Typography>
       </TableCell>
       <TableCell className={styles.tableColumn}>
@@ -64,14 +64,14 @@ const StoreListItem = ({ store }: Props) => {
         </Typography>
       </TableCell>
       <TableCell className={styles.tableColumn}>
-        {store.imageUrl
+        {store.imagePath
           ? (
             <StoreImageModal
               label={
                 <Typography fontSize="15px" fontWeight={500}><u>보기</u></Typography>
               }
-              storeId={store.storeId}
-              imageName={store.imageUrl}
+              storeId={store.id}
+              imagePath={store.imagePath}
             />
           )
           : (<Typography fontSize="15px" fontWeight={500}>-</Typography>)

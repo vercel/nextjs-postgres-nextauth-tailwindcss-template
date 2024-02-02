@@ -1,6 +1,6 @@
 import React from 'react'
 import { MenuItem } from '@mui/material'
-import { StoreSearchCondition, StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import { StoreSearchCondition, StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/props'
 import SearchField from '@/app/(AuthorizedLayout)/_components/search/SearchField'
 
 const StoreSearchField = ({ pageParameters, setPageParameters }: StoreSearchProps) => {

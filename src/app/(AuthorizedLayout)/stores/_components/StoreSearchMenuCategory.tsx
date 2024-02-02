@@ -1,5 +1,5 @@
 import React from 'react'
-import { StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import { StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/props'
 import SearchMenuCategory from '@/app/(AuthorizedLayout)/_components/search/SearchMenuCategory'
 
 const StoreSearchMenuCategory = ({ pageParameters, setPageParameters }: StoreSearchProps) => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import { StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/props'
 import 'dayjs/locale/ko'
 import SearchDate from '@/app/(AuthorizedLayout)/_components/search/SearchDate'
 

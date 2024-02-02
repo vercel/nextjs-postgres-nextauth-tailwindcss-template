@@ -13,8 +13,8 @@ import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
 import {
   businessLocationValidated,
   nameValidated,
-  storeIdValidated,
-  storeTelValidated
+  idValidated,
+  telephoneValidated
 } from '@/app/(AuthorizedLayout)/stores/_lib/validated'
 import { Session } from 'next-auth'
 import { postStore } from '@/app/(AuthorizedLayout)/stores/register/_lib/postStore'
@@ -26,80 +26,81 @@ import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import { FileInputState } from '@/app/(AuthorizedLayout)/_models/state'
 import { postStoreImage } from '@/app/(AuthorizedLayout)/stores/_lib/postStoreImage'
 import StoreBankAccountFieldGroup from '@/app/(AuthorizedLayout)/stores/_components/StoreBankAccountFieldGroup'
+import { MenuCategory } from '@/app/(AuthorizedLayout)/stores/_models/props'
 
 /**
  * 매장 등록 State.
  *
- * @property storeId          매장 ID
+ * @property id               매장 ID
  * @property name             매장명
- * @property imageUrl         이미지 URL
- * @property storeTel         매장 전화번호
- * @property bank             은행명
+ * @property imagePath        이미지 URL
+ * @property telephone        매장 전화번호
+ * @property bankName         은행명
  * @property accountNumber    계좌번호
  * @property accountHolder    예금주
  * @property businessLocation 영업 소재지
- * @property category         메뉴구분
+ * @property menuCategoryCode 메뉴구분
  * @property isValidated      유효성 체크 통과 여부
  * @property session          세션 정보
  */
 export type StoreRegisterState = {
-  storeId: TextFieldState,
-  storeName: TextFieldState,
-  imageUrl: FileInputState,
-  storeTel: TextFieldState,
-  bank: TextFieldState,
+  id: TextFieldState,
+  name: TextFieldState,
+  imagePath: FileInputState,
+  telephone: TextFieldState,
+  bankName: TextFieldState,
   accountNumber: TextFieldState,
   accountHolder: TextFieldState,
   businessLocation: TextFieldState,
-  category: string,
+  menuCategoryCode: MenuCategory,
   isValidated: boolean,
   session: Session,
 }
 
-const initState = (session: Session) => ({
-  storeId: initBaseState(),
-  storeName: initBaseState(),
-  imageUrl: {
+const initState = (session: Session | null) => ({
+  id: initBaseState(),
+  name: initBaseState(),
+  imagePath: {
     name: '',
     file: null
   },
-  storeTel: initBaseState(),
-  bank: initBaseState(),
+  telephone: initBaseState(),
+  bankName: initBaseState(),
   accountNumber: initBaseState(),
   accountHolder: initBaseState(),
   businessLocation: initBaseState(),
-  category: 'MEALS',
+  menuCategoryCode: 'MEALS' as MenuCategory,
   isValidated: false,
   session: session,
-})
+} as StoreRegisterState)
 
 const onRegisterData = async (registerData: StoreRegisterState) => {
   if (!registerData.isValidated) {
     return
   }
 
-  if (registerData.imageUrl.file) {
-    const result = await postStoreImage(registerData.imageUrl.file, registerData.session)
-    registerData.imageUrl.name = result.data
+  if (registerData.imagePath.file) {
+    const result = await postStoreImage(registerData.imagePath.file, registerData.session)
+    registerData.imagePath.name = result.data
   }
 
   return await postStore({
-    id: registerData.storeId.value,
-    name: registerData.storeName.value,
-    imagePath: registerData.imageUrl.name,
-    telephone: registerData.storeTel.value,
-    bankName: registerData.bank.value,
+    id: registerData.id.value,
+    name: registerData.name.value,
+    imagePath: registerData.imagePath.name,
+    telephone: registerData.telephone.value,
+    bankName: registerData.bankName.value,
     accountNumber: registerData.accountNumber.value,
     accountHolder: registerData.accountHolder.value,
     businessLocation: registerData.businessLocation.value,
-    menuCategoryCode: registerData.category,
+    menuCategoryCode: registerData.menuCategoryCode,
   }, registerData.session)
 }
 
 const StoreRegisterModal = () => {
   const router = useRouter()
   const { data: session } = useSession()
-  const [registerData, setRegisterData] = useState<StoreRegisterState>(initState(session!))
+  const [registerData, setRegisterData] = useState<StoreRegisterState>(initState(session))
 
   const queryClient = useQueryClient()
   const mutation = useMutation({
@@ -125,12 +126,12 @@ const StoreRegisterModal = () => {
     }
   })
 
-  const onChangeStoreId = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeId = (event: ChangeEvent<HTMLInputElement>) => {
     const storeId = event.target.value
-    const errorMessage = storeIdValidated(storeId)
+    const errorMessage = idValidated(storeId)
     setRegisterData((prev) => ({
       ...prev,
-      storeId: {
+      id: {
         value: storeId,
         isError: errorMessage !== '',
         errorMessage: errorMessage
@@ -139,12 +140,12 @@ const StoreRegisterModal = () => {
     onValidated()
   }
 
-  const onChangeStoreName = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     const storeName = event.target.value
     const errorMessage = nameValidated(storeName)
     setRegisterData((prev) => ({
       ...prev,
-      storeName: {
+      name: {
         value: storeName,
         isError: errorMessage !== '',
         errorMessage: errorMessage
@@ -153,12 +154,12 @@ const StoreRegisterModal = () => {
     onValidated()
   }
 
-  const onChangeStoreTel = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeTelephone = (event: ChangeEvent<HTMLInputElement>) => {
     const storeTel = event.target.value
-    const errorMessage = storeTelValidated(storeTel)
+    const errorMessage = telephoneValidated(storeTel)
     setRegisterData((prev) => ({
       ...prev,
-      storeTel: {
+      telephone: {
         value: storeTel,
         isError: errorMessage !== '',
         errorMessage: errorMessage
@@ -199,45 +200,45 @@ const StoreRegisterModal = () => {
       <>
         <Stack spacing={1}>
           <TextField
-            id={"storeId"}
+            id={"id"}
             label={"매장ID"}
             placeHolder={"영문(소문자)+숫자만"}
-            state={registerData.storeId}
-            onChange={onChangeStoreId}
+            state={registerData.id}
+            onChange={onChangeId}
             required
           />
           <TextField
-            id={"storeName"}
+            id={"name"}
             label={"매장명"}
             placeHolder={"최대 60글자"}
-            state={registerData.storeName}
-            onChange={onChangeStoreName}
+            state={registerData.name}
+            onChange={onChangeName}
             required
           />
           <StoreImageField
-            id={"imageUrl"}
+            id={"imagePath"}
             label={"이미지"}
-            data={registerData.imageUrl}
+            data={registerData.imagePath}
             setData={(imageUrl) => {
-              setRegisterData((prev) => ({ ...prev, imageUrl: imageUrl }))
+              setRegisterData((prev) => ({ ...prev, imagePath: imageUrl }))
             }}
           />
           <TextField
-            id={"storeTel"}
+            id={"telephone"}
             label={"매장 전화번호"}
             placeHolder={"대표번호"}
-            state={registerData.storeTel}
-            onChange={onChangeStoreTel}
+            state={registerData.telephone}
+            onChange={onChangeTelephone}
           />
           <StoreBankAccountFieldGroup
             data={{
-              bank: registerData.bank,
+              bankName: registerData.bankName,
               accountNumber: registerData.accountNumber,
               accountHolder: registerData.accountHolder,
             }}
             setData={{
-              bank: (bankState) => {
-                setRegisterData((prev) => ({ ...prev, bank: bankState }))
+              bankName: (bankNameState) => {
+                setRegisterData((prev) => ({ ...prev, bankName: bankNameState }))
               },
               accountNumber: (accountNumberState) => {
                 setRegisterData((prev) => ({ ...prev, accountNumber: accountNumberState }))
@@ -256,9 +257,9 @@ const StoreRegisterModal = () => {
             onChange={onChangeBusinessLocation}
           />
           <StoreCategoryRadioGroup
-            data={registerData.category}
-            setData={(category) => {
-              setRegisterData((prev) => ({ ...prev, category: category }))
+            data={registerData.menuCategoryCode}
+            setData={(menuCategoryCode: MenuCategory) => {
+              setRegisterData((prev) => ({ ...prev, menuCategoryCode: menuCategoryCode }))
             }}
           />
           <BasicButton

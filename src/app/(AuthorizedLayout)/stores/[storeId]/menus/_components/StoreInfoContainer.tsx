@@ -18,7 +18,7 @@ const StoreInfoContainer = ({ storeDetail, handleRegister }: Props) => {
             매장ID
           </Typography>
           <Typography className={styles.contents}>
-            {storeDetail.storeId}
+            {storeDetail.id}
           </Typography>
         </Box>
         <Box className={styles.row}>
@@ -26,7 +26,7 @@ const StoreInfoContainer = ({ storeDetail, handleRegister }: Props) => {
             매장명
           </Typography>
           <Typography className={styles.contents}>
-            {storeDetail.storeName}
+            {storeDetail.name}
           </Typography>
         </Box>
       </Box>

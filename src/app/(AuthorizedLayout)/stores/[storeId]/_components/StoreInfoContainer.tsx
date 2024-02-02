@@ -1,6 +1,5 @@
 import styles from '@/app/(AuthorizedLayout)/stores/[storeId]/_components/storeDetail.module.css'
 import { Box, Container, Typography } from '@mui/material'
-import Link from 'next/link'
 import { formatPhoneNumber } from '@/app/(AuthorizedLayout)/_lib/phoneNumber'
 import { menuCategoryName } from '@/app/(AuthorizedLayout)/stores/_lib/menuCategory'
 import { BasicButton } from '@/app/_components/BasicButton'
@@ -20,7 +19,7 @@ const StoreInfoContainer = ({ storeDetail, handlerEdit }: Props) => {
           매장ID
         </Typography>
         <Typography className={styles.contents}>
-          {storeDetail.storeId}
+          {storeDetail.id}
         </Typography>
       </Box>
       <Box className={styles.row}>
@@ -28,18 +27,18 @@ const StoreInfoContainer = ({ storeDetail, handlerEdit }: Props) => {
           매장명
         </Typography>
         <Typography className={styles.contents}>
-          {storeDetail.storeName}
+          {storeDetail.name}
         </Typography>
       </Box>
       <Box className={styles.row}>
         <Typography className={styles.title}>
           이미지
         </Typography>
-        {storeDetail.imageUrl !== '' ? (
+        {storeDetail.imagePath !== '' ? (
           <StoreImageModal
             label={<u>이미지</u>}
-            storeId={storeDetail.storeId}
-            imageName={storeDetail.imageUrl}
+            storeId={storeDetail.id}
+            imagePath={storeDetail.imagePath}
           />
         ) : null}
       </Box>
@@ -48,7 +47,7 @@ const StoreInfoContainer = ({ storeDetail, handlerEdit }: Props) => {
           매장 전화번호
         </Typography>
         <Typography className={styles.contents}>
-          {formatPhoneNumber(storeDetail.storeTel)}
+          {formatPhoneNumber(storeDetail.telephone)}
         </Typography>
       </Box>
       <Box className={styles.row}>
@@ -56,7 +55,7 @@ const StoreInfoContainer = ({ storeDetail, handlerEdit }: Props) => {
           계좌 번호
         </Typography>
         <Typography className={styles.contents}>
-          {storeDetail.bank} | {storeDetail.accountNumber} | {storeDetail.accountHolder}
+          {storeDetail.bankName} | {storeDetail.accountNumber} | {storeDetail.accountHolder}
         </Typography>
       </Box>
       <Box className={styles.row}>
@@ -64,7 +63,7 @@ const StoreInfoContainer = ({ storeDetail, handlerEdit }: Props) => {
           메뉴 구분
         </Typography>
         <Typography className={styles.contents}>
-          {menuCategoryName(storeDetail.category)}
+          {menuCategoryName(storeDetail.menuCategoryCode)}
         </Typography>
       </Box>
       <Box className={styles.row}>

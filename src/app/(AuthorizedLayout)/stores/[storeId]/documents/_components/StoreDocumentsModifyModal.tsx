@@ -37,11 +37,11 @@ type StoreDocumentsModifyState = {
 } & StoreModifyFormState
 
 const initState = ({
-   storeId,
+   id,
    session,
    storeDetail
 }: StoreModifyFormStateInitProps) => ({
-  storeId: storeId,
+  storeId: id,
   healthCertUrl: {
     name: storeDetail?.healthCertUrl ?? '',
     file: null
@@ -66,7 +66,7 @@ const onModifyData = async (modifyData: StoreDocumentsModifyState) => {
 
   if (modifyData.healthCertUrl.file) {
     const result = await postStoreDocumentFile({
-      storeId: modifyData.storeId,
+      storeId: modifyData.id,
       storeDocumentType: 'HEALTH_CERT',
       file: modifyData.healthCertUrl.file,
       session: modifyData.session
@@ -76,7 +76,7 @@ const onModifyData = async (modifyData: StoreDocumentsModifyState) => {
 
   if (modifyData.carRegistrationCertUrl.file) {
     const result = await postStoreDocumentFile({
-      storeId: modifyData.storeId,
+      storeId: modifyData.id,
       storeDocumentType: 'CAR_REGISTRATION_CERT',
       file: modifyData.carRegistrationCertUrl.file,
       session: modifyData.session
@@ -86,7 +86,7 @@ const onModifyData = async (modifyData: StoreDocumentsModifyState) => {
 
   if (modifyData.businessReportCertUrl.file) {
     const result = await postStoreDocumentFile({
-      storeId: modifyData.storeId,
+      storeId: modifyData.id,
       storeDocumentType: 'BUSINESS_REPORT_CERT',
       file: modifyData.businessReportCertUrl.file,
       session: modifyData.session
@@ -94,7 +94,7 @@ const onModifyData = async (modifyData: StoreDocumentsModifyState) => {
     modifyData.businessReportCertUrl.name = result.data
   }
 
-  return await putStoreDocuments(modifyData.storeId, {
+  return await putStoreDocuments(modifyData.id, {
     healthCertUrl: modifyData.healthCertUrl.name,
     healthCertRegisterDate: modifyData.healthCertRegisterDate,
     carRegistrationCertUrl: modifyData.carRegistrationCertUrl.name,
@@ -107,7 +107,7 @@ const StoreDocumentsModifyModal = ({ storeId }: StoreProps) => {
   const { storeDetail, session, isLoading } = useStoreDetail(storeId)
   const [modifyData, setModifyData] = useState<StoreDocumentsModifyState>(
     initState({
-      storeId,
+      id: storeId,
       session,
       storeDetail
     })

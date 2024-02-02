@@ -11,7 +11,7 @@ import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
 import {
   businessLocationValidated,
   nameValidated,
-  storeTelValidated
+  telephoneValidated
 } from '@/app/(AuthorizedLayout)/stores/_lib/validated'
 import { invalidateStoresQueries } from '@/app/(AuthorizedLayout)/stores/_lib/invalidateQueries'
 import TextField from '@/app/(AuthorizedLayout)/_components/form/TextField'
@@ -27,71 +27,71 @@ import { StoreModifyFormStateInitProps, StoreProps } from '@/app/(AuthorizedLayo
 import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
 import { FileInputState } from '@/app/(AuthorizedLayout)/_models/state'
 import { postStoreImage } from '@/app/(AuthorizedLayout)/stores/_lib/postStoreImage'
+import { MenuCategory } from '@/app/(AuthorizedLayout)/stores/_models/props'
 
 /**
  * 매장 정보 변경 State.
  *
- * @property storeId          매장 ID
  * @property name             매장명
- * @property imageUrl         이미지 URL
- * @property storeTel         매장 전화번호
- * @property bank             은행명
+ * @property imagePath        이미지 URL
+ * @property telephone        매장 전화번호
+ * @property bankName         은행명
  * @property accountNumber    계좌번호
  * @property accountHolder    예금주
  * @property businessLocation 영업 소재지
- * @property category         메뉴구분
+ * @property menuCategoryCode 메뉴구분 코드
  */
 type StoreModifyState = {
-  storeName: TextFieldState,
-  imageUrl: FileInputState,
-  storeTel: TextFieldState,
-  bank: TextFieldState,
+  name: TextFieldState,
+  imagePath: FileInputState,
+  telephone: TextFieldState,
+  bankName: TextFieldState,
   accountNumber: TextFieldState,
   accountHolder: TextFieldState,
   businessLocation: TextFieldState,
-  category: string,
+  menuCategoryCode: MenuCategory,
 } & StoreModifyFormState
 
 const initState = ({
-   storeId,
+   id,
    session,
    storeDetail
 }: StoreModifyFormStateInitProps) => ({
-  storeId: storeId,
-  storeName: initBaseState(storeDetail?.storeName ?? ''),
-  imageUrl: {
-    name: storeDetail?.imageUrl ?? '',
+  id: id,
+  name: initBaseState(storeDetail?.name ?? ''),
+  imagePath: {
+    name: storeDetail?.imagePath ?? '',
     file: null
   },
-  storeTel: initBaseState(storeDetail?.storeTel ?? ''),
-  bank: initBaseState(storeDetail?.bank ?? ''),
+  telephone: initBaseState(storeDetail?.telephone ?? ''),
+  bankName: initBaseState(storeDetail?.bankName ?? ''),
   accountNumber: initBaseState(storeDetail?.accountNumber ?? ''),
   accountHolder: initBaseState(storeDetail?.accountHolder ?? ''),
   businessLocation: initBaseState(storeDetail?.businessLocation ?? ''),
-  category: storeDetail?.category ?? 'MEALS',
+  menuCategoryCode: storeDetail?.menuCategoryCode ?? 'MEALS',
   isValidated: true,
   session: session,
-})
+} as StoreModifyState)
 
 const onModifyData = async (modifyData: StoreModifyState) => {
   if (!modifyData.isValidated) {
     return
   }
 
-  if (modifyData.imageUrl.file) {
-    const result = await postStoreImage(modifyData.imageUrl.file, modifyData.session)
-    modifyData.imageUrl.name = result.data
+  if (modifyData.imagePath.file) {
+    const result = await postStoreImage(modifyData.imagePath.file, modifyData.session)
+    modifyData.imagePath.name = result.data
   }
 
-  return await putStore(modifyData.storeId, {
-    storeName: modifyData.storeName.value,
-    storeImageUrl: modifyData.imageUrl.name,
-    storeTel: modifyData.storeTel.value,
-    bank: modifyData.bank.value,
+  return await putStore(modifyData.id, {
+    name: modifyData.name.value,
+    imagePath: modifyData.imagePath.name,
+    telephone: modifyData.telephone.value,
+    bankName: modifyData.bankName.value,
     accountNumber: modifyData.accountNumber.value,
     accountHolder: modifyData.accountHolder.value,
     businessLocation: modifyData.businessLocation.value,
-    category: modifyData.category,
+    menuCategoryCode: modifyData.menuCategoryCode,
   }, modifyData.session)
 }
 
@@ -100,7 +100,7 @@ const StoreModifyModal = ({ storeId }: StoreProps) => {
   const { storeDetail, session, isLoading } = useStoreDetail(storeId)
   const [modifyData, setModifyData] = useState<StoreModifyState>(
     initState({
-      storeId,
+      id: storeId,
       session,
       storeDetail
     })
@@ -130,12 +130,12 @@ const StoreModifyModal = ({ storeId }: StoreProps) => {
     }
   })
 
-  const onChangeStoreName = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     const storeName = event.target.value
     const errorMessage = nameValidated(storeName)
     setModifyData((prev) => ({
       ...prev,
-      storeName: {
+      name: {
         value: storeName,
         isError: errorMessage !== '',
         errorMessage: errorMessage
@@ -144,12 +144,12 @@ const StoreModifyModal = ({ storeId }: StoreProps) => {
     onValidated()
   }
 
-  const onChangeStoreTel = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeTelephone = (event: ChangeEvent<HTMLInputElement>) => {
     const storeTel = event.target.value
-    const errorMessage = storeTelValidated(storeTel)
+    const errorMessage = telephoneValidated(storeTel)
     setModifyData((prev) => ({
       ...prev,
-      storeTel: {
+      telephone: {
         value: storeTel,
         isError: errorMessage !== '',
         errorMessage: errorMessage
@@ -195,37 +195,37 @@ const StoreModifyModal = ({ storeId }: StoreProps) => {
       <>
         <Stack spacing={1}>
           <TextField
-            id={"storeName"}
+            id={"name"}
             label={"매장명"}
             placeHolder={"최대 60글자"}
-            state={modifyData.storeName}
-            onChange={onChangeStoreName}
+            state={modifyData.name}
+            onChange={onChangeName}
             required
           />
           <StoreImageField
-            id={"imageUrl"}
+            id={"imagePath"}
             label={"이미지"}
-            data={modifyData.imageUrl}
+            data={modifyData.imagePath}
             setData={(imageUrl) => {
-              setModifyData((prev) => ({ ...prev, imageUrl: imageUrl }))
+              setModifyData((prev) => ({ ...prev, imagePath: imageUrl }))
             }}
           />
           <TextField
-            id={"storeTel"}
+            id={"telephone"}
             label={"매장 전화번호"}
             placeHolder={"대표번호"}
-            state={modifyData.storeTel}
-            onChange={onChangeStoreTel}
+            state={modifyData.telephone}
+            onChange={onChangeTelephone}
           />
           <StoreBankAccountFieldGroup
             data={{
-              bank: modifyData.bank,
+              bankName: modifyData.bankName,
               accountNumber: modifyData.accountNumber,
               accountHolder: modifyData.accountHolder,
             }}
             setData={{
-              bank: (bankState) => {
-                setModifyData((prev) => ({ ...prev, bank: bankState }))
+              bankName: (bankNameState) => {
+                setModifyData((prev) => ({ ...prev, bankName: bankNameState }))
               },
               accountNumber: (accountNumberState) => {
                 setModifyData((prev) => ({ ...prev, accountNumber: accountNumberState }))
@@ -244,9 +244,9 @@ const StoreModifyModal = ({ storeId }: StoreProps) => {
             onChange={onChangeBusinessLocation}
           />
           <StoreCategoryRadioGroup
-            data={modifyData.category}
+            data={modifyData.menuCategoryCode}
             setData={(category) => {
-              setModifyData((prev) => ({ ...prev, category: category }))
+              setModifyData((prev) => ({ ...prev, menuCategoryCode: category }))
             }}
           />
           <ConfirmButton

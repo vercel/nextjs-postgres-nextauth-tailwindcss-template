@@ -1,5 +1,5 @@
 import { NO_AUTHORIZED } from '@/app/(AuthorizedLayout)/_lib/session'
-import { StorePageParameters } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import { StorePageParameters } from '@/app/(AuthorizedLayout)/stores/_models/props'
 
 const PAGE_SIZE = 50
 

@@ -26,7 +26,7 @@ const StoreDocumentContainer = ({ storeDetail, handlerEdit }: Props) => {
           <Typography className={styles.documentLink}>
             {isNotEmpty(storeDetail.healthCertUrl) ? (
               <Link target="_blank"
-                    href={`/api/stores/${storeDetail.storeId}/documents/HEALTH_CERT/files/${storeDetail.healthCertUrl}`}>
+                    href={`/api/stores/${storeDetail.id}/documents/HEALTH_CERT/files/${storeDetail.healthCertUrl}`}>
                 <u>보기</u>
               </Link>
             ) : null}
@@ -47,7 +47,7 @@ const StoreDocumentContainer = ({ storeDetail, handlerEdit }: Props) => {
           <Typography className={styles.documentLink}>
             {isNotEmpty(storeDetail.carRegistrationCertUrl) ? (
               <Link target="_blank"
-                    href={`/api/stores/${storeDetail.storeId}/documents/CAR_REGISTRATION_CERT/files/${storeDetail.carRegistrationCertUrl}`}>
+                    href={`/api/stores/${storeDetail.id}/documents/CAR_REGISTRATION_CERT/files/${storeDetail.carRegistrationCertUrl}`}>
                 <u>보기</u>
               </Link>
               ) : null}
@@ -63,7 +63,7 @@ const StoreDocumentContainer = ({ storeDetail, handlerEdit }: Props) => {
           <Typography className={styles.documentLink}>
             {isNotEmpty(storeDetail.businessReportCertUrl) ? (
               <Link target="_blank"
-                    href={`/api/stores/${storeDetail.storeId}/documents/BUSINESS_REPORT_CERT/files/${storeDetail.businessReportCertUrl}`}>
+                    href={`/api/stores/${storeDetail.id}/documents/BUSINESS_REPORT_CERT/files/${storeDetail.businessReportCertUrl}`}>
                 <u>보기</u>
               </Link>
             ) : null}

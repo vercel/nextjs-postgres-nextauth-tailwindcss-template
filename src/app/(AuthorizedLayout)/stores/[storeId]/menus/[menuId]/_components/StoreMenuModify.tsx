@@ -61,7 +61,7 @@ const initState = ({
   menuName: initBaseState(storeMenu.name),
   menuEnglishName: initBaseState(storeMenu.englishName),
   price: initBaseState(storeMenu.price.toString()),
-  imageUrl: {
+  imagePath: {
     name: storeMenu.imageUrl,
     file: null
   },
@@ -88,7 +88,7 @@ const onModifyData = async (modifyData: StoreMenuModifyState) => {
     name: modifyData.menuName.value,
     englishName: modifyData.menuEnglishName.value,
     price: modifyData.price.value === '' ? 0 : Number(modifyData.price.value),
-    imageUrl: modifyData.imageUrl.name,
+    imagePath: modifyData.imageUrl.name,
     allergies: modifyData.allergies,
     description: modifyData.description,
   }, modifyData.session)
@@ -189,7 +189,7 @@ const StoreMenuModify = ({ storeMenu, session }: { storeMenu: StoreMenu, session
             label={"이미지"}
             data={modifyData.imageUrl}
             setData={(imageUrl) => {
-              setModifyData((prev) => ({ ...prev, imageUrl: imageUrl }))
+              setModifyData((prev) => ({ ...prev, imagePath: imageUrl }))
             }}
           />
           <StoreTextareaGroup

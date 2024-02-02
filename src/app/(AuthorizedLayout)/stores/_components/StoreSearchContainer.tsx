@@ -1,5 +1,5 @@
 import React from 'react'
-import { StorePageParameters, StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import { StorePageParameters, StoreSearchProps } from '@/app/(AuthorizedLayout)/stores/_models/props'
 import StoreSearchField from '@/app/(AuthorizedLayout)/stores/_components/StoreSearchField'
 import StoreSearchDate from '@/app/(AuthorizedLayout)/stores/_components/StoreSearchDate'
 import StoreSearchStatus from '@/app/(AuthorizedLayout)/stores/_components/StoreSearchStatus'

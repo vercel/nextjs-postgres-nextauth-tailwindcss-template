@@ -1,33 +1,6 @@
 import { PageParameters } from '@/app/(AuthorizedLayout)/_models/common'
 import { Dispatch, SetStateAction } from 'react'
 
-/**
- * 매장 목록 응답 Data.
- *
- * @property storeId                       매장 ID
- * @property createDate               등록일
- * @property storeName                     매장명
- * @property categoryName             메뉴구분
- * @property isBusinessRegistered     사업자 등록 여부
- * @property menuCount                메뉴 수
- * @property submittedDocumentCount   필수서류 제출 수
- * @property healthCertRegisterDate   보건증 발급일
- * @property healthCertExpirationDate 보건증 만기일
- * @property imageUrl                 이미지 URL
- */
-export interface StoreResponse {
-  storeId: string,
-  createDate: Date,
-  storeName: string,
-  categoryName: string,
-  isBusinessRegistered: boolean,
-  menuCount: number,
-  submittedDocumentCount: number,
-  healthCertRegisterDate: Date,
-  healthCertExpirationDate: Date,
-  imageUrl: string,
-}
-
 export type StoreSearchCondition = 'STORE_NAME' | 'STORE_ID'
 
 export type StoreStatus = 'NOT_DOCUMENTS_SUBMITTED' |

@@ -5,13 +5,14 @@ import BaseCard from '@/app/_components/BaseCard'
 import { BasicButton } from '@/app/_components/BasicButton'
 import { useRouter } from 'next/navigation'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
-import { StoreResponse, StorePageProperties, StorePageParameters } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import { StorePageProperties, StorePageParameters } from '@/app/(AuthorizedLayout)/stores/_models/props'
 import StoreSearchContainer from '@/app/(AuthorizedLayout)/stores/_components/StoreSearchContainer'
 import StoreListTable from '@/app/(AuthorizedLayout)/stores/_components/StoreListTable'
 import { Page } from '@/app/(AuthorizedLayout)/_models/common'
 import { Box, Typography } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 import { getStores } from '@/app/(AuthorizedLayout)/stores/_lib/getStores'
+import { StoreResponse } from '@/app/(AuthorizedLayout)/stores/_models/response'
 
 const StoreListView = ({ pageParameters: initPageParameters }: StorePageProperties) => {
   const [pageParameters, setPageParameters] = useState(initPageParameters)

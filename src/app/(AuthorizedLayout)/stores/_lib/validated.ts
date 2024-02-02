@@ -1,11 +1,11 @@
 import { formatPhoneNumber } from '@/app/(AuthorizedLayout)/_lib/phoneNumber'
 import { passwordRegex } from '@/app/(AuthorizedLayout)/_lib/string'
 
-export const storeIdValidated = (storeId: string) => {
+export const idValidated = (id: string) => {
   let errorMessage = '';
-  if (storeId === '') {
+  if (id === '') {
     errorMessage = '매장 ID를 입력해주세요.'
-  } else if (!storeId.match(/[a-zA-Z0-9]{1,50}/)) {
+  } else if (!id.match(/[a-zA-Z0-9]{1,50}/)) {
     errorMessage = "매장 ID를 확인해주세요."
   }
   return errorMessage
@@ -21,17 +21,17 @@ export const nameValidated = (name: string) => {
   return errorMessage
 }
 
-export const storeTelValidated = (storeTel: string) => {
+export const telephoneValidated = (telephone: string) => {
   let errorMessage = '';
-  if (storeTel !== '' && formatPhoneNumber(storeTel) === undefined) {
+  if (telephone !== '' && formatPhoneNumber(telephone) === undefined) {
     errorMessage = '매장 전화번호를 확인해주세요.'
   }
   return errorMessage
 }
 
-export const bankValidated = (bank: string) => {
+export const bankNameValidated = (bankName: string) => {
   let errorMessage = '';
-  if (bank !== '' && Buffer.byteLength(bank) > 50) {
+  if (bankName !== '' && Buffer.byteLength(bankName) > 50) {
     errorMessage = '은행을 확인해주세요.'
   }
   return errorMessage

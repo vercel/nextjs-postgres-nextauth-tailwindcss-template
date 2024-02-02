@@ -2,7 +2,7 @@ import React from 'react'
 import { MenuItem } from '@mui/material'
 import { MenuSearchProps } from '@/app/(AuthorizedLayout)/stores/menus/_models/props'
 import SearchField from '@/app/(AuthorizedLayout)/_components/search/SearchField'
-import { StoreSearchCondition } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import { StoreSearchCondition } from '@/app/(AuthorizedLayout)/stores/_models/props'
 
 const MenuSearchField = ({ pageParameters, setPageParameters }: MenuSearchProps) => {
   return (

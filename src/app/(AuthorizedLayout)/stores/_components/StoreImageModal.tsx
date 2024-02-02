@@ -4,14 +4,15 @@ import { ReactNode, useState } from 'react'
 import { Box, Modal } from '@mui/material'
 import Image from 'next/image'
 import styles from './storeImageModal.module.css'
+import { storeImageUrl } from '@/app/(AuthorizedLayout)/stores/_lib/storeImageUrl'
 
 type Props = {
   label: ReactNode,
   storeId: string,
-  imageName: string,
+  imagePath: string,
 }
 
-const StoreImageModal = ({ label, storeId, imageName }: Props) => {
+const StoreImageModal = ({ label, storeId, imagePath }: Props) => {
   const [isOpen, setOpen] = useState<boolean>(false)
 
   const handleClick = () => {
@@ -27,10 +28,10 @@ const StoreImageModal = ({ label, storeId, imageName }: Props) => {
       <Modal open={isOpen} onClose={handleClose}>
         <Box className={styles.container}>
           <Image
-            src={`/api/stores/${storeId}/images/${imageName}`}
+            src={storeImageUrl(imagePath)}
             width={0}
             height={0}
-            sizes={"100%"}
+            sizes={'100%'}
             alt={storeId}
             className={styles.image}
           />

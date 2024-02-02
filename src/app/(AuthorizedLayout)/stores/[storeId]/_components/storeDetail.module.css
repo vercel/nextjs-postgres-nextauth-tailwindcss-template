@@ -22,6 +22,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 5px;
+    height: 35px;
 }
 
 .title {

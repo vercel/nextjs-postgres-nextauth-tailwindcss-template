@@ -1,4 +1,4 @@
-import { MenuCategory } from '@/app/(AuthorizedLayout)/stores/_models/store'
+import { MenuCategory } from '@/app/(AuthorizedLayout)/stores/_models/props'
 
 export const menuCategoryName = (category: MenuCategory) => {
   switch (category) {
