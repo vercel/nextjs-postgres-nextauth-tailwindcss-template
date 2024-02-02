@@ -13,7 +13,7 @@ const GoogleIcon = (props) => (
 );
 
 export default function Example() {
-  return (
+  return ( 
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-4 py-10 lg:px-6">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -25,7 +25,7 @@ export default function Example() {
               htmlFor="email"
               className="text-tremor-default font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong"
             >
-              Email
+              Email test
             </label>
             <TextInput
               type="email"
