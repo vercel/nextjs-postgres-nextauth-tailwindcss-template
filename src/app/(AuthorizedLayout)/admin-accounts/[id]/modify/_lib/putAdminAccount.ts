@@ -7,7 +7,6 @@ export const putAdminAccount = async (
   adminAccount: Omit<AdminAccount, 'id' | 'password' | 'lastUpdatedAt'>,
   session?: Session | null
 ) => await clientFetch(
-  `v1`,
   `/accounts/${id}`,
   {
     method: 'PUT',

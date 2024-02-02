@@ -15,6 +15,7 @@ import { idValidated, nameValidated, passwordValidated } from '@/app/(Authorized
 import { invalidateAdminAccountsQueries } from '@/app/(AuthorizedLayout)/admin-accounts/_lib/invalidateQueries'
 import { Session } from 'next-auth'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
+import { createHashed } from '@/utils/hashedPassword'
 
 type AdminAccountRegisterState = {
   id: TextFieldState;
@@ -39,9 +40,10 @@ const onRegisterData = async (registerData: AdminAccountRegisterState) => {
     return
   }
 
+  const hashedPassword = createHashed(String(registerData.password.value))
   return await postAdminAccount({
     id: registerData.id.value,
-    password: registerData.password.value,
+    password: hashedPassword,
     name: registerData.name.value,
     phoneNumber: registerData.phoneNumber.value
   }, registerData.session)

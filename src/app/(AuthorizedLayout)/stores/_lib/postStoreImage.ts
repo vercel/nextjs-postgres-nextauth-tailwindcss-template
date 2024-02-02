@@ -9,7 +9,6 @@ export const postStoreImage = async (
   formData.append('file', file)
 
   const response = await clientMultipartFetch(
-    `v1`,
     `/stores/images`,
     {
       method: 'POST',

@@ -7,7 +7,6 @@ export const GET = async (
   const { searchParams } = new URL(request.url)
   console.log('getMenus params', searchParams)
   return await serverFetch(
-    'v1',
     `/menus?${searchParams}`,
     {}
   )

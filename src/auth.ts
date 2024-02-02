@@ -3,6 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { jwtDecode } from 'jwt-decode'
 import { JWT } from '@auth/core/jwt'
 import { ResponseData } from '@/app/(AuthorizedLayout)/_models/common'
+import { createHashed } from '@/utils/hashedPassword'
 
 type Login = {
   accessToken: string;
@@ -25,14 +26,16 @@ export const {
   providers: [
     CredentialsProvider({
       authorize: async function(credentials): Promise<User | null> {
-        const authResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/admin/login`, {
+        const hashedPassword = createHashed(String(credentials?.password))
+        console.log('password', hashedPassword)
+        const authResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             id: credentials?.username,
-            pw: credentials?.password
+            password: hashedPassword
           })
         })
 

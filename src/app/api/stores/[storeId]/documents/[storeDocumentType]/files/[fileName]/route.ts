@@ -7,7 +7,6 @@ export const GET = async (
   { params }: { params: { storeId: string, storeDocumentType: StoreDocumentType, fileName: string } }
 ) => {
   const blob = await serverFileFetch(
-    'v1',
     `/stores/${params.storeId}/documents/${params.storeDocumentType}/files/${params.fileName}`,
     {}
   )

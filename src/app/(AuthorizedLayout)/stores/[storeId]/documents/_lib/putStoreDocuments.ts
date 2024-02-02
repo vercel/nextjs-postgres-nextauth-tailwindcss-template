@@ -7,7 +7,6 @@ export const putStoreDocuments = async (
   request: StoreDocumentsModifyRequest,
   session?: Session | null
 ) => await clientFetch(
-  `v1`,
   `/stores/${storeId}/documents`,
   {
     method: 'PUT',

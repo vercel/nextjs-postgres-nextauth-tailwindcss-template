@@ -15,7 +15,7 @@ const nextConfig = {
     return [
       {
         source: '/server-api/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`,
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/admin/:path*`,
       },
     ];
   },

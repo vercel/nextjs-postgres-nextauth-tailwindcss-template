@@ -84,15 +84,15 @@ const onRegisterData = async (registerData: StoreRegisterState) => {
   }
 
   return await postStore({
-    storeId: registerData.storeId.value,
-    storeName: registerData.storeName.value,
-    imageUrl: registerData.imageUrl.name,
-    storeTel: registerData.storeTel.value,
-    bank: registerData.bank.value,
+    id: registerData.storeId.value,
+    name: registerData.storeName.value,
+    imagePath: registerData.imageUrl.name,
+    telephone: registerData.storeTel.value,
+    bankName: registerData.bank.value,
     accountNumber: registerData.accountNumber.value,
     accountHolder: registerData.accountHolder.value,
     businessLocation: registerData.businessLocation.value,
-    category: registerData.category,
+    menuCategoryCode: registerData.category,
   }, registerData.session)
 }
 

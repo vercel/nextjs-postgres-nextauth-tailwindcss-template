@@ -4,14 +4,13 @@ import { NextResponse } from 'next/server'
 import { ResponseData } from '@/app/(AuthorizedLayout)/_models/common'
 
 export const serverFetch = async (
-  version: string,
   path: string,
   requestInit: RequestInit
 ) => {
-  console.log('serverFetch', version, path, requestInit)
+  console.log('serverFetch', path, requestInit)
   const accessToken = await getSessionToken()
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/${version}/admin${path}`, {
+    `${process.env.NEXT_PUBLIC_API_URL}/admin${path}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -25,14 +24,13 @@ export const serverFetch = async (
 }
 
 export const serverFileFetch = async (
-  version: string,
   path: string,
   requestInit: RequestInit
 ) => {
-  console.log('serverFileFetch', version, path, requestInit)
+  console.log('serverFileFetch', path, requestInit)
   const accessToken = await getSessionToken()
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/${version}/admin${path}`, {
+    `${process.env.NEXT_PUBLIC_API_URL}/admin${path}`, {
       method: 'GET',
       headers: {
         'Authorization': `${ACCESS_TOKEN_HEADER}${accessToken}`

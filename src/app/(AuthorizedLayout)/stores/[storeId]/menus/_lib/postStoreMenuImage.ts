@@ -12,7 +12,6 @@ export const postStoreMenuImage = async ({ storeId, file, session}: Props) => {
   formData.append('file', file)
 
   const response = await clientMultipartFetch(
-    `v1`,
     `/stores/${storeId}/menus/images`,
     {
       method: 'POST',

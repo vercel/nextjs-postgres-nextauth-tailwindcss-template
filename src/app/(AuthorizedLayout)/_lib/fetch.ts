@@ -2,14 +2,13 @@ import { ACCESS_TOKEN_HEADER } from '@/auth'
 import { Session } from 'next-auth'
 
 export const clientFetch = async (
-  version: string,
   path: string,
   requestInit: RequestInit,
   session?: Session | null
 ) => {
-  console.log('clientFetch', version, path, requestInit, session)
+  console.log('clientFetch', path, requestInit, session)
   return await fetch(
-    `/server-api/${version}/admin${path}`, {
+    `/server-api${path}`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `${ACCESS_TOKEN_HEADER}${session?.accessToken}`
@@ -20,14 +19,13 @@ export const clientFetch = async (
 }
 
 export const clientMultipartFetch = async (
-  version: string,
   path: string,
   requestInit: RequestInit,
   session?: Session | null
 ) => {
-  console.log('clientMultipartFetch', version, path, requestInit, session)
+  console.log('clientMultipartFetch', path, requestInit, session)
   return await fetch(
-    `/server-api/${version}/admin${path}`, {
+    `/server-api${path}`, {
       headers: {
         Authorization: `${ACCESS_TOKEN_HEADER}${session?.accessToken}`
       },

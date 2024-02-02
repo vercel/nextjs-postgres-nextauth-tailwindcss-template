@@ -6,7 +6,6 @@ export const GET = async (
   { params }: { params: { menuId: number } }
 ) => {
   return await serverFetch(
-    'v1',
     `/menus/${params.menuId}`,
     {}
   )

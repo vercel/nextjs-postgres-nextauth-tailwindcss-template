@@ -12,7 +12,6 @@ export const postStoreMenuDescriptionImage = async ({ storeId, file, session}: P
   formData.append('file', file)
 
   const response = await clientMultipartFetch(
-    `v1`,
     `/stores/${storeId}/menus/description/images`,
     {
       method: 'POST',

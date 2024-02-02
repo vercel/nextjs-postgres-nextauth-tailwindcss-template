@@ -6,7 +6,6 @@ export const GET = async (
   { params }: { params: { id: string } }
 ) => {
   return await serverFetch(
-    'v1',
     `/accounts/${params.id}`,
     {}
   )

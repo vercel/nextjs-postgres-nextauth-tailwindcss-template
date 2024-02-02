@@ -6,7 +6,6 @@ export const postAdminAccount = async (
   adminAccount: AdminAccount,
   session?: Session | null
 ) => await clientFetch(
-  `v1`,
   `/accounts`,
   {
     method: 'POST',

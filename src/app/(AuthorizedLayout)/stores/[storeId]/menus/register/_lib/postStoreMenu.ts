@@ -7,7 +7,6 @@ export const postStoreMenu = async (
   request: StoreMenuRegisterRequest,
   session?: Session | null
 ) => await clientFetch(
-  `v1`,
   `/stores/${storeId}/menus`,
   {
     method: 'POST',

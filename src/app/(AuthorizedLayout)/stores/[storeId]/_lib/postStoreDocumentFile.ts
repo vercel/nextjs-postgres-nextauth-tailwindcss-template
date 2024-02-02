@@ -1,4 +1,4 @@
-import { clientFetch, clientMultipartFetch } from '@/app/(AuthorizedLayout)/_lib/fetch'
+import { clientMultipartFetch } from '@/app/(AuthorizedLayout)/_lib/fetch'
 import { Session } from 'next-auth'
 import { StoreDocumentType } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeDocumentType'
 
@@ -14,7 +14,6 @@ export const postStoreDocumentFile = async ({ storeId, storeDocumentType, file, 
   formData.append('file', file)
 
   const response = await clientMultipartFetch(
-    `v1`,
     `/stores/${storeId}/documents/${storeDocumentType}/files`,
     {
       method: 'POST',

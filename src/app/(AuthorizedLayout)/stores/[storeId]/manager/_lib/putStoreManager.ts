@@ -7,7 +7,6 @@ export const putStoreManager = async (
   request: StoreManagerModifyRequest,
   session?: Session | null
 ) => await clientFetch(
-  `v1`,
   `/stores/${storeId}/manager`,
   {
     method: 'PUT',

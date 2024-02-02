@@ -8,7 +8,6 @@ export const putStoreMenu = async (
   request: StoreMenuModifyRequest,
   session?: Session | null
 ) => await clientFetch(
-  `v1`,
   `/stores/${storeId}/menus/${menuId}`,
   {
     method: 'PUT',
