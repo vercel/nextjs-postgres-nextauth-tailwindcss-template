@@ -8,9 +8,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.17",
-    "@heroicons/react": "^2.0.18",
-    "@tremor/react": "^3.10.0",
+    "@headlessui/react": "^1.7.18",
+    "@headlessui/tailwindcss": "^0.2.0",
+    "@heroicons/react": "^1.0.6",
+    "@remixicon/react": "^4.1.1",
+    "@tremor/react": "^3.13.4",
     "@types/js-cookie": "^3.0.5",
     "@types/node": "20.8.9",
     "@types/react": "18.2.33",
@@ -37,5 +39,8 @@
     "singleQuote": true,
     "tabWidth": 2,
     "trailingComma": "none"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7"
   }
 }
