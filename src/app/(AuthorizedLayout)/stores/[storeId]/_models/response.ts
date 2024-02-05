@@ -17,12 +17,12 @@ import { MenuCategory } from '@/app/(AuthorizedLayout)/stores/_models/props'
  * @property businessName             상호명
  * @property businessNumber           사업자 등록번호
  * @property owner                    대표자명
- * @property businessRegistrationUrl  사업자 등록증 URL
+ * @property businessRegistrationPath 사업자 등록증 URL
  * @property healthCertRegisterDate   보건증 등록일
  * @property healthCertExpirationDate 보건증 만기일
- * @property healthCertUrl            보건증 URL
- * @property carRegistrationCertUrl   자동차 등록증 URL
- * @property businessReportCertUrl    영업 신고증 URL
+ * @property healthCertPath           보건증 URL
+ * @property carRegistrationCertPath  자동차 등록증 URL
+ * @property businessReportCertPath   영업 신고증 URL
  * @property menuCount                메뉴 수
  */
 export interface StoreDetailResponse {
@@ -40,11 +40,11 @@ export interface StoreDetailResponse {
   businessName: string,
   businessNumber: string,
   owner: string,
-  businessRegistrationUrl?: string,
+  businessRegistrationPath?: string,
   healthCertRegisterDate?: Date,
   healthCertExpirationDate?: Date,
-  healthCertUrl?: string,
-  carRegistrationCertUrl?: string,
-  businessReportCertUrl?: string,
+  healthCertPath?: string,
+  carRegistrationCertPath?: string,
+  businessReportCertPath?: string,
   menuCount: number,
 }

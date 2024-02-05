@@ -43,16 +43,16 @@ const initState = ({
 }: StoreModifyFormStateInitProps) => ({
   storeId: id,
   healthCertUrl: {
-    name: storeDetail?.healthCertUrl ?? '',
+    name: storeDetail?.healthCertPath ?? '',
     file: null
   },
   healthCertRegisterDate: formatDate(storeDetail?.healthCertRegisterDate) ?? '',
   carRegistrationCertUrl: {
-  name: storeDetail?.carRegistrationCertUrl ?? '',
+  name: storeDetail?.carRegistrationCertPath ?? '',
     file: null
   },
   businessReportCertUrl: {
-    name: storeDetail?.businessReportCertUrl ?? '',
+    name: storeDetail?.businessReportCertPath ?? '',
     file: null
   },
   isValidated: true,

@@ -24,9 +24,9 @@ const StoreDocumentContainer = ({ storeDetail, handlerEdit }: Props) => {
             보건증
           </Typography>
           <Typography className={styles.documentLink}>
-            {isNotEmpty(storeDetail.healthCertUrl) ? (
+            {isNotEmpty(storeDetail.healthCertPath) ? (
               <Link target="_blank"
-                    href={`/api/stores/${storeDetail.id}/documents/HEALTH_CERT/files/${storeDetail.healthCertUrl}`}>
+                    href={`/api/stores/${storeDetail.id}/documents/HEALTH_CERT/files/${storeDetail.healthCertPath}`}>
                 <u>보기</u>
               </Link>
             ) : null}
@@ -45,9 +45,9 @@ const StoreDocumentContainer = ({ storeDetail, handlerEdit }: Props) => {
             자동차 등록증
           </Typography>
           <Typography className={styles.documentLink}>
-            {isNotEmpty(storeDetail.carRegistrationCertUrl) ? (
+            {isNotEmpty(storeDetail.carRegistrationCertPath) ? (
               <Link target="_blank"
-                    href={`/api/stores/${storeDetail.id}/documents/CAR_REGISTRATION_CERT/files/${storeDetail.carRegistrationCertUrl}`}>
+                    href={`/api/stores/${storeDetail.id}/documents/CAR_REGISTRATION_CERT/files/${storeDetail.carRegistrationCertPath}`}>
                 <u>보기</u>
               </Link>
               ) : null}
@@ -61,9 +61,9 @@ const StoreDocumentContainer = ({ storeDetail, handlerEdit }: Props) => {
             영업신고증
           </Typography>
           <Typography className={styles.documentLink}>
-            {isNotEmpty(storeDetail.businessReportCertUrl) ? (
+            {isNotEmpty(storeDetail.businessReportCertPath) ? (
               <Link target="_blank"
-                    href={`/api/stores/${storeDetail.id}/documents/BUSINESS_REPORT_CERT/files/${storeDetail.businessReportCertUrl}`}>
+                    href={`/api/stores/${storeDetail.id}/documents/BUSINESS_REPORT_CERT/files/${storeDetail.businessReportCertPath}`}>
                 <u>보기</u>
               </Link>
             ) : null}

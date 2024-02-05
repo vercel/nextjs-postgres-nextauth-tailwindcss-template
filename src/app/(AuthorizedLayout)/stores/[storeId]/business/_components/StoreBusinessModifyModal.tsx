@@ -27,16 +27,18 @@ import { FileInputState } from '@/app/(AuthorizedLayout)/_models/state'
 import { postStoreDocumentFile } from '@/app/(AuthorizedLayout)/stores/[storeId]/_lib/postStoreDocumentFile'
 
 /**
- * 매장 담당자 정보 변경 State.
+ * 매장 사업자 정보 변경 State.
  *
- * @property managerName         담당자명
- * @property managerPhoneNumber  담당자 연락처
+ * @property name             상호명
+ * @property number           사업자 등록번호
+ * @property owner            대표자명
+ * @property registrationPath 사업자 등록증 경로
  */
 type StoreBusinessModifyState = {
-  businessName: TextFieldState,
-  businessNumber: TextFieldState,
+  name: TextFieldState,
+  number: TextFieldState,
   owner: TextFieldState,
-  businessRegistrationUrl: FileInputState,
+  registrationPath: FileInputState,
 } & StoreModifyFormState
 
 const initState = ({
@@ -44,38 +46,38 @@ const initState = ({
   session,
   storeDetail
 }: StoreModifyFormStateInitProps) => ({
-  storeId: id,
-  businessName: initBaseState(storeDetail?.businessName ?? ''),
-  businessNumber: initBaseState(storeDetail?.businessNumber ?? ''),
+  id: id,
+  name: initBaseState(storeDetail?.businessName ?? ''),
+  number: initBaseState(storeDetail?.businessNumber ?? ''),
   owner: initBaseState(storeDetail?.owner ?? ''),
-  businessRegistrationUrl: {
-    name: storeDetail?.businessRegistrationUrl ?? '',
+  registrationPath: {
+    name: storeDetail?.businessRegistrationPath ?? '',
     file: null
   },
   isValidated: true,
   session: session,
-})
+} as StoreBusinessModifyState)
 
 const onModifyData = async (modifyData: StoreBusinessModifyState) => {
   if (!modifyData.isValidated) {
     return
   }
 
-  if (modifyData.businessRegistrationUrl.file) {
+  if (modifyData.registrationPath.file) {
     const result = await postStoreDocumentFile({
       storeId: modifyData.id,
       storeDocumentType: 'BUSINESS_REGISTRATION',
-      file: modifyData.businessRegistrationUrl.file,
+      file: modifyData.registrationPath.file,
       session: modifyData.session
     })
-    modifyData.businessRegistrationUrl.name = result.data
+    modifyData.registrationPath.name = result.data
   }
 
   return await putStoreBusiness(modifyData.id, {
-    businessName: modifyData.businessName.value,
-    businessNumber: modifyData.businessNumber.value,
+    name: modifyData.name.value,
+    number: modifyData.number.value,
     owner: modifyData.owner.value,
-    businessRegistrationUrl: modifyData.businessRegistrationUrl.name,
+    registrationPath: modifyData.registrationPath.name,
   }, modifyData.session)
 }
 
@@ -114,13 +116,13 @@ const StoreBusinessModifyModal = ({ storeId }: StoreProps) => {
     }
   })
 
-  const onChangeBusinessName = (event: ChangeEvent<HTMLInputElement>) => {
-    const businessName = event.target.value
-    const errorMessage = businessNameValidated(businessName)
+  const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
+    const name = event.target.value
+    const errorMessage = businessNameValidated(name)
     setModifyData((prev) => ({
       ...prev,
-      businessName: {
-        value: businessName,
+      name: {
+        value: name,
         isError: errorMessage !== '',
         errorMessage: errorMessage
       }
@@ -128,13 +130,13 @@ const StoreBusinessModifyModal = ({ storeId }: StoreProps) => {
     onValidated()
   }
 
-  const onChangeBusinessNumber = (event: ChangeEvent<HTMLInputElement>) => {
-    const businessNumber = event.target.value
-    const errorMessage = businessNumberValidated(businessNumber)
+  const onChangeNumber = (event: ChangeEvent<HTMLInputElement>) => {
+    const number = event.target.value
+    const errorMessage = businessNumberValidated(number)
     setModifyData((prev) => ({
       ...prev,
-      businessNumber: {
-        value: businessNumber,
+      number: {
+        value: number,
         isError: errorMessage !== '',
         errorMessage: errorMessage
       }
@@ -181,14 +183,14 @@ const StoreBusinessModifyModal = ({ storeId }: StoreProps) => {
           <TextField
             id={"businessName"}
             label={"상호명"}
-            state={modifyData.businessName}
-            onChange={onChangeBusinessName}
+            state={modifyData.name}
+            onChange={onChangeName}
           />
           <TextField
             id={"businessNumber"}
             label={"사업자 등록 번호"}
-            state={modifyData.businessNumber}
-            onChange={onChangeBusinessNumber}
+            state={modifyData.number}
+            onChange={onChangeNumber}
           />
           <TextField
             id={"owner"}
@@ -197,11 +199,11 @@ const StoreBusinessModifyModal = ({ storeId }: StoreProps) => {
             onChange={onChangeOwner}
           />
           <StoreImageField
-            id={"businessRegistrationUrl"}
+            id={"registrationPath"}
             label={"사업자 등록증"}
-            data={modifyData.businessRegistrationUrl}
+            data={modifyData.registrationPath}
             setData={(businessRegistrationUrl) => {
-              setModifyData((prev) => ({ ...prev, businessRegistrationUrl: businessRegistrationUrl }))
+              setModifyData((prev) => ({ ...prev, registrationPath: businessRegistrationUrl }))
             }}
           />
           <ConfirmButton

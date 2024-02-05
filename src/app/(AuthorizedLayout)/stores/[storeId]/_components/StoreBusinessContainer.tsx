@@ -18,10 +18,10 @@ const StoreBusinessContainer = ({ storeDetail, handlerEdit }: Props) => {
         <Typography className={styles.title}>
           사업자 정보
         </Typography>
-        {isNotEmpty(storeDetail.businessRegistrationUrl) ? (
+        {isNotEmpty(storeDetail.businessRegistrationPath) ? (
           <Typography className={styles.contents}>
             [<Link target="_blank"
-                   href={`/api/stores/${storeDetail.id}/documents/BUSINESS_REGISTRATION/files/${storeDetail.businessRegistrationUrl}`}>
+                   href={`/api/stores/${storeDetail.id}/documents/BUSINESS_REGISTRATION/files/${storeDetail.businessRegistrationPath}`}>
             <u>사업자 등록증 보기</u>
           </Link>]
           </Typography>
