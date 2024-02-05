@@ -18,7 +18,7 @@ const StoreManagerContainer = ({ storeDetail, handlerEdit }: Props) => {
           담당자명
         </Typography>
         <Typography className={styles.contents}>
-          {storeDetail.managerName}
+          {storeDetail.name}
         </Typography>
       </Box>
       <Box className={styles.row}>

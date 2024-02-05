@@ -7,14 +7,11 @@ import { initBaseState, TextFieldState } from '@/app/_components/BaseTextField'
 import { useRouter } from 'next/navigation'
 import BaseModal from '@/app/_components/BaseModal'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useSession } from 'next-auth/react'
 import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
-import { Session } from 'next-auth'
 import { invalidateStoresQueries } from '@/app/(AuthorizedLayout)/stores/_lib/invalidateQueries'
 import TextField from '@/app/(AuthorizedLayout)/_components/form/TextField'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import ConfirmButton from '@/app/(AuthorizedLayout)/_components/form/ConfirmButton'
-import { StoreDetailResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/response'
 import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/_hooks/useStoreDetail'
 import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
 import { StoreModifyFormState } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeModifyFormState'
@@ -28,12 +25,12 @@ import {
 /**
  * 매장 담당자 정보 변경 State.
  *
- * @property managerName         담당자명
- * @property managerPhoneNumber  담당자 연락처
+ * @property name         담당자명
+ * @property phoneNumber  담당자 연락처
  */
 type StoreManagerModifyState = {
-  managerName: TextFieldState,
-  managerPhoneNumber: TextFieldState,
+  name: TextFieldState,
+  phoneNumber: TextFieldState,
 } & StoreModifyFormState
 
 const initState = ({
@@ -41,12 +38,12 @@ const initState = ({
    session,
    storeDetail
 }: StoreModifyFormStateInitProps) => ({
-  storeId: id,
-  managerName: initBaseState(storeDetail?.managerName ?? ''),
-  managerPhoneNumber: initBaseState(storeDetail?.managerPhoneNumber ?? ''),
+  id: id,
+  name: initBaseState(storeDetail?.managerName ?? ''),
+  phoneNumber: initBaseState(storeDetail?.managerPhoneNumber ?? ''),
   isValidated: true,
   session: session,
-})
+} as StoreManagerModifyState)
 
 const onModifyData = async (modifyData: StoreManagerModifyState) => {
   if (!modifyData.isValidated) {
@@ -54,8 +51,8 @@ const onModifyData = async (modifyData: StoreManagerModifyState) => {
   }
 
   return await putStoreManager(modifyData.id, {
-    managerName: modifyData.managerName.value,
-    managerPhoneNumber: modifyData.managerPhoneNumber.value,
+    name: modifyData.name.value,
+    phoneNumber: modifyData.phoneNumber.value,
   }, modifyData.session)
 }
 
@@ -99,7 +96,7 @@ const StoreManagerModifyModal = ({ storeId }: StoreProps) => {
     const errorMessage = managerNameValidated(managerName)
     setModifyData((prev) => ({
       ...prev,
-      managerName: {
+      name: {
         value: managerName,
         isError: errorMessage !== '',
         errorMessage: errorMessage
@@ -113,7 +110,7 @@ const StoreManagerModifyModal = ({ storeId }: StoreProps) => {
     const errorMessage = managerPhoneNumberValidated(managerPhoneNumber)
     setModifyData((prev) => ({
       ...prev,
-      managerPhoneNumber: {
+      phoneNumber: {
         value: managerPhoneNumber,
         isError: errorMessage !== '',
         errorMessage: errorMessage
@@ -147,13 +144,13 @@ const StoreManagerModifyModal = ({ storeId }: StoreProps) => {
           <TextField
             id={"managerName"}
             label={"이름"}
-            state={modifyData.managerName}
+            state={modifyData.name}
             onChange={onChangeManagerName}
           />
           <TextField
             id={"managerPhoneNumber"}
             label={"연락처"}
-            state={modifyData.managerPhoneNumber}
+            state={modifyData.phoneNumber}
             onChange={onChangeManagerPhoneNumber}
           />
           <ConfirmButton
