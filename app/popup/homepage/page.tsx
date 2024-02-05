@@ -9,7 +9,7 @@ import styles from './styles/Homepage.module.css';
 import ExploreContent from './components/ExploreContent';
 import MapContent from './components/MapContent';
 import CalendarContent from './components/CalendarContent';
-import MessengerContent from './components/MessengerContent';
+import MessengerContent from './components/MessengerContent/MessengerContent';
 import MyPopupsContent from './components/MyPopupsContent';
 
 const Homepage: React.FC = () => {
@@ -19,7 +19,7 @@ const Homepage: React.FC = () => {
     setSelectedOption(option);
   };
 
-  let content = <p><ExploreContent /></p>;
+  let content = <p><div><ExploreContent /></div></p>;
 
   switch (selectedOption) {
     case 'explore':

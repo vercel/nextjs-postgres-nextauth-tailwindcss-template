@@ -1,0 +1,114 @@
+/* pages/components/MessageModal.module.css */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000; /* Ensure modal is on top of other content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal {
+    background-color: #fff;
+    width: 66.666%; /* 2/3 of horizontal space */
+    max-height: 66.666%; /* 2/3 of vertical space */
+    padding: 20px;
+    border-radius: 8px;
+    overflow: hidden; /* Hide overflow from parent */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 1; /* Ensure sender name stays above message list */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+  
+  .closeButton {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .messageList {
+    flex: 1;
+    overflow-y: auto; /* Enable vertical scrolling */
+    width: 100%; /* Take up full horizontal space */
+    display: flex; /* Ensure child elements occupy full width */
+    flex-direction: column; /* Align child elements vertically */
+    padding-right: 10px;
+  }
+
+  .messageList::-webkit-scrollbar {
+    width: 5px; /* Set width of scrollbar */
+    height: 5px; /* Set height of scrollbar */
+  }
+  
+  .messageList::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); /* Set color of scrollbar thumb */
+    border-radius: 5px; /* Set border-radius of scrollbar thumb */
+    transition: width 0.3s, height 0.3s; /* Add transition for smooth expansion */
+  }
+  
+  .messageList:hover::-webkit-scrollbar-thumb {
+    width: 8px; /* Expand width of scrollbar thumb on hover */
+    height: 8px; /* Expand height of scrollbar thumb on hover */
+  }
+  
+  .messageList::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5); /* Change color of scrollbar thumb on hover */
+  }
+  
+  .inputContainer {
+    position: sticky;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 1; /* Ensure input box stays above message list */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+  }
+  
+  .input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    resize: none; /* Disable resizing by dragging */
+    height: auto; /* Allow dynamic height adjustment */
+    min-height: 40px; /* Set minimum height */
+    max-height: 200px; /* Set maximum height */
+    line-height: 1.6; /* Set line height for readability */
+    font-family: inherit; /* Inherit font family from parent */
+    white-space: pre-wrap; /* Wrap text */
+    word-wrap: break-word; /* Break long words */
+    overflow-y: hidden; /* Hide vertical scrollbar initially */
+  }
+  
+  .input.auto-height {
+    overflow-y: auto; /* Show vertical scrollbar when needed */
+  }
+  
+  .sendButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

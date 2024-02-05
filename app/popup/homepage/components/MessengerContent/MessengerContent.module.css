@@ -1,0 +1,11 @@
+/* pages/components/MessengerContent.module.css */
+
+.container {
+  height: calc(100vh - 200px); /* Adjust height as needed */
+  overflow: hidden; /* Hide overflow from parent */
+}
+
+.messages {
+  height: 100%; /* Occupy full height of container */
+  overflow-y: auto; /* Enable vertical scrolling */
+}

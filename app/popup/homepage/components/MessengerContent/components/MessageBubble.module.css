@@ -1,0 +1,29 @@
+/* pages/components/MessageBubble.module.css */
+
+.userBubble {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 70%;
+    margin-bottom: 10px;
+    align-self: flex-end; /* Align user's messages to the right */
+  }
+  
+  .senderBubble {
+    background-color: #f0f0f0;
+    color: #333;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 70%;
+    margin-bottom: 10px;
+    align-self: flex-start; /* Align sender's messages to the left */
+  }
+  
+  .userBubble p,
+  .senderBubble p {
+    margin: 0; /* Remove default margins for <p> elements */
+    white-space: pre-wrap; /* Preserve newline characters */
+    text-align: left;
+  }
+  

@@ -1,0 +1,25 @@
+/* pages/components/Message.module.css */
+
+.message {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.sender {
+  font-weight: bold;
+}
+
+.preview {
+  flex: 1;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.time {
+  font-size: 12px;
+  color: #666;
+}
