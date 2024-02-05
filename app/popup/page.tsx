@@ -1,4 +1,4 @@
-import { sql } from '@vercel/postgres';
+
 import { Card, Title, Text } from '@tremor/react';
 
 
