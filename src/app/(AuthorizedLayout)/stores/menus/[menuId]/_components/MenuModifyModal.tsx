@@ -20,7 +20,7 @@ const MenuModifyModal = ({ menuId }: MenuProps) => {
         name: menu.name,
         englishName: menu.englishName,
         price: menu.price,
-        imagePath: menu.imageUrl,
+        imagePath: menu.imagePath,
         allergies: menu.allergies,
         description: menu.description,
         createdDate: menu.createdDate,
