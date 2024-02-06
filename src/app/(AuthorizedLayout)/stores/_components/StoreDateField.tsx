@@ -4,7 +4,8 @@ import React from 'react'
 import { Box, Typography } from '@mui/material'
 import styles from '../../_components/form/textField.module.css'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3'
+import { ko } from 'date-fns/locale/ko'
 
 type Props = {
   label: string,
@@ -23,12 +24,12 @@ const StoreDateField = ({ label, data, setData }: Props) => {
         {label}
       </Typography>
       <LocalizationProvider
-        dateAdapter={AdapterDayjs}
-        adapterLocale={'ko'}
+        dateAdapter={AdapterDateFns}
+        adapterLocale={ko}
       >
         <DatePicker
           value={data}
-          format="YYYY. MM. DD"
+          format="yyyy. MM. dd"
           className={styles.textField}
           onChange={handleDateChange}
         />

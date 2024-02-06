@@ -24,16 +24,16 @@ import { postStoreDocumentFile } from '@/app/(AuthorizedLayout)/stores/[storeId]
 /**
  * 매장 필수서류 정보 변경 State.
  *
- *  @property healthCertUrl          보건증 URL
+ *  @property healthCertPath          보건증 URL
  *  @property healthCertRegisterDate 보건증 등록일
- *  @property carRegistrationCertUrl 자동차 등록증 URL
- *  @property businessReportCertUrl  영업신고증 URL
+ *  @property carRegistrationCertPath 자동차 등록증 URL
+ *  @property businessReportCertPath  영업신고증 URL
  */
 type StoreDocumentsModifyState = {
-  healthCertUrl: FileInputState,
+  healthCertPath: FileInputState,
   healthCertRegisterDate: string,
-  carRegistrationCertUrl: FileInputState,
-  businessReportCertUrl: FileInputState,
+  carRegistrationCertPath: FileInputState,
+  businessReportCertPath: FileInputState,
 } & StoreModifyFormState
 
 const initState = ({
@@ -41,64 +41,64 @@ const initState = ({
    session,
    storeDetail
 }: StoreModifyFormStateInitProps) => ({
-  storeId: id,
-  healthCertUrl: {
+  id: id,
+  healthCertPath: {
     name: storeDetail?.healthCertPath ?? '',
     file: null
   },
   healthCertRegisterDate: formatDate(storeDetail?.healthCertRegisterDate) ?? '',
-  carRegistrationCertUrl: {
+  carRegistrationCertPath: {
   name: storeDetail?.carRegistrationCertPath ?? '',
     file: null
   },
-  businessReportCertUrl: {
+  businessReportCertPath: {
     name: storeDetail?.businessReportCertPath ?? '',
     file: null
   },
   isValidated: true,
   session: session,
-})
+} as StoreDocumentsModifyState)
 
 const onModifyData = async (modifyData: StoreDocumentsModifyState) => {
   if (!modifyData.isValidated) {
     return
   }
 
-  if (modifyData.healthCertUrl.file) {
+  if (modifyData.healthCertPath.file) {
     const result = await postStoreDocumentFile({
       storeId: modifyData.id,
       storeDocumentType: 'HEALTH_CERT',
-      file: modifyData.healthCertUrl.file,
+      file: modifyData.healthCertPath.file,
       session: modifyData.session
     })
-    modifyData.healthCertUrl.name = result.data
+    modifyData.healthCertPath.name = result.data
   }
 
-  if (modifyData.carRegistrationCertUrl.file) {
+  if (modifyData.carRegistrationCertPath.file) {
     const result = await postStoreDocumentFile({
       storeId: modifyData.id,
       storeDocumentType: 'CAR_REGISTRATION_CERT',
-      file: modifyData.carRegistrationCertUrl.file,
+      file: modifyData.carRegistrationCertPath.file,
       session: modifyData.session
     })
-    modifyData.carRegistrationCertUrl.name = result.data
+    modifyData.carRegistrationCertPath.name = result.data
   }
 
-  if (modifyData.businessReportCertUrl.file) {
+  if (modifyData.businessReportCertPath.file) {
     const result = await postStoreDocumentFile({
       storeId: modifyData.id,
       storeDocumentType: 'BUSINESS_REPORT_CERT',
-      file: modifyData.businessReportCertUrl.file,
+      file: modifyData.businessReportCertPath.file,
       session: modifyData.session
     })
-    modifyData.businessReportCertUrl.name = result.data
+    modifyData.businessReportCertPath.name = result.data
   }
 
   return await putStoreDocuments(modifyData.id, {
-    healthCertUrl: modifyData.healthCertUrl.name,
+    healthCertPath: modifyData.healthCertPath.name,
     healthCertRegisterDate: modifyData.healthCertRegisterDate,
-    carRegistrationCertUrl: modifyData.carRegistrationCertUrl.name,
-    businessReportCertUrl: modifyData.businessReportCertUrl.name,
+    carRegistrationCertPath: modifyData.carRegistrationCertPath.name,
+    businessReportCertPath: modifyData.businessReportCertPath.name,
   }, modifyData.session)
 }
 
@@ -160,11 +160,11 @@ const StoreDocumentsModifyModal = ({ storeId }: StoreProps) => {
       <>
         <Stack spacing={1}>
           <StoreImageField
-            id={"healthCertUrl"}
+            id={"healthCertPath"}
             label={"보건증"}
-            data={modifyData.healthCertUrl}
-            setData={(healthCertUrl) => {
-              setModifyData((prev) => ({ ...prev, healthCertUrl: healthCertUrl }))
+            data={modifyData.healthCertPath}
+            setData={(healthCertPath) => {
+              setModifyData((prev) => ({ ...prev, healthCertPath: healthCertPath }))
             }}
           />
           <StoreDateField
@@ -175,19 +175,19 @@ const StoreDocumentsModifyModal = ({ storeId }: StoreProps) => {
             }}
           />
           <StoreImageField
-            id={"carRegistrationCertUrl"}
+            id={"carRegistrationCertPath"}
             label={"자동차 등록증"}
-            data={modifyData.carRegistrationCertUrl}
-            setData={(carRegistrationCertUrl) => {
-              setModifyData((prev) => ({ ...prev, carRegistrationCertUrl: carRegistrationCertUrl }))
+            data={modifyData.carRegistrationCertPath}
+            setData={(carRegistrationCertPath) => {
+              setModifyData((prev) => ({ ...prev, carRegistrationCertPath: carRegistrationCertPath }))
             }}
           />
           <StoreImageField
-            id={"businessReportCertUrl"}
+            id={"businessReportCertPath"}
             label={"영업 신고증"}
-            data={modifyData.businessReportCertUrl}
-            setData={(businessReportCertUrl) => {
-              setModifyData((prev) => ({ ...prev, businessReportCertUrl: businessReportCertUrl }))
+            data={modifyData.businessReportCertPath}
+            setData={(businessReportCertPath) => {
+              setModifyData((prev) => ({ ...prev, businessReportCertPath: businessReportCertPath }))
             }}
           />
           <ConfirmButton
