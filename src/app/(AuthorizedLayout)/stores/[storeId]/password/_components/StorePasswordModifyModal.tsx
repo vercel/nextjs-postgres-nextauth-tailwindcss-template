@@ -33,12 +33,12 @@ const initState = ({ storeId, session }: {
   storeId: string,
   session: Session | null
 }) => ({
-  storeId: storeId,
+  id: storeId,
   password: initBaseState(),
   confirmPassword: initBaseState(),
   isValidated: false,
   session: session,
-})
+} as StorePasswordModifyState)
 
 const onModifyData = async (modifyData: StorePasswordModifyState) => {
   if (!modifyData.isValidated) {
@@ -55,7 +55,7 @@ const StorePasswordModifyModal = ({ storeId }: StoreProps) => {
   const { data: session } = useSession()
   const [modifyData, setModifyData] = useState<StorePasswordModifyState>(
     initState({
-      id: id,
+      storeId,
       session
     })
   )

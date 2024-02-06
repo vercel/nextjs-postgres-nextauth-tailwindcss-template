@@ -7,7 +7,7 @@ export const putStorePassword = async (
   request: StorePasswordModifyRequest,
   session?: Session | null
 ) => await clientFetch(
-  `/stores/${storeId}/password`,
+  `/stores/${storeId}/manager-accounts/password`,
   {
     method: 'PUT',
     body: JSON.stringify(request)
