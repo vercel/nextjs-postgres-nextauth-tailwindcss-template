@@ -4,7 +4,7 @@
  * @property id           메뉴 ID
  * @property createdDate  등록일
  * @property name         메뉴명
- * @property imageUrl     이미지 URL
+ * @property imagePath    이미지 경로
  * @property price        가격
  * @property storeId      메뉴명
  * @property storeName    이미지 URL
@@ -14,7 +14,7 @@ interface MenuResponse {
   id: number,
   createdDate: Date,
   name: string,
-  imageUrl: string,
+  imagePath: string,
   price: number,
   storeId: string,
   storeName: string,

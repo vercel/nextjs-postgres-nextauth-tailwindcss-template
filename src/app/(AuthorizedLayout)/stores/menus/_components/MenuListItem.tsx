@@ -26,10 +26,10 @@ const MenuListItem = ({ menu }: Props) => {
         </Link>
       </TableCell>
       <TableCell className={styles.tableColumn}>
-        {menu.imageUrl
+        {menu.imagePath
           ? (
             <Image
-              src={storeMenuImageUrl(menu.storeId, menu.imageUrl)}
+              src={storeMenuImageUrl(menu.storeId, menu.imagePath)}
               width={0}
               height={0}
               sizes={"100%"}
