@@ -15,7 +15,7 @@ import {
 } from '@/app/(AuthorizedLayout)/stores/_lib/validated'
 import { invalidateStoresQueries } from '@/app/(AuthorizedLayout)/stores/_lib/invalidateQueries'
 import TextField from '@/app/(AuthorizedLayout)/_components/form/TextField'
-import StoreImageField from '@/app/(AuthorizedLayout)/stores/_components/StoreImageField'
+import FileField from '@/app/(AuthorizedLayout)/_components/form/FileField'
 import StoreBankAccountFieldGroup from '@/app/(AuthorizedLayout)/stores/_components/StoreBankAccountFieldGroup'
 import StoreCategoryRadioGroup from '@/app/(AuthorizedLayout)/stores/_components/StoreCategoryRadioGroup'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
@@ -202,7 +202,7 @@ const StoreModifyModal = ({ storeId }: StoreProps) => {
             onChange={onChangeName}
             required
           />
-          <StoreImageField
+          <FileField
             id={"imagePath"}
             label={"이미지"}
             data={modifyData.imagePath}

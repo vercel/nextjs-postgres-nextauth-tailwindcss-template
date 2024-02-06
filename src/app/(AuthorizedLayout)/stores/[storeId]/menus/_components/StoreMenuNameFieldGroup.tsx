@@ -9,12 +9,12 @@ import {
 
 type Props = {
   data: {
-    menuName: TextFieldState,
-    menuEnglishName: TextFieldState,
+    name: TextFieldState,
+    englishName: TextFieldState,
   },
   setData: {
-    menuName: (menuNameState: TextFieldState) => void,
-    menuEnglishName: (menuEnglishNameState: TextFieldState) => void,
+    bane: (menuNameState: TextFieldState) => void,
+    englishName: (menuEnglishNameState: TextFieldState) => void,
   },
   onValidated: () => void
 }
@@ -27,7 +27,7 @@ const StoreMenuNameFieldGroup = ({
   const onChangeMenuName = (event: ChangeEvent<HTMLInputElement>) => {
     const menuName = event.target.value
     const errorMessage = menuNameValidated(menuName)
-    setData.menuName({
+    setData.bane({
       value: menuName,
       isError: errorMessage !== '',
       errorMessage: errorMessage
@@ -38,7 +38,7 @@ const StoreMenuNameFieldGroup = ({
   const onChangeMenuEnglishName = (event: ChangeEvent<HTMLInputElement>) => {
     const menuEnglishName = event.target.value
     const errorMessage = menuEnglishNameValidated(menuEnglishName)
-    setData.menuEnglishName({
+    setData.englishName({
       value: menuEnglishName,
       isError: errorMessage !== '',
       errorMessage: errorMessage
@@ -56,14 +56,14 @@ const StoreMenuNameFieldGroup = ({
           <BaseTextField
             id={'menuName'}
             placeholder={'메뉴명'}
-            state={data.menuName}
+            state={data.name}
             onChange={onChangeMenuName}
             className={styles.menuNameTextField}
           />
           <BaseTextField
             id={'menuEnglishName'}
             placeholder={'영문 메뉴명(선택사항)'}
-            state={data.menuEnglishName}
+            state={data.englishName}
             onChange={onChangeMenuEnglishName}
             className={styles.menuEnglishNameTextField}
           />

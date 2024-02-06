@@ -6,16 +6,14 @@ import styles from './storeMenuRegister.module.css'
 import { initBaseState, TextFieldState } from '@/app/_components/BaseTextField'
 import { useRouter } from 'next/navigation'
 import BaseModal from '@/app/_components/BaseModal'
-import { BasicButton } from '@/app/_components/BasicButton'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
 import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
 import { Session } from 'next-auth'
 import TextField from '@/app/(AuthorizedLayout)/_components/form/TextField'
-import StoreImageField from '@/app/(AuthorizedLayout)/stores/_components/StoreImageField'
+import FileField from '@/app/(AuthorizedLayout)/_components/form/FileField'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import { FileInputState, FormState } from '@/app/(AuthorizedLayout)/_models/state'
-import { postStoreImage } from '@/app/(AuthorizedLayout)/stores/_lib/postStoreImage'
 import { postStoreMenu } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/register/_lib/postStoreMenu'
 import { StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
 import {
@@ -25,8 +23,7 @@ import StoreMenuNameFieldGroup
   from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_components/StoreMenuNameFieldGroup'
 import { priceValidated } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/register/_lib/validated'
 import StoreTextareaGroup from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_components/StoreTextareaGroup'
-import StoreTextEditorGroup
-  from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_components/StoreTextEditorGroup'
+import StoreTextEditorGroup from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_components/StoreTextEditorGroup'
 import { postStoreMenuImage } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_lib/postStoreMenuImage'
 import ConfirmButton from '@/app/(AuthorizedLayout)/_components/form/ConfirmButton'
 
@@ -36,7 +33,7 @@ import ConfirmButton from '@/app/(AuthorizedLayout)/_components/form/ConfirmButt
  * @property menuName        메뉴명
  * @property menuEnglishName 영문 메뉴명
  * @property price           가격
- * @property imageUrl        이미지 URL
+ * @property imagePath       이미지 경로
  * @property allergies       원산지 및 알러지 정보
  * @property description     상품설명
  */
@@ -45,7 +42,7 @@ export type StoreMenuRegisterState = {
   menuName: TextFieldState,
   menuEnglishName: TextFieldState,
   price: TextFieldState,
-  imageUrl: FileInputState,
+  imagePath: FileInputState,
   allergies: string,
   description: string,
 } & FormState
@@ -70,19 +67,19 @@ const onRegisterData = async (registerData: StoreMenuRegisterState) => {
     return
   }
 
-  if (registerData.imageUrl.file) {
+  if (registerData.imagePath.file) {
     const result = await postStoreMenuImage({
       storeId: registerData.storeId,
-      file: registerData.imageUrl.file,
+      file: registerData.imagePath.file,
       session: registerData.session })
-    registerData.imageUrl.name = result.data
+    registerData.imagePath.name = result.data
   }
 
   return await postStoreMenu(registerData.storeId, {
     name: registerData.menuName.value,
     englishName: registerData.menuEnglishName.value,
     price: registerData.price.value === '' ? 0 : Number(registerData.price.value),
-    imagePath: registerData.imageUrl.name,
+    imagePath: registerData.imagePath.name,
     allergies: registerData.allergies,
     description: registerData.description,
   }, registerData.session)
@@ -150,14 +147,14 @@ const StoreMenuRegisterModal = ({ storeId }: StoreProps) => {
         <Stack spacing={1}>
           <StoreMenuNameFieldGroup
             data={{
-              menuName: registerData.menuName,
-              menuEnglishName: registerData.menuEnglishName,
+              name: registerData.menuName,
+              englishName: registerData.menuEnglishName,
             }}
             setData={{
-              menuName: (menuNameState) => {
+              bane: (menuNameState) => {
                 setRegisterData((prev) => ({ ...prev, menuName: menuNameState }))
               },
-              menuEnglishName: (menuEnglishNameState) => {
+              englishName: (menuEnglishNameState) => {
                 setRegisterData((prev) => ({ ...prev, menuEnglishName: menuEnglishNameState }))
               },
             }}
@@ -170,12 +167,12 @@ const StoreMenuRegisterModal = ({ storeId }: StoreProps) => {
             state={registerData.price}
             onChange={onChangePrice}
           />
-          <StoreImageField
-            id={"imageUrl"}
+          <FileField
+            id={"imagePath"}
             label={"이미지"}
-            data={registerData.imageUrl}
-            setData={(imageUrl) => {
-              setRegisterData((prev) => ({ ...prev, imagePath: imageUrl }))
+            data={registerData.imagePath}
+            setData={(imagePath) => {
+              setRegisterData((prev) => ({ ...prev, imagePath: imagePath }))
             }}
           />
           <StoreTextareaGroup

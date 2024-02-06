@@ -14,7 +14,7 @@ import useStoreDetail from '@/app/(AuthorizedLayout)/stores/[storeId]/_hooks/use
 import Loading from '@/app/(AuthorizedLayout)/_components/layout/Loading'
 import { StoreModifyFormState } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/storeModifyFormState'
 import { StoreModifyFormStateInitProps, StoreProps } from '@/app/(AuthorizedLayout)/stores/[storeId]/_models/props'
-import StoreImageField from '@/app/(AuthorizedLayout)/stores/_components/StoreImageField'
+import FileField from '@/app/(AuthorizedLayout)/_components/form/FileField'
 import { putStoreDocuments } from '@/app/(AuthorizedLayout)/stores/[storeId]/documents/_lib/putStoreDocuments'
 import StoreDateField from '../../../_components/StoreDateField'
 import { formatDate } from '@/app/(AuthorizedLayout)/_lib/date'
@@ -159,7 +159,7 @@ const StoreDocumentsModifyModal = ({ storeId }: StoreProps) => {
     >
       <>
         <Stack spacing={1}>
-          <StoreImageField
+          <FileField
             id={"healthCertPath"}
             label={"보건증"}
             data={modifyData.healthCertPath}
@@ -174,7 +174,7 @@ const StoreDocumentsModifyModal = ({ storeId }: StoreProps) => {
               setModifyData((prev) => ({ ...prev, healthCertRegisterDate: healthCertRegisterDate }))
             }}
           />
-          <StoreImageField
+          <FileField
             id={"carRegistrationCertPath"}
             label={"자동차 등록증"}
             data={modifyData.carRegistrationCertPath}
@@ -182,7 +182,7 @@ const StoreDocumentsModifyModal = ({ storeId }: StoreProps) => {
               setModifyData((prev) => ({ ...prev, carRegistrationCertPath: carRegistrationCertPath }))
             }}
           />
-          <StoreImageField
+          <FileField
             id={"businessReportCertPath"}
             label={"영업 신고증"}
             data={modifyData.businessReportCertPath}

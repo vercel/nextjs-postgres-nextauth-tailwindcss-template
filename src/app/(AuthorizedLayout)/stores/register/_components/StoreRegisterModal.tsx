@@ -20,7 +20,7 @@ import { Session } from 'next-auth'
 import { postStore } from '@/app/(AuthorizedLayout)/stores/register/_lib/postStore'
 import { invalidateStoresQueries } from '@/app/(AuthorizedLayout)/stores/_lib/invalidateQueries'
 import TextField from '@/app/(AuthorizedLayout)/_components/form/TextField'
-import StoreImageField from '@/app/(AuthorizedLayout)/stores/_components/StoreImageField'
+import FileField from '@/app/(AuthorizedLayout)/_components/form/FileField'
 import StoreCategoryRadioGroup from '@/app/(AuthorizedLayout)/stores/_components/StoreCategoryRadioGroup'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import { FileInputState } from '@/app/(AuthorizedLayout)/_models/state'
@@ -215,7 +215,7 @@ const StoreRegisterModal = () => {
             onChange={onChangeName}
             required
           />
-          <StoreImageField
+          <FileField
             id={"imagePath"}
             label={"이미지"}
             data={registerData.imagePath}

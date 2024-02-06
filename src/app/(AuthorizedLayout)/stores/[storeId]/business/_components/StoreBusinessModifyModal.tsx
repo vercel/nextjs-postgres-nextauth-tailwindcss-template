@@ -22,7 +22,7 @@ import {
   businessNumberValidated,
   ownerValidated
 } from '@/app/(AuthorizedLayout)/stores/[storeId]/business/_lib/validated'
-import StoreImageField from '@/app/(AuthorizedLayout)/stores/_components/StoreImageField'
+import FileField from '@/app/(AuthorizedLayout)/_components/form/FileField'
 import { FileInputState } from '@/app/(AuthorizedLayout)/_models/state'
 import { postStoreDocumentFile } from '@/app/(AuthorizedLayout)/stores/[storeId]/_lib/postStoreDocumentFile'
 
@@ -198,7 +198,7 @@ const StoreBusinessModifyModal = ({ storeId }: StoreProps) => {
             state={modifyData.owner}
             onChange={onChangeOwner}
           />
-          <StoreImageField
+          <FileField
             id={"registrationPath"}
             label={"사업자 등록증"}
             data={modifyData.registrationPath}

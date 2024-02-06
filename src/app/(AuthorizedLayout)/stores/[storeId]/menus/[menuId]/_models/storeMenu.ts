@@ -17,7 +17,7 @@ export interface StoreMenu {
   name: string,
   englishName: string,
   price: number,
-  imageUrl: string,
+  imagePath: string,
   allergies: string,
   description: string,
   createdDate: Date

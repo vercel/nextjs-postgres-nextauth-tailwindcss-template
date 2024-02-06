@@ -35,7 +35,7 @@ const StoreMenuListItem = ({ storeId, menu }: Props) => {
         }
       </TableCell>
       <TableCell className={styles.tableColumn}>
-        <Link href={`/menu/${menu.id}/modify`}>
+        <Link href={`/stores/${storeId}/menus/${menu.id}`}>
           <Typography variant="h6" fontWeight={600}>
             {menu.name}
           </Typography>

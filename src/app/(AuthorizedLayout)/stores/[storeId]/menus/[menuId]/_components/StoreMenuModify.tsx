@@ -24,7 +24,7 @@ import { format } from 'date-fns/format'
 import StoreMenuNameFieldGroup
   from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_components/StoreMenuNameFieldGroup'
 import TextField from '@/app/(AuthorizedLayout)/_components/form/TextField'
-import StoreImageField from '@/app/(AuthorizedLayout)/stores/_components/StoreImageField'
+import FileField from '@/app/(AuthorizedLayout)/_components/form/FileField'
 import StoreTextareaGroup from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_components/StoreTextareaGroup'
 import StoreTextEditorGroup from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_components/StoreTextEditorGroup'
 import ConfirmButton from '@/app/(AuthorizedLayout)/_components/form/ConfirmButton'
@@ -32,20 +32,20 @@ import ConfirmButton from '@/app/(AuthorizedLayout)/_components/form/ConfirmButt
 /**
  * 메뉴 수정 State.
  *
- * @property menuName        메뉴명
- * @property menuEnglishName 영문 메뉴명
- * @property price           가격
- * @property imageUrl        이미지 URL
- * @property allergies       원산지 및 알러지 정보
- * @property description     상품설명
+ * @property name        메뉴명
+ * @property englishName 영문 메뉴명
+ * @property price       가격
+ * @property imagePath   이미지 경로
+ * @property allergies   원산지 및 알러지 정보
+ * @property description 상품설명
  */
 export type StoreMenuModifyState = {
-  menuId: number,
+  id: number,
   storeId: string,
-  menuName: TextFieldState,
-  menuEnglishName: TextFieldState,
+  name: TextFieldState,
+  englishName: TextFieldState,
   price: TextFieldState,
-  imageUrl: FileInputState,
+  imagePath: FileInputState,
   allergies: string,
   description: string,
 } & FormState
@@ -56,13 +56,13 @@ const initState = ({
   session,
   storeMenu
 }: StoreMenuModifyFormStateInitProps) => ({
-  menuId: menuId,
+  id: menuId,
   storeId: storeId,
-  menuName: initBaseState(storeMenu.name),
-  menuEnglishName: initBaseState(storeMenu.englishName),
+  name: initBaseState(storeMenu.name),
+  englishName: initBaseState(storeMenu.englishName),
   price: initBaseState(storeMenu.price.toString()),
   imagePath: {
-    name: storeMenu.imageUrl,
+    name: storeMenu.imagePath,
     file: null
   },
   allergies: storeMenu.allergies,
@@ -76,19 +76,19 @@ const onModifyData = async (modifyData: StoreMenuModifyState) => {
     return
   }
 
-  if (modifyData.imageUrl.file) {
+  if (modifyData.imagePath.file) {
     const result = await postStoreMenuImage({
       storeId: modifyData.storeId,
-      file: modifyData.imageUrl.file,
+      file: modifyData.imagePath.file,
       session: modifyData.session })
-    modifyData.imageUrl.name = result.data
+    modifyData.imagePath.name = result.data
   }
 
-  return await putStoreMenu(modifyData.menuId, modifyData.storeId, {
-    name: modifyData.menuName.value,
-    englishName: modifyData.menuEnglishName.value,
+  return await putStoreMenu(modifyData.id, modifyData.storeId, {
+    name: modifyData.name.value,
+    englishName: modifyData.englishName.value,
     price: modifyData.price.value === '' ? 0 : Number(modifyData.price.value),
-    imagePath: modifyData.imageUrl.name,
+    imagePath: modifyData.imagePath.name,
     allergies: modifyData.allergies,
     description: modifyData.description,
   }, modifyData.session)
@@ -164,15 +164,15 @@ const StoreMenuModify = ({ storeMenu, session }: { storeMenu: StoreMenu, session
           <LabelField label={'날짜'} data={format(storeMenu.createdDate!, 'yyyy. MM. dd')} />
           <StoreMenuNameFieldGroup
             data={{
-              menuName: modifyData.menuName,
-              menuEnglishName: modifyData.menuEnglishName,
+              name: modifyData.name,
+              englishName: modifyData.englishName,
             }}
             setData={{
-              menuName: (menuNameState) => {
-                setModifyData((prev) => ({ ...prev, menuName: menuNameState }))
+              bane: (nameState) => {
+                setModifyData((prev) => ({ ...prev, name: nameState }))
               },
-              menuEnglishName: (menuEnglishNameState) => {
-                setModifyData((prev) => ({ ...prev, menuEnglishName: menuEnglishNameState }))
+              englishName: (englishNameState) => {
+                setModifyData((prev) => ({ ...prev, englishName: englishNameState }))
               },
             }}
             onValidated={onValidated}
@@ -184,12 +184,12 @@ const StoreMenuModify = ({ storeMenu, session }: { storeMenu: StoreMenu, session
             state={modifyData.price}
             onChange={onChangePrice}
           />
-          <StoreImageField
-            id={"imageUrl"}
+          <FileField
+            id={"imagePath"}
             label={"이미지"}
-            data={modifyData.imageUrl}
-            setData={(imageUrl) => {
-              setModifyData((prev) => ({ ...prev, imagePath: imageUrl }))
+            data={modifyData.imagePath}
+            setData={(imagePath) => {
+              setModifyData((prev) => ({ ...prev, imagePath: imagePath }))
             }}
           />
           <StoreTextareaGroup
