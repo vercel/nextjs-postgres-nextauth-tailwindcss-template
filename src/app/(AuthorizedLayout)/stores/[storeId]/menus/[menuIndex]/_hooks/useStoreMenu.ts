@@ -5,10 +5,10 @@ import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import { useSession } from 'next-auth/react'
-import { getStoreMenu } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuId]/_lib/getStoreMenu'
-import { StoreMenuResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuId]/_models/response'
+import { getStoreMenu } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuIndex]/_lib/getStoreMenu'
+import { StoreMenuResponse } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuIndex]/_models/response'
 
-const useStoreMenu = (menuId: number, storeId: string) => {
+const useStoreMenu = (menuIndex: number, storeId: string) => {
   const router = useRouter()
   const { data: session, status } = useSession()
 
@@ -17,8 +17,8 @@ const useStoreMenu = (menuId: number, storeId: string) => {
     isLoading,
     isError,
     error
-  } = useQuery<Response, Error, StoreMenuResponse, [_1: string, storeId: string, _2: string, menuId: number]>({
-    queryKey: ['stores', storeId, 'menus', menuId],
+  } = useQuery<Response, Error, StoreMenuResponse, [_1: string, storeId: string, _2: string, menuIndex: number]>({
+    queryKey: ['stores', storeId, 'menus', menuIndex],
     queryFn: getStoreMenu,
     staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준
     gcTime: 300 * 1000,

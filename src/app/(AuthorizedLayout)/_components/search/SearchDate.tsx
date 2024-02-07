@@ -1,8 +1,10 @@
 import React from 'react'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { Box, Typography } from '@mui/material'
 import styles from './searchDate.module.css'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3'
+import { ko } from 'date-fns/locale/ko'
+import { formatDate, parseDate } from '@/app/(AuthorizedLayout)/_lib/date'
 
 type Props = {
   label: string,
@@ -19,17 +21,19 @@ const SearchDate = ({
   setStartDate,
   setEndDate,
 }: Props) => {
-  const handleStartDateChange = (startDate: string | null) => {
+  const handleStartDateChange = (value: Date | null) => {
+    const startDate = formatDate(value)
     setStartDate(startDate ?? '')
   }
 
-  const handleEndDateChange = (endDate: string | null) => {
+  const handleEndDateChange = (value: Date | null) => {
+    const endDate = formatDate(value)
     setEndDate(endDate ?? '')
   }
   return (
     <LocalizationProvider
-      dateAdapter={AdapterDayjs}
-      adapterLocale={'ko'}
+      dateAdapter={AdapterDateFns}
+      adapterLocale={ko}
     >
       <Box className={styles.searchDateContainer}>
         <Typography className={styles.searchDateLabel}>
@@ -37,15 +41,15 @@ const SearchDate = ({
         </Typography>
         <Box className={styles.searchDateBox}>
           <DatePicker
-            value={startDate}
-            format="YYYY. MM. DD"
+            value={parseDate(startDate)}
+            format="yyyy. MM. dd"
             className={styles.searchDate}
             onChange={handleStartDateChange}
           />
           <Typography className={styles.searchDateLabel}>~</Typography>
           <DatePicker
-            value={endDate}
-            format="YYYY. MM. DD"
+            value={parseDate(endDate)}
+            format="yyyy. MM. dd"
             className={styles.searchDate}
             onChange={handleEndDateChange}
           />

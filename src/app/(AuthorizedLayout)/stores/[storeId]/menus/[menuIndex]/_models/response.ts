@@ -1,7 +1,7 @@
 /**
  * 매장의 메뉴 조회 응답 Data.
  *
- * @property id           메뉴 ID
+ * @property index        메뉴 고유번호
  * @property name         메뉴명
  * @property englishName  영문 메뉴명
  * @property price        가격
@@ -11,7 +11,7 @@
  * @property createdDate  등록일
  */
 export interface StoreMenuResponse {
-  id: number,
+  index: number,
   name: string,
   englishName: string,
   price: number,

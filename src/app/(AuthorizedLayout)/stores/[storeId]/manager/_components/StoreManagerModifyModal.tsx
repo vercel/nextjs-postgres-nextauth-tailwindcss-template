@@ -38,7 +38,7 @@ const initState = ({
    session,
    storeDetail
 }: StoreModifyFormStateInitProps) => ({
-  id: id,
+  index: id,
   name: initBaseState(storeDetail?.managerName ?? ''),
   phoneNumber: initBaseState(storeDetail?.managerPhoneNumber ?? ''),
   isValidated: true,
@@ -61,7 +61,7 @@ const StoreManagerModifyModal = ({ storeId }: StoreProps) => {
   const { storeDetail, session, isLoading } = useStoreDetail(storeId)
   const [modifyData, setModifyData] = useState<StoreManagerModifyState>(
     initState({
-      id: storeId,
+      index: storeId,
       session,
       storeDetail
     })

@@ -49,7 +49,7 @@ const AdminAccountModifyModal = ({ id }: Props) => {
   }, [isError, error, router])
 
   const [modifyData, setModifyData] = useState<AdminAccountModifyState>({
-    id: id,
+    index: id,
     name: initBaseState(adminAccount?.name),
     phoneNumber: initBaseState(adminAccount?.phoneNumber),
     isValidated: false

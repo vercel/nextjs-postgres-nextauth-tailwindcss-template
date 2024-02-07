@@ -3,7 +3,7 @@ import React, { Suspense } from 'react'
 import StoreMenuDetailContainer
   from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_components/StoreMenuDetailContainer'
 
-const StoreMenuModifyPage = ({ params }: { params: { menuId: string, storeId: string } }) => {
+const StoreMenuModifyPage = ({ params }: { params: { menuIndex: string, storeId: string } }) => {
   return (
     <Suspense fallback={<Loading />}>
       {/* @ts-expect-error Server Component */}

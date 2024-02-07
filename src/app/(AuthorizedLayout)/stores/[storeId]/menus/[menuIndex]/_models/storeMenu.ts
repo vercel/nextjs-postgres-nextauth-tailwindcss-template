@@ -1,7 +1,7 @@
 /**
  *  매장 메뉴 Data.
  *
- *  @property id           메뉴 ID
+ *  @property index        메뉴 고유번호
  *  @property storeId      매장 ID
  *  @property name         메뉴명
  *  @property englishName  영문 메뉴명
@@ -12,7 +12,7 @@
  *  @property createdDate  등록일
  */
 export interface StoreMenu {
-  id: number,
+  index: number,
   storeId: string,
   name: string,
   englishName: string,

@@ -4,7 +4,7 @@ import { IconCircleFilled } from '@tabler/icons-react'
 import styles from './navigationItem.module.css'
 
 export type NavigationItemType = {
-  id: number
+  index: number
   title: string
   href: string
 }
@@ -18,7 +18,7 @@ interface ItemType {
 
 const NavigationItem = ({ navigation, isSelected }: ItemType) => {
   return (
-    <ListSubheader key={navigation.id} disableSticky className={styles.navigationItem}>
+    <ListSubheader key={navigation.index} disableSticky className={styles.navigationItem}>
       <ListItemButton
         component={Link}
         href={navigation.href}

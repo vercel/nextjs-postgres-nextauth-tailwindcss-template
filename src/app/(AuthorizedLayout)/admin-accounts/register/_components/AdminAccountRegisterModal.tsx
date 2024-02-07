@@ -42,7 +42,7 @@ const onRegisterData = async (registerData: AdminAccountRegisterState) => {
 
   const hashedPassword = createHashed(String(registerData.password.value))
   return await postAdminAccount({
-    id: registerData.id.value,
+    index: registerData.id.value,
     password: hashedPassword,
     name: registerData.name.value,
     phoneNumber: registerData.phoneNumber.value
@@ -83,7 +83,7 @@ const AdminAccountRegisterModal = () => {
     const errorMessage = idValidated(id)
     setRegisterData((prev) => ({
       ...prev,
-      id: {
+      index: {
         value: id,
         isError: errorMessage !== '',
         errorMessage: errorMessage

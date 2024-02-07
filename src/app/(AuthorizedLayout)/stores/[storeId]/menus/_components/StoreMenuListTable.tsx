@@ -62,7 +62,7 @@ const StoreMenuListTable = ({ storeId, menus }: Props) => {
             { menus && menus.length > 0
               ? menus.map((menu) => (
                 <StoreMenuListItem
-                  key={menu.id}
+                  key={menu.index}
                   storeId={storeId}
                   menu={menu}
                 />

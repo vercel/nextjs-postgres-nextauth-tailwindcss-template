@@ -13,7 +13,7 @@ interface Props {
 
 const StoreMenuListItem = ({ storeId, menu }: Props) => {
   return (
-    <TableRow key={menu.id}>
+    <TableRow key={menu.index}>
       <TableCell className={styles.tableColumn}>
         <Typography fontSize="15px" fontWeight={500}>
           {format(menu.createdDate!, 'yyyy. MM. dd')}
@@ -35,7 +35,7 @@ const StoreMenuListItem = ({ storeId, menu }: Props) => {
         }
       </TableCell>
       <TableCell className={styles.tableColumn}>
-        <Link href={`/stores/${storeId}/menus/${menu.id}`}>
+        <Link href={`/stores/${storeId}/menus/${menu.index}`}>
           <Typography variant="h6" fontWeight={600}>
             {menu.name}
           </Typography>
@@ -47,7 +47,7 @@ const StoreMenuListItem = ({ storeId, menu }: Props) => {
         </Typography>
       </TableCell>
       <TableCell className={styles.tableColumn}>
-        <Link href={`/stores/${storeId}/menus/${menu.id}`}>수정</Link>
+        <Link href={`/stores/${storeId}/menus/${menu.index}`}>수정</Link>
       </TableCell>
     </TableRow>
   )

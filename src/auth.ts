@@ -49,7 +49,7 @@ export const {
           .replace(ACCESS_TOKEN_HEADER, '')
         console.log("authorize jwt", jwt)
         return {
-          id: String(credentials?.username),
+          index: String(credentials?.username),
           token: String(jwt)
         }
       }
@@ -78,7 +78,7 @@ export const {
         ...session,
         accessToken: String(token.accessToken),
         user: {
-          id: String(token.sub),
+          index: String(token.sub),
           auth: String(token.auth),
         }
       }

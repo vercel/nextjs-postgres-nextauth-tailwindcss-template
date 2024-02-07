@@ -5,10 +5,10 @@ import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
 import { useSession } from 'next-auth/react'
-import { getMenu } from '@/app/(AuthorizedLayout)/stores/menus/[menuId]/_lib/getMenu'
-import { MenuResponse } from '@/app/(AuthorizedLayout)/stores/menus/[menuId]/_models/response'
+import { getMenu } from '@/app/(AuthorizedLayout)/stores/menus/[menuIndex]/_lib/getMenu'
+import { MenuResponse } from '@/app/(AuthorizedLayout)/stores/menus/[menuIndex]/_models/response'
 
-const useMenu = (menuId: number) => {
+const useMenu = (menuIndex: number) => {
   const router = useRouter()
   const { data: session, status } = useSession()
 
@@ -17,8 +17,8 @@ const useMenu = (menuId: number) => {
     isLoading,
     isError,
     error
-  } = useQuery<Response, Error, MenuResponse, [_1: string, _2: string, menuId: number]>({
-    queryKey: ['stores', 'menus', menuId],
+  } = useQuery<Response, Error, MenuResponse, [_1: string, _2: string, menuIndex: number]>({
+    queryKey: ['stores', 'menus', menuIndex],
     queryFn: getMenu,
     staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준
     gcTime: 300 * 1000,

@@ -58,7 +58,7 @@ export type StoreRegisterState = {
 }
 
 const initState = (session: Session | null) => ({
-  id: initBaseState(),
+  index: initBaseState(),
   name: initBaseState(),
   imagePath: {
     name: '',
@@ -85,7 +85,7 @@ const onRegisterData = async (registerData: StoreRegisterState) => {
   }
 
   return await postStore({
-    id: registerData.id.value,
+    index: registerData.id.value,
     name: registerData.name.value,
     imagePath: registerData.imagePath.name,
     telephone: registerData.telephone.value,
@@ -131,7 +131,7 @@ const StoreRegisterModal = () => {
     const errorMessage = idValidated(storeId)
     setRegisterData((prev) => ({
       ...prev,
-      id: {
+      index: {
         value: storeId,
         isError: errorMessage !== '',
         errorMessage: errorMessage

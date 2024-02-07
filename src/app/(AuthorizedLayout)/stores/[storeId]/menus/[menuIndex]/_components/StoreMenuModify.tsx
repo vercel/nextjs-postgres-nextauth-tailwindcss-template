@@ -1,13 +1,13 @@
 import React, { ChangeEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { StoreMenu } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuId]/_models/storeMenu'
+import { StoreMenu } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuIndex]/_models/storeMenu'
 import { initBaseState, TextFieldState } from '@/app/_components/BaseTextField'
 import { FileInputState, FormState } from '@/app/(AuthorizedLayout)/_models/state'
 import {
   StoreMenuModifyFormStateInitProps
-} from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuId]/_models/props'
+} from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuIndex]/_models/props'
 import { postStoreMenuImage } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/_lib/postStoreMenuImage'
-import { putStoreMenu } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuId]/_lib/putStoreMenu'
+import { putStoreMenu } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuIndex]/_lib/putStoreMenu'
 import { Session } from 'next-auth'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { SIGN_OUT_PAGE_PATH } from '@/auth'
@@ -17,7 +17,7 @@ import {
 import { priceValidated } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/register/_lib/validated'
 import { isValidated } from '@/app/(AuthorizedLayout)/_lib/validate'
 import BaseModal from '@/app/_components/BaseModal'
-import styles from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuId]/_components/storeMenuModify.module.css'
+import styles from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuIndex]/_components/storeMenuModify.module.css'
 import { Stack } from '@mui/material'
 import LabelField from '@/app/(AuthorizedLayout)/_components/form/LabelField'
 import { format } from 'date-fns/format'
@@ -40,7 +40,7 @@ import ConfirmButton from '@/app/(AuthorizedLayout)/_components/form/ConfirmButt
  * @property description 상품설명
  */
 export type StoreMenuModifyState = {
-  id: number,
+  index: number,
   storeId: string,
   name: TextFieldState,
   englishName: TextFieldState,
@@ -51,12 +51,12 @@ export type StoreMenuModifyState = {
 } & FormState
 
 const initState = ({
-  menuId,
+  menuIndex,
   storeId,
   session,
   storeMenu
 }: StoreMenuModifyFormStateInitProps) => ({
-  id: menuId,
+  index: menuIndex,
   storeId: storeId,
   name: initBaseState(storeMenu.name),
   englishName: initBaseState(storeMenu.englishName),
@@ -84,7 +84,7 @@ const onModifyData = async (modifyData: StoreMenuModifyState) => {
     modifyData.imagePath.name = result.data
   }
 
-  return await putStoreMenu(modifyData.id, modifyData.storeId, {
+  return await putStoreMenu(modifyData.index, modifyData.storeId, {
     name: modifyData.name.value,
     englishName: modifyData.englishName.value,
     price: modifyData.price.value === '' ? 0 : Number(modifyData.price.value),
@@ -98,7 +98,7 @@ const StoreMenuModify = ({ storeMenu, session }: { storeMenu: StoreMenu, session
   const router = useRouter()
   const [modifyData, setModifyData] = useState<StoreMenuModifyState>(
     initState({
-      menuId : storeMenu.id,
+      menuIndex : storeMenu.index,
       storeId : storeMenu.storeId,
       session,
       storeMenu

@@ -1,13 +1,13 @@
 import { Session } from 'next-auth'
-import { StoreMenu } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuId]/_models/storeMenu'
+import { StoreMenu } from '@/app/(AuthorizedLayout)/stores/[storeId]/menus/[menuIndex]/_models/storeMenu'
 
 export type StoreMenuProps = {
-  menuId: number,
+  menuIndex: number,
   storeId: string,
 }
 
 export type StoreMenuModifyFormStateInitProps = {
-  menuId: number,
+  menuIndex: number,
   storeId: string,
   session: Session | null,
   storeMenu: StoreMenu,

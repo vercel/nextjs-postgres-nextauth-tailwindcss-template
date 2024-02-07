@@ -3,10 +3,10 @@ import { serverFetch } from '@/app/api/_lib/fetch'
 
 export const GET = async (
   request: NextRequest,
-  { params }: { params: { menuId: number, storeId: string } }
+  { params }: { params: { menuIndex: number, storeId: string } }
 ) => {
   return await serverFetch(
-    `/stores/${params.storeId}/menus/${params.menuId}`,
+    `/stores/${params.storeId}/menus/${params.menuIndex}`,
     {}
   )
 }

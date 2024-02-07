@@ -1,6 +1,7 @@
 import { format } from 'date-fns/format'
+import { parse } from 'date-fns'
 
-export const formatDate = (date?: Date) => {
+export const formatDate = (date?: Date | null) => {
   if (date === null || date === undefined) {
     return null
   }
@@ -10,4 +11,8 @@ export const formatDate = (date?: Date) => {
     return null
   }
   return dateString
+}
+
+export const parseDate = (date: string) => {
+  return parse(date, 'yyyy. MM. dd', new Date())
 }

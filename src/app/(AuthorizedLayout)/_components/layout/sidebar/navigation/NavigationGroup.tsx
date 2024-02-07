@@ -7,7 +7,7 @@ import NavigationItem, {
 } from '@/app/(AuthorizedLayout)/_components/layout/sidebar/navigation/NavigationItem'
 
 export type NavigationGroupType = {
-  id: number
+  index: number
   title: string
   icon: Icon
   href: string
@@ -49,11 +49,11 @@ const NavigationGroup = ({ navigation, pathDirect }: ItemType) => {
       .filter((navigationItem) => pathDirect.startsWith(navigationItem.href))
       .sort((a,b) => b.href.length - a.href.length)
       .at(0)
-    return selectItemType?.id === subNavigation.id
+    return selectItemType?.index === subNavigation.index
   }
 
   return (
-    <List component="div" disablePadding key={navigation.id}>
+    <List component="div" disablePadding key={navigation.index}>
       <ListItem className={styles.navigationGroup}>
         <ListItemButton
           component={Link}
@@ -80,7 +80,7 @@ const NavigationGroup = ({ navigation, pathDirect }: ItemType) => {
         <Collapse in={isSelected}>
           {navigation.children.map((subNavigation) => (
             <NavigationItem
-              key={subNavigation.id}
+              key={subNavigation.index}
               navigation={subNavigation}
               isSelected={isItemSelected(subNavigation)}
             />

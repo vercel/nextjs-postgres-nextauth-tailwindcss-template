@@ -51,7 +51,7 @@ const StoreListView = ({ pageParameters: initPageParameters }: StorePageProperti
   }
 
   const handlerRouter = (pageParameters: StorePageParameters) => {
-    const searchParams = new URLSearchParams(...Object.entries(pageParameters))
+    const searchParams = new URLSearchParams(pageParameters as any)
     router.push(`/stores?${searchParams.toString()}`)
 
     setPageParameters(pageParameters)

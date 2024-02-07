@@ -33,7 +33,7 @@ const initState = ({ storeId, session }: {
   storeId: string,
   session: Session | null
 }) => ({
-  id: storeId,
+  index: storeId,
   password: initBaseState(),
   confirmPassword: initBaseState(),
   isValidated: false,

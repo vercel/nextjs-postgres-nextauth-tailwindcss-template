@@ -19,7 +19,7 @@ const MenuListItem = ({ menu }: Props) => {
         </Typography>
       </TableCell>
       <TableCell className={styles.tableColumn}>
-        <Link href={`/stores/menus/${menu.id}`}>
+        <Link href={`/stores/menus/${menu.index}`}>
           <Typography variant="h6" fontWeight={600}>
             {menu.name}
           </Typography>
