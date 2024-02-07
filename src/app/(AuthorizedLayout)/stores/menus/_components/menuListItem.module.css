@@ -3,8 +3,8 @@
 }
 
 .image {
-    width: 200px;
-    height: auto;
+    width: auto;
+    height: 50px;
     position: relative;
     object-fit: cover;
 }

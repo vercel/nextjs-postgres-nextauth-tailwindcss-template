@@ -50,8 +50,8 @@ const MenuListView = ({ pageParameters: initPageParameters }: MenuPageProperties
   }
 
   const handlerRouter = (pageParameters: MenuPageParameters) => {
-    const searchParams = new URLSearchParams(...Object.entries(pageParameters))
-    router.push(`/menus?${searchParams.toString()}`)
+    const searchParams = new URLSearchParams(pageParameters as any)
+    router.push(`/stores/menus?${searchParams.toString()}`)
 
     setPageParameters(pageParameters)
     setSearchPageParameters(pageParameters)
