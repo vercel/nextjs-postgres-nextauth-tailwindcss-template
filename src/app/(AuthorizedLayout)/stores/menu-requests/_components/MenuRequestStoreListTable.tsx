@@ -11,18 +11,23 @@ import {
   Typography
 } from '@mui/material'
 import { Page } from '@/app/(AuthorizedLayout)/_models/common'
-import MenuListItem from '@/app/(AuthorizedLayout)/stores/menus/_components/MenuListItem'
+import MenuRequestStoreListItem
+  from '@/app/(AuthorizedLayout)/stores/menu-requests/_components/MenuRequestStoreListItem'
 
 type Props = {
   page: number,
-  menuPage: Page<MenuResponse> | undefined,
+  menuRequestStorePage: Page<MenuRequestStoreResponse> | undefined,
   handlerPageChange: (
     event: ChangeEvent<unknown>,
     page: number
   ) => void,
 }
 
-const MenuListTable = ({ page, menuPage, handlerPageChange }: Props) => {
+const MenuRequestStoreListTable = ({
+  page,
+  menuRequestStorePage,
+  handlerPageChange
+}: Props) => {
   return (
     <Container
       sx={{
@@ -51,22 +56,12 @@ const MenuListTable = ({ page, menuPage, handlerPageChange }: Props) => {
             <TableRow>
               <TableCell sx={{ textAlign: 'center'}}>
                 <Typography color="textSecondary" variant="h6">
-                  등록일
+                  요청일
                 </Typography>
               </TableCell>
               <TableCell sx={{ textAlign: 'center'}}>
                 <Typography color="textSecondary" variant="h6">
-                  메뉴명
-                </Typography>
-              </TableCell>
-              <TableCell sx={{ textAlign: 'center'}}>
-                <Typography color="textSecondary" variant="h6">
-                  이미지
-                </Typography>
-              </TableCell>
-              <TableCell sx={{ textAlign: 'center'}}>
-                <Typography color="textSecondary" variant="h6">
-                  가격
+                  매장 ID
                 </Typography>
               </TableCell>
               <TableCell sx={{ textAlign: 'center'}}>
@@ -79,21 +74,31 @@ const MenuListTable = ({ page, menuPage, handlerPageChange }: Props) => {
                   메뉴구분
                 </Typography>
               </TableCell>
+              <TableCell sx={{ textAlign: 'center'}}>
+                <Typography color="textSecondary" variant="h6">
+                  메뉴 갯수
+                </Typography>
+              </TableCell>
+              <TableCell sx={{ textAlign: 'center'}}>
+                <Typography color="textSecondary" variant="h6">
+                  -
+                </Typography>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            { menuPage && menuPage.elements > 0
-              ? menuPage?.contents.map((menu, idx) => (
-                <MenuListItem
+            { menuRequestStorePage && menuRequestStorePage.elements > 0
+              ? menuRequestStorePage?.contents.map((menuRequestStore, idx) => (
+                <MenuRequestStoreListItem
                   key={idx}
-                  menu={menu}
+                  menuRequestStore={menuRequestStore}
                 />
               ))
               : (
                 <TableRow>
                   <TableCell colSpan={6} align={'center'} sx={{height: '300px'}}>
                     <Typography color="textSecondary" sx={{ fontSize: '1.5rem', fontWeight: '500' }}>
-                      조회된 메뉴가 없습니다.
+                      조회된 매장이 없습니다.
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -108,7 +113,7 @@ const MenuListTable = ({ page, menuPage, handlerPageChange }: Props) => {
         sx={{
           marginTop: '20px;'
         }}
-        count={menuPage?.pages}
+        count={menuRequestStorePage?.pages}
         page={page}
         onChange={handlerPageChange}
       />
@@ -116,4 +121,4 @@ const MenuListTable = ({ page, menuPage, handlerPageChange }: Props) => {
   )
 }
 
-export default MenuListTable
+export default MenuRequestStoreListTable

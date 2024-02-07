@@ -53,7 +53,7 @@ const Navigations: NavigationGroupType[] = [
       {
         index: 22,
         title: '메뉴 승인',
-        href: '/stores/menus/approvals',
+        href: '/stores/menu-requests',
       },
     ],
   },

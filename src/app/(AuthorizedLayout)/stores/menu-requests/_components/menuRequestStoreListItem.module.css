@@ -1,0 +1,10 @@
+.tableColumn {
+    text-align: center;
+}
+
+.image {
+    width: auto;
+    height: 50px;
+    position: relative;
+    object-fit: cover;
+}

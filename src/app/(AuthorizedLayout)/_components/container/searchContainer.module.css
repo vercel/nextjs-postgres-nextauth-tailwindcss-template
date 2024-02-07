@@ -15,6 +15,7 @@
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 5px;
+    gap: 20px;
 }
 
 .searchLastRow {

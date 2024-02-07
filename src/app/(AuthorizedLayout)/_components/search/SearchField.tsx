@@ -15,7 +15,7 @@ const SearchField = ({
    searchValue,
    setSearchCondition,
    setSearchValue,
-                       children,
+   children,
 }: Props) => {
   console.log('searchCondition', searchCondition)
   const handleSearchConditionChange = (

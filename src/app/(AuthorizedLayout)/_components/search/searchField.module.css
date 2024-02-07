@@ -3,6 +3,7 @@
     flex-direction: row;
     justify-content: flex-start;
     gap: 5px;
+    flex-grow: 1;
 }
 
 .searchCondition {
@@ -17,7 +18,8 @@
 
 .searchValue :global(.MuiOutlinedInput-input) {
     min-width: 100px;
-    max-width: 200px;
+    max-width: 500px;
     padding: 5px 14px;
     height: 35px;
+    flex-grow: 1;
 }

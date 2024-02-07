@@ -15,12 +15,12 @@ export const getMenus = async ({ queryKey }: { queryKey: [_1: string, _2: string
       tags: [
         'stores',
         'menus',
-        ...Object.values(pageParameters)
+        ...Object.values(pageParameters).map((value) => value.toString())
       ]
     }
   })
 
-  console.log("getMenus response", response)
+  console.log("getMenuRequests response", response)
   if (response.status === 401) {
     throw NO_AUTHORIZED
   }

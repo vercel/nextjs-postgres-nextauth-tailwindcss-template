@@ -3,11 +3,10 @@ import { serverFetch } from '@/app/api/_lib/fetch'
 
 export const GET = async (
   request: NextRequest,
+  { params }: { params: { menuIndex: number } }
 ) => {
-  const { searchParams } = new URL(request.url)
-  console.log('getMenus params', searchParams)
   return await serverFetch(
-    `/stores/menus?${searchParams}`,
+    `/stores/menus/${params.menuIndex}`,
     {}
   )
 }
