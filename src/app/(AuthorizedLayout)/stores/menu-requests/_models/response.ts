@@ -7,7 +7,7 @@
  * @property requestMenuCount 승인요청 메뉴 수
  * @property requestDateTime  승인요청 일시
  */
-interface MenuRequestStoreResponse {
+interface MenuRequestStoreListResponse {
   storeId: string,
   storeName: string,
   menuCategoryName: string,

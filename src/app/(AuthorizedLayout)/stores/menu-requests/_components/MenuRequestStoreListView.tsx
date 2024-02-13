@@ -29,7 +29,7 @@ const MenuRequestStoreListView = ({
     data: menuRequestStorePage,
     isError,
     error
-  } = useQuery<Response, Error, Page<MenuRequestStoreResponse>, [_1: string, _2: string, pageParameters: MenuRequestStorePageParameters]>({
+  } = useQuery<Response, Error, Page<MenuRequestStoreListResponse>, [_1: string, _2: string, pageParameters: MenuRequestStorePageParameters]>({
     queryKey: ['stores', 'menu-requests', pageParameters],
     queryFn: getMenuRequestStores,
     staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준

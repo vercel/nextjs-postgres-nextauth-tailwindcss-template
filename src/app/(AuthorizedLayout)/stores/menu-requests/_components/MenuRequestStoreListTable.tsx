@@ -16,7 +16,7 @@ import MenuRequestStoreListItem
 
 type Props = {
   page: number,
-  menuRequestStorePage: Page<MenuRequestStoreResponse> | undefined,
+  menuRequestStorePage: Page<MenuRequestStoreListResponse> | undefined,
   handlerPageChange: (
     event: ChangeEvent<unknown>,
     page: number

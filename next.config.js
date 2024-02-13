@@ -6,9 +6,14 @@ const nextConfig = {
     emotion: true,
   },
   images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 's3.ap-northeast-2.amazonaws.com'
+      }
+    ],
     domains: [
       'localhost',
-      's3.ap-northeast-2.amazonaws.com'
     ],
   },
   async rewrites() {

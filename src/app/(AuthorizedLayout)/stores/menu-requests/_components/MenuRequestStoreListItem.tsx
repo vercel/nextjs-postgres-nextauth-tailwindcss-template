@@ -5,7 +5,7 @@ import styles from './menuRequestStoreListItem.module.css'
 import Link from 'next/link'
 
 interface Props {
-  menuRequestStore: MenuRequestStoreResponse,
+  menuRequestStore: MenuRequestStoreListResponse,
 }
 
 const MenuRequestStoreListItem = ({ menuRequestStore }: Props) => {
@@ -17,9 +17,11 @@ const MenuRequestStoreListItem = ({ menuRequestStore }: Props) => {
         </Typography>
       </TableCell>
       <TableCell className={styles.tableColumn}>
-        <Typography variant="h6" fontWeight={600}>
-          {menuRequestStore.storeId}
-        </Typography>
+        <Link href={`/stores/${menuRequestStore.storeId}/menu-requests`}>
+          <Typography variant="h6" fontWeight={600}>
+            {menuRequestStore.storeId}
+          </Typography>
+        </Link>
       </TableCell>
       <TableCell className={styles.tableColumn}>
         <Typography fontSize="15px" fontWeight={500}>

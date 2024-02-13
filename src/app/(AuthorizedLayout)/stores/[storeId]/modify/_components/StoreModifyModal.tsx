@@ -57,7 +57,7 @@ const initState = ({
    session,
    storeDetail
 }: StoreModifyFormStateInitProps) => ({
-  index: id,
+  id: id,
   name: initBaseState(storeDetail?.name ?? ''),
   imagePath: {
     name: storeDetail?.imagePath ?? '',
@@ -100,7 +100,7 @@ const StoreModifyModal = ({ storeId }: StoreProps) => {
   const { storeDetail, session, isLoading } = useStoreDetail(storeId)
   const [modifyData, setModifyData] = useState<StoreModifyState>(
     initState({
-      index: storeId,
+      id: storeId,
       session,
       storeDetail
     })

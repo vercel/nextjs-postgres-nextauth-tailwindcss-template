@@ -1,0 +1,36 @@
+.tableColumn {
+    text-align: center;
+}
+
+.image {
+    width: auto;
+    height: 50px;
+    position: relative;
+    object-fit: cover;
+}
+
+.overlay {
+}
+
+.overlayModal {
+    width: 375px;
+    min-height: 375px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFF;
+    border-radius: 12px;
+    border: 2px solid #656565;
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    padding: 5px;
+}
+
+.overlayImage {
+    width: 300px;
+    height: auto;
+    position: relative;
+    object-fit: cover;
+}

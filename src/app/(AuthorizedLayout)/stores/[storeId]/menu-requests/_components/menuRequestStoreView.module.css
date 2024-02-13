@@ -1,0 +1,46 @@
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1000px;
+    transform: translate(-50%, -50%);
+}
+
+.infoContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    gap: 5px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+}
+
+.title {
+    font-size: 1rem;
+    font-weight: 700;
+    width: 80px;
+}
+
+.contents {
+    font-size: 1rem;
+    font-weight: 400;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.buttonGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-right: 5px;
+}

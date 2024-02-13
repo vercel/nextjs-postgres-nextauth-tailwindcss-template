@@ -1,4 +1,19 @@
 /**
+ * 판매자 관리 - 메뉴 승인 - 매장별 조회 응답 DTO.
+ *
+ * @property storeId          메뉴명
+ * @property storeName        이미지 URL
+ * @property menuCategoryName 메뉴 구분명
+ * @property menuRequests     메뉴 승인요청 내역
+ */
+export interface MenuRequestStoreDetailResponse {
+  storeId: string,
+  storeName: string,
+  menuCategoryName: string,
+  menuRequests: MenuRequestResponse[],
+}
+
+/**
  *  메뉴 조회 응답 Data.
  *
  *  @property index        메뉴 고유번호
@@ -11,7 +26,7 @@
  *  @property description  상품설명
  *  @property createdDate  등록일
  */
-export interface MenuResponse {
+export interface MenuRequestResponse {
   index: number,
   storeId: string,
   name: string,
