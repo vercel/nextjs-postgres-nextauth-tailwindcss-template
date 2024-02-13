@@ -66,11 +66,6 @@ const MenuRequestStoreListView = ({
   return (
     <>
       <BaseCard title="메뉴 승인">
-        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItem: 'center' }}>
-          <Typography color="textSecondary" sx={{ fontSize: '1.25rem', fontWeight: '600' }}>
-            진행중 : 0건
-          </Typography>
-        </Box>
         <MenuRequestStoreSearchContainer
           pageParameters={searchPageParameters}
           setPageParameters={setSearchPageParameters}
