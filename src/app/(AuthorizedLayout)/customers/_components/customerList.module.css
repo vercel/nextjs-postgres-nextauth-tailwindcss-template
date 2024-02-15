@@ -1,0 +1,21 @@
+.checkboxGroupContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    line-height: 35px;
+}
+
+.checkboxGroupLabel {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.checkboxGroup {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}

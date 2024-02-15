@@ -7,7 +7,7 @@
 }
 
 .searchCondition {
-    width: 100px;
+    width: 120px;
 }
 
 .searchCondition :global(.MuiOutlinedInput-input) {
@@ -16,10 +16,11 @@
     line-height: 35px;
 }
 
+.searchValue {
+    flex-grow: 1;
+}
+
 .searchValue :global(.MuiOutlinedInput-input) {
-    min-width: 100px;
-    max-width: 500px;
     padding: 5px 14px;
     height: 35px;
-    flex-grow: 1;
 }

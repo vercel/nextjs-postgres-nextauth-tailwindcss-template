@@ -1,0 +1,12 @@
+.tableColumn {
+    text-align: center;
+}
+
+.idColumn {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10px;
+}

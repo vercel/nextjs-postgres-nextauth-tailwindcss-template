@@ -49,7 +49,7 @@ export const {
           .replace(ACCESS_TOKEN_HEADER, '')
         console.log("authorize jwt", jwt)
         return {
-          index: String(credentials?.username),
+          id: String(credentials?.username),
           token: String(jwt)
         }
       }
@@ -57,6 +57,7 @@ export const {
   ],
   callbacks: {
     jwt({ token, user }: { token: JWT, user: User }): JWT {
+      console.log("jwt", token, user)
       if (user !== undefined && user.token) {
         return {
           ...token,
@@ -70,6 +71,7 @@ export const {
       session: Session,
       token: JWT,
     }): Session {
+      console.log("session", session, token)
       if (token === undefined) {
         return session
       }
@@ -78,7 +80,7 @@ export const {
         ...session,
         accessToken: String(token.accessToken),
         user: {
-          index: String(token.sub),
+          id: String(token.sub),
           auth: String(token.auth),
         }
       }

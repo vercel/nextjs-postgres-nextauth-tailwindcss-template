@@ -61,7 +61,7 @@ const Navigations: NavigationGroupType[] = [
     index: 3,
     title: '사용자 관리',
     icon: IconUser,
-    href: '/users',
+    href: '/customers',
   },
   {
     index: 4,
@@ -101,7 +101,7 @@ const Navigations: NavigationGroupType[] = [
       {
         index: 62,
         title: '고객센터 정보',
-        href: '/settings/customer-center',
+        href: '/settings/customers-center',
       },
       {
         index: 63,

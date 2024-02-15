@@ -5,7 +5,7 @@ export const GET = async (request: NextRequest) => {
   const { searchParams } = new URL(request.url)
   console.log('getCustomers params', searchParams)
   return await serverFetch(
-   `/stores?${searchParams}`,
+   `/customers?${searchParams}`,
     {}
   )
 }

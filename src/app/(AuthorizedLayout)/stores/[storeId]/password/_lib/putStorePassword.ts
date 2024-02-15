@@ -1,6 +1,6 @@
 import { clientFetch } from '@/app/(AuthorizedLayout)/_lib/fetch'
 import { Session } from 'next-auth'
-import { StorePasswordModifyRequest } from '@/app/(AuthorizedLayout)/stores/[storeId]/password/_models/modify'
+import { StorePasswordModifyRequest } from '@/app/(AuthorizedLayout)/stores/[storeId]/password/_models/request'
 
 export const putStorePassword = async (
   storeId: string,

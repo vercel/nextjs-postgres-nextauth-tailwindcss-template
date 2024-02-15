@@ -6,37 +6,37 @@
     width: 100%;
 }
 
-.rejectButton {
+.cancelButton {
     border-radius: 4px;
     width: 48%;
     height: 50px;
     font-size: 1.2rem;
 }
 
-.rejectButton:global(.MuiButton-contained) {
+.cancelButton:global(.MuiButton-contained) {
     background-color: #696868;
     color: #fff;
 }
 
-.rejectButton:global(.MuiButton-contained.Mui-disabled) {
+.cancelButton:global(.MuiButton-contained.Mui-disabled) {
     color: rgba(0, 0, 0, 0.26);
     box-shadow: none;
     background-color: rgba(0, 0, 0, 0.12);
 }
 
-.approvalButton {
+.confirmButton {
     border-radius: 4px;
     width: 48%;
     height: 50px;
     font-size: 1.2rem;
 }
 
-.approvalButton:global(.MuiButton-contained) {
+.confirmButton:global(.MuiButton-contained) {
     background-color: #F80069;
     color: #D5FF2E;
 }
 
-.approvalButton:global(.MuiButton-contained.Mui-disabled) {
+.confirmButton:global(.MuiButton-contained.Mui-disabled) {
     color: rgba(0, 0, 0, 0.26);
     box-shadow: none;
     background-color: rgba(0, 0, 0, 0.12);

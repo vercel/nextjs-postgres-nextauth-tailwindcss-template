@@ -46,7 +46,7 @@ const initState = ({
   session,
   storeDetail
 }: StoreModifyFormStateInitProps) => ({
-  index: id,
+  id: id,
   name: initBaseState(storeDetail?.businessName ?? ''),
   number: initBaseState(storeDetail?.businessNumber ?? ''),
   owner: initBaseState(storeDetail?.owner ?? ''),
@@ -86,7 +86,7 @@ const StoreBusinessModifyModal = ({ storeId }: StoreProps) => {
   const { storeDetail, session, isLoading } = useStoreDetail(storeId)
   const [modifyData, setModifyData] = useState<StoreBusinessModifyState>(
     initState({
-      index: storeId,
+      id: storeId,
       session,
       storeDetail
     })

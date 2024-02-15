@@ -1,6 +1,6 @@
-import React, { ReactNode, useState } from 'react'
-import { Box, Card, CardContent, Icon, Modal, Stack, Typography } from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close';
+import React, { ReactNode } from 'react'
+import { Box, Card, CardContent, Modal, Stack, Typography } from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close'
 
 type Props = {
   title?: string;

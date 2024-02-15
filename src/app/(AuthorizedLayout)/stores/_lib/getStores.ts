@@ -19,7 +19,7 @@ export const getStores = async ({ queryKey }: { queryKey: [_1: string, pageParam
     }
   })
 
-  console.log("getStores response", response)
+  console.log("getCustomers response", response)
   if (response.status === 401) {
     throw NO_AUTHORIZED
   }
