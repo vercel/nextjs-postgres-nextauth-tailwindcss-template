@@ -1,6 +1,5 @@
 'use client';
 
-import { useFormState } from 'react-dom';
 import {
   TableHead,
   TableRow,
@@ -11,29 +10,25 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { SelectUser } from '@/lib/db';
-import { useInfiniteScroll } from './infinite-scroll';
 import { deleteUser } from './actions';
+import { useRouter } from 'next/navigation';
 
 export function UsersTable({
-  action,
-  search,
-  users
+  users,
+  offset
 }: {
-  action: any;
-  search: string;
   users: SelectUser[];
+  offset: number | null;
 }) {
-  console.log('users table', users.length);
-  const [state, formAction] = useFormState(action, {
-    users,
-    offset: 20
-  });
-  const filteredUsers = search ? users : state.users;
-  const sentinelRef = useInfiniteScroll(formAction);
+  const router = useRouter();
+
+  function onClick() {
+    router.replace(`/?offset=${offset}`);
+  }
 
   return (
-    <form>
-      <div className="border shadow-sm rounded-lg">
+    <>
+      <form className="border shadow-sm rounded-lg">
         <Table>
           <TableHeader>
             <TableRow>
@@ -44,14 +39,22 @@ export function UsersTable({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filteredUsers.map((user) => (
+            {users.map((user) => (
               <UserRow key={user.id} user={user} />
             ))}
           </TableBody>
         </Table>
-      </div>
-      <div ref={sentinelRef} />
-    </form>
+      </form>
+      {offset !== null && (
+        <Button
+          className="mt-4 w-40"
+          variant="secondary"
+          onClick={() => onClick()}
+        >
+          Next Page
+        </Button>
+      )}
+    </>
   );
 }
 

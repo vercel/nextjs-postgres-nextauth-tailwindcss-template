@@ -1,11 +1,9 @@
 import 'server-only';
 
-import { neon, neonConfig } from '@neondatabase/serverless';
+import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { pgTable, serial, varchar } from 'drizzle-orm/pg-core';
 import { eq, ilike } from 'drizzle-orm';
-
-neonConfig.fetchConnectionCache = true;
 
 export const db = drizzle(
   neon(process.env.POSTGRES_URL!, {
@@ -24,23 +22,32 @@ const users = pgTable('users', {
 
 export type SelectUser = typeof users.$inferSelect;
 
-export async function getUsers(search: string, offset: number) {
+export async function getUsers(
+  search: string,
+  offset: number
+): Promise<{
+  users: SelectUser[];
+  newOffset: number | null;
+}> {
   // Always search the full table, not per page
   if (search) {
-    return await db
-      .select()
-      .from(users)
-      .where(ilike(users.name, `%${search}%`))
-      .limit(1000);
+    return {
+      users: await db
+        .select()
+        .from(users)
+        .where(ilike(users.name, `%${search}%`))
+        .limit(1000),
+      newOffset: null
+    };
   }
 
   if (offset === null) {
-    return [];
+    return { users: [], newOffset: null };
   }
 
-  const filteredUsers = await db.select().from(users).limit(20).offset(offset);
-
-  return filteredUsers;
+  const moreUsers = await db.select().from(users).limit(20).offset(offset);
+  const newOffset = moreUsers.length >= 20 ? offset + 20 : null;
+  return { users: moreUsers, newOffset };
 }
 
 export async function deleteUserById(id: number) {
