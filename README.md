@@ -45,6 +45,8 @@ Insert a row for testing:
 INSERT INTO users (id, email, name, username) VALUES (1, 'me@site.com', 'Me', 'username');
 ```
 
+Copy the `.env.example` file to `.env` and update the values.
+
 Finally, run the following commands to start the development server:
 
 ```
