@@ -1,36 +1,25 @@
-import { sql } from '@vercel/postgres';
-import { Card, Title, Text } from '@tremor/react';
-import Search from './search';
-import UsersTable from './table';
-
-interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-}
+import { getUsers } from '@/lib/db';
+import { UsersTable } from './users-table';
+import { Search } from './search';
 
 export default async function IndexPage({
   searchParams
 }: {
-  searchParams: { q: string };
+  searchParams: { q: string; offset: string };
 }) {
   const search = searchParams.q ?? '';
-  const result = await sql`
-    SELECT id, name, username, email 
-    FROM users 
-    WHERE name ILIKE ${'%' + search + '%'};
-  `;
-  const users = result.rows as User[];
+  const offset = searchParams.offset ?? 0;
+  const { users, newOffset } = await getUsers(search, Number(offset));
 
   return (
-    <main className="p-4 md:p-10 mx-auto max-w-7xl">
-      <Title>Users</Title>
-      <Text>A list of users retrieved from a Postgres database.</Text>
-      <Search />
-      <Card className="mt-6">
-        <UsersTable users={users} />
-      </Card>
+    <main className="flex flex-1 flex-col p-4 md:p-6">
+      <div className="flex items-center mb-8">
+        <h1 className="font-semibold text-lg md:text-2xl">Users</h1>
+      </div>
+      <div className="w-full mb-4">
+        <Search value={searchParams.q} />
+      </div>
+      <UsersTable users={users} offset={newOffset} />
     </main>
   );
 }
