@@ -20,7 +20,7 @@ export async function User() {
   }
 
   return (
-    <>
+    <div className="flex items-center gap-4">
       <form
         action={async () => {
           'use server';
@@ -36,6 +36,6 @@ export async function User() {
         width={32}
         alt={`${user.name} avatar`}
       />
-    </>
+    </div>
   );
 }
