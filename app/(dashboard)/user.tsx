@@ -9,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import Link from 'next/link';
 
 export async function User() {
   let session = await auth();
@@ -37,16 +38,22 @@ export async function User() {
         <DropdownMenuItem>Settings</DropdownMenuItem>
         <DropdownMenuItem>Support</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <form
-            action={async () => {
-              'use server';
-              await signOut();
-            }}
-          >
-            <button type="submit">Sign Out</button>
-          </form>
-        </DropdownMenuItem>
+        {user ? (
+          <DropdownMenuItem>
+            <form
+              action={async () => {
+                'use server';
+                await signOut();
+              }}
+            >
+              <button type="submit">Sign Out</button>
+            </form>
+          </DropdownMenuItem>
+        ) : (
+          <DropdownMenuItem>
+            <Link href="/login">Sign In</Link>
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
