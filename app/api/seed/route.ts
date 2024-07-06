@@ -2,6 +2,8 @@ import { db, products, insertProductSchema } from 'lib/db';
 import { generateObject } from 'ai';
 import { openai } from '@ai-sdk/openai';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   //   const result = await generateObject({
   //     model: openai('gpt-4-turbo'),
