@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -24,13 +24,13 @@
     "drizzle-orm": "^0.31.2",
     "drizzle-zod": "^0.5.1",
     "lucide-react": "^0.400.0",
-    "next": "15.0.0-rc.0",
+    "next": "15.0.0-canary.56",
     "next-auth": "5.0.0-beta.19",
     "postcss": "^8.4.39",
     "prettier": "^3.3.2",
     "prop-types": "^15.8.1",
-    "react": "19.0.0-rc-f994737d14-20240522",
-    "react-dom": "19.0.0-rc-f994737d14-20240522",
+    "react": "19.0.0-rc.0",
+    "react-dom": "19.0.0-rc.0",
     "server-only": "^0.0.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.4",

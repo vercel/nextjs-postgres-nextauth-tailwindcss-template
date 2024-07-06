@@ -1,48 +1,33 @@
 'use client';
 
-import { Input } from '@/components/ui/input';
-import { SearchIcon, Spinner } from '@/components/icons';
+import { useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { useTransition, useEffect, useRef, useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { Spinner } from '@/components/icons';
+import { Search } from 'lucide-react';
 
-export function Search(props: { value?: string }) {
+export function SearchInput(props: { value?: string }) {
   const router = useRouter();
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [value, setValue] = useState(props.value);
   const [isPending, startTransition] = useTransition();
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    console.log('value', value);
-    if (value === undefined) {
-      return;
-    } else if (value) {
-      params.set('q', value);
-    } else {
-      params.delete('q');
-    }
-
+  function searchAction(formData: FormData) {
+    let value = formData.get('q') as string;
+    let params = new URLSearchParams({ q: value });
     startTransition(() => {
-      // All navigations are transitions automatically
-      // But wrapping this allow us to observe the pending state
       router.replace(`/?${params.toString()}`);
     });
-  }, [router, value]);
+  }
 
   return (
-    <div className="relative">
-      <SearchIcon className="absolute left-2.5 top-3 h-4 w-4 text-gray-500" />
+    <form action={searchAction} className="relative ml-auto flex-1 md:grow-0">
+      <Search className="absolute left-2.5 top-[.75rem] h-4 w-4 text-muted-foreground" />
       <Input
-        ref={inputRef}
-        value={value ?? ''}
-        onInput={(e) => {
-          setValue(e.currentTarget.value);
-        }}
-        spellCheck={false}
-        className="w-full bg-white shadow-none appearance-none pl-8"
-        placeholder="Search users..."
+        name="q"
+        type="search"
+        placeholder="Search..."
+        className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
       />
       {isPending && <Spinner />}
-    </div>
+    </form>
   );
 }
