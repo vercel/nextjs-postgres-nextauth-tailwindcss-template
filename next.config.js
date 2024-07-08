@@ -8,7 +8,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'avatar.vercel.sh'
+        hostname: '*.public.blob.vercel-storage.com'
       }
     ]
   }

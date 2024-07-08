@@ -12,7 +12,7 @@
 
 This is a starter template using the following stack:
 
-- Framework - [Next.js 14](https://nextjs.org/)
+- Framework - [Next.js (App Router)](https://nextjs.org)
 - Language - [TypeScript](https://www.typescriptlang.org)
 - Auth - [Auth.js](https://authjs.dev)
 - Database - [Postgres](https://vercel.com/postgres)

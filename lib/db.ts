@@ -2,54 +2,71 @@ import 'server-only';
 
 import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
-import { pgTable, serial, varchar } from 'drizzle-orm/pg-core';
-import { eq, ilike } from 'drizzle-orm';
+import {
+  pgTable,
+  text,
+  numeric,
+  integer,
+  timestamp,
+  pgEnum,
+  serial
+} from 'drizzle-orm/pg-core';
+import { count, eq, ilike } from 'drizzle-orm';
+import { createInsertSchema } from 'drizzle-zod';
 
-export const db = drizzle(
-  neon(process.env.POSTGRES_URL!, {
-    fetchOptions: {
-      cache: 'no-store'
-    }
-  })
-);
+export const db = drizzle(neon(process.env.POSTGRES_URL!));
 
-const users = pgTable('users', {
+export const statusEnum = pgEnum('status', ['active', 'inactive', 'archived']);
+
+export const products = pgTable('products', {
   id: serial('id').primaryKey(),
-  name: varchar('name', { length: 50 }),
-  username: varchar('username', { length: 50 }),
-  email: varchar('email', { length: 50 })
+  imageUrl: text('image_url').notNull(),
+  name: text('name').notNull(),
+  status: statusEnum('status').notNull(),
+  price: numeric('price', { precision: 10, scale: 2 }).notNull(),
+  stock: integer('stock').notNull(),
+  availableAt: timestamp('available_at').notNull()
 });
 
-export type SelectUser = typeof users.$inferSelect;
+export type SelectProduct = typeof products.$inferSelect;
+export const insertProductSchema = createInsertSchema(products);
 
-export async function getUsers(
+export async function getProducts(
   search: string,
   offset: number
 ): Promise<{
-  users: SelectUser[];
+  products: SelectProduct[];
   newOffset: number | null;
+  totalProducts: number;
 }> {
   // Always search the full table, not per page
   if (search) {
     return {
-      users: await db
+      products: await db
         .select()
-        .from(users)
-        .where(ilike(users.name, `%${search}%`))
+        .from(products)
+        .where(ilike(products.name, `%${search}%`))
         .limit(1000),
-      newOffset: null
+      newOffset: null,
+      totalProducts: 0
     };
   }
 
   if (offset === null) {
-    return { users: [], newOffset: null };
+    return { products: [], newOffset: null, totalProducts: 0 };
   }
 
-  const moreUsers = await db.select().from(users).limit(20).offset(offset);
-  const newOffset = moreUsers.length >= 20 ? offset + 20 : null;
-  return { users: moreUsers, newOffset };
+  let totalProducts = await db.select({ count: count() }).from(products);
+  let moreProducts = await db.select().from(products).limit(5).offset(offset);
+  let newOffset = moreProducts.length >= 5 ? offset + 5 : null;
+
+  return {
+    products: moreProducts,
+    newOffset,
+    totalProducts: totalProducts[0].count
+  };
 }
 
-export async function deleteUserById(id: number) {
-  await db.delete(users).where(eq(users.id, id));
+export async function deleteProductById(id: number) {
+  await db.delete(products).where(eq(products.id, id));
 }
