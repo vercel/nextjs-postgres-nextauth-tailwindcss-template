@@ -31,21 +31,28 @@ During the deployment, Vercel will prompt you to create a new Postgres database.
 Inside the Vercel Postgres dashboard, create a table based on the schema defined in this repository.
 
 ```
-CREATE TABLE users (
+CREATE TYPE status AS ENUM ('active', 'inactive', 'archived');
+
+CREATE TABLE products (
   id SERIAL PRIMARY KEY,
-  email VARCHAR(255) NOT NULL,
-  name VARCHAR(255),
-  username VARCHAR(255)
+  image_url TEXT NOT NULL,
+  name TEXT NOT NULL,
+  status status NOT NULL,
+  price NUMERIC(10, 2) NOT NULL,
+  stock INTEGER NOT NULL,
+  available_at TIMESTAMP NOT NULL
 );
 ```
 
-Insert a row for testing:
+Then, uncomment `app/api/seed.ts` and hit `http://localhost:3000/api/seed` to seed the database with products.
 
-```
-INSERT INTO users (id, email, name, username) VALUES (1, 'me@site.com', 'Me', 'username');
-```
+Next, copy the `.env.example` file to `.env` and update the values. Follow the instructions in the `.env.example` file to set up your GitHub OAuth application.
 
-Copy the `.env.example` file to `.env` and update the values.
+```bash
+npm i -g vercel
+vercel link
+vercel env pull
+```
 
 Finally, run the following commands to start the development server:
 
