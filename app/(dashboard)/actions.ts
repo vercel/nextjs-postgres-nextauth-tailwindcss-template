@@ -4,7 +4,7 @@ import { deleteProductById } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 
 export async function deleteProduct(formData: FormData) {
-  // Uncomment this to enable deletion
+  // let id = Number(formData.get('id'));
   // await deleteProductById(id);
   // revalidatePath('/');
 }

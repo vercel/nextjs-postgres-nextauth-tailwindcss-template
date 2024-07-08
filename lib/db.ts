@@ -14,13 +14,7 @@ import {
 import { count, eq, ilike } from 'drizzle-orm';
 import { createInsertSchema } from 'drizzle-zod';
 
-export const db = drizzle(
-  neon(process.env.POSTGRES_URL!, {
-    fetchOptions: {
-      cache: 'no-store'
-    }
-  })
-);
+export const db = drizzle(neon(process.env.POSTGRES_URL!));
 
 export const statusEnum = pgEnum('status', ['active', 'inactive', 'archived']);
 

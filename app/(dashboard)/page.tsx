@@ -45,8 +45,7 @@ export default async function ProductsPage({
       <TabsContent value="all">
         <ProductsTable
           products={products}
-          // @ts-ignore
-          offset={newOffset}
+          offset={newOffset ?? 0}
           totalProducts={totalProducts}
         />
       </TabsContent>
