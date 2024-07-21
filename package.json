@@ -24,7 +24,7 @@
     "drizzle-orm": "^0.31.2",
     "drizzle-zod": "^0.5.1",
     "lucide-react": "^0.400.0",
-    "next": "15.0.0-canary.57",
+    "next": "15.0.0-canary.75",
     "next-auth": "5.0.0-beta.19",
     "postcss": "^8.4.39",
     "prettier": "^3.3.2",
