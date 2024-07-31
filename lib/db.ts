@@ -49,7 +49,7 @@ export async function getProducts(
     return {
       products: totalProducts,
       newOffset: 0,
-      totalProducts: totalProducts.length,
+      totalProducts: totalProducts.length
     };
   }
 

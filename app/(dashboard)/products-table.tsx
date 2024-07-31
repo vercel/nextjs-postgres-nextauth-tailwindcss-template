@@ -30,7 +30,7 @@ export function ProductsTable({
   products: SelectProduct[];
   offset: number;
   totalProducts: number;
-  showAll: boolean
+  showAll: boolean;
 }) {
   let router = useRouter();
   let productsPerPage = 5;
