@@ -36,29 +36,27 @@ export async function getProducts(
   offset: number
 ): Promise<{
   products: SelectProduct[];
-  newOffset: number | null;
+  newOffset: number;
   totalProducts: number;
 }> {
   // Always search the full table, not per page
   if (search) {
+    const totalProducts = await db
+      .select()
+      .from(products)
+      .where(ilike(products.name, `%${search}%`))
+      .limit(1000)
     return {
-      products: await db
-        .select()
-        .from(products)
-        .where(ilike(products.name, `%${search}%`))
-        .limit(1000),
-      newOffset: null,
-      totalProducts: 0
+      products: totalProducts,
+      newOffset: 0,
+      totalProducts: totalProducts.length,
     };
   }
 
-  if (offset === null) {
-    return { products: [], newOffset: null, totalProducts: 0 };
-  }
 
   let totalProducts = await db.select({ count: count() }).from(products);
   let moreProducts = await db.select().from(products).limit(5).offset(offset);
-  let newOffset = moreProducts.length >= 5 ? offset + 5 : null;
+  let newOffset = offset;
 
   return {
     products: moreProducts,
