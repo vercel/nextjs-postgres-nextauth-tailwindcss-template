@@ -24,7 +24,7 @@ import { Button } from '@/components/ui/button';
 export function ProductsTable({
   products,
   offset,
-  totalProducts
+  totalProducts,
 }: {
   products: SelectProduct[];
   offset: number;
@@ -34,11 +34,11 @@ export function ProductsTable({
   let productsPerPage = 5;
 
   function prevPage() {
-    router.back();
+    router.push(`/?offset=${offset - productsPerPage}`, { scroll: false });
   }
 
   function nextPage() {
-    router.push(`/?offset=${offset}`, { scroll: false });
+    router.push(`/?offset=${offset + productsPerPage}`, { scroll: false });
   }
 
   return (
@@ -80,7 +80,7 @@ export function ProductsTable({
           <div className="text-xs text-muted-foreground">
             Showing{' '}
             <strong>
-              {Math.min(offset - productsPerPage, totalProducts) + 1}-{offset}
+              {totalProducts === 0 ? 0 : offset + 1}-{Math.min(offset + productsPerPage, totalProducts)}
             </strong>{' '}
             of <strong>{totalProducts}</strong> products
           </div>
@@ -90,7 +90,7 @@ export function ProductsTable({
               variant="ghost"
               size="sm"
               type="submit"
-              disabled={offset === productsPerPage}
+              disabled={offset < productsPerPage}
             >
               <ChevronLeft className="mr-2 h-4 w-4" />
               Prev
@@ -100,7 +100,7 @@ export function ProductsTable({
               variant="ghost"
               size="sm"
               type="submit"
-              disabled={offset + productsPerPage > totalProducts}
+              disabled={offset + productsPerPage >= totalProducts}
             >
               Next
               <ChevronRight className="ml-2 h-4 w-4" />
