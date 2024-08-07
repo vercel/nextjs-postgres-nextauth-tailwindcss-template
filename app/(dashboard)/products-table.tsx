@@ -25,12 +25,10 @@ export function ProductsTable({
   products,
   offset,
   totalProducts,
-  showAll
 }: {
   products: SelectProduct[];
   offset: number;
   totalProducts: number;
-  showAll: boolean;
 }) {
   let router = useRouter();
   let productsPerPage = 5;
@@ -78,11 +76,11 @@ export function ProductsTable({
         </Table>
       </CardContent>
       <CardFooter>
-        {showAll || <form className="flex items-center w-full justify-between">
+        <form className="flex items-center w-full justify-between">
           <div className="text-xs text-muted-foreground">
             Showing{' '}
             <strong>
-              {offset + 1}-{Math.min(offset + productsPerPage, totalProducts)}
+              {totalProducts === 0 ? 0 : offset + 1}-{Math.min(offset + productsPerPage, totalProducts)}
             </strong>{' '}
             of <strong>{totalProducts}</strong> products
           </div>
@@ -108,7 +106,7 @@ export function ProductsTable({
               <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
-        </form>}
+        </form>
       </CardFooter>
     </Card>
   );

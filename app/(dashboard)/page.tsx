@@ -47,7 +47,6 @@ export default async function ProductsPage({
           products={products}
           offset={newOffset ?? 0}
           totalProducts={totalProducts}
-          showAll={search !== ''}
         />
       </TabsContent>
     </Tabs>
