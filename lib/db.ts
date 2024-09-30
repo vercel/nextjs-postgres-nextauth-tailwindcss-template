@@ -70,3 +70,9 @@ export async function getProducts(
 export async function deleteProductById(id: number) {
   await db.delete(products).where(eq(products.id, id));
 }
+
+type NewProduct = typeof products.$inferInsert;
+
+export async function insertProduct(product: NewProduct) {
+  // return db.insert(products).values(product);
+}
