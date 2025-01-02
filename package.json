@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start"
   },
@@ -42,11 +42,6 @@
     "singleQuote": true,
     "tabWidth": 2,
     "trailingComma": "none"
-  },
-  "pnpm": {
-    "overrides": {
-      "@types/react": "19.0.0",
-      "@types/react-dom": "19.0.0"
-    }
   }
 }
+
