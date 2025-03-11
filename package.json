@@ -51,7 +51,6 @@
     "react-dom": "19.0.0",
     "react-hook-form": "^7.54.2",
     "recharts": "^2.15.1",
-    "rimraf": "^6.0.1",
     "server-only": "^0.0.1",
     "styled-jsx": "^5.1.6",
     "tailwind-merge": "^2.6.0",

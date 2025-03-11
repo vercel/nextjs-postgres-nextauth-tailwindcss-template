@@ -1,24 +1,26 @@
-import { execSync } from "child_process";
 import path from "path";
 import fs from "fs";
-import { rimraf } from "rimraf";
 
-// Function to delete a directory with rimraf
+// Function to delete a directory recursively using fs.rmSync
 const deleteDirectory = (directoryPath) => {
     if (fs.existsSync(directoryPath)) {
         console.log(`[INFO] Deleting: ${directoryPath}`);
-        rimraf.sync(directoryPath); // Rimraf forces deletion recursively
-        if (!fs.existsSync(directoryPath)) {
-            console.log(`[SUCCESS] Deleted: ${directoryPath}`);
-        } else {
-            console.error(`[ERROR] Couldn't delete directory: ${directoryPath}`);
+        try {
+            fs.rmSync(directoryPath, { recursive: true, force: true }); // Recursively force delete
+            if (!fs.existsSync(directoryPath)) {
+                console.log(`[SUCCESS] Deleted: ${directoryPath}`);
+            } else {
+                console.error(`[ERROR] Couldn't delete directory: ${directoryPath}`);
+            }
+        } catch (err) {
+            console.error(`[ERROR] Failed to delete directory ${directoryPath}:`, err.message);
         }
     } else {
         console.log(`[INFO] Directory does not exist: ${directoryPath}`);
     }
 };
 
-// Function to recursively find and delete node_modules in subdirectories
+// Function to recursively find and delete `node_modules` in subdirectories
 const deleteNodeModulesRecursively = (dir) => {
     const items = fs.readdirSync(dir, { withFileTypes: true });
 
