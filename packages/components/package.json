@@ -1,0 +1,13 @@
+{
+  "name": "@easeful/components",
+  "version": "0.1.0",
+  "main": "src/index.js",
+  "private": true,
+  "dependencies": {
+    "@radix-ui/react-accordion": "1.2.3",
+    "lucide-react": "0.400.0",
+    "clsx": "2.1.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

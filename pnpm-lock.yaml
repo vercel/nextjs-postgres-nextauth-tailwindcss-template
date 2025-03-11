@@ -193,6 +193,24 @@ importers:
         specifier: ^3.0.7
         version: 3.0.7(@types/node@20.17.6)(@vitest/browser@3.0.7)(jiti@1.21.7)(msw@2.7.3(@types/node@20.17.6)(typescript@5.8.2))(terser@5.39.0)(yaml@2.7.0)
 
+  packages/components:
+    dependencies:
+      '@radix-ui/react-accordion':
+        specifier: 1.2.3
+        version: 1.2.3(@types/react-dom@19.0.0)(@types/react@19.0.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      clsx:
+        specifier: 2.1.1
+        version: 2.1.1
+      lucide-react:
+        specifier: 0.400.0
+        version: 0.400.0(react@19.0.0)
+      react:
+        specifier: ^19.0.0
+        version: 19.0.0
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.0.0(react@19.0.0)
+
 packages:
 
   '@adobe/css-tools@4.4.2':

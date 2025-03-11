@@ -1,0 +1,4 @@
+packages:
+  - 'packages/*'
+  - 'app' # Add your `app` folder if not already listed
+  - 'stories'
