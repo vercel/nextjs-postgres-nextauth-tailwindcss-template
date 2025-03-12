@@ -5,7 +5,8 @@
     "dev:app": "pnpm --filter @easeful/app dev",
     "dev:storybook": "pnpm --filter @easeful/storybook storybook",
     "build:app": "pnpm --filter @easeful/app build",
-    "build:storybook": "pnpm --filter @easeful/storybook build-storybook"
+    "build:storybook": "pnpm --filter @easeful/storybook build-storybook",
+    "clean": "node clean-install.js"
   },
   "prettier": {
     "arrowParens": "always",
