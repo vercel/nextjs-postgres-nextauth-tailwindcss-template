@@ -10,16 +10,13 @@ const dirname =
     ? __dirname
     : path.dirname(fileURLToPath(import.meta.url));
 
-// More info at: https://storybook.js.org/docs/writing-tests/test-addon
 export default defineConfig({
   test: {
     workspace: [
       {
         extends: true,
         plugins: [
-          // The plugin will run tests for the stories defined in your Storybook config
-          // See options at: https://storybook.js.org/docs/writing-tests/test-addon#storybooktest
-          storybookTest({ configDir: path.join(dirname, '.storybook') })
+          storybookTest({ configDir: path.join(dirname, 'sites/storybook/.storybook') })
         ],
         test: {
           name: 'storybook',
@@ -29,7 +26,7 @@ export default defineConfig({
             name: 'chromium',
             provider: 'playwright'
           },
-          setupFiles: ['.storybook/vitest.setup.js']
+          setupFiles: ['sites/storybook/.storybook/vitest.setup.js']
         }
       }
     ]

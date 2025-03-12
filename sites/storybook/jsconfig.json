@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@easeful/components": [
+        "../../packages/components"
+      ]
+    }
+  }
+}
