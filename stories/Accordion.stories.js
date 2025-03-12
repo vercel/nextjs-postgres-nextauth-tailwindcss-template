@@ -4,7 +4,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger
-} from '@easeful/components';
+} from '@/components/ui/accordion';
 
 export default {
   title: 'Components/Accordion',
