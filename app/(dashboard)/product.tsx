@@ -49,7 +49,7 @@ export function Product({ product }: { product: SelectProduct }) {
             <DropdownMenuItem>Edit</DropdownMenuItem>
             <DropdownMenuItem>
               <form action={deleteProduct}>
-                <button type="submit">Delete</button>
+                <button type="submit">Deleete</button>
               </form>
             </DropdownMenuItem>
           </DropdownMenuContent>
