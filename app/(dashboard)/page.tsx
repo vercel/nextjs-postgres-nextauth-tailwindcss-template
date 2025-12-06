@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { ProductsTable } from './products-table';
 import { getProducts } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ProductsPage(
   props: {
     searchParams: Promise<{ q: string; offset: string }>;
