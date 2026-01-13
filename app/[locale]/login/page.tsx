@@ -14,9 +14,10 @@ import {
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { signIn, signInWithMagicLink } from '@/lib/auth-actions';
-import { Mail, Sparkles, Wallet, KeyRound, Zap, Shield, TrendingUp, UserPlus } from 'lucide-react';
+import { Mail, Sparkles, KeyRound, Zap, Shield, TrendingUp, UserPlus } from 'lucide-react';
 import { Link, useRouter } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
+import { Logo } from '@/components/ui/logo';
 
 function LoginForm() {
   const t = useTranslations('pages.login');
@@ -81,7 +82,7 @@ function LoginForm() {
         <Card className="w-full max-w-md animate-fade-in border-primary/20 shadow-2xl">
           <CardHeader className="space-y-4 text-center pb-6">
             <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 ring-4 ring-primary/5">
-              <Wallet className="h-10 w-10 text-primary animate-pulse" />
+              <Logo variant="icon" size={40} className="animate-pulse" />
             </div>
             <CardTitle className="text-2xl sm:text-3xl font-bold">
               {t('redirecting.title')}
@@ -140,12 +141,9 @@ function LoginForm() {
       {/* Left Panel - Branding & Benefits (Hidden on mobile) */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary/10 via-primary/5 to-background p-12 flex-col justify-center">
         <div className="max-w-md">
-          <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary shadow-lg">
-            <Wallet className="h-8 w-8 text-primary-foreground" />
-          </div>
-          <h1 className="text-4xl font-bold mb-4 text-foreground">
-            {t('branding.title')}
-          </h1>
+          <div className="mb-8">
+            <Logo variant="full" size={48} />
+          </div>      
           <p className="text-xl text-muted-foreground mb-8">
             {t('branding.description')}
           </p>
@@ -196,7 +194,7 @@ function LoginForm() {
           <CardHeader className="space-y-3 text-center pb-6">
             {/* Mobile logo */}
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 lg:hidden">
-              <Wallet className="h-8 w-8 text-primary" />
+              <Logo variant="icon" size={32} />
             </div>
             <CardTitle className="text-2xl sm:text-3xl font-bold">
               {t('title')}

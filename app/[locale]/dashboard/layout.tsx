@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import {
   Home,
-  Wallet,
   FolderOpen,
   DollarSign,
   TrendingUp,
@@ -14,6 +13,7 @@ import {
   Receipt,
   History
 } from 'lucide-react';
+import { Logo } from '@/components/ui/logo';
 
 import {
   Breadcrumb,
@@ -115,9 +115,7 @@ function DesktopNav({ t, brandName }: { t: any; brandName: string }) {
         {/* Logo/Brand - Estilo shadcn limpio */}
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
           <Link href="/" className="flex items-center gap-2 font-semibold min-h-[44px] py-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <Wallet className="h-4 w-4 text-primary-foreground" />
-            </div>
+            <Logo variant="icon" size={32} />
             <span className="text-lg">{brandName}</span>
           </Link>
         </div>
@@ -184,9 +182,7 @@ function MobileNav({ t, brandName }: { t: any; brandName: string }) {
           {/* Logo/Brand - Estilo shadcn limpio */}
           <div className="flex h-14 items-center border-b px-4">
             <Link href="/" className="flex items-center gap-2 font-semibold min-h-[44px] py-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <Wallet className="h-4 w-4 text-primary-foreground" />
-              </div>
+              <Logo variant="icon" size={32} />
               <span className="text-lg">{brandName}</span>
             </Link>
           </div>

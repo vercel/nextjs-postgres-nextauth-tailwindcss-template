@@ -26,6 +26,13 @@ export async function generateMetadata({
         ? 'finanzas personales, control de gastos, presupuesto, app financiera, gastos recurrentes, ingresos, tallify'
         : 'personal finance, expense tracking, budget, finance app, recurring expenses, income, tallify',
     metadataBase: new URL('https://tallify.com'),
+    icons: {
+      icon: [
+        { url: '/icon.svg', type: 'image/svg+xml' },
+        { url: '/favicon.ico', sizes: 'any' }
+      ],
+      apple: [{ url: '/icon.svg', type: 'image/svg+xml' }]
+    },
     openGraph: {
       type: 'website',
       locale: locale === 'es' ? 'es_MX' : 'en_US',

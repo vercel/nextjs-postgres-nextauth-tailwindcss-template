@@ -13,9 +13,10 @@ import {
   CardTitle
 } from '@/components/ui/card';
 import { signUp } from '@/lib/auth-actions';
-import { Mail, Wallet, Zap, Shield, TrendingUp, ArrowLeft } from 'lucide-react';
+import { Mail, Zap, Shield, TrendingUp, ArrowLeft } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
+import { Logo } from '@/components/ui/logo';
 
 function SignUpForm() {
   const t = useTranslations('pages.register');
@@ -107,8 +108,8 @@ function SignUpForm() {
       {/* Left Panel - Branding & Benefits (Hidden on mobile) */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary/10 via-primary/5 to-background p-12 flex-col justify-center">
         <div className="max-w-md">
-          <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary shadow-lg">
-            <Wallet className="h-8 w-8 text-primary-foreground" />
+          <div className="mb-8">
+            <Logo variant="full" size={48} />
           </div>
           <h1 className="text-4xl font-bold mb-4 text-foreground">
             {t('branding.title')}
@@ -163,7 +164,7 @@ function SignUpForm() {
           <CardHeader className="space-y-3 text-center pb-6">
             {/* Mobile logo */}
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 lg:hidden">
-              <Wallet className="h-8 w-8 text-primary" />
+              <Logo variant="icon" size={32} />
             </div>
             <CardTitle className="text-2xl sm:text-3xl font-bold">
               {t('title')}
@@ -262,7 +263,7 @@ function SignUpForm() {
                   </span>
                 ) : (
                   <span className="flex items-center gap-2">
-                    <Wallet className="h-5 w-5" />
+                    <Logo variant="icon" size={20} />
                     {t('submitButton')}
                   </span>
                 )}

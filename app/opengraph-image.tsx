@@ -46,21 +46,20 @@ export default async function Image() {
               marginBottom: "40px",
             }}
           >
-            {/* Logo SVG as background */}
-            <div
-              style={{
-                width: "80px",
-                height: "80px",
-                backgroundColor: "#9FFF66", // Verde Vibrante
-                borderRadius: "20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "48px",
-              }}
+            {/* Logo SVG */}
+            <svg
+              width="80"
+              height="80"
+              viewBox="0 0 47 48"
+              style={{ borderRadius: "20px" }}
             >
-              📊
-            </div>
+              <rect width="47" height="48" rx="8" fill="#9FFF66" />
+              <path
+                d="M20 15.829V38.0055H26.44V15.829H37V10.0055L26.44 10L20 15.829Z"
+                fill="#101816"
+              />
+              <path d="M20 15.829V10.0056L10 10V15.829H20Z" fill="#101816" />
+            </svg>
             <div
               style={{
                 fontSize: "72px",

@@ -1,0 +1,113 @@
+'use client';
+
+import { cn } from '@/lib/utils';
+import type { ComponentPropsWithoutRef } from 'react';
+
+interface LogoProps extends Omit<ComponentPropsWithoutRef<'svg'>, 'children'> {
+  variant?: 'full' | 'icon';
+  size?: 'sm' | 'md' | 'lg' | number;
+  className?: string;
+}
+
+export function Logo({ variant = 'full', size = 'md', className, ...props }: LogoProps) {
+  // Size mapping for responsive scaling
+  const sizes = {
+    sm: { width: 93, height: 24 },
+    md: { width: 185, height: 48 },
+    lg: { width: 278, height: 72 }
+  };
+  const iconSizes = {
+    sm: { width: 24, height: 24 },
+    md: { width: 47, height: 48 },
+    lg: { width: 71, height: 72 }
+  };
+
+  // Calculate dimensions
+  const dimensions =
+    typeof size === 'number'
+      ? variant === 'full'
+        ? { width: size * 3.85, height: size }
+        : { width: size, height: size }
+      : variant === 'full'
+        ? sizes[size]
+        : iconSizes[size];
+
+  if (variant === 'icon') {
+    return (
+      <svg
+        width={dimensions.width}
+        height={dimensions.height}
+        viewBox="0 0 47 48"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={cn('shrink-0', className)}
+        role="img"
+        aria-label="Tallify icon"
+        {...props}
+      >
+        <rect width="47" height="48.0055" rx="8" fill="#9EFF66" />
+        <path
+          d="M20 15.829V38.0055H26.44V15.829H37V10.0055L26.44 10L20 15.829Z"
+          fill="#101816"
+        />
+        <path d="M20 15.829V10.0056L10 10V15.829H20Z" fill="#101816" />
+      </svg>
+    );
+  }
+
+  // Full logo with "Tallify" text
+  return (
+    <svg
+      width={dimensions.width}
+      height={dimensions.height}
+      viewBox="0 0 185 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={cn('shrink-0', className)}
+      role="img"
+      aria-label="Tallify logo"
+      {...props}
+    >
+      {/* Icon */}
+      <rect width="47" height="48.0055" rx="8" fill="#9EFF66" />
+      <path
+        d="M20 15.829V38.0055H26.44V15.829H37V10.0055L26.44 10L20 15.829Z"
+        fill="#101816"
+      />
+      <path d="M20 15.829V10.0056L10 10V15.829H20Z" fill="#101816" />
+      {/* "Tallify" text */}
+      <path
+        d="M160.56 46.16V42.6H164.52C165.4 42.6 166.12 42.44 166.68 42.12C167.267 41.8267 167.8 41.24 168.28 40.36L170.12 36.92L170.6 40.6L158.16 18H163.84L173.2 35.76H170.96L179.88 18H185L172.72 41.44C171.813 43.0933 170.747 44.2933 169.52 45.04C168.32 45.7867 166.8 46.16 164.96 46.16H160.56Z"
+        fill="#F4F3F0"
+      />
+      <path
+        d="M143.92 38.56V16.6C143.92 15.2933 144.187 14.1467 144.72 13.16C145.28 12.1467 146.04 11.3733 147 10.84C147.987 10.28 149.16 10 150.52 10H155.8V13.52H152.04C151.08 13.52 150.32 13.8267 149.76 14.44C149.2 15.0533 148.92 15.8667 148.92 16.88V38.56H143.92ZM139.16 21.48V18H144.56V21.48H139.16ZM148.28 21.48V18H155.8V21.48H148.28Z"
+        fill="#F4F3F0"
+      />
+      <path
+        d="M131.32 38.56V18H136.32V38.56H131.32ZM131.16 14.68V10H136.52V14.68H131.16Z"
+        fill="#F4F3F0"
+      />
+      <path d="M123.16 38.56V10H128.16V38.56H123.16Z" fill="#F4F3F0" />
+      <path d="M115.16 38.56V10H120.16V38.56H115.16Z" fill="#F4F3F0" />
+      <path
+        d="M96.7202 39.0814C94.0268 39.0814 91.9202 38.5481 90.4002 37.4814C88.9068 36.3881 88.1602 34.8814 88.1602 32.9614C88.1602 31.8147 88.4535 30.8281 89.0402 30.0014C89.6268 29.1481 90.4935 28.4681 91.6402 27.9614C92.8135 27.4281 94.2402 27.0681 95.9202 26.8814L105.04 25.8814C105.733 25.8014 106.24 25.6281 106.56 25.3614C106.907 25.0681 107.08 24.6681 107.08 24.1614V24.1214C107.08 23.4281 106.827 22.8414 106.32 22.3614C105.84 21.8814 105.133 21.5214 104.2 21.2814C103.267 21.0147 102.147 20.8814 100.84 20.8814C98.8935 20.8814 97.3602 21.1347 96.2402 21.6414C95.1202 22.1214 94.4535 22.8414 94.2402 23.8014H89.2402C89.4268 22.4414 90.0002 21.2947 90.9602 20.3614C91.9202 19.4014 93.2402 18.6814 94.9202 18.2014C96.6002 17.6947 98.6002 17.4414 100.92 17.4414C103.4 17.4414 105.467 17.7214 107.12 18.2814C108.773 18.8147 110.013 19.6281 110.84 20.7214C111.667 21.7881 112.08 23.1347 112.08 24.7614V38.5614H107.28V32.1214L107.8 32.7614C107.213 34.1214 106.387 35.2814 105.32 36.2414C104.28 37.1747 103.027 37.8814 101.56 38.3614C100.12 38.8414 98.5068 39.0814 96.7202 39.0814ZM98.3202 35.5214C99.5468 35.5214 100.68 35.3614 101.72 35.0414C102.787 34.6947 103.72 34.2281 104.52 33.6414C105.32 33.0547 105.947 32.3747 106.4 31.6014C106.853 30.8014 107.08 29.9481 107.08 29.0414V26.6814L107.92 27.8814C107.493 28.1481 106.973 28.3614 106.36 28.5214C105.747 28.6547 104.893 28.7881 103.8 28.9214L96.5202 29.8814C95.4535 30.0147 94.6535 30.2947 94.1202 30.7214C93.6135 31.1481 93.3602 31.7347 93.3602 32.4814C93.3602 33.4947 93.7735 34.2547 94.6002 34.7614C95.4535 35.2681 96.6935 35.5214 98.3202 35.5214Z"
+        fill="#F4F3F0"
+      />
+      <path
+        d="M67.56 38.56V14.04H55V10H85.28V14.04H72.76V38.56H67.56Z"
+        fill="#F4F3F0"
+      />
+    </svg>
+  );
+}
+
+// Responsive logo that shows icon on mobile, full logo on desktop
+export function LogoResponsive({ className, ...props }: Omit<LogoProps, 'variant'>) {
+  return (
+    <>
+      <Logo variant="icon" className={cn('sm:hidden', className)} {...props} />
+      <Logo variant="full" className={cn('hidden sm:block', className)} {...props} />
+    </>
+  );
+}
