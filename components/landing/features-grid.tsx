@@ -1,5 +1,6 @@
 import { BarChart3, RefreshCw, Zap, Sparkles, Eye, TrendingUp } from "lucide-react";
 import { FeatureCard } from "./feature-card";
+import { LandingHeading } from "@/components/ui/landing-heading";
 
 const features = [
   {
@@ -56,13 +57,14 @@ export function FeaturesGrid() {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
-          <h2
+          <LandingHeading
             id="features-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4"
+            variant="section"
+            highlight="controlar tus finanzas"
+            className="mb-4"
           >
-            Todo lo que necesitas para{" "}
-            <span className="text-primary">controlar tus finanzas</span>
-          </h2>
+            Todo lo que necesitas para
+          </LandingHeading>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
             Herramientas poderosas diseñadas para simplificar tu vida financiera
           </p>

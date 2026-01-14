@@ -1,4 +1,5 @@
 import { Heart, Clock, DollarSign } from "lucide-react";
+import { LandingHeading } from "@/components/ui/landing-heading";
 
 const benefits = [
   {
@@ -36,13 +37,14 @@ export function ValuePropsSection() {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
-          <h2
+          <LandingHeading
             id="benefits-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4"
+            variant="section"
+            highlight="Tallify"
+            className="mb-4"
           >
-            Lo que ganas con{" "}
-            <span className="text-primary">Tallify</span>
-          </h2>
+            Lo que ganas con
+          </LandingHeading>
         </div>
 
         {/* Benefits Grid */}

@@ -6,6 +6,7 @@ import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LandingHeading } from "@/components/ui/landing-heading";
 
 const screenshots = [
   {
@@ -93,9 +94,14 @@ export function ScreenshotsCarousel() {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Mira <span className="text-primary">Tallify</span> en acción
-          </h2>
+          <LandingHeading
+            variant="section"
+            highlight="Tallify"
+            suffix=" en acción"
+            className="mb-4"
+          >
+            Mira
+          </LandingHeading>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
             Interfaz moderna diseñada para claridad y velocidad
           </p>

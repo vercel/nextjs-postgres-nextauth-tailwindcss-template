@@ -26,7 +26,8 @@ export default {
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-mono)', 'monospace']
+        mono: ['var(--font-mono)', 'monospace'],
+        heading: ['"Zalando Sans Expanded Variable"', 'var(--font-inter)', 'system-ui', 'sans-serif']
       },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1rem' }],
@@ -53,6 +54,19 @@ export default {
         'overline': [
           '0.75rem',
           { lineHeight: '1rem', fontWeight: '600', letterSpacing: '0.05em' }
+        ],
+        // Landing page headings (Zalando Sans Expanded)
+        'heading-hero': [
+          'clamp(2.5rem, 6vw, 4.5rem)',
+          { lineHeight: '1.1', letterSpacing: '-0.04em' }
+        ],
+        'heading-section': [
+          'clamp(2rem, 5vw, 3.5rem)',
+          { lineHeight: '1.2', letterSpacing: '-0.035em' }
+        ],
+        'heading-impact': [
+          'clamp(2.75rem, 7vw, 5rem)',
+          { lineHeight: '1.1', letterSpacing: '-0.04em' }
         ]
       },
       colors: {

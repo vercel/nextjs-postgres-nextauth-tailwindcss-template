@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { LandingHeading } from "@/components/ui/landing-heading";
 import { Zap, RefreshCw, Mail, Gift } from "lucide-react";
 import { useTranslations } from 'next-intl';
 
@@ -15,12 +16,16 @@ export function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Texto */}
           <div className="text-center lg:text-left animate-fade-in">
-            <h1
+            <LandingHeading
+              level="h1"
+              variant="hero"
               id="hero-heading"
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight max-w-4xl mx-auto lg:mx-0"
+              highlight={t('headline.highlight')}
+              highlightFirst
+              className="max-w-4xl mx-auto lg:mx-0"
             >
-              <span className="text-primary">{t('headline.highlight')}</span> {t('headline.rest')}
-            </h1>
+              {t('headline.rest')}
+            </LandingHeading>
 
             <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mt-6 max-w-2xl mx-auto lg:mx-0">
               {t('subtitle')}

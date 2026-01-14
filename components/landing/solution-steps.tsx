@@ -2,6 +2,7 @@
 
 import { Edit3, BarChart3, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
+import { LandingHeading } from "@/components/ui/landing-heading";
 import { useTranslations } from 'next-intl';
 
 const stepsConfig = [
@@ -39,13 +40,14 @@ export function SolutionSteps() {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16 animate-fade-in">
-          <h2
+          <LandingHeading
             id="solution-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4"
+            variant="section"
+            highlight={t('headlineHighlight')}
+            className="mb-4"
           >
-            {t('headline')}{" "}
-            <span className="text-primary">{t('headlineHighlight')}</span>
-          </h2>
+            {t('headline')}
+          </LandingHeading>
         </div>
 
         {/* Steps Grid */}

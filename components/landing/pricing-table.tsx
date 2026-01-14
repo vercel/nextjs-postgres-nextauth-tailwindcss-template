@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { LandingHeading } from "@/components/ui/landing-heading";
 import Link from "next/link";
 import { useTranslations } from 'next-intl';
 
@@ -72,13 +73,14 @@ export function PricingTable() {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16 animate-fade-in">
-          <h2
+          <LandingHeading
             id="pricing-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4"
+            variant="section"
+            highlight={t('headlineHighlight')}
+            className="mb-4"
           >
-            {t('headline')}{" "}
-            <span className="text-primary">{t('headlineHighlight')}</span>
-          </h2>
+            {t('headline')}
+          </LandingHeading>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
             {t('subtitle')}
           </p>

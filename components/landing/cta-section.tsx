@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { LandingHeading } from "@/components/ui/landing-heading";
 import { CheckCircle2 } from "lucide-react";
 import { useTranslations } from 'next-intl';
 
@@ -12,10 +13,13 @@ export function CTASection() {
     <section className="relative py-20 bg-gradient-to-b from-primary/5 via-background to-background overflow-hidden">
       <div className="container mx-auto px-4 text-center relative z-10">
         {/* Headline */}
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-6 animate-fade-in">
-          {t('headline')}{" "}
-          <span className="text-primary">{t('headlineHighlight')}</span>
-        </h2>
+        <LandingHeading
+          variant="impact"
+          highlight={t('headlineHighlight')}
+          className="mb-6 animate-fade-in"
+        >
+          {t('headline')}
+        </LandingHeading>
 
         {/* Subheadline */}
         <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in-up">

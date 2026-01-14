@@ -2,6 +2,7 @@
 
 import { AlertCircle, TrendingDown, Calendar } from "lucide-react";
 import Image from "next/image";
+import { LandingHeading } from "@/components/ui/landing-heading";
 import { useTranslations } from 'next-intl';
 
 const problemsConfig = [
@@ -36,12 +37,14 @@ export function ProblemSection() {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16 animate-fade-in">
-          <h2
+          <LandingHeading
             id="problem-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4"
+            variant="section"
+            highlight={t('headlineHighlight')}
+            className="mb-4"
           >
-            {t('headline')} <span className="text-primary">{t('headlineHighlight')}</span>
-          </h2>
+            {t('headline')}
+          </LandingHeading>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
             {t('subtitle')}
           </p>

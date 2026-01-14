@@ -1,4 +1,5 @@
 import { TestimonialCard } from "./testimonial-card";
+import { LandingHeading } from "@/components/ui/landing-heading";
 
 const testimonials = [
   {
@@ -37,13 +38,14 @@ export function TestimonialsSection() {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
-          <h2
+          <LandingHeading
             id="testimonials-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4"
+            variant="section"
+            highlight="nuestros usuarios"
+            className="mb-4"
           >
-            Lo que dicen{" "}
-            <span className="text-primary">nuestros usuarios</span>
-          </h2>
+            Lo que dicen
+          </LandingHeading>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
             Historias reales de personas que transformaron su relación con el
             dinero

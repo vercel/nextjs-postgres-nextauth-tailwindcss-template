@@ -1,4 +1,6 @@
 import './globals.css';
+// Optimizado: solo pesos variables sin italic (~25KB menos)
+import '@fontsource-variable/zalando-sans-expanded/wght.css';
 
 import { Analytics } from '@vercel/analytics/react';
 import { Inter, JetBrains_Mono } from 'next/font/google';

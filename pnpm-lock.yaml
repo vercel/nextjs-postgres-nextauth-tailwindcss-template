@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@fontsource-variable/zalando-sans-expanded':
+        specifier: ^5.2.1
+        version: 5.2.1
       '@radix-ui/react-accordion':
         specifier: ^1.2.12
         version: 1.2.12(@types/react-dom@19.0.0)(@types/react@19.0.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -814,6 +817,9 @@ packages:
 
   '@floating-ui/utils@0.2.8':
     resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
+
+  '@fontsource-variable/zalando-sans-expanded@5.2.1':
+    resolution: {integrity: sha512-+gNz/EbGvJPDJNOZ6TCei+CwAhPP96iyyd11W6uqFWQ+68vae0l8ThAwHdeU+jC8WOTgpQOKVkTBxzFRf3DAog==}
 
   '@formatjs/ecma402-abstract@2.3.6':
     resolution: {integrity: sha512-HJnTFeRM2kVFVr5gr5kH1XP6K0JcJtE7Lzvtr3FS/so5f1kpsqqqxy5JF+FRaO6H2qmcMfAUIox7AJteieRtVw==}
@@ -4714,6 +4720,8 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
 
   '@floating-ui/utils@0.2.8': {}
+
+  '@fontsource-variable/zalando-sans-expanded@5.2.1': {}
 
   '@formatjs/ecma402-abstract@2.3.6':
     dependencies:
