@@ -25,15 +25,15 @@ interface LandingHeadingProps {
 
 const variantStyles: Record<HeadingVariant, { base: string; highlight: string }> = {
   hero: {
-    base: 'font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tighter leading-[1.1] [word-spacing:-0.12em]',
+    base: 'font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-normal leading-[1.1] [word-spacing:-0.12em]',
     highlight: 'text-primary font-black'
   },
   section: {
-    base: 'font-heading text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground tracking-tighter leading-[1.2] [word-spacing:-0.1em]',
+    base: 'font-heading text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground tracking-normal leading-[1.2] [word-spacing:-0.1em]',
     highlight: 'text-primary font-bold'
   },
   impact: {
-    base: 'font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tighter leading-[1.1] [word-spacing:-0.12em]',
+    base: 'font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-normal leading-[1.1] [word-spacing:-0.12em]',
     highlight: 'text-primary font-extrabold'
   }
 };
