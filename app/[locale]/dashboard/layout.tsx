@@ -114,7 +114,11 @@ function DesktopNav({ t, brandName }: { t: any; brandName: string }) {
       <div className="flex h-full flex-col gap-2">
         {/* Logo/Brand - Estilo shadcn limpio */}
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-          <Link href="/" className="flex items-center gap-2 font-semibold min-h-[44px] py-2">
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-2 font-semibold min-h-[44px] py-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            aria-label="Tallify - Ir al dashboard"
+          >
             <Logo variant="icon" size={32} />
             <span className="text-lg">{brandName}</span>
           </Link>
@@ -181,7 +185,11 @@ function MobileNav({ t, brandName }: { t: any; brandName: string }) {
         <div className="flex h-full flex-col">
           {/* Logo/Brand - Estilo shadcn limpio */}
           <div className="flex h-14 items-center border-b px-4">
-            <Link href="/" className="flex items-center gap-2 font-semibold min-h-[44px] py-2">
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-2 font-semibold min-h-[44px] py-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              aria-label="Tallify - Ir al dashboard"
+            >
               <Logo variant="icon" size={32} />
               <span className="text-lg">{brandName}</span>
             </Link>

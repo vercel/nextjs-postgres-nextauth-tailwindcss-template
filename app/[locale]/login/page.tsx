@@ -141,9 +141,13 @@ function LoginForm() {
       {/* Left Panel - Branding & Benefits (Hidden on mobile) */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary/10 via-primary/5 to-background p-12 flex-col justify-center">
         <div className="max-w-md">
-          <div className="mb-8">
+          <Link
+            href="/"
+            className="mb-8 inline-block rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            aria-label="Tallify - Ir a inicio"
+          >
             <Logo variant="full" size={48} />
-          </div>      
+          </Link>      
           <p className="text-xl text-muted-foreground mb-8">
             {t('branding.description')}
           </p>
@@ -193,9 +197,13 @@ function LoginForm() {
         <Card className="w-full max-w-md animate-fade-in border-primary/20 shadow-2xl">
           <CardHeader className="space-y-3 text-center pb-6">
             {/* Mobile logo */}
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 lg:hidden">
+            <Link
+              href="/"
+              className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              aria-label="Tallify - Ir a inicio"
+            >
               <Logo variant="icon" size={32} />
-            </div>
+            </Link>
             <CardTitle className="text-2xl sm:text-3xl font-bold">
               {t('title')}
             </CardTitle>
