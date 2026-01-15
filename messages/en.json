@@ -11,18 +11,19 @@
   "pages": {
     "home": {
       "hero": {
+        "badge": "More clarity, less anxiety",
         "headline": {
-          "highlight": "The problem isn't spending.",
-          "rest": "It's deciding without seeing what's ahead."
+          "highlight": "Control your spending",
+          "rest": "without guilt or friction"
         },
-        "subtitle": "Tallify shows you your expenses and real balance before you spend.",
+        "subtitle": "Tallify shows the real impact of every expense before you make it. No judgment, no complicated apps. Just informed decisions.",
         "features": {
-          "free": "Free",
-          "quick": "Easy expense tracking",
-          "recurring": "Recurring expenses",
-          "alerts": "Email alerts"
+          "quick": "Log it in seconds",
+          "impact": "See the impact before you spend",
+          "neutral": "Judgment-free tracking",
+          "balance": "Projected real balance"
         },
-        "cta": "Get started for free →",
+        "cta": "Get started for free",
         "imageAlt": "Tallify dashboard showing balance, expenses and income in real time with main KPIs"
       },
       "problem": {
