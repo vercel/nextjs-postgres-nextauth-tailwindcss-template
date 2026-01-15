@@ -30,7 +30,7 @@ During the deployment, Vercel will prompt you to create a new Postgres database.
 
 Inside the Vercel Postgres dashboard, create a table based on the schema defined in this repository.
 
-```
+```sql
 CREATE TYPE status AS ENUM ('active', 'inactive', 'archived');
 
 CREATE TABLE products (
@@ -56,7 +56,7 @@ vercel env pull
 
 Finally, run the following commands to start the development server:
 
-```
+```bash
 pnpm install
 pnpm dev
 ```
