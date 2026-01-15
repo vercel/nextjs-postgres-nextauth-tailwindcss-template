@@ -11,18 +11,19 @@
   "pages": {
     "home": {
       "hero": {
+        "badge": "Más claridad, menos ansiedad",
         "headline": {
-          "highlight": "El problema no es gastar.",
-          "rest": "Es decidir sin ver lo que viene."
+          "highlight": "Controla tus gastos",
+          "rest": "sin culpa ni fricción"
         },
-        "subtitle": "Tallify te muestra tus gastos y tu balance real antes de gastar.",
+        "subtitle": "Tallify te muestra el impacto real de cada gasto antes de que lo hagas. Sin juicios, sin apps complicadas. Solo decisiones informadas.",
         "features": {
-          "free": "Gratis",
-          "quick": "Registro de gasto fácil",
-          "recurring": "Gastos recurrentes",
-          "alerts": "Alertas por email"
+          "quick": "Registra en segundos",
+          "impact": "Ve el impacto antes de gastar",
+          "neutral": "Seguimiento sin culpa",
+          "balance": "Balance real proyectado"
         },
-        "cta": "Comenzar gratis →",
+        "cta": "Comenzar gratis",
         "imageAlt": "Dashboard de Tallify mostrando balance, gastos e ingresos en tiempo real con KPIs principales"
       },
       "problem": {
@@ -83,29 +84,29 @@
         "headlineHighlight": "Tallify?",
         "subtitle": "Comparamos Tallify con las herramientas más populares para gestión de gastos",
         "thisApp": "Esta herramienta",
-      "features": {
-        "registerTime": "Registro de gasto",
-        "setup": "Configuración inicial",
-        "focused": "Enfocado en finanzas",
-        "balance": "Balance real con recurrentes",
-        "pricing": "Precio (funciones básicas)",
-        "learning": "Curva de aprendizaje",
-        "mobile": "Mobile-first",
-        "dashboard": "Dashboard con KPIs"
-      },
-      "tallify": "Tallify",
-      "notion": "Notion",
-      "excel": "Excel",
-      "apps": "Apps Genéricas",
-      "values": {
-        "quick": "10 segundos",
-        "instant": "0 minutos",
-        "free": "Gratis",
-        "zeroDays": "0 días",
-        "manual": "Manual",
-        "basic": "Básico",
-        "customizable": "Personalizable"
-      },
+        "features": {
+          "registerTime": "Registro de gasto",
+          "setup": "Configuración inicial",
+          "focused": "Enfocado en finanzas",
+          "balance": "Balance real con recurrentes",
+          "pricing": "Precio (funciones básicas)",
+          "learning": "Curva de aprendizaje",
+          "mobile": "Mobile-first",
+          "dashboard": "Dashboard con KPIs"
+        },
+        "tallify": "Tallify",
+        "notion": "Notion",
+        "excel": "Excel",
+        "apps": "Apps Genéricas",
+        "values": {
+          "quick": "10 segundos",
+          "instant": "0 minutos",
+          "free": "Gratis",
+          "zeroDays": "0 días",
+          "manual": "Manual",
+          "basic": "Básico",
+          "customizable": "Personalizable"
+        },
         "note": "* Excel es gratis si ya tienes Microsoft Office. Notion ofrece plan gratuito limitado. Apps genéricas varían en precio."
       },
       "quote": {

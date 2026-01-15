@@ -1,9 +1,9 @@
 'use client';
 
-import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Zap, RefreshCw, Mail, Gift } from "lucide-react";
+import Link from 'next/link';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { BarChart3, Eye, ShieldCheck, Zap } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export function HeroSection() {
@@ -15,11 +15,16 @@ export function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Texto */}
           <div className="text-center lg:text-left animate-fade-in">
+            <div className="inline-flex items-center justify-center rounded-full border border-border bg-card/70 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              {t('badge')}
+            </div>
+
             <h1
               id="hero-heading"
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight max-w-4xl mx-auto lg:mx-0"
+              className="mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight max-w-4xl mx-auto lg:mx-0"
             >
-              <span className="text-primary">{t('headline.highlight')}</span> {t('headline.rest')}
+              <span className="text-primary">{t('headline.highlight')}</span>{' '}
+              {t('headline.rest')}
             </h1>
 
             <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mt-6 max-w-2xl mx-auto lg:mx-0">
@@ -28,83 +33,55 @@ export function HeroSection() {
 
             {/* Feature Points */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-8 max-w-xl mx-auto lg:mx-0">
-              {/* Gratis - Most important (Gold/Amber) */}
-              <div className="group flex items-center gap-3 cursor-pointer transition-transform hover:translate-x-1">
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300"
-                  style={{ backgroundColor: 'hsl(45 93% 47% / 0.1)' }}
-                >
-                  <Gift
-                    className="w-5 h-5 transition-all duration-300 group-hover:animate-bounce"
-                    style={{ color: 'hsl(45 93% 47%)' }}
-                    aria-hidden="true"
-                  />
-                </div>
-                <span
-                  className="text-base font-medium transition-colors duration-300"
-                  style={{ color: 'hsl(var(--foreground))' }}
-                >
-                  <span className="group-hover:text-[hsl(45_93%_47%)] transition-colors">{t('features.free')}</span>
-                </span>
-              </div>
-
-              {/* Registro de gasto fácil (Primary Green) */}
-              <div className="group flex items-center gap-3 cursor-pointer transition-transform hover:translate-x-1">
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300"
-                  style={{ backgroundColor: 'hsl(98 100% 70% / 0.1)' }}
-                >
+              {/* Registro en segundos */}
+              <div className="group flex items-center gap-3 transition-transform hover:translate-x-1">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-primary/10 text-primary transition-all duration-300">
                   <Zap
-                    className="w-5 h-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12"
-                    style={{ color: 'hsl(98 100% 70%)' }}
+                    className="w-5 h-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6"
                     aria-hidden="true"
                   />
                 </div>
-                <span
-                  className="text-base font-medium transition-colors duration-300"
-                  style={{ color: 'hsl(var(--foreground))' }}
-                >
-                  <span className="group-hover:text-[hsl(98_100%_70%)] transition-colors">{t('features.quick')}</span>
+                <span className="text-base font-medium text-foreground transition-colors duration-300 group-hover:text-primary">
+                  {t('features.quick')}
                 </span>
               </div>
 
-              {/* Gastos recurrentes (Blue) */}
-              <div className="group flex items-center gap-3 cursor-pointer transition-transform hover:translate-x-1">
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300"
-                  style={{ backgroundColor: 'hsl(220 89% 61% / 0.1)' }}
-                >
-                  <RefreshCw
-                    className="w-5 h-5 transition-all duration-500 group-hover:rotate-180"
-                    style={{ color: 'hsl(220 89% 61%)' }}
+              {/* Impacto real */}
+              <div className="group flex items-center gap-3 transition-transform hover:translate-x-1">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-primary/10 text-primary transition-all duration-300">
+                  <Eye
+                    className="w-5 h-5 transition-all duration-300 group-hover:scale-110"
                     aria-hidden="true"
                   />
                 </div>
-                <span
-                  className="text-base font-medium transition-colors duration-300"
-                  style={{ color: 'hsl(var(--foreground))' }}
-                >
-                  <span className="group-hover:text-[hsl(220_89%_61%)] transition-colors">{t('features.recurring')}</span>
+                <span className="text-base font-medium text-foreground transition-colors duration-300 group-hover:text-primary">
+                  {t('features.impact')}
                 </span>
               </div>
 
-              {/* Alertas por email (Purple) */}
-              <div className="group flex items-center gap-3 cursor-pointer transition-transform hover:translate-x-1">
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300"
-                  style={{ backgroundColor: 'hsl(280 83% 63% / 0.1)' }}
-                >
-                  <Mail
-                    className="w-5 h-5 transition-all duration-300 group-hover:-translate-y-1 group-hover:scale-110"
-                    style={{ color: 'hsl(280 83% 63%)' }}
+              {/* Seguimiento sin juicio */}
+              <div className="group flex items-center gap-3 transition-transform hover:translate-x-1">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-primary/10 text-primary transition-all duration-300">
+                  <ShieldCheck
+                    className="w-5 h-5 transition-all duration-300 group-hover:scale-110"
                     aria-hidden="true"
                   />
                 </div>
-                <span
-                  className="text-base font-medium transition-colors duration-300"
-                  style={{ color: 'hsl(var(--foreground))' }}
-                >
-                  <span className="group-hover:text-[hsl(280_83%_63%)] transition-colors">{t('features.alerts')}</span>
+                <span className="text-base font-medium text-foreground transition-colors duration-300 group-hover:text-primary">
+                  {t('features.neutral')}
+                </span>
+              </div>
+
+              {/* Balance real */}
+              <div className="group flex items-center gap-3 transition-transform hover:translate-x-1">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-primary/10 text-primary transition-all duration-300">
+                  <BarChart3
+                    className="w-5 h-5 transition-all duration-300 group-hover:scale-110"
+                    aria-hidden="true"
+                  />
+                </div>
+                <span className="text-base font-medium text-foreground transition-colors duration-300 group-hover:text-primary">
+                  {t('features.balance')}
                 </span>
               </div>
             </div>
