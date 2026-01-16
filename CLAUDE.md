@@ -281,6 +281,8 @@ Use specialized agents for better results:
 | Agent | Use For | Invoke When |
 |-------|---------|-------------|
 | **shadcn-component-builder** | UI components with shadcn/ui, mobile-first design, WCAG 2.1 AA | Adding/modifying components, fixing accessibility |
+| **design-system-guardian** | Visual consistency, design token enforcement, dark mode compliance | Reviewing components, auditing colors/tokens |
+| **ux-writer** | Microcopy, error messages, onboarding flows, tone consistency | Creating UI text, notifications, empty states |
 | **docs-maintainer** | Maintaining accurate documentation | After feature changes, before releases |
 | **playwright-qa-tester** | E2E testing, accessibility validation | After features, before deployments |
 
