@@ -279,8 +279,10 @@
       "createAccount": "Crear cuenta gratis",
       "loading": "Cargando...",
       "errors": {
-        "signIn": "Error al iniciar sesión",
-        "magicLink": "Error al enviar el enlace mágico"
+        "signIn": "No pudimos iniciar sesión. Revisá tu email y contraseña e intentá de nuevo.",
+        "magicLink": "No pudimos enviar el enlace. Revisá tu email e intentá de nuevo.",
+        "invalidCredentials": "Email o contraseña incorrectos. ¿Querés probar con Magic Link?",
+        "emailNotConfirmed": "Confirmá tu email antes de iniciar sesión. Revisá tu bandeja de entrada."
       },
       "tabs": {
         "password": "Email & Contraseña",
@@ -487,6 +489,9 @@
       "previous": "Anterior",
       "continue": "Continuar",
       "processing": "Procesando...",
+      "savingProfile": "Guardando tu perfil...",
+      "creatingCategories": "Creando categorías...",
+      "almostThere": "Casi listo...",
       "goToDashboard": "Ir al Dashboard",
       "error": "Ocurrió un error. Por favor intenta de nuevo.",
       "step1": {
@@ -504,7 +509,9 @@
       },
       "step3": {
         "title": "Categorías iniciales",
-        "subtitle": "Selecciona las categorías que más uses (puedes agregar más después)",
+        "subtitle": "Seleccioná al menos una para organizar tus gastos. Podés agregar más después.",
+        "selected": "{count, plural, =0 {Ninguna seleccionada} =1 {1 seleccionada} other {# seleccionadas}}",
+        "selectAtLeastOne": "Seleccioná al menos una categoría",
         "categories": {
           "food": "Alimentos",
           "transport": "Transporte",
@@ -527,23 +534,25 @@
         }
       },
       "step5": {
-        "title": "¡Todo listo!",
-        "subtitle": "Ya puedes empezar a gestionar tus finanzas",
+        "title": "¡Listo para empezar!",
+        "subtitle": "Tu cuenta está configurada",
         "greeting": "¡Hola, {name}!",
-        "summary": "Has configurado {categories} categorías y 1 método de pago.",
-        "note": "Puedes personalizar todo desde el dashboard.",
+        "summary": "Configuraste {categories} categorías y 1 método de pago.",
+        "note": "Podés personalizar todo desde el dashboard.",
+        "ctaPrimary": "Registrar primer gasto",
+        "ctaSecondary": "Explorar dashboard",
         "nextSteps": {
           "expense": {
-            "title": "Crea tu primer gasto",
-            "description": "Empieza a registrar tus gastos diarios"
+            "title": "Registrá tu primer gasto",
+            "description": "Empezá a llevar el control de tus gastos diarios"
           },
           "stats": {
-            "title": "Ve tus estadísticas",
-            "description": "Analiza tus gastos con gráficas y métricas"
+            "title": "Mirá tus estadísticas",
+            "description": "Analizá tus gastos con gráficas y métricas"
           },
           "budgets": {
-            "title": "Configura presupuestos",
-            "description": "Establece límites de gasto por categoría"
+            "title": "Configurá presupuestos",
+            "description": "Establecé límites de gasto por categoría"
           }
         }
       }

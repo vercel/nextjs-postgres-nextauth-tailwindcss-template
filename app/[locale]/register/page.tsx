@@ -13,7 +13,7 @@ import {
   CardTitle
 } from '@/components/ui/card';
 import { signUp } from '@/lib/auth-actions';
-import { Mail, Zap, Shield, TrendingUp, ArrowLeft } from 'lucide-react';
+import { Mail, Zap, Shield, TrendingUp, ArrowLeft, UserPlus } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 import { Logo } from '@/components/ui/logo';
@@ -271,7 +271,7 @@ function SignUpForm() {
                   </span>
                 ) : (
                   <span className="flex items-center gap-2">
-                    <Logo variant="icon" size={20} />
+                    <UserPlus className="h-5 w-5" />
                     {t('submitButton')}
                   </span>
                 )}

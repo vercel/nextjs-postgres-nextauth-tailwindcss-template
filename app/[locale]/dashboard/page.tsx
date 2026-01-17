@@ -113,14 +113,14 @@ export default async function DashboardPage() {
               <div className="h-12 w-12 rounded-full bg-green-500/10 flex items-center justify-center mb-4">
                 <TrendingUp className="h-6 w-6 text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">{t('navigation.income')}</h3>
+              <h3 className="text-lg font-semibold mb-2">{t('navigation.sections.income')}</h3>
               <p className="text-sm text-muted-foreground mb-4">
                 {t('emptyState.description')}
               </p>
               <Button variant="outline" asChild>
                 <Link href="/dashboard/income">
                   <TrendingUp className="mr-2 h-4 w-4" />
-                  {t('navigation.income')}
+                  {t('navigation.sections.income')}
                 </Link>
               </Button>
             </div>

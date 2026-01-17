@@ -279,8 +279,10 @@
       "createAccount": "Create free account",
       "loading": "Loading...",
       "errors": {
-        "signIn": "Error signing in",
-        "magicLink": "Error sending magic link"
+        "signIn": "We couldn't sign you in. Check your email and password, then try again.",
+        "magicLink": "We couldn't send the link. Check your email and try again.",
+        "invalidCredentials": "Incorrect email or password. Want to try Magic Link?",
+        "emailNotConfirmed": "Please confirm your email before signing in. Check your inbox."
       },
       "tabs": {
         "password": "Email & Password",
@@ -487,6 +489,9 @@
       "previous": "Previous",
       "continue": "Continue",
       "processing": "Processing...",
+      "savingProfile": "Saving your profile...",
+      "creatingCategories": "Creating categories...",
+      "almostThere": "Almost there...",
       "goToDashboard": "Go to Dashboard",
       "error": "An error occurred. Please try again.",
       "step1": {
@@ -504,7 +509,9 @@
       },
       "step3": {
         "title": "Initial categories",
-        "subtitle": "Select the categories you use most (you can add more later)",
+        "subtitle": "Select at least one to organize your expenses. You can add more later.",
+        "selected": "{count, plural, =0 {None selected} =1 {1 selected} other {# selected}}",
+        "selectAtLeastOne": "Select at least one category",
         "categories": {
           "food": "Food",
           "transport": "Transport",
@@ -527,14 +534,16 @@
         }
       },
       "step5": {
-        "title": "All set!",
-        "subtitle": "You can now start managing your finances",
+        "title": "Ready to start!",
+        "subtitle": "Your account is set up",
         "greeting": "Hello, {name}!",
         "summary": "You've set up {categories} categories and 1 payment method.",
         "note": "You can customize everything from the dashboard.",
+        "ctaPrimary": "Log first expense",
+        "ctaSecondary": "Explore dashboard",
         "nextSteps": {
           "expense": {
-            "title": "Create your first expense",
+            "title": "Log your first expense",
             "description": "Start tracking your daily expenses"
           },
           "stats": {
