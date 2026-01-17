@@ -9,19 +9,19 @@ const problemsConfig = [
   {
     key: 'doubt',
     icon: AlertCircle,
-    color: "hsl(45 93% 47%)", // Amarillo
+    color: "hsl(var(--warning))", // Amarillo - design token
     image: "/images/problem-1-doubt.png",
   },
   {
     key: 'visibility',
     icon: TrendingDown,
-    color: "hsl(0 72% 50%)", // Rojo
+    color: "hsl(var(--destructive))", // Rojo - design token
     image: "/images/problem-2-visibility.png",
   },
   {
     key: 'consequences',
     icon: Calendar,
-    color: "hsl(280 83% 63%)", // Morado
+    color: "hsl(var(--info))", // Azul - design token
     image: "/images/problem-3-consequences.png",
   },
 ];
@@ -45,7 +45,7 @@ export function ProblemSection() {
           >
             {t('headline')}
           </LandingHeading>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="font-sans text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             {t('subtitle')}
           </p>
         </div>
@@ -118,11 +118,11 @@ export function ProblemSection() {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-foreground mb-2">
+                  <h3 className="font-heading text-xl font-bold text-foreground mb-2">
                     {t(`problems.${problem.key}.title`)}
                   </h3>
 
-                  <p className="text-sm text-muted-foreground mb-3">
+                  <p className="font-sans text-sm text-muted-foreground mb-3 leading-relaxed">
                     {t(`problems.${problem.key}.description`)}
                   </p>
 

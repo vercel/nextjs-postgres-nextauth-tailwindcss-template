@@ -17,7 +17,7 @@ export function QuoteSection() {
           >
             {t('headline')}
           </LandingHeading>
-          <p className="text-xl md:text-2xl text-muted-foreground mt-6">
+          <p className="font-sans text-lg md:text-xl text-muted-foreground mt-6 leading-relaxed">
             {t('text')}
           </p>
         </div>

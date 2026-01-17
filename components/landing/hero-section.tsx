@@ -31,60 +31,48 @@ export function HeroSection() {
               {t('headline.rest')}
             </LandingHeading>
 
-            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mt-6 max-w-2xl mx-auto lg:mx-0">
+            <p className="font-sans text-lg md:text-xl text-muted-foreground mt-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
               {t('subtitle')}
             </p>
 
             {/* Feature Points */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-8 max-w-xl mx-auto lg:mx-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 max-w-xl mx-auto lg:mx-0">
               {/* Registro en segundos */}
-              <div className="group flex items-center gap-3 transition-transform hover:translate-x-1">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-primary/10 text-primary transition-all duration-300">
-                  <Zap
-                    className="w-5 h-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6"
-                    aria-hidden="true"
-                  />
+              <div className="group flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-primary/10 text-primary">
+                  <Zap className="w-5 h-5" aria-hidden="true" />
                 </div>
-                <span className="text-base font-medium text-foreground transition-colors duration-300 group-hover:text-primary">
+                <span className="text-sm font-medium text-foreground">
                   {t('features.quick')}
                 </span>
               </div>
 
-              {/* Impacto real */}
-              <div className="group flex items-center gap-3 transition-transform hover:translate-x-1">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-primary/10 text-primary transition-all duration-300">
-                  <Eye
-                    className="w-5 h-5 transition-all duration-300 group-hover:scale-110"
-                    aria-hidden="true"
-                  />
+              {/* Balance real */}
+              <div className="group flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-primary/10 text-primary">
+                  <Eye className="w-5 h-5" aria-hidden="true" />
                 </div>
-                <span className="text-base font-medium text-foreground transition-colors duration-300 group-hover:text-primary">
+                <span className="text-sm font-medium text-foreground">
                   {t('features.impact')}
                 </span>
               </div>
 
-              {/* Seguimiento sin juicio */}
-              <div className="group flex items-center gap-3 transition-transform hover:translate-x-1">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-primary/10 text-primary transition-all duration-300">
-                  <ShieldCheck
-                    className="w-5 h-5 transition-all duration-300 group-hover:scale-110"
-                    aria-hidden="true"
-                  />
+              {/* Gastos futuros */}
+              <div className="group flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-primary/10 text-primary">
+                  <ShieldCheck className="w-5 h-5" aria-hidden="true" />
                 </div>
-                <span className="text-base font-medium text-foreground transition-colors duration-300 group-hover:text-primary">
+                <span className="text-sm font-medium text-foreground">
                   {t('features.neutral')}
                 </span>
               </div>
 
-              {/* Balance real */}
-              <div className="group flex items-center gap-3 transition-transform hover:translate-x-1">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-primary/10 text-primary transition-all duration-300">
-                  <BarChart3
-                    className="w-5 h-5 transition-all duration-300 group-hover:scale-110"
-                    aria-hidden="true"
-                  />
+              {/* Decidí antes */}
+              <div className="group flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-primary/10 text-primary">
+                  <BarChart3 className="w-5 h-5" aria-hidden="true" />
                 </div>
-                <span className="text-base font-medium text-foreground transition-colors duration-300 group-hover:text-primary">
+                <span className="text-sm font-medium text-foreground">
                   {t('features.balance')}
                 </span>
               </div>

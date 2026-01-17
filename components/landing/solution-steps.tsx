@@ -10,21 +10,21 @@ const stepsConfig = [
     key: 'register',
     number: "1",
     icon: Edit3,
-    color: "hsl(98 100% 70%)", // Verde vibrante (primary)
+    color: "hsl(var(--primary))", // Verde vibrante - design token
     image: "/images/step-1-register.png",
   },
   {
     key: 'balance',
     number: "2",
     icon: BarChart3,
-    color: "hsl(220 89% 61%)", // Azul
+    color: "hsl(var(--info))", // Azul - design token
     image: "/images/step-2-balance.png",
   },
   {
     key: 'decide',
     number: "3",
     icon: CheckCircle2,
-    color: "hsl(142 76% 55%)", // Verde
+    color: "hsl(var(--success))", // Verde success - design token
     image: "/images/step-3-decide.png",
   },
 ];
@@ -54,18 +54,27 @@ export function SolutionSteps() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {stepsConfig.map((step, index) => {
             const Icon = step.icon;
+            const isClimax = index === 2; // Paso 3 es el climax
             return (
               <div
                 key={step.key}
-                className="group animate-fade-in-up bg-card border border-border rounded-2xl hover:shadow-xl transition-all hover:-translate-y-2 relative"
+                className={`group animate-fade-in-up bg-card border rounded-2xl hover:shadow-xl transition-all hover:-translate-y-2 relative ${
+                  isClimax
+                    ? 'border-2 border-success/50 ring-2 ring-success/20 shadow-lg'
+                    : 'border-border'
+                }`}
                 style={{
                   animationDelay: `${index * 150}ms`,
                 }}
               >
-                {/* Number badge - Top center, responsive size */}
+                {/* Number badge - Top center, responsive size - CLIMAX is bigger */}
                 <div className="absolute -top-6 sm:-top-8 md:-top-10 left-1/2 -translate-x-1/2 z-10">
                   <div
-                    className="flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full font-bold text-2xl sm:text-3xl md:text-4xl shadow-lg border-4 bg-background group-hover:scale-110 transition-transform"
+                    className={`flex items-center justify-center rounded-full font-heading font-extrabold shadow-lg border-4 bg-background group-hover:scale-110 transition-transform ${
+                      isClimax
+                        ? 'w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 text-3xl sm:text-4xl md:text-5xl'
+                        : 'w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 text-2xl sm:text-3xl md:text-4xl'
+                    }`}
                     style={{
                       borderColor: step.color,
                       color: step.color,
@@ -131,23 +140,30 @@ export function SolutionSteps() {
 
                 {/* Content */}
                 <div className="p-6 rounded-b-2xl">
-                  <h3 className="text-xl font-bold text-foreground mb-2">
+                  <h3 className={`font-heading font-bold text-foreground mb-2 ${isClimax ? 'text-2xl' : 'text-xl'}`}>
                     {t(`items.${step.key}.title`)}
                   </h3>
 
-                  <p className="text-sm text-muted-foreground mb-4">
+                  {isClimax && (
+                    <p className="font-sans text-sm text-success font-semibold mb-2">
+                      El momento que importa
+                    </p>
+                  )}
+
+                  <p className="font-sans text-sm text-muted-foreground mb-4 leading-relaxed">
                     {t(`items.${step.key}.description`)}
                   </p>
 
                   {/* Benefit Badge */}
                   <div
-                    className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-sans text-xs font-semibold"
                     style={{
                       backgroundColor: `${step.color}15`,
                       color: step.color,
                     }}
                   >
-                    ✓ {t(`items.${step.key}.benefit`)}
+                    <CheckCircle2 className="w-3 h-3" aria-hidden="true" />
+                    {t(`items.${step.key}.benefit`)}
                   </div>
                 </div>
               </div>

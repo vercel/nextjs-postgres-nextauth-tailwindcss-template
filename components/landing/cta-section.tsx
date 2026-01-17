@@ -22,7 +22,7 @@ export function CTASection() {
         </LandingHeading>
 
         {/* Subheadline */}
-        <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in-up">
+        <p className="font-sans text-base md:text-lg text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in-up leading-relaxed">
           {t('subtitle')}
         </p>
 

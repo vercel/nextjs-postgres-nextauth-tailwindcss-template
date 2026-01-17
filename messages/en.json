@@ -1,52 +1,52 @@
 {
   "brand": {
     "name": "Tallify",
-    "tagline": "Make your money count",
-    "description": "Manage your expenses and income, visualize your financial situation in real time. Free forever."
+    "tagline": "Financial clarity in real time",
+    "description": "Manage your expenses and income, visualize your financial situation in real time. Know how much you really have."
   },
   "navigation": {
     "login": "Sign In",
-    "getStarted": "Get started for free"
+    "getStarted": "Get started"
   },
   "pages": {
     "home": {
       "hero": {
-        "badge": "More clarity, less anxiety",
+        "badge": "Financial certainty in real time",
         "headline": {
-          "highlight": "Control your spending",
-          "rest": "without guilt or friction"
+          "highlight": "Know what you have",
+          "rest": "before every decision"
         },
-        "subtitle": "Tallify shows the real impact of every expense before you make it. No judgment, no complicated apps. Just informed decisions.",
+        "subtitle": "Tallify calculates your real balance by deducting recurring and planned expenses. Decide with certainty, not assumptions.",
         "features": {
-          "quick": "Log it in seconds",
-          "impact": "See the impact before you spend",
-          "neutral": "Judgment-free tracking",
-          "balance": "Projected real balance"
+          "quick": "Log in under 10 seconds",
+          "impact": "Real balance, not bank balance",
+          "neutral": "Includes future recurring expenses",
+          "balance": "Decide before you spend"
         },
-        "cta": "Get started for free",
-        "imageAlt": "Tallify dashboard showing balance, expenses and income in real time with main KPIs"
+        "cta": "Get started",
+        "imageAlt": "Tallify dashboard showing real balance, expenses and income in real time with main KPIs"
       },
       "problem": {
-        "headline": "Does this sound",
-        "headlineHighlight": "familiar?",
-        "subtitle": "Do you relate to any of these? Tallify is for you.",
+        "headline": "Does this happen",
+        "headlineHighlight": "to you?",
+        "subtitle": "Tallify solves the 3 most common money problems.",
         "problems": {
           "doubt": {
-            "title": "Doubts before spending",
-            "description": "Can I afford this? Am I overspending?",
-            "highlight": "You lack financial clarity",
+            "title": "Can I afford this?",
+            "description": "Before every purchase, the same question. You're never sure.",
+            "highlight": "Constant doubt",
             "imageAlt": "Person with doubts before making a purchase"
           },
           "visibility": {
-            "title": "Money disappears",
-            "description": "You earn well, but don't know where your money goes.",
-            "highlight": "Lack of total visibility",
-            "imageAlt": "Money dispersing without control"
+            "title": "Your bank balance lies",
+            "description": "You have money in your account, but half is already committed to recurring expenses. How much can you really spend?",
+            "highlight": "Unreal balance",
+            "imageAlt": "Bank balance vs real balance"
           },
           "consequences": {
-            "title": "Costly oversights",
-            "description": "Late fees, interest, and decisions that weigh on you.",
-            "highlight": "Avoidable consequences",
+            "title": "End of month: always tight",
+            "description": "You thought you'd be fine, but forgotten expenses show up. Again.",
+            "highlight": "Avoidable surprises",
             "imageAlt": "Calendar with forgotten payments"
           }
         }
@@ -55,26 +55,26 @@
         "title": "See {brand} in action",
         "subtitle": "See how it works with real dashboard screenshots",
         "steps": {
-          "headline": "Your financial control in",
-          "headlineHighlight": "3 simple steps",
+          "headline": "Financial clarity in",
+          "headlineHighlight": "3 steps",
           "items": {
             "register": {
-              "title": "Register in 10 seconds",
-              "description": "Click, type, and done.",
-              "benefit": "30 hours/year saved",
+              "title": "Log in under 10 seconds",
+              "description": "Amount, category, done. No endless forms.",
+              "benefit": "Zero friction",
               "imageAlt": "Quick expense registration interface"
             },
             "balance": {
-              "title": "See your real balance",
-              "description": "Your actual available money, not just your bank balance.",
-              "benefit": "Financial peace of mind",
+              "title": "See your real balance, not the bank's",
+              "description": "Tallify deducts recurring expenses automatically. What you see is what you can really spend.",
+              "benefit": "Absolute certainty",
               "imageAlt": "Dashboard showing real balance"
             },
             "decide": {
-              "title": "Decide with confidence",
-              "description": "You know exactly how much you can spend.",
-              "benefit": "Decisions without anxiety",
-              "imageAlt": "User making financial decisions"
+              "title": "Decide before you spend",
+              "description": "Can I buy this? Tallify tells you instantly. With real data.",
+              "benefit": "Zero regrets",
+              "imageAlt": "User making informed financial decisions"
             }
           }
         }
@@ -110,14 +110,14 @@
         "note": "* Excel is free if you already have Microsoft Office. Notion offers a limited free plan. Generic apps vary in price."
       },
       "quote": {
-        "headline": "What you don't measure,",
-        "headlineHighlight": "you can't control",
-        "text": "Tallify measures. You control."
+        "headline": "Clarity",
+        "headlineHighlight": "precedes certainty",
+        "text": "Tallify gives you clarity. You get certainty."
       },
       "pricing": {
-        "headline": "Start for free.",
-        "headlineHighlight": "Scale only if you need it.",
-        "subtitle": "The plan pays for itself with the expenses you avoid when you see your numbers clearly.",
+        "headline": "Start with what you need.",
+        "headlineHighlight": "Scale when you want.",
+        "subtitle": "Pro pays for itself with the unnecessary expenses you identify when you see your numbers clearly.",
         "billingPeriod": {
           "monthly": "Monthly",
           "annual": "Annual"
@@ -135,7 +135,7 @@
               "clearDashboard": "Clear dashboard",
               "multiDevice": "Use on mobile and desktop"
             },
-            "cta": "Get started for free",
+            "cta": "Start free",
             "ctaSubtext": "No card. No expiration."
           },
           "pro": {
@@ -224,8 +224,8 @@
         "subtitle": "Everything you need to know about Tallify",
         "questions": {
           "free": {
-            "q": "Is it really free?",
-            "a": "Yes, the Free plan is 100% free forever. Includes unlimited expenses and income, 10 categories, 3 payment methods, and all basic features. No credit card required."
+            "q": "What's included in the free plan?",
+            "a": "The free plan includes unlimited expenses and income, 10 customizable categories, 3 payment methods, and all core Tallify features. You can use the free plan as long as you want, no expiration or card required."
           },
           "categories": {
             "q": "What if I need more than 10 categories?",
@@ -254,16 +254,16 @@
         }
       },
       "cta": {
-        "headline": "Start today.",
-        "headlineHighlight": "Free and no commitment.",
-        "subtitle": "Your first expense tracked in 15 seconds.",
+        "headline": "Start making better decisions",
+        "headlineHighlight": "today",
+        "subtitle": "Create your account, log an expense, see your real balance. All in under 3 minutes.",
         "benefits": {
-          "setup": "Setup in 5 minutes",
-          "noCard": "No credit card required",
-          "forever": "Free forever"
+          "setup": "Setup in 2 minutes",
+          "noCard": "No card required",
+          "forever": "Free plan available"
         },
-        "button": "Get started for free →",
-        "buttonAria": "Create free account on Tallify"
+        "button": "Create account →",
+        "buttonAria": "Create account on Tallify"
       }
     },
     "login": {

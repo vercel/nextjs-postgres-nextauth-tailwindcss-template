@@ -82,7 +82,7 @@ export function ComparisonSection() {
           >
             {t('headline')}
           </LandingHeading>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="font-sans text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             {t('subtitle')}
           </p>
         </div>
@@ -203,11 +203,11 @@ function renderCell(
     return value ? (
       <Check
         className={`w-5 h-5 mx-auto ${
-          isTallify ? "text-primary" : "text-green-500"
+          isTallify ? "text-primary" : "text-success"
         }`}
       />
     ) : (
-      <X className="w-5 h-5 text-red-500 mx-auto" />
+      <X className="w-5 h-5 text-destructive mx-auto" />
     );
   }
 
