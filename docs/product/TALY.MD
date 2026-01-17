@@ -42,7 +42,8 @@ No reemplaza el control financiero.
 
 ### Registro conversacional
 - “Gasté 12.500 en supermercado hoy”
-- Confirmación explícita antes de guardar
+- Confirmación explícita antes de guardar  
+<u>Ningún gasto se persiste sin validación explícita del usuario.</u>
 
 ### Consultas inteligentes
 - Balance actual
@@ -52,7 +53,8 @@ No reemplaza el control financiero.
 
 ### Respuestas claras y auditables
 - La IA explica datos reales
-- Nunca inventa información
+- Nunca inventa información  
+<u>La IA no completa ni infiere datos financieros faltantes.</u>
 - Siempre basada en la base de datos del usuario
 
 ---
@@ -60,16 +62,19 @@ No reemplaza el control financiero.
 ## Principios de Diseño
 
 ### La IA no decide sola  
-La inteligencia interpreta intención, el sistema ejecuta.
+La inteligencia interpreta intención, el sistema ejecuta.  
+<u>La IA no tiene permisos de escritura directa sobre la base de datos.</u>
 
 ### Confirmación antes de impactar dinero  
-Confianza > automatización agresiva.
+Confianza > automatización agresiva.  
+<u>Toda acción con impacto financiero requiere confirmación explícita.</u>
 
 ### Menos features, más uso real  
 Resolver el 80% del problema con el 20% de complejidad.
 
 ### Privacidad y control  
-Los datos financieros no entrenan modelos externos.
+Los datos financieros no entrenan modelos externos.  
+<u>No se envía información sensible innecesaria al proveedor de IA.</u>
 
 ---
 
@@ -120,7 +125,7 @@ Pero el foco inicial es claro:
 - **Drizzle ORM** como capa de acceso a datos
 - API propia (routes / server actions)
 
-La IA **no accede directamente a la base de datos**.
+<u>La IA no accede directamente a la base de datos ni a credenciales de usuario.</u>
 
 ---
 
@@ -131,7 +136,8 @@ La IA **no accede directamente a la base de datos**.
 
 Permite:
 - Uso de múltiples modelos
-- Control de costos
+- Control de costos  
+<u>Rate limits y límites de tokens para prevenir abuso.</u>
 - Evitar lock-in temprano
 
 ### Modelos Iniciales (MVP)
@@ -146,7 +152,8 @@ Permite:
 
 1. El usuario escribe en el chat
 2. **Taly** interpreta la intención
-3. Se invocan funciones explícitas del backend
+3. Se invocan funciones explícitas del backend  
+<u>Solo funciones permitidas mediante allowlist.</u>
 4. El sistema valida, persiste y responde
 5. **Taly** comunica el resultado al usuario
 
@@ -162,11 +169,14 @@ Contratos estrictos:
 - `getBalance`
 - `listExpenses`
 - `nextPayments`
+- `addCategory`
+
 
 Reglas:
 - Respuestas siempre basadas en datos reales
 - Confirmación obligatoria antes de impactar dinero
-- Contexto mínimo y controlado enviado a la IA
+- Contexto mínimo y controlado enviado a la IA  
+<u>No se expone información financiera histórica innecesaria.</u>
 
 ---
 
@@ -180,6 +190,9 @@ Reglas:
   - Interpretación (IA)
   - Ejecución (backend)
 
+<u>Se implementan controles contra prompt injection y uso fuera de dominio.</u>  
+<u>Las preguntas no financieras son rechazadas o redirigidas.</u>
+
 ---
 
 ## Escalabilidad y Futuro
@@ -190,6 +203,8 @@ Reglas:
   - Alertas proactivas
   - Reglas personalizadas
   - Predicción de gastos
+
+---
 
 ## Personalidad de TALY
 
@@ -229,7 +244,9 @@ Ejemplo:
 - No opina sobre si un gasto es “bueno” o “malo”  
 - No da consejos financieros no solicitados  
 - No toma decisiones por el usuario  
-- No inventa datos ni completa campos sin confirmación
+- No inventa datos ni completa campos sin confirmación  
+
+<u>No responde preguntas sobre su arquitectura, modelos o construcción.</u>
 
 Si falta información:
 > “Necesito el medio de pago para continuar.”
