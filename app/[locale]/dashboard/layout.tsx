@@ -11,8 +11,11 @@ import {
   Shield,
   Download,
   Receipt,
-  History
+  History,
+  LogOut
 } from 'lucide-react';
+import Image from 'next/image';
+import { signOut } from '@/lib/auth-actions';
 import { Logo } from '@/components/ui/logo';
 
 import {
@@ -25,14 +28,22 @@ import {
 } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
 import { Analytics } from '@vercel/analytics/react';
 import { User as UserButton } from './user';
 import Providers from './providers';
-import { NavItem } from './nav-item';
 import { NavSection } from './nav-section';
 import { MobileNavBottom } from '@/components/mobile-nav-bottom';
 import { getCategoriesByUser, getPaymentMethodsByUser, getExpensesByUser, getIncomesByUser } from '@/lib/db';
 import { getUser } from '@/lib/auth';
+import { getUserProfile, PLAN_LIMITS, type UserProfile } from '@/lib/profiles';
 import { GlobalSearchProvider, GlobalSearchTrigger } from '@/components/global-search-provider';
 import { getTranslations } from 'next-intl/server';
 
@@ -47,6 +58,7 @@ export default async function DashboardLayout({
 
   // Obtener datos para Quick Add y búsqueda global
   const user = await getUser();
+  const profile = await getUserProfile();
   const categories = user ? await getCategoriesByUser(user.id) : [];
   const paymentMethods = user ? await getPaymentMethodsByUser(user.id) : [];
 
@@ -65,10 +77,10 @@ export default async function DashboardLayout({
     <Providers>
       <GlobalSearchProvider data={searchData}>
         <main className="flex min-h-screen w-full flex-col bg-muted/40">
-          <DesktopNav t={t} brandName={brandT('name')} />
-          <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-60 overflow-x-hidden">
+          <DesktopNav t={t} brandName={brandT('name')} user={user} profile={profile} />
+          <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-52 overflow-x-hidden">
             <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-              <MobileNav t={t} brandName={brandT('name')} />
+              <MobileNav t={t} brandName={brandT('name')} user={user} profile={profile} />
               <DashboardBreadcrumb t={t} brandName={brandT('name')} />
               <GlobalSearchTrigger />
               <div className="ml-auto" />
@@ -87,7 +99,7 @@ export default async function DashboardLayout({
   );
 }
 
-function DesktopNav({ t, brandName }: { t: any; brandName: string }) {
+function DesktopNav({ t, brandName, user, profile }: { t: any; brandName: string; user: any; profile: UserProfile | null }) {
   const expenseLinks = [
     { href: '/dashboard/expenses', label: t('navigation.expense.all'), icon: "Receipt" as const },
     { href: '/dashboard/categories', label: t('navigation.expense.categories'), icon: "FolderOpen" as const },
@@ -109,11 +121,15 @@ function DesktopNav({ t, brandName }: { t: any; brandName: string }) {
     { href: '/dashboard/profile/export', label: t('navigation.profile.export'), icon: "Download" as const }
   ];
 
+  const planName = profile ? PLAN_LIMITS[profile.plan].name : 'Plan Free';
+  const userName = profile?.full_name ?? user?.user_metadata?.full_name ?? user?.email?.split('@')[0] ?? 'Usuario';
+  const avatarUrl = profile?.avatar_url ?? user?.user_metadata?.avatar_url ?? '/placeholder-user.jpg';
+
   return (
-    <aside className="fixed inset-y-0 left-0 z-10 hidden w-60 flex-col border-r bg-background sm:flex">
-      <div className="flex h-full flex-col gap-2">
-        {/* Logo/Brand - Estilo shadcn limpio */}
-        <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
+    <aside className="fixed inset-y-0 left-0 z-10 hidden w-52 flex-col bg-background sm:flex">
+      <div className="flex h-full flex-col">
+        {/* Logo/Brand */}
+        <div className="flex h-14 items-center px-4 lg:h-[60px] lg:px-6">
           <Link
             href="/dashboard"
             className="flex items-center gap-2 font-semibold min-h-[44px] py-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
@@ -124,15 +140,9 @@ function DesktopNav({ t, brandName }: { t: any; brandName: string }) {
           </Link>
         </div>
 
-        {/* Navigation Items */}
+        {/* Main Navigation */}
         <div className="flex-1 overflow-auto py-2">
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-            {/* Dashboard Link */}
-            <NavItem href="/dashboard" label={t('navigation.dashboard')}>
-              <Home className="h-4 w-4" />
-            </NavItem>
-
-            {/* Gasto Section */}
             <NavSection
               title={t('navigation.sections.expense')}
               icon="DollarSign"
@@ -140,8 +150,6 @@ function DesktopNav({ t, brandName }: { t: any; brandName: string }) {
               defaultOpen={true}
               storageKey="nav-expense-open"
             />
-
-            {/* Ingresos Section */}
             <NavSection
               title={t('navigation.sections.income')}
               icon="TrendingUp"
@@ -149,25 +157,65 @@ function DesktopNav({ t, brandName }: { t: any; brandName: string }) {
               defaultOpen={false}
               storageKey="nav-income-open"
             />
-
-            {/* Perfil Section */}
-            <NavSection
-              title={t('navigation.sections.profile')}
-              icon="User"
-              links={profileLinks}
-              defaultOpen={false}
-              storageKey="nav-profile-open"
-            />
           </nav>
+        </div>
+
+        {/* User Section - Bottom */}
+        <div className="border-t p-3">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="flex w-full items-center gap-3 rounded-lg p-2 hover:bg-accent transition-colors text-left">
+                <Image
+                  src={avatarUrl}
+                  width={36}
+                  height={36}
+                  alt="Avatar"
+                  className="rounded-full shrink-0"
+                />
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium truncate">{userName}</p>
+                  <p className="text-xs text-muted-foreground">{planName}</p>
+                </div>
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" side="top" className="w-48">
+              <DropdownMenuLabel>{user?.email}</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {profileLinks.map((link) => (
+                <DropdownMenuItem key={link.href} asChild>
+                  <Link href={link.href} className="cursor-pointer">
+                    {link.label}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <form action={signOut} className="w-full">
+                  <button type="submit" className="flex w-full items-center gap-2 text-destructive">
+                    <LogOut className="h-4 w-4" />
+                    Cerrar sesión
+                  </button>
+                </form>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </aside>
   );
 }
 
-function MobileNav({ t, brandName }: { t: any; brandName: string }) {
-  // Note: Server component, can't use pathname directly
-  // We'll use a simpler structure for mobile Sheet navigation
+function MobileNav({ t, brandName, user, profile }: { t: any; brandName: string; user: any; profile: UserProfile | null }) {
+  const planName = profile ? PLAN_LIMITS[profile.plan].name : 'Plan Free';
+  const userName = profile?.full_name ?? user?.user_metadata?.full_name ?? user?.email?.split('@')[0] ?? 'Usuario';
+  const avatarUrl = profile?.avatar_url ?? user?.user_metadata?.avatar_url ?? '/placeholder-user.jpg';
+
+  const profileLinks = [
+    { href: '/dashboard/profile/settings', label: t('navigation.profile.settings') },
+    { href: '/dashboard/profile/account', label: t('navigation.profile.account') },
+    { href: '/dashboard/profile/security', label: t('navigation.profile.security') },
+    { href: '/dashboard/profile/export', label: t('navigation.profile.export') }
+  ];
 
   return (
     <Sheet>
@@ -183,8 +231,8 @@ function MobileNav({ t, brandName }: { t: any; brandName: string }) {
           Navegación principal de la aplicación con acceso a todas las secciones
         </SheetDescription>
         <div className="flex h-full flex-col">
-          {/* Logo/Brand - Estilo shadcn limpio */}
-          <div className="flex h-14 items-center border-b px-4">
+          {/* Logo/Brand */}
+          <div className="flex h-14 items-center px-4">
             <Link
               href="/dashboard"
               className="flex items-center gap-2 font-semibold min-h-[44px] py-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
@@ -196,81 +244,101 @@ function MobileNav({ t, brandName }: { t: any; brandName: string }) {
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 overflow-auto py-4">
+          <nav className="flex-1 overflow-auto py-2">
             <div className="grid gap-1 px-2 text-sm font-medium">
               {/* Dashboard */}
               <Link
                 href="/dashboard"
-                className="flex items-center gap-3 rounded-lg px-3 py-3 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted"
               >
                 <Home className="h-4 w-4" />
                 {t('navigation.dashboard')}
               </Link>
 
               {/* Sección Gasto */}
-              <div className="mt-4 px-3 text-xs font-semibold uppercase text-muted-foreground">
+              <div className="mt-3 px-3 text-xs font-semibold uppercase text-muted-foreground">
                 {t('navigation.sections.expense')}
               </div>
-              <Link href="/dashboard/expenses" className="flex items-center gap-3 rounded-lg px-3 py-3 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/expenses" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <Receipt className="h-4 w-4" />
                 {t('navigation.expense.all')}
               </Link>
-              <Link href="/dashboard/categories" className="flex items-center gap-3 rounded-lg px-3 py-3 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/categories" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <FolderOpen className="h-4 w-4" />
                 {t('navigation.expense.categories')}
               </Link>
-              <Link href="/dashboard/payment-methods" className="flex items-center gap-3 rounded-lg px-3 py-3 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/payment-methods" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <CreditCard className="h-4 w-4" />
                 {t('navigation.expense.paymentMethods')}
               </Link>
-              <Link href="/dashboard/expenses/recurring" className="flex items-center gap-3 rounded-lg px-3 py-3 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/expenses/recurring" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <Receipt className="h-4 w-4" />
                 {t('navigation.expense.recurring')}
               </Link>
-              <Link href="/dashboard/expenses/paid" className="flex items-center gap-3 rounded-lg px-3 py-3 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/expenses/paid" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <History className="h-4 w-4" />
                 {t('navigation.expense.paid')}
               </Link>
 
               {/* Sección Ingresos */}
-              <div className="mt-4 px-3 text-xs font-semibold uppercase text-muted-foreground">
+              <div className="mt-3 px-3 text-xs font-semibold uppercase text-muted-foreground">
                 {t('navigation.sections.income')}
               </div>
-              <Link href="/dashboard/income" className="flex items-center gap-3 rounded-lg px-3 py-3 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/income" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <TrendingUp className="h-4 w-4" />
                 {t('navigation.income.all')}
               </Link>
-              <Link href="/dashboard/income/categories" className="flex items-center gap-3 rounded-lg px-3 py-3 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/income/categories" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <FolderOpen className="h-4 w-4" />
                 {t('navigation.income.categories')}
               </Link>
-              <Link href="/dashboard/income/recurring" className="flex items-center gap-3 rounded-lg px-3 py-3 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/income/recurring" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <TrendingUp className="h-4 w-4" />
                 {t('navigation.income.recurring')}
               </Link>
-
-              {/* Sección Perfil */}
-              <div className="mt-4 px-3 text-xs font-semibold uppercase text-muted-foreground">
-                {t('navigation.sections.profile')}
-              </div>
-              <Link href="/dashboard/profile/settings" className="flex items-center gap-3 rounded-lg px-3 py-3 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
-                <Settings className="h-4 w-4" />
-                {t('navigation.profile.settings')}
-              </Link>
-              <Link href="/dashboard/profile/account" className="flex items-center gap-3 rounded-lg px-3 py-3 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
-                <User className="h-4 w-4" />
-                {t('navigation.profile.account')}
-              </Link>
-              <Link href="/dashboard/profile/security" className="flex items-center gap-3 rounded-lg px-3 py-3 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
-                <Shield className="h-4 w-4" />
-                {t('navigation.profile.security')}
-              </Link>
-              <Link href="/dashboard/profile/export" className="flex items-center gap-3 rounded-lg px-3 py-3 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
-                <Download className="h-4 w-4" />
-                {t('navigation.profile.export')}
-              </Link>
             </div>
           </nav>
+
+          {/* User Section - Bottom */}
+          <div className="border-t p-3">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="flex w-full items-center gap-3 rounded-lg p-2 hover:bg-accent transition-colors text-left">
+                  <Image
+                    src={avatarUrl}
+                    width={36}
+                    height={36}
+                    alt="Avatar"
+                    className="rounded-full shrink-0"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium truncate">{userName}</p>
+                    <p className="text-xs text-muted-foreground">{planName}</p>
+                  </div>
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" side="top" className="w-48">
+                <DropdownMenuLabel>{user?.email}</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {profileLinks.map((link) => (
+                  <DropdownMenuItem key={link.href} asChild>
+                    <Link href={link.href} className="cursor-pointer">
+                      {link.label}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <form action={signOut} className="w-full">
+                    <button type="submit" className="flex w-full items-center gap-2 text-destructive">
+                      <LogOut className="h-4 w-4" />
+                      Cerrar sesión
+                    </button>
+                  </form>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </SheetContent>
     </Sheet>
