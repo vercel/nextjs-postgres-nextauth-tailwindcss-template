@@ -37,7 +37,6 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Analytics } from '@vercel/analytics/react';
-import { User as UserButton } from './user';
 import Providers from './providers';
 import { NavSection } from './nav-section';
 import { MobileNavBottom } from '@/components/mobile-nav-bottom';
@@ -83,8 +82,6 @@ export default async function DashboardLayout({
               <MobileNav t={t} brandName={brandT('name')} user={user} profile={profile} />
               <DashboardBreadcrumb t={t} brandName={brandT('name')} />
               <GlobalSearchTrigger />
-              <div className="ml-auto" />
-              <UserButton />
             </header>
             <main className="grid flex-1 items-start gap-2 p-3 pb-20 sm:p-4 sm:pb-0 sm:px-6 sm:py-0 md:gap-4 overflow-x-hidden">
               {children}
