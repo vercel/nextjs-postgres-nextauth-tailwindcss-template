@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import {
   Home,
   DollarSign,
@@ -31,96 +32,97 @@ export function MobileNavBottom() {
   const pathname = usePathname();
   const router = useRouter();
   const [moreOpen, setMoreOpen] = useState(false);
+  const t = useTranslations('pages.dashboard.navigation');
 
   // Items principales (3 máximo para mejor UX mobile)
   const primaryLinks = [
-    { href: '/dashboard', label: 'Inicio', icon: Home },
-    { href: '/dashboard/expenses', label: 'Gastos', icon: DollarSign }
+    { href: '/dashboard', label: t('home'), icon: Home },
+    { href: '/dashboard/expenses', label: t('expenses'), icon: DollarSign }
   ];
 
   // Items secundarios en el menú "Más" - Agrupados por sección
   const moreLinks = [
     // Sección Gasto
     {
-      section: 'Gasto',
+      section: t('sections.expense'),
       items: [
         {
           href: '/dashboard/categories',
-          label: 'Categorías',
+          label: t('expense.categories'),
           icon: FolderOpen,
-          description: 'Administra categorías de gastos'
+          description: t('descriptions.categories')
         },
         {
           href: '/dashboard/payment-methods',
-          label: 'Métodos de pago',
+          label: t('expense.paymentMethods'),
           icon: CreditCard,
-          description: 'Configura tarjetas y cuentas'
+          description: t('descriptions.paymentMethods')
         },
         {
           href: '/dashboard/expenses/recurring',
-          label: 'Recurrentes',
+          label: t('expense.recurring'),
           icon: Receipt,
-          description: 'Plantillas de gastos automáticos'
+          description: t('descriptions.recurring')
         },
         {
           href: '/dashboard/expenses/paid',
-          label: 'Pagados',
+          label: t('expense.paid'),
           icon: History,
-          description: 'Historial de gastos pagados'
+          description: t('descriptions.paid')
         }
       ]
     },
     // Sección Ingresos
     {
-      section: 'Ingresos',
+      section: t('sections.income'),
       items: [
         {
           href: '/dashboard/income',
-          label: 'Ingresos',
+          label: t('income.all'),
           icon: TrendingUp,
-          description: 'Registra tus fuentes de ingreso'
+          description: t('descriptions.income')
         },
         {
           href: '/dashboard/income/categories',
-          label: 'Categorías',
+          label: t('income.categories'),
           icon: FolderOpen,
-          description: 'Administra categorías de ingresos'
+          description: t('descriptions.incomeCategories')
         },
         {
           href: '/dashboard/income/recurring',
-          label: 'Recurrentes',
+          label: t('income.recurring'),
           icon: TrendingUp,
-          description: 'Plantillas de ingresos automáticos'
+          description: t('descriptions.incomeRecurring')
         }
       ]
     },
     // Sección Perfil
     {
-      section: 'Perfil',
+      section: t('sections.profile'),
       items: [
         {
           href: '/dashboard/profile/settings',
-          label: 'Configuración',
+          label: t('profile.settings'),
           icon: Settings,
-          description: 'Preferencias y ajustes'
+          description: t('descriptions.settings')
         },
         {
           href: '/dashboard/profile/account',
-          label: 'Mi cuenta',
+          label: t('profile.account'),
           icon: User,
-          description: 'Datos personales y plan'
+          description: t('descriptions.account')
         },
         {
           href: '/dashboard/profile/security',
-          label: 'Seguridad',
+          label: t('profile.security'),
           icon: Shield,
-          description: 'Contraseña y autenticación'
+          description: t('descriptions.security')
         },
         {
           href: '/dashboard/profile/export',
-          label: 'Exportar datos',
+          label: t('profile.export'),
           icon: Download,
-          description: 'Backups y exportaciones'
+          description: t('descriptions.export')
         }
       ]
     }
@@ -151,13 +153,13 @@ export function MobileNavBottom() {
                   'flex flex-col items-center gap-2 rounded-2xl px-3 py-3 text-xs font-semibold transition-all duration-300',
                   'relative overflow-hidden',
                   isActive
-                    ? 'text-primary scale-105 bg-primary/10'
-                    : 'text-muted-foreground hover:text-foreground active:scale-95 hover:bg-accent/50'
+                    ? 'text-primary scale-105 motion-reduce:scale-100 bg-primary/10'
+                    : 'text-muted-foreground hover:text-foreground active:scale-95 motion-reduce:active:scale-100 hover:bg-accent/50'
                 )}
               >
                 {/* Active indicator - animated background */}
                 {isActive && (
-                  <span className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 animate-pulse"
+                  <span className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 animate-pulse motion-reduce:animate-none"
                         style={{ animationDuration: '3s' }} />
                 )}
 
@@ -165,13 +167,13 @@ export function MobileNavBottom() {
                   className={cn(
                     'relative flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300',
                     isActive
-                      ? 'bg-gradient-to-br from-primary to-primary/80 shadow-lg shadow-primary/30 scale-110'
+                      ? 'bg-gradient-to-br from-primary to-primary/80 shadow-lg shadow-primary/30 scale-110 motion-reduce:scale-100'
                       : 'bg-muted/50 hover:bg-muted'
                   )}
                 >
                   <Icon className={cn(
                     'h-5 w-5 transition-all duration-300',
-                    isActive ? 'text-white' : 'text-muted-foreground'
+                    isActive ? 'text-primary-foreground' : 'text-muted-foreground'
                   )} />
                 </div>
 
@@ -194,7 +196,7 @@ export function MobileNavBottom() {
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted/50 hover:bg-muted transition-all duration-300">
               <MoreHorizontal className="h-5 w-5" />
             </div>
-            <span className="leading-tight">Más</span>
+            <span className="leading-tight">{t('more')}</span>
           </button>
         </div>
       </nav>
@@ -206,9 +208,9 @@ export function MobileNavBottom() {
           <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-muted-foreground/20 rounded-full" />
 
           <SheetHeader className="space-y-3 pt-2">
-            <SheetTitle className="text-2xl">Más opciones</SheetTitle>
+            <SheetTitle className="text-2xl">{t('moreOptions')}</SheetTitle>
             <SheetDescription className="text-base">
-              Accede a todas las funciones de la app ✨
+              {t('moreDescription')}
             </SheetDescription>
           </SheetHeader>
 
@@ -234,7 +236,7 @@ export function MobileNavBottom() {
                         aria-current={isActive ? 'page' : undefined}
                         className={cn(
                           'w-full flex items-center gap-4 p-4 rounded-2xl min-h-[44px] transition-all duration-300',
-                          'hover:bg-accent/80 active:scale-[0.97]',
+                          'hover:bg-accent/80 active:scale-[0.97] motion-reduce:active:scale-100',
                           'border-2 border-transparent',
                           isActive
                             ? 'bg-gradient-to-r from-primary/15 via-primary/10 to-primary/5 border-primary/30 shadow-sm shadow-primary/20'
@@ -252,7 +254,7 @@ export function MobileNavBottom() {
                           <Icon
                             className={cn(
                               'h-6 w-6 transition-transform duration-300',
-                              isActive ? 'text-white scale-110' : 'text-muted-foreground'
+                              isActive ? 'text-primary-foreground scale-110' : 'text-muted-foreground'
                             )}
                           />
                         </div>
@@ -275,8 +277,8 @@ export function MobileNavBottom() {
                           className={cn(
                             'h-5 w-5 transition-all duration-300',
                             isActive
-                              ? 'text-primary translate-x-1'
-                              : 'text-muted-foreground group-hover:translate-x-1'
+                              ? 'text-primary translate-x-1 motion-reduce:translate-x-0'
+                              : 'text-muted-foreground group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0'
                           )}
                         />
                       </button>

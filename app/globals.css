@@ -208,6 +208,36 @@ input[type='search']::-ms-clear {
   display: none;
 }
 
+/* CMDK Command Palette - Remove focus outline */
+[cmdk-input] {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+[cmdk-input]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+[cmdk-input-wrapper] {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+[cmdk-input-wrapper]:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Ensure cmdk input never shows focus ring */
+[cmdk-input]:focus-visible,
+[cmdk-input]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  --tw-ring-shadow: none !important;
+  --tw-ring-offset-shadow: none !important;
+}
+
 /* Custom Scrollbar */
 .overflow-x-auto::-webkit-scrollbar {
   height: 4px;
@@ -415,7 +445,7 @@ input[type='search']::-ms-clear {
   /* Ensure all interactive elements have visible focus indicators */
   button:focus-visible,
   a:focus-visible,
-  input:focus-visible,
+  input:not([cmdk-input]):focus-visible,
   select:focus-visible,
   textarea:focus-visible,
   [role="button"]:focus-visible,

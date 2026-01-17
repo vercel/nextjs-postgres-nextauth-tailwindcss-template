@@ -1,6 +1,8 @@
 'use client';
 
 import * as React from 'react';
+import { Search } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { GlobalSearch } from './global-search';
 
 /**
@@ -72,30 +74,17 @@ export function GlobalSearchProvider({ children, data }: GlobalSearchProviderPro
  */
 export function GlobalSearchTrigger() {
   const { open } = useGlobalSearchContext();
+  const t = useTranslations('pages.dashboard.navigation.search');
 
   return (
     <button
       onClick={open}
-      className="flex items-center gap-2 rounded-lg border bg-muted/50 px-3 min-h-[44px] text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-      aria-label="Open search (Cmd+K)"
+      className="flex items-center gap-2 rounded-lg border bg-muted/50 px-4 min-h-[44px] text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:w-80 sm:max-w-md"
+      aria-label={t('ariaLabel')}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-4 w-4"
-      >
-        <circle cx="11" cy="11" r="8" />
-        <path d="m21 21-4.3-4.3" />
-      </svg>
-      <span className="hidden sm:inline">Buscar...</span>
-      <kbd className="hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border bg-background px-1.5 font-mono text-xs font-medium">
+      <Search className="h-4 w-4 shrink-0" />
+      <span className="hidden sm:inline flex-1 text-left">{t('trigger')}</span>
+      <kbd className="hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border bg-background px-1.5 font-mono text-xs font-medium" aria-hidden="true">
         ⌘K
       </kbd>
     </button>

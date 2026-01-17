@@ -385,6 +385,35 @@
       "navigation": {
         "toggleMenu": "Alternar menú",
         "dashboard": "Dashboard",
+        "home": "Inicio",
+        "expenses": "Gastos",
+        "more": "Más",
+        "moreOptions": "Todas las opciones",
+        "moreDescription": "Acceso completo a gastos, ingresos y configuración",
+        "search": {
+          "placeholder": "Buscar gastos, ingresos, categorías...",
+          "trigger": "Buscar...",
+          "ariaLabel": "Abrir búsqueda (Cmd+K)",
+          "dialogTitle": "Búsqueda global",
+          "emptyQuery": "Escribe para buscar gastos, ingresos o categorías",
+          "noResults": "No encontramos nada. Prueba con otra búsqueda.",
+          "navigate": "Navegar",
+          "select": "Seleccionar",
+          "toOpen": "para abrir"
+        },
+        "descriptions": {
+          "categories": "Organiza tus gastos por tipo",
+          "paymentMethods": "Gestiona tarjetas y cuentas bancarias",
+          "recurring": "Suscripciones y gastos fijos mensuales",
+          "paid": "Gastos completados y confirmados",
+          "income": "Sueldo, freelance y otros ingresos",
+          "incomeCategories": "Organiza tus ingresos por tipo",
+          "incomeRecurring": "Sueldo y cobros fijos mensuales",
+          "settings": "Moneda, idioma y notificaciones",
+          "account": "Perfil, email y plan activo",
+          "security": "Cambia tu contraseña y accesos",
+          "export": "Descarga tus gastos en Excel o CSV"
+        },
         "sections": {
           "expense": "Gasto",
           "income": "Ingresos",

@@ -18,14 +18,6 @@ import Image from 'next/image';
 import { signOut } from '@/lib/auth-actions';
 import { Logo } from '@/components/ui/logo';
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator
-} from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import {
@@ -78,10 +70,11 @@ export default async function DashboardLayout({
         <main className="flex min-h-screen w-full flex-col bg-muted/40">
           <DesktopNav t={t} brandName={brandT('name')} user={user} profile={profile} />
           <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-52 overflow-x-hidden">
-            <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+            <header className="sticky top-0 z-30 flex h-14 items-center border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
               <MobileNav t={t} brandName={brandT('name')} user={user} profile={profile} />
-              <DashboardBreadcrumb t={t} brandName={brandT('name')} />
-              <GlobalSearchTrigger />
+              <div className="flex-1 flex justify-end sm:justify-center">
+                <GlobalSearchTrigger />
+              </div>
             </header>
             <main className="grid flex-1 items-start gap-2 p-3 pb-20 sm:p-4 sm:pb-0 sm:px-6 sm:py-0 md:gap-4 overflow-x-hidden">
               {children}
@@ -246,7 +239,7 @@ function MobileNav({ t, brandName, user, profile }: { t: any; brandName: string;
               {/* Dashboard */}
               <Link
                 href="/dashboard"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted"
+                className="flex items-center gap-3 rounded-lg px-3 py-2.5 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted"
               >
                 <Home className="h-4 w-4" />
                 {t('navigation.dashboard')}
@@ -256,23 +249,23 @@ function MobileNav({ t, brandName, user, profile }: { t: any; brandName: string;
               <div className="mt-3 px-3 text-xs font-semibold uppercase text-muted-foreground">
                 {t('navigation.sections.expense')}
               </div>
-              <Link href="/dashboard/expenses" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/expenses" className="flex items-center gap-3 rounded-lg px-3 py-2.5 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <Receipt className="h-4 w-4" />
                 {t('navigation.expense.all')}
               </Link>
-              <Link href="/dashboard/categories" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/categories" className="flex items-center gap-3 rounded-lg px-3 py-2.5 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <FolderOpen className="h-4 w-4" />
                 {t('navigation.expense.categories')}
               </Link>
-              <Link href="/dashboard/payment-methods" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/payment-methods" className="flex items-center gap-3 rounded-lg px-3 py-2.5 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <CreditCard className="h-4 w-4" />
                 {t('navigation.expense.paymentMethods')}
               </Link>
-              <Link href="/dashboard/expenses/recurring" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/expenses/recurring" className="flex items-center gap-3 rounded-lg px-3 py-2.5 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <Receipt className="h-4 w-4" />
                 {t('navigation.expense.recurring')}
               </Link>
-              <Link href="/dashboard/expenses/paid" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/expenses/paid" className="flex items-center gap-3 rounded-lg px-3 py-2.5 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <History className="h-4 w-4" />
                 {t('navigation.expense.paid')}
               </Link>
@@ -281,15 +274,15 @@ function MobileNav({ t, brandName, user, profile }: { t: any; brandName: string;
               <div className="mt-3 px-3 text-xs font-semibold uppercase text-muted-foreground">
                 {t('navigation.sections.income')}
               </div>
-              <Link href="/dashboard/income" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/income" className="flex items-center gap-3 rounded-lg px-3 py-2.5 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <TrendingUp className="h-4 w-4" />
                 {t('navigation.income.all')}
               </Link>
-              <Link href="/dashboard/income/categories" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/income/categories" className="flex items-center gap-3 rounded-lg px-3 py-2.5 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <FolderOpen className="h-4 w-4" />
                 {t('navigation.income.categories')}
               </Link>
-              <Link href="/dashboard/income/recurring" className="flex items-center gap-3 rounded-lg px-3 py-2 min-h-[40px] text-muted-foreground hover:text-primary hover:bg-muted">
+              <Link href="/dashboard/income/recurring" className="flex items-center gap-3 rounded-lg px-3 py-2.5 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-muted">
                 <TrendingUp className="h-4 w-4" />
                 {t('navigation.income.recurring')}
               </Link>
@@ -342,20 +335,3 @@ function MobileNav({ t, brandName, user, profile }: { t: any; brandName: string;
   );
 }
 
-function DashboardBreadcrumb({ t, brandName }: { t: any; brandName: string }) {
-  return (
-    <Breadcrumb className="hidden md:flex">
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href="/dashboard">{t('navigation.dashboard')}</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>{brandName}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
-  );
-}

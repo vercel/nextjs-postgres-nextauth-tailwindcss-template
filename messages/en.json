@@ -407,6 +407,35 @@
           "account": "My account",
           "security": "Security",
           "export": "Export data"
+        },
+        "search": {
+          "placeholder": "Search expenses, income, categories...",
+          "trigger": "Search...",
+          "ariaLabel": "Open search (Cmd+K)",
+          "dialogTitle": "Global search",
+          "emptyQuery": "Type to search expenses, income or categories",
+          "noResults": "Nothing found. Try a different search.",
+          "navigate": "Navigate",
+          "select": "Select",
+          "toOpen": "to open"
+        },
+        "home": "Home",
+        "expenses": "Expenses",
+        "more": "More",
+        "moreOptions": "All options",
+        "moreDescription": "Full access to expenses, income and settings",
+        "descriptions": {
+          "categories": "Organize your expenses by type",
+          "paymentMethods": "Manage cards and bank accounts",
+          "recurring": "Subscriptions and fixed monthly expenses",
+          "paid": "Completed and confirmed expenses",
+          "income": "Salary, freelance and other income",
+          "incomeCategories": "Organize your income by type",
+          "incomeRecurring": "Salary and fixed monthly payments",
+          "settings": "Currency, language and notifications",
+          "account": "Profile, email and active plan",
+          "security": "Change your password and access",
+          "export": "Download your expenses in Excel or CSV"
         }
       },
       "months": {
