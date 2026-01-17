@@ -92,7 +92,7 @@ function SignUpForm() {
               </p>
             </div>
             <Link href="/login" className="block">
-              <Button variant="outline" className="w-full h-12">
+              <Button variant="outline" className="w-full h-12 rounded-full">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 {t('success.backToLogin')}
               </Button>
@@ -261,7 +261,7 @@ function SignUpForm() {
 
               <Button
                 type="submit"
-                className="h-12 sm:h-12 w-full text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl transition-all"
+                className="h-12 sm:h-12 w-full text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl transition-all rounded-full"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -290,7 +290,7 @@ function SignUpForm() {
             </div>
 
             <Link href="/login" className="block">
-              <Button variant="outline" className="w-full h-12">
+              <Button variant="outline" className="w-full h-12 rounded-full">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 {t('login')}
               </Button>

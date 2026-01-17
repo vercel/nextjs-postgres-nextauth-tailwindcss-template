@@ -126,7 +126,7 @@ function LoginForm() {
             <Button
               onClick={() => setEmailSent(false)}
               variant="outline"
-              className="w-full h-12"
+              className="w-full h-12 rounded-full"
             >
               {t('emailSent.sendAnother')}
             </Button>
@@ -274,7 +274,7 @@ function LoginForm() {
 
                   <Button
                     type="submit"
-                    className="h-12 sm:h-12 w-full text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl transition-all"
+                    className="h-12 sm:h-12 w-full text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl transition-all rounded-full"
                     disabled={isLoading}
                   >
                     {isLoading ? (
@@ -313,7 +313,7 @@ function LoginForm() {
 
                   <Button
                     type="submit"
-                    className="h-12 sm:h-12 w-full text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl transition-all"
+                    className="h-12 sm:h-12 w-full text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl transition-all rounded-full"
                     disabled={isLoading}
                   >
                     {isLoading ? (
@@ -367,7 +367,7 @@ function LoginForm() {
             </div>
 
             <Link href="/register" className="block">
-              <Button variant="outline" className="w-full h-12">
+              <Button variant="outline" className="w-full h-12 rounded-full">
                 <UserPlus className="h-4 w-4 mr-2" />
                 {t('createAccount')}
               </Button>
