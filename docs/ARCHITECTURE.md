@@ -87,8 +87,8 @@ gastos/
 │   │   ├── dashboard/                # Main application (route group)
 │   │   │   ├── actions.ts            # ⭐ Primary Server Actions
 │   │   │   ├── page.tsx              # Dashboard home with KPIs
-│   │   │   ├── layout.tsx            # Shared dashboard layout
-│   │   │   ├── nav-section.tsx       # Navigation component
+│   │   │   ├── layout.tsx            # Shared dashboard layout (includes DesktopNav, MobileNav)
+│   │   │   ├── nav-section.tsx       # Collapsible navigation sections
 │   │   │   ├── dashboard-kpis.tsx    # KPI cards component
 │   │   │   ├── categorias/           # Expense categories module
 │   │   │   │   ├── [id]/             # Category detail page
@@ -139,7 +139,7 @@ gastos/
 │   │   ├── empty-state.tsx           # ⭐ Empty states
 │   │   └── skeletons.tsx             # ⭐ Loading skeletons
 │   ├── global-search.tsx             # ⭐ Global search modal (Cmd+K)
-│   └── mobile-nav-bottom.tsx         # ⭐ Mobile navigation
+│   └── mobile-nav-bottom.tsx         # ⭐ Mobile bottom navigation (3 items + More)
 │
 ├── docs/                             # Documentation
 │   ├── INDEX.md                      # Documentation index
@@ -427,6 +427,110 @@ CREATE POLICY "Users can delete own expenses"
 - Protection against application bugs
 - Works even if ORM is bypassed
 - Automatic isolation between users
+
+---
+
+## Navigation & Layout Architecture
+
+### Desktop Sidebar (w-52 / 208px)
+
+The desktop sidebar is a fixed-position navigation panel optimized for balance between navigation and content area.
+
+**Key Specifications:**
+- **Width:** 208px (`w-52`) - Reduced from 240px for more content space
+- **Position:** Fixed left, full height
+- **Visibility:** Hidden on mobile, visible `sm:flex` (≥640px)
+- **Main content offset:** `sm:pl-52` applied to content container
+
+**Structure:**
+```
+┌─────────────────────┐
+│ Logo/Brand (link)   │  ← Dashboard access
+├─────────────────────┤
+│                     │
+│ NavSection (Gasto)  │  ← Collapsible with localStorage state
+│   ├ Todos           │
+│   ├ Categorías      │
+│   ├ Métodos de pago │
+│   └ ...             │
+│                     │
+│ NavSection (Ingreso)│  ← Collapsible with localStorage state
+│   ├ Todos           │
+│   └ ...             │
+│                     │
+├─────────────────────┤
+│ User Profile        │  ← Avatar, name, plan + dropdown
+│   • Configuración   │     (Settings, Account, Security,
+│   • Mi cuenta       │      Export, Logout)
+│   • ...             │
+└─────────────────────┘
+```
+
+**Design Decisions:**
+- No Dashboard link in navigation (accessible via logo)
+- No vertical separators on nested items (cleaner visual)
+- User profile integrated in sidebar (removed from header)
+- Auto-expand section if contains active route
+
+**Implementation:** See `DesktopNav()` function in `/app/[locale]/dashboard/layout.tsx`
+
+### Mobile Navigation (Dual Pattern)
+
+Mobile uses two complementary navigation systems:
+
+#### 1. Bottom Navigation Bar (`MobileNavBottom`)
+- **Location:** Fixed bottom, full width
+- **Visibility:** Only on mobile (`sm:hidden`)
+- **Items:** 3 primary actions (Inicio, Gastos, Más)
+- **Sheet "Más":** Contains secondary navigation grouped by section
+
+**Pattern:**
+```
+┌─────────────────────────────────┐
+│  [Inicio]  [Gastos]  [Más...]  │  ← Bottom bar (fixed)
+└─────────────────────────────────┘
+```
+
+#### 2. Hamburger Sidebar Sheet (`MobileNav`)
+- **Trigger:** PanelLeft button in header
+- **Pattern:** Radix UI Sheet (slide from left)
+- **Structure:** Identical to desktop sidebar (Logo, Dashboard, NavSections, User Profile)
+- **Purpose:** Full navigation access on mobile
+
+**Design Decision:** Dual navigation provides flexibility - bottom bar for quick access, hamburger for complete navigation tree.
+
+**Implementation:** See `MobileNav()` function in `/app/[locale]/dashboard/layout.tsx` and `/components/mobile-nav-bottom.tsx`
+
+### NavSection Pattern
+
+Collapsible navigation sections with persistent state:
+
+**Features:**
+- Radix UI Collapsible component
+- State persisted in localStorage (key: `nav-{section}-open`)
+- Auto-expand if contains active route
+- Chevron rotation animation (180deg when open)
+- No border-left on nested items (previous versions had vertical line)
+
+**Touch Targets (WCAG AA):**
+- Section trigger: 40px (`min-h-[40px]`)
+- Nested links: 36px (`min-h-[36px]`)
+
+**Implementation:** See `/app/[locale]/dashboard/nav-section.tsx`
+
+### Responsive Breakpoints
+
+```
+Mobile (< 640px):
+  - MobileNavBottom visible
+  - Hamburger sheet for full navigation
+  - Sidebar hidden
+
+Desktop (≥ 640px):
+  - Sidebar visible (w-52)
+  - MobileNavBottom hidden
+  - Content offset by pl-52
+```
 
 ---
 

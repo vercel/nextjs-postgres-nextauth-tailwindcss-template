@@ -24,8 +24,10 @@ Catálogo completo de componentes UI del proyecto con props, ejemplos y best pra
   - [QuickAddFAB](#quickaddfab)
   - [UpcomingExpensesWidget](#upcomingexpenseswidget)
 - [Layout Components](#layout-components)
+  - [Desktop Sidebar Navigation](#desktop-sidebar-navigation)
+  - [NavSection](#navsection)
   - [MobileNavBottom](#mobilenavbottom)
-  - [NavItem](#navitem)
+  - [Mobile Sidebar Sheet](#mobile-sidebar-sheet)
 - [Loading States](#loading-states)
 - [Toast Notifications](#toast-notifications)
 
@@ -878,6 +880,102 @@ import { UpcomingExpensesWidget } from '@/app/dashboard/upcoming-expenses-widget
 
 ## Layout Components
 
+### Desktop Sidebar Navigation
+
+**Ubicación:** `/app/[locale]/dashboard/layout.tsx` (DesktopNav function)
+
+Sidebar de navegación lateral para desktop con secciones colapsables y perfil de usuario.
+
+#### Dimensiones
+
+- **Width:** 208px (`w-52`) - Optimizado para balance entre navegación y contenido
+- **Position:** Fixed a la izquierda (solo visible en desktop `sm:flex`)
+- **Content offset:** `sm:pl-52` aplicado al contenedor principal
+
+#### Estructura
+
+1. **Logo/Brand** - Link al dashboard con logo y nombre de la app
+2. **Main Navigation** - Secciones colapsables (Gasto, Ingresos)
+3. **User Profile Section** - Avatar, nombre, plan y dropdown con perfil/logout
+
+#### Features
+
+- **Dashboard access:** Vía logo (no link separado en navegación)
+- **Secciones colapsables:** NavSection con estado persistente en localStorage
+- **Sin separadores verticales:** NavSection items sin `border-l`
+- **User dropdown:** Configuración, Cuenta, Seguridad, Exportar, Cerrar sesión
+- **Auto-expand:** Sección se expande automáticamente si ruta activa
+
+#### Accesibilidad
+
+- ✅ Logo link: `min-h-[44px]` con ARIA label
+- ✅ NavSection triggers: `min-h-[40px]` con ARIA expanded
+- ✅ Nested nav items: `min-h-[36px]` con ARIA current
+- ✅ User profile button: Touch target adecuado con roles semánticos
+- ✅ Focus visible: Ring 2px en todos los elementos interactivos
+
+---
+
+### NavSection
+
+**Ubicación:** `/app/[locale]/dashboard/nav-section.tsx`
+
+Componente de navegación colapsable para agrupar links relacionados en el sidebar.
+
+#### Props
+
+```typescript
+interface NavSectionProps {
+  title: string;
+  icon: IconName; // Nombre del icono de lucide-react
+  links: NavLink[];
+  defaultOpen?: boolean;
+  storageKey: string; // Para persistir estado en localStorage
+}
+
+interface NavLink {
+  href: string;
+  label: string;
+  icon: IconName;
+}
+```
+
+#### Ejemplo de Uso
+
+```tsx
+const expenseLinks = [
+  { href: '/dashboard/expenses', label: 'Todos', icon: 'Receipt' },
+  { href: '/dashboard/categories', label: 'Categorías', icon: 'FolderOpen' },
+  { href: '/dashboard/payment-methods', label: 'Métodos de pago', icon: 'CreditCard' }
+];
+
+<NavSection
+  title="Gasto"
+  icon="DollarSign"
+  links={expenseLinks}
+  defaultOpen={true}
+  storageKey="nav-expense-open"
+/>
+```
+
+#### Features
+
+- **Collapsible:** Radix UI Collapsible con animación suave
+- **Estado persistente:** localStorage guarda open/closed state
+- **Auto-expand:** Se expande si contiene la ruta activa
+- **Visual feedback:** Highlight en sección y link activos
+- **Sin separadores:** Items anidados sin `border-l` (diseño limpio)
+
+#### Accesibilidad
+
+- ✅ Touch targets: Trigger 40px, nested items 36px
+- ✅ ARIA expanded: Indica estado colapsado/expandido
+- ✅ ARIA current: "page" en link activo
+- ✅ Focus visible: Ring 2px
+- ✅ Keyboard navigation: Enter/Space para toggle, Tab para navegar
+
+---
+
 ### MobileNavBottom
 
 **Ubicación:** `/components/mobile-nav-bottom.tsx`
@@ -887,10 +985,11 @@ Navegación inferior para móviles con 3 items principales + "Más".
 #### Features
 
 - **3 items principales:** Inicio, Gastos, (+ Más)
-- **Sheet "Más":** Contiene Ingresos, Categorías, Métodos de Pago, Gastos Pagados
+- **Sheet "Más":** Contiene Ingresos, Categorías, Métodos de Pago, Gastos Pagados, Perfil
 - **Indicador activo:** Gradient bar superior + background highlight
 - **Animaciones:** Scale on active, hover effects
 - **Responsive:** Solo visible en móvil (sm:hidden)
+- **User profile:** Dropdown integrado en sheet con avatar, nombre y plan
 
 #### Accesibilidad
 
@@ -902,35 +1001,25 @@ Navegación inferior para móviles con 3 items principales + "Más".
 
 ---
 
-### NavItem
+### Mobile Sidebar Sheet
 
-**Ubicación:** `/app/dashboard/nav-item.tsx`
+**Ubicación:** `/app/[locale]/dashboard/layout.tsx` (MobileNav function)
 
-Item de navegación para sidebar desktop.
-
-#### Props
-
-```typescript
-interface NavItemProps {
-  href: string;
-  label: string;
-  icon: LucideIcon;
-  isActive?: boolean;
-}
-```
+Sheet lateral para navegación móvil (hamburger menu) que replica estructura del sidebar desktop.
 
 #### Features
 
-- Highlight cuando activo
-- Hover effects
-- Iconos de Lucide React
-- Touch target 44px
+- **Trigger:** Botón PanelLeft en header (solo visible en móvil)
+- **Estructura:** Logo + Dashboard link + Secciones (Gasto/Ingresos) + User profile
+- **User profile section:** Idéntico a desktop (avatar, nombre, plan, dropdown)
+- **Homologado con desktop:** Mismo patrón de navegación y opciones
 
 #### Accesibilidad
 
-- ✅ Min-height: 44px
-- ✅ ARIA current: "page" si activo
-- ✅ Focus visible
+- ✅ Sheet title + description: Para lectores de pantalla
+- ✅ Touch targets: min-h-[40px] en todos los links
+- ✅ Focus trap: Radix Sheet maneja automáticamente
+- ✅ Close on selection: Sheet se cierra al navegar
 
 ---
 

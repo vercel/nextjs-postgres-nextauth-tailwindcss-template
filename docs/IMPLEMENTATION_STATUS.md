@@ -365,7 +365,7 @@ El proyecto Tallify ha completado las fases core de desarrollo: dashboard, UX/UI
 | Button (icon-sm) | 32px | 40px (h-10) | ✅ |
 | Input (default) | 40px | 44px (h-11) | ✅ |
 | FilterBar chips | 32-40px | 44-48px (min-h) | ✅ |
-| NavItem | ~36px | 44px (min-h-[44px]) | ✅ |
+| NavItem (deprecated) | ~36px | 44px (min-h-[44px]) | ✅ → 🔄 Now NavSection |
 | SearchBar clear button | 20px | 32px (h-8 w-8) | ✅ |
 | QuickAddFAB checkbox | 16px | 20px (h-5 w-5) | ⚠️ Aceptable (label extendido) |
 
@@ -373,9 +373,12 @@ El proyecto Tallify ha completado las fases core de desarrollo: dashboard, UX/UI
 - `/components/ui/button.tsx`
 - `/components/ui/input.tsx`
 - `/components/ui/filter-bar.tsx`
-- `/app/dashboard/nav-item.tsx`
+- `/app/[locale]/dashboard/nav-section.tsx` (replaces old nav-item.tsx)
 - `/components/ui/search-bar.tsx`
-- `/app/dashboard/quick-add-fab.tsx`
+- `/app/[locale]/dashboard/quick-add-fab.tsx`
+
+**Nota (Enero 2026):** NavItem fue reemplazado por NavSection (componente colapsable).
+Touch targets actuales: Section trigger 40px, nested links 36px (WCAG AA compliant).
 
 #### Contraste de Colores (WCAG 1.4.3 - AA)
 
