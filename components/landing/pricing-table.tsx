@@ -89,7 +89,7 @@ export function PricingTable() {
           <div className="flex items-center justify-center gap-3">
             <button
               onClick={() => setBillingPeriod("monthly")}
-              className={`px-6 py-2 rounded-lg font-medium transition-all ${
+              className={`px-6 py-2 rounded-full font-medium transition-all ${
                 billingPeriod === "monthly"
                   ? "bg-primary text-primary-foreground"
                   : "bg-muted text-muted-foreground hover:bg-muted/80"
@@ -100,7 +100,7 @@ export function PricingTable() {
             </button>
             <button
               onClick={() => setBillingPeriod("annual")}
-              className={`px-6 py-2 rounded-lg font-medium transition-all ${
+              className={`px-6 py-2 rounded-full font-medium transition-all ${
                 billingPeriod === "annual"
                   ? "bg-primary text-primary-foreground"
                   : "bg-muted text-muted-foreground hover:bg-muted/80"
@@ -187,7 +187,7 @@ export function PricingTable() {
               <Button
                 asChild
                 size="lg"
-                className={`w-full h-11 ${
+                className={`w-full h-11 rounded-full ${
                   plan.popular
                     ? ""
                     : "bg-secondary text-secondary-foreground hover:bg-secondary/80"

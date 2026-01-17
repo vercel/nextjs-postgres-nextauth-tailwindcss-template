@@ -82,7 +82,7 @@ export default async function HomePage() {
             >
               {t('navigation.login')}
             </Link>
-            <Button asChild size="default" className="h-12">
+            <Button asChild size="default" className="h-12 rounded-full">
               <Link href="/login">{t('navigation.getStarted')}</Link>
             </Button>
           </div>

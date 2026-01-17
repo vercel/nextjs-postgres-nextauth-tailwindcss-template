@@ -504,7 +504,33 @@ export function CustomCard({ title, children, className }: Props) {
 }
 ```
 
-### 8. Project-Specific Context
+### 8. Button Border Radius Convention
+
+| Context | Class | Usage |
+|---------|-------|-------|
+| Landing CTA | `rounded-full` | Primary action buttons on landing pages |
+| Icon buttons | `rounded-full` | Buttons containing only icons |
+| Billing toggles | `rounded-full` | Period/plan selection toggles |
+| Standard buttons | `rounded-md` | Buttons in forms, modals, dialogs |
+| Cards | `rounded-xl` or `rounded-lg` | Card containers |
+| Inputs | `rounded-lg` | Text fields, selects, textareas |
+
+```typescript
+// Landing page CTA - pill-shaped
+<Button className="h-12 px-8 rounded-full">Start Free</Button>
+
+// Icon button - pill-shaped
+<Button size="icon" className="rounded-full" aria-label="Close">
+  <X className="h-4 w-4" />
+</Button>
+
+// Form button - standard radius
+<Button type="submit">Save Changes</Button>
+```
+
+**Rule**: Landing page CTAs and icon-only buttons MUST use `rounded-full` for pill-shaped appearance.
+
+### 9. Project-Specific Context
 
 **Tallify Expense Tracker** - v0.1.0-beta
 - Next.js 15 with App Router and Server Components
@@ -529,7 +555,7 @@ export function CustomCard({ title, children, className }: Props) {
 - Touch targets ≥ 44px on all breakpoints
 - Test on: iPhone SE (375px), iPad (768px), Desktop (1440px)
 
-### 9. Testing Checklist
+### 10. Testing Checklist
 
 Before marking a component as complete, verify:
 

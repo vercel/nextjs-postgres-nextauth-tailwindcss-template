@@ -83,7 +83,7 @@ export function HeroSection() {
               <Button
                 size="lg"
                 asChild
-                className="h-12 px-8 text-base font-semibold"
+                className="h-12 px-8 text-base font-semibold rounded-full"
                 aria-label={t('cta')}
               >
                 <Link href="/login">{t('cta')}</Link>

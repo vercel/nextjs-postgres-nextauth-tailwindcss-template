@@ -46,7 +46,7 @@ export function TestimonialCard({
                   className={`w-4 h-4 ${
                     i < rating
                       ? "fill-yellow-400 text-yellow-400"
-                      : "fill-muted text-muted"
+                      : "fill-muted text-muted-foreground"
                   }`}
                   aria-hidden="true"
                 />

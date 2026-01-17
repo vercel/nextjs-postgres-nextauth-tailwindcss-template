@@ -122,6 +122,19 @@ Protect the visual integrity of Tallify by:
 
 **Rule**: Use only `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-full`.
 
+### Button Border Radius Convention
+
+| Context | Class | Usage |
+|---------|-------|-------|
+| Landing CTA | `rounded-full` | Primary action buttons on landing pages |
+| Icon buttons | `rounded-full` | Buttons containing only icons |
+| Billing toggles | `rounded-full` | Period/plan selection toggles |
+| Standard buttons | `rounded-md` | Buttons in forms, modals, dialogs |
+| Cards | `rounded-xl` or `rounded-lg` | Card containers |
+| Inputs | `rounded-lg` | Text fields, selects, textareas |
+
+**Rule**: Landing page CTAs and icon-only buttons MUST use `rounded-full` for pill-shaped appearance.
+
 #### 6. Dark Mode Incompatibility
 ```tsx
 // VIOLATION: Only works in light mode
