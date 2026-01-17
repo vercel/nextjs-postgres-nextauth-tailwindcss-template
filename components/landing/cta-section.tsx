@@ -47,7 +47,7 @@ export function CTASection() {
           <Button
             size="lg"
             asChild
-            className="h-14 px-10 text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow rounded-full"
+            className="h-14 px-10 text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow"
             aria-label={t('buttonAria')}
           >
             <Link href="/login">{t('button')}</Link>

@@ -506,29 +506,32 @@ export function CustomCard({ title, children, className }: Props) {
 
 ### 8. Button Border Radius Convention
 
-| Context | Class | Usage |
-|---------|-------|-------|
-| Landing CTA | `rounded-full` | Primary action buttons on landing pages |
-| Icon buttons | `rounded-full` | Buttons containing only icons |
-| Billing toggles | `rounded-full` | Period/plan selection toggles |
-| Standard buttons | `rounded-md` | Buttons in forms, modals, dialogs |
+**All buttons use `rounded-full` by default** (pill-shaped). This is enforced at the component level in `/components/ui/button.tsx`.
+
+| Context | Behavior | Notes |
+|---------|----------|-------|
+| All buttons | `rounded-full` (default) | No class needed - automatic |
+| Button groups | Use `rounded-l-none`/`rounded-r-none` | Override for joined edges |
 | Cards | `rounded-xl` or `rounded-lg` | Card containers |
 | Inputs | `rounded-lg` | Text fields, selects, textareas |
 
 ```typescript
-// Landing page CTA - pill-shaped
-<Button className="h-12 px-8 rounded-full">Start Free</Button>
+// Standard button - pill-shaped by default (NO class needed)
+<Button>Start Free</Button>
 
-// Icon button - pill-shaped
-<Button size="icon" className="rounded-full" aria-label="Close">
+// Icon button - already pill-shaped by default
+<Button size="icon" aria-label="Close">
   <X className="h-4 w-4" />
 </Button>
 
-// Form button - standard radius
-<Button type="submit">Save Changes</Button>
+// Button group - use partial radius overrides
+<div className="flex">
+  <Button className="rounded-r-none">Left</Button>
+  <Button className="rounded-l-none">Right</Button>
+</div>
 ```
 
-**Rule**: Landing page CTAs and icon-only buttons MUST use `rounded-full` for pill-shaped appearance.
+**Rule**: `rounded-full` is NEVER needed on buttons - it's the default. Only use radius overrides for button groups.
 
 ### 9. Project-Specific Context
 

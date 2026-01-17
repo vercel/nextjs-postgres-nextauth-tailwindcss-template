@@ -68,7 +68,7 @@ export function ReviewsSection() {
             onClick={prevReview}
             variant="outline"
             size="icon"
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 h-12 w-12 rounded-full bg-background shadow-lg hidden md:flex"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 h-12 w-12 bg-background shadow-lg hidden md:flex"
             aria-label="Review anterior"
           >
             <ChevronLeft className="h-6 w-6" />
@@ -78,7 +78,7 @@ export function ReviewsSection() {
             onClick={nextReview}
             variant="outline"
             size="icon"
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 h-12 w-12 rounded-full bg-background shadow-lg hidden md:flex"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 h-12 w-12 bg-background shadow-lg hidden md:flex"
             aria-label="Review siguiente"
           >
             <ChevronRight className="h-6 w-6" />

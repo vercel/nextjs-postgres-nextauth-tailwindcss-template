@@ -135,7 +135,7 @@ export function ScreenshotsCarousel() {
           <Button
             variant="outline"
             size="icon"
-            className="absolute left-4 top-1/2 -translate-y-1/2 min-h-[44px] min-w-[44px] rounded-full bg-background/80 backdrop-blur-sm shadow-lg hover:bg-background"
+            className="absolute left-4 top-1/2 -translate-y-1/2 min-h-[44px] min-w-[44px] bg-background/80 backdrop-blur-sm shadow-lg hover:bg-background"
             onClick={scrollPrev}
             disabled={!canScrollPrev}
             aria-label="Anterior screenshot"
@@ -146,7 +146,7 @@ export function ScreenshotsCarousel() {
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-4 top-1/2 -translate-y-1/2 min-h-[44px] min-w-[44px] rounded-full bg-background/80 backdrop-blur-sm shadow-lg hover:bg-background"
+            className="absolute right-4 top-1/2 -translate-y-1/2 min-h-[44px] min-w-[44px] bg-background/80 backdrop-blur-sm shadow-lg hover:bg-background"
             onClick={scrollNext}
             disabled={!canScrollNext}
             aria-label="Siguiente screenshot"

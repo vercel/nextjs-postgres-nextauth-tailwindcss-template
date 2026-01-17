@@ -124,16 +124,16 @@ Protect the visual integrity of Tallify by:
 
 ### Button Border Radius Convention
 
-| Context | Class | Usage |
-|---------|-------|-------|
-| Landing CTA | `rounded-full` | Primary action buttons on landing pages |
-| Icon buttons | `rounded-full` | Buttons containing only icons |
-| Billing toggles | `rounded-full` | Period/plan selection toggles |
-| Standard buttons | `rounded-md` | Buttons in forms, modals, dialogs |
+**All buttons use `rounded-full` by default** (pill-shaped). This is enforced at the component level.
+
+| Context | Behavior | Notes |
+|---------|----------|-------|
+| All buttons | `rounded-full` (default) | No class needed - automatic |
+| Button groups | Use `rounded-l-none`/`rounded-r-none` | Override for joined edges |
 | Cards | `rounded-xl` or `rounded-lg` | Card containers |
 | Inputs | `rounded-lg` | Text fields, selects, textareas |
 
-**Rule**: Landing page CTAs and icon-only buttons MUST use `rounded-full` for pill-shaped appearance.
+**Rule**: `rounded-full` is NEVER needed on buttons - it's the default. Only use radius overrides for button groups.
 
 #### 6. Dark Mode Incompatibility
 ```tsx

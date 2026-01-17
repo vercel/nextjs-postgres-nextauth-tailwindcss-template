@@ -458,7 +458,7 @@ export function OnboardingClient({ initialName }: OnboardingClientProps) {
                 <Button
                   variant="outline"
                   onClick={handlePrevStep}
-                  className="h-12 rounded-full"
+                  className="h-12"
                   disabled={isLoading}
                 >
                   <ChevronLeft className="h-4 w-4 mr-2" />
@@ -467,7 +467,7 @@ export function OnboardingClient({ initialName }: OnboardingClientProps) {
               )}
               <Button
                 onClick={handleNextStep}
-                className="h-12 flex-1 font-semibold rounded-full"
+                className="h-12 flex-1 font-semibold"
                 disabled={!canContinue() || isLoading}
               >
                 {isLoading ? (
