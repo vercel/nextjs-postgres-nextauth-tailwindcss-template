@@ -48,3 +48,24 @@ export function ButtonGroup({
     </ToggleGroup>
   );
 }
+
+/**
+ * ButtonGroupText - Text element for use in button groups (AI Elements compatibility)
+ */
+export function ButtonGroupText({
+  className,
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLSpanElement>) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center justify-center px-3 text-sm font-medium",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </span>
+  );
+}

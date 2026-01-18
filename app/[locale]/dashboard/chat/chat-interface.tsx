@@ -3,17 +3,37 @@
 import * as React from 'react';
 import { useChat } from '@ai-sdk/react';
 import { TextStreamChatTransport } from 'ai';
+import type { ToolUIPart } from 'ai';
 import { Bot, Send, RefreshCw, User, Sparkles, Check, X, Loader2, Clock, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
-import ReactMarkdown from 'react-markdown';
 import { confirmExpense } from '@/lib/ai/actions';
 import type { PendingExpense } from '@/lib/ai/types';
+
+// AI Elements components
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from '@/components/ai-elements/conversation';
+import {
+  Message,
+  MessageContent,
+  MessageResponse,
+} from '@/components/ai-elements/message';
+import {
+  PromptInput,
+  PromptInputTextarea,
+  PromptInputFooter,
+  PromptInputTools,
+  PromptInputSubmit,
+} from '@/components/ai-elements/prompt-input';
+import { Loader } from '@/components/ai-elements/loader';
+import { Suggestions, Suggestion } from '@/components/ai-elements/suggestion';
+import { Tool, ToolHeader, ToolContent, ToolInput, ToolOutput } from '@/components/ai-elements/tool';
 
 // =============================================================================
 // CHAT TRANSPORT
@@ -22,6 +42,18 @@ import type { PendingExpense } from '@/lib/ai/types';
 const chatTransport = new TextStreamChatTransport({
   api: '/api/chat',
 });
+
+// =============================================================================
+// TOOL DISPLAY NAMES (for Spanish UI)
+// =============================================================================
+
+const TOOL_LABELS: Record<string, string> = {
+  getBalance: 'Consultando balance',
+  listExpenses: 'Buscando gastos',
+  getUpcomingPayments: 'Verificando pagos pendientes',
+  getCategoryStats: 'Analizando categorias',
+  createExpense: 'Preparando gasto',
+};
 
 // =============================================================================
 // CHAT INTERFACE
@@ -43,8 +75,6 @@ export function ChatInterface() {
   const [pendingExpense, setPendingExpense] = React.useState<PendingExpense | null>(null);
   const [isConfirming, setIsConfirming] = React.useState(false);
   const [confirmationStatus, setConfirmationStatus] = React.useState<'idle' | 'success' | 'error'>('idle');
-  const scrollRef = React.useRef<HTMLDivElement>(null);
-  const inputRef = React.useRef<HTMLTextAreaElement>(null);
 
   const isLoading = status === 'submitted' || status === 'streaming';
 
@@ -67,14 +97,21 @@ export function ChatInterface() {
       .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase();
 
-    // Check if this looks like an expense confirmation message
+    // Skip if this is a confirmation of already saved expense
+    const isAlreadySaved =
+      normalizedContent.includes('registrado correctamente') ||
+      normalizedContent.includes('ha sido registrado') ||
+      normalizedContent.includes('guardado correctamente') ||
+      normalizedContent.includes('el gasto ha sido') ||
+      normalizedContent.includes('gasto registrado') ||
+      normalizedContent.includes('creado exitosamente');
+
+    if (isAlreadySaved) return;
+
+    // Check if this looks like an expense confirmation REQUEST (not already saved)
     const isExpenseConfirmation =
       normalizedContent.includes('gasto preparado') ||
-      (normalizedContent.includes('registrar') && normalizedContent.includes('gasto')) ||
       normalizedContent.includes('voy a registrar') ||
-      (normalizedContent.includes('monto:') &&
-       normalizedContent.includes('descripcion:') &&
-       normalizedContent.includes('categoria:')) ||
       (normalizedContent.includes('confirma') && normalizedContent.includes('guardarlo'));
 
     if (!isExpenseConfirmation) return;
@@ -176,75 +213,56 @@ export function ChatInterface() {
     setPendingExpense({ ...pendingExpense, ...updates });
   };
 
-  // Auto-scroll to bottom
-  React.useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [messages]);
-
-  // Auto-focus input
-  React.useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
-
-  // Auto-resize textarea
-  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setInput(e.target.value);
-    e.target.style.height = 'auto';
-    e.target.style.height = `${Math.min(e.target.scrollHeight, 200)}px`;
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
-
-    const text = input.trim();
+  const handleSubmit = async ({ text }: { text: string }) => {
+    if (!text.trim() || isLoading) return;
     setInput('');
-    if (inputRef.current) {
-      inputRef.current.style.height = 'auto';
-    }
-
-    await sendMessage({ text });
+    await sendMessage({ text: text.trim() });
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      if (input.trim() && !isLoading) {
-        const form = e.currentTarget.closest('form');
-        if (form) {
-          form.requestSubmit();
-        }
-      }
-    }
+  const handleSuggestionClick = (suggestion: string) => {
+    setInput(suggestion);
   };
 
   return (
     <div className="flex flex-col h-[calc(100vh-8rem)] sm:h-[calc(100vh-6rem)] max-w-4xl mx-auto w-full">
       {/* Messages Area */}
-      <ScrollArea ref={scrollRef} className="flex-1 px-4">
-        <div
-          className="py-4 space-y-6"
-          aria-live="polite"
-          aria-relevant="additions"
-        >
+      <Conversation className="flex-1" aria-live="polite" aria-relevant="additions">
+        <ConversationContent className="gap-6 py-4 px-4">
           {messages.length === 0 ? (
-            <WelcomeScreen onSuggestionClick={(text) => {
-              setInput(text);
-              inputRef.current?.focus();
-            }} />
+            <WelcomeScreen onSuggestionClick={handleSuggestionClick} />
           ) : (
-            messages.map((message) => (
-              <MessageBubble key={message.id} message={message} />
-            ))
+            messages.map((message) => {
+              // Check for tool calls in the message
+              const toolParts = message.parts?.filter(
+                (p): p is ToolUIPart => p.type === 'tool-invocation'
+              ) || [];
+
+              return (
+                <React.Fragment key={message.id}>
+                  {/* Render tool calls */}
+                  {toolParts.length > 0 && message.role === 'assistant' && (
+                    <div className="flex gap-3 sm:gap-4">
+                      <ChatAvatar role="assistant" />
+                      <div className="flex-1 space-y-2">
+                        {toolParts.map((tool) => (
+                          <ToolCallDisplay key={tool.toolCallId} tool={tool} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {/* Render message */}
+                  <MessageBubble message={message} />
+                </React.Fragment>
+              );
+            })
           )}
 
+          {/* Loading indicator */}
           {isLoading && messages[messages.length - 1]?.role === 'user' && (
-            <div className="flex gap-4">
-              <Avatar role="assistant" />
+            <div className="flex gap-3 sm:gap-4">
+              <ChatAvatar role="assistant" />
               <div className="flex-1 pt-1">
-                <TypingIndicator />
+                <LoadingIndicator status={status} />
               </div>
             </div>
           )}
@@ -264,51 +282,53 @@ export function ChatInterface() {
           {error && (
             <ErrorMessage error={error} onRetry={regenerate} />
           )}
-        </div>
-      </ScrollArea>
+        </ConversationContent>
+        <ConversationScrollButton />
+      </Conversation>
 
       {/* Input Area */}
       <div className="border-t p-4">
-        <form onSubmit={handleSubmit} className="relative max-w-3xl mx-auto">
-          <div className="relative flex items-end gap-2">
-            <Textarea
-              ref={inputRef}
+        <div className="max-w-3xl mx-auto">
+          <PromptInput
+            onSubmit={handleSubmit}
+            className="relative"
+          >
+            <PromptInputTextarea
               value={input}
-              onChange={handleTextareaChange}
-              onKeyDown={handleKeyDown}
+              onChange={(e) => setInput(e.target.value)}
               placeholder="Preguntale a Taly sobre tus finanzas..."
               disabled={isLoading}
-              rows={1}
-              className="min-h-[44px] max-h-[200px] resize-none py-3"
               aria-label="Mensaje para Taly"
+              className="min-h-[44px] max-h-[200px]"
             />
-            {isLoading ? (
-              <Button
-                type="button"
-                size="icon"
-                variant="ghost"
-                onClick={stop}
-                aria-label="Detener generacion"
-                className="shrink-0"
-              >
-                <div className="h-4 w-4 rounded-sm bg-foreground" />
-              </Button>
-            ) : (
-              <Button
-                type="submit"
-                size="icon"
-                disabled={!input.trim()}
-                aria-label="Enviar mensaje"
-                className="shrink-0"
-              >
-                <Send className="h-4 w-4" />
-              </Button>
-            )}
-          </div>
+            <PromptInputFooter>
+              <PromptInputTools>
+                {/* Placeholder for future tools */}
+              </PromptInputTools>
+              {isLoading ? (
+                <Button
+                  type="button"
+                  size="icon"
+                  variant="ghost"
+                  onClick={stop}
+                  aria-label="Detener generacion"
+                  className="shrink-0 h-8 w-8"
+                >
+                  <div className="h-4 w-4 rounded-sm bg-foreground" />
+                </Button>
+              ) : (
+                <PromptInputSubmit
+                  disabled={!input.trim()}
+                  aria-label="Enviar mensaje"
+                  className="shrink-0"
+                />
+              )}
+            </PromptInputFooter>
+          </PromptInput>
           <p className="text-xs text-muted-foreground text-center mt-2">
             Taly puede cometer errores. Verifica la informacion importante.
           </p>
-        </form>
+        </div>
       </div>
     </div>
   );
@@ -329,6 +349,9 @@ interface MessageBubbleProps {
 function MessageBubble({ message }: MessageBubbleProps) {
   const isUser = message.role === 'user';
 
+  // Skip data messages
+  if (message.role === 'data') return null;
+
   // Extract text content from parts
   const content = message.parts
     ?.filter((p): p is { type: 'text'; text: string } => p.type === 'text' && !!p.text)
@@ -337,50 +360,42 @@ function MessageBubble({ message }: MessageBubbleProps) {
 
   if (!content) return null;
 
+  // Cast role to accepted type (data is filtered out above)
+  const messageRole = message.role as 'user' | 'assistant' | 'system';
+
   return (
-    <div className={cn('flex gap-3 sm:gap-4', isUser && 'flex-row-reverse')}>
-      <Avatar role={message.role} />
-      <div
-        className={cn(
-          'flex-1 space-y-2 overflow-hidden',
-          isUser && 'flex justify-end'
-        )}
-      >
-        <div
+    <Message
+      from={messageRole}
+      className={cn(
+        'animate-in fade-in-50 slide-in-from-bottom-2 duration-300',
+        isUser && 'max-w-[85%] sm:max-w-[80%] ml-auto'
+      )}
+    >
+      <div className={cn('flex gap-3 sm:gap-4', isUser && 'flex-row-reverse')}>
+        <ChatAvatar role={message.role} />
+        <MessageContent
           className={cn(
-            'prose prose-sm dark:prose-invert max-w-none',
-            isUser && 'bg-primary text-primary-foreground rounded-2xl rounded-tr-md px-4 py-3 inline-block max-w-[85%] sm:max-w-[80%]'
+            isUser && 'bg-primary text-primary-foreground rounded-2xl rounded-tr-md px-4 py-3 shadow-sm'
           )}
         >
           {isUser ? (
             <p className="m-0 whitespace-pre-wrap leading-relaxed">{content}</p>
           ) : (
-            <ReactMarkdown
-              components={{
-                p: ({ children }) => <p className="mb-3 last:mb-0 leading-relaxed">{children}</p>,
-                ul: ({ children }) => <ul className="mb-3 ml-4 list-disc space-y-1">{children}</ul>,
-                ol: ({ children }) => <ol className="mb-3 ml-4 list-decimal space-y-1">{children}</ol>,
-                li: ({ children }) => <li className="leading-relaxed">{children}</li>,
-                strong: ({ children }) => <strong className="font-semibold text-foreground">{children}</strong>,
-                code: ({ children }) => (
-                  <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono">{children}</code>
-                ),
-              }}
-            >
+            <MessageResponse className="prose prose-sm dark:prose-invert max-w-none [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_p]:leading-relaxed">
               {content}
-            </ReactMarkdown>
+            </MessageResponse>
           )}
-        </div>
+        </MessageContent>
       </div>
-    </div>
+    </Message>
   );
 }
 
 // =============================================================================
-// AVATAR
+// CHAT AVATAR
 // =============================================================================
 
-function Avatar({ role }: { role: string }) {
+function ChatAvatar({ role }: { role: string }) {
   const isUser = role === 'user';
 
   return (
@@ -401,16 +416,61 @@ function Avatar({ role }: { role: string }) {
 }
 
 // =============================================================================
-// TYPING INDICATOR
+// LOADING INDICATOR
 // =============================================================================
 
-function TypingIndicator() {
+function LoadingIndicator({ status }: { status: string }) {
+  const getMessage = () => {
+    switch (status) {
+      case 'submitted':
+        return 'Pensando...';
+      case 'streaming':
+        return 'Escribiendo...';
+      default:
+        return 'Procesando...';
+    }
+  };
+
   return (
-    <div className="flex items-center gap-1 py-2" aria-label="Escribiendo..." role="status">
-      <span className="h-2 w-2 rounded-full bg-muted-foreground/50 animate-bounce [animation-delay:-0.3s] motion-reduce:animate-none motion-reduce:opacity-70" />
-      <span className="h-2 w-2 rounded-full bg-muted-foreground/50 animate-bounce [animation-delay:-0.15s] motion-reduce:animate-none motion-reduce:opacity-70" />
-      <span className="h-2 w-2 rounded-full bg-muted-foreground/50 animate-bounce motion-reduce:animate-none motion-reduce:opacity-70" />
+    <div
+      className="flex items-center gap-3 py-2 animate-in fade-in-50 duration-300"
+      role="status"
+      aria-label={getMessage()}
+    >
+      <Loader variant="dots" />
+      <span className="text-sm text-muted-foreground">{getMessage()}</span>
     </div>
+  );
+}
+
+// =============================================================================
+// TOOL CALL DISPLAY
+// =============================================================================
+
+function ToolCallDisplay({ tool }: { tool: ToolUIPart }) {
+  // Extract tool name from type (format: "tool-<name>")
+  const toolName = tool.type.startsWith('tool-')
+    ? tool.type.slice(5) // Remove "tool-" prefix
+    : tool.type;
+  const displayName = TOOL_LABELS[toolName] || toolName;
+
+  // Cast input/output to any to satisfy AI Elements component types
+  const toolInput = tool.input as Record<string, unknown> | undefined;
+  const toolOutput = tool.output as Record<string, unknown> | undefined;
+  const toolError = tool.errorText as string | undefined;
+
+  return (
+    <Tool defaultOpen={false}>
+      <ToolHeader
+        title={displayName}
+        type={tool.type}
+        state={tool.state}
+      />
+      <ToolContent>
+        {toolInput && <ToolInput input={toolInput} />}
+        <ToolOutput output={toolOutput} errorText={toolError} />
+      </ToolContent>
+    </Tool>
   );
 }
 
@@ -420,10 +480,10 @@ function TypingIndicator() {
 
 function WelcomeScreen({ onSuggestionClick }: { onSuggestionClick: (text: string) => void }) {
   const suggestions = [
-    { icon: Sparkles, text: 'Cual es mi balance este mes?' },
-    { icon: Sparkles, text: 'Muestra mis ultimos gastos' },
-    { icon: Sparkles, text: 'Tengo pagos pendientes?' },
-    { icon: Sparkles, text: 'En que categoria gasto mas?' },
+    'Cual es mi balance este mes?',
+    'Muestra mis ultimos gastos',
+    'Tengo pagos pendientes?',
+    'En que categoria gasto mas?',
   ];
 
   return (
@@ -436,18 +496,22 @@ function WelcomeScreen({ onSuggestionClick }: { onSuggestionClick: (text: string
         Tu asistente financiero personal. Preguntame sobre tu balance, gastos, pagos pendientes o registra nuevos gastos.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-lg px-2 sm:px-0">
-        {suggestions.map((suggestion, i) => (
-          <button
-            key={i}
-            onClick={() => onSuggestionClick(suggestion.text)}
-            className="flex items-center gap-3 p-4 rounded-xl border bg-card hover:bg-accent transition-colors text-left group min-h-[44px] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            aria-label={`Preguntar: ${suggestion.text}`}
-          >
-            <suggestion.icon className="h-5 w-5 shrink-0 text-primary group-hover:scale-110 transition-transform" />
-            <span className="text-sm leading-snug">{suggestion.text}</span>
-          </button>
-        ))}
+      <div className="w-full max-w-lg">
+        <Suggestions className="justify-center flex-wrap gap-3">
+          {suggestions.map((text, i) => (
+            <Suggestion
+              key={i}
+              suggestion={text}
+              onClick={onSuggestionClick}
+              variant="outline"
+              className="min-h-[44px] px-4 py-2 text-sm"
+              aria-label={`Preguntar: ${text}`}
+            >
+              <Sparkles className="h-4 w-4 mr-2 text-primary" />
+              {text}
+            </Suggestion>
+          ))}
+        </Suggestions>
       </div>
     </div>
   );
@@ -555,7 +619,7 @@ function ConfirmationCard({ expense, onConfirm, onCancel, onUpdate, isLoading, s
 
   return (
     <div className="flex gap-3 sm:gap-4">
-      <Avatar role="assistant" />
+      <ChatAvatar role="assistant" />
       <Card className="flex-1 max-w-md border-primary/20 bg-primary/5">
         <CardContent className="p-4">
           <div className="flex items-center justify-between mb-3">
@@ -586,7 +650,7 @@ function ConfirmationCard({ expense, onConfirm, onCancel, onUpdate, isLoading, s
                   min="0"
                   value={expense.amount}
                   onChange={(e) => onUpdate({ amount: parseFloat(e.target.value) || 0 })}
-                  className="h-8 w-32 text-right"
+                  className="h-10 w-32 text-right"
                   aria-label="Monto del gasto"
                 />
               ) : (
@@ -602,7 +666,7 @@ function ConfirmationCard({ expense, onConfirm, onCancel, onUpdate, isLoading, s
                   type="text"
                   value={expense.description}
                   onChange={(e) => onUpdate({ description: e.target.value })}
-                  className="h-8 flex-1 text-right"
+                  className="h-10 flex-1 text-right"
                   aria-label="Descripcion del gasto"
                 />
               ) : (
@@ -618,7 +682,7 @@ function ConfirmationCard({ expense, onConfirm, onCancel, onUpdate, isLoading, s
                   type="text"
                   value={expense.categoryName}
                   onChange={(e) => onUpdate({ categoryName: e.target.value })}
-                  className="h-8 flex-1 text-right"
+                  className="h-10 flex-1 text-right"
                   aria-label="Categoria del gasto"
                 />
               ) : (
@@ -634,7 +698,7 @@ function ConfirmationCard({ expense, onConfirm, onCancel, onUpdate, isLoading, s
                   value={expense.paymentStatus}
                   onValueChange={(value) => onUpdate({ paymentStatus: value as 'pagado' | 'pendiente' })}
                 >
-                  <SelectTrigger className="h-8 w-32" aria-label="Estado del pago">
+                  <SelectTrigger className="min-h-[44px] w-36" aria-label="Estado del pago">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
