@@ -12,7 +12,8 @@ import {
   Download,
   Receipt,
   History,
-  LogOut
+  LogOut,
+  Sparkles
 } from 'lucide-react';
 import Image from 'next/image';
 import { signOut } from '@/lib/auth-actions';
@@ -133,6 +134,16 @@ function DesktopNav({ t, brandName, user, profile }: { t: any; brandName: string
         {/* Main Navigation */}
         <div className="flex-1 overflow-auto py-2">
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+            {/* Taly - AI Assistant */}
+            <Link
+              href="/dashboard/chat"
+              className="flex items-center gap-3 rounded-lg px-3 py-2.5 mb-2 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors group"
+            >
+              <Sparkles className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
+              <span className="font-medium">Taly</span>
+              <span className="ml-auto text-[10px] font-medium px-1.5 py-0.5 rounded bg-primary/10 text-primary">AI</span>
+            </Link>
+
             <NavSection
               title={t('navigation.sections.expense')}
               icon="DollarSign"
@@ -243,6 +254,16 @@ function MobileNav({ t, brandName, user, profile }: { t: any; brandName: string;
               >
                 <Home className="h-4 w-4" />
                 {t('navigation.dashboard')}
+              </Link>
+
+              {/* Taly - AI Assistant */}
+              <Link
+                href="/dashboard/chat"
+                className="flex items-center gap-3 rounded-lg px-3 py-2.5 min-h-[44px] text-muted-foreground hover:text-primary hover:bg-primary/10 group"
+              >
+                <Sparkles className="h-4 w-4 text-primary" />
+                <span>Taly</span>
+                <span className="ml-auto text-[10px] font-medium px-1.5 py-0.5 rounded bg-primary/10 text-primary">AI</span>
               </Link>
 
               {/* Sección Gasto */}

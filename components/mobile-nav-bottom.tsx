@@ -17,7 +17,8 @@ import {
   User,
   Settings,
   Shield,
-  Download
+  Download,
+  Sparkles
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
@@ -34,10 +35,11 @@ export function MobileNavBottom() {
   const [moreOpen, setMoreOpen] = useState(false);
   const t = useTranslations('pages.dashboard.navigation');
 
-  // Items principales (3 máximo para mejor UX mobile)
+  // Items principales
   const primaryLinks = [
     { href: '/dashboard', label: t('home'), icon: Home },
-    { href: '/dashboard/expenses', label: t('expenses'), icon: DollarSign }
+    { href: '/dashboard/expenses', label: t('expenses'), icon: DollarSign },
+    { href: '/dashboard/chat', label: 'Taly', icon: Sparkles }
   ];
 
   // Items secundarios en el menú "Más" - Agrupados por sección
@@ -139,7 +141,7 @@ export function MobileNavBottom() {
         {/* Active indicator - top gradient bar */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
 
-        <div className="grid grid-cols-3 gap-2 px-3 py-3">
+        <div className="grid grid-cols-4 gap-1 px-2 py-3">
           {/* Primary navigation items */}
           {primaryLinks.map(({ href, label, icon: Icon }) => {
             const isActive = pathname === href;

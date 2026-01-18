@@ -18,6 +18,8 @@
     "screenshots:optimize": "tsx scripts/optimize-screenshots.ts"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^3.0.12",
+    "@ai-sdk/react": "^3.0.41",
     "@fontsource-variable/zalando-sans-expanded": "^5.2.1",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
@@ -45,6 +47,7 @@
     "@types/react-dom": "19.0.0",
     "@vercel/analytics": "^1.4.1",
     "@vercel/postgres": "^0.10.0",
+    "ai": "^6.0.39",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -66,6 +69,7 @@
     "react": "19.0.0",
     "react-day-picker": "^9.13.0",
     "react-dom": "19.0.0",
+    "react-markdown": "^10.1.0",
     "recharts": "^3.5.1",
     "server-only": "^0.0.1",
     "tailwind-merge": "^2.6.0",

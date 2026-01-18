@@ -603,5 +603,51 @@
     "save": "Guardar",
     "delete": "Eliminar",
     "edit": "Editar"
+  },
+  "taly": {
+    "title": "Taly",
+    "subtitle": "Tu asistente financiero",
+    "placeholder": "Escribe un mensaje...",
+    "send": "Enviar mensaje",
+    "sending": "Enviando...",
+    "clearChat": "Limpiar conversacion",
+    "openChat": "Abrir chat con Taly",
+    "closeChat": "Cerrar chat",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "welcome": {
+      "title": "Hola, soy Taly",
+      "subtitle": "Tu asistente financiero personal. Puedo ayudarte a:",
+      "features": {
+        "balance": "Ver tu balance y gastos",
+        "register": "Registrar gastos rapidamente",
+        "pending": "Revisar pagos pendientes",
+        "analyze": "Analizar gastos por categoria"
+      },
+      "hint": "Prueba escribiendo: \"Cuanto tengo?\" o \"Gaste 500 en uber\""
+    },
+    "confirmation": {
+      "expense": {
+        "title": "Registrar gasto",
+        "description": "Descripcion",
+        "category": "Categoria",
+        "date": "Fecha",
+        "status": "Estado",
+        "paid": "Pagado",
+        "pending": "Pendiente"
+      }
+    },
+    "messages": {
+      "expenseCreated": "Gasto registrado correctamente.",
+      "cancelled": "Operacion cancelada."
+    },
+    "errors": {
+      "rateLimit": "Has alcanzado el limite de mensajes. Intenta de nuevo mas tarde.",
+      "apiError": "Hubo un problema al procesar tu mensaje. Intenta de nuevo.",
+      "offTopic": "Solo puedo ayudarte con temas de finanzas personales.",
+      "unauthorized": "Necesitas iniciar sesion para usar Taly.",
+      "unknown": "Error desconocido"
+    }
   }
 }
