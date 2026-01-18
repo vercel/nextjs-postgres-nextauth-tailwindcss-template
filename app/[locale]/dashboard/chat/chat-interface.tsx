@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import ReactMarkdown from 'react-markdown';
 import { confirmExpense } from '@/lib/ai/actions';
@@ -48,7 +50,7 @@ export function ChatInterface() {
 
   // Parse messages to detect pending expense confirmations
   React.useEffect(() => {
-    if (messages.length === 0) return;
+    if (messages.length === 0 || pendingExpense) return;
 
     const lastMessage = messages[messages.length - 1];
     if (lastMessage.role !== 'assistant') return;
@@ -68,117 +70,75 @@ export function ChatInterface() {
     // Check if this looks like an expense confirmation message
     const isExpenseConfirmation =
       normalizedContent.includes('gasto preparado') ||
-      normalizedContent.includes('registrar') && normalizedContent.includes('gasto') ||
+      (normalizedContent.includes('registrar') && normalizedContent.includes('gasto')) ||
       normalizedContent.includes('voy a registrar') ||
       (normalizedContent.includes('monto:') &&
        normalizedContent.includes('descripcion:') &&
        normalizedContent.includes('categoria:')) ||
       (normalizedContent.includes('confirma') && normalizedContent.includes('guardarlo'));
 
-    if (isExpenseConfirmation && !pendingExpense) {
-      // Helper function to parse currency amount
-      const parseAmount = (str: string): number => {
-        if (!str) return 0;
-        // Remove currency symbols, spaces, and other non-numeric chars except commas and dots
-        const cleaned = str.replace(/[^\d,.\-]/g, '');
-        if (!cleaned) return 0;
+    if (!isExpenseConfirmation) return;
 
-        // Determine format based on position of comma vs dot
-        let normalized = cleaned;
-        if (normalized.includes(',') && normalized.includes('.')) {
-          const lastComma = normalized.lastIndexOf(',');
-          const lastDot = normalized.lastIndexOf('.');
-          if (lastComma > lastDot) {
-            // European format: 1.000,50 -> 1000.50
-            normalized = normalized.replace(/\./g, '').replace(',', '.');
-          } else {
-            // US format: 1,000.50 -> 1000.50
-            normalized = normalized.replace(/,/g, '');
-          }
-        } else if (normalized.includes(',')) {
-          const parts = normalized.split(',');
-          // Check if comma is decimal separator (e.g., "100,50") or thousands (e.g., "1,000")
-          if (parts.length === 2 && parts[1].length <= 2) {
-            normalized = normalized.replace(',', '.');
-          } else {
-            // Thousands separator
-            normalized = normalized.replace(/,/g, '');
-          }
-        }
-        return parseFloat(normalized) || 0;
-      };
+    // Helper function to parse currency amount
+    const parseAmount = (str: string): number => {
+      if (!str) return 0;
+      const cleaned = str.replace(/[^\d,.\-]/g, '');
+      if (!cleaned) return 0;
 
-      // Normalize content: replace various line endings and bullets
-      const normalizedText = content
-        .replace(/\r\n/g, '\n')
-        .replace(/\r/g, '\n');
-
-      // Split into lines for more reliable parsing
-      const lines = normalizedText.split('\n').map(l => l.trim());
-
-      // Find amount - look for line containing "Monto"
-      let amount = 0;
-      for (const line of lines) {
-        if (/[Mm]onto/i.test(line)) {
-          // Extract everything after "Monto" that looks like a number
-          const valueMatch = line.match(/[Mm]onto[:\s\-*]*\$?\s*([\d,.\s]+)/i);
-          if (valueMatch) {
-            amount = parseAmount(valueMatch[1]);
-            break;
-          }
-        }
+      let normalized = cleaned;
+      if (normalized.includes(',') && normalized.includes('.')) {
+        const lastComma = normalized.lastIndexOf(',');
+        const lastDot = normalized.lastIndexOf('.');
+        normalized = lastComma > lastDot
+          ? normalized.replace(/\./g, '').replace(',', '.')
+          : normalized.replace(/,/g, '');
+      } else if (normalized.includes(',')) {
+        const parts = normalized.split(',');
+        normalized = parts.length === 2 && parts[1].length <= 2
+          ? normalized.replace(',', '.')
+          : normalized.replace(/,/g, '');
       }
+      return parseFloat(normalized) || 0;
+    };
 
-      // Find description - look for line containing "Descripcion"
-      let description = '';
-      for (const line of lines) {
-        if (/[Dd]escripci[oó]n/i.test(line)) {
-          // Extract everything after "Descripcion:"
-          const valueMatch = line.match(/[Dd]escripci[oó]n[:\s\-*]+(.+)/i);
-          if (valueMatch) {
-            description = valueMatch[1].trim();
-            break;
-          }
-        }
+    // Split into lines and parse all fields in a single pass
+    const lines = content.replace(/\r\n?/g, '\n').split('\n').map(l => l.trim());
+
+    let amount = 0;
+    let description = '';
+    let categoryName = '';
+
+    for (const line of lines) {
+      if (!amount && /[Mm]onto/i.test(line)) {
+        const match = line.match(/[Mm]onto[:\s\-*]*\$?\s*([\d,.\s]+)/i);
+        if (match) amount = parseAmount(match[1]);
       }
-
-      // Find category - look for line containing "Categoria"
-      let categoryName = '';
-      for (const line of lines) {
-        if (/[Cc]ategor[ií]a/i.test(line)) {
-          // Extract everything after "Categoria:"
-          const valueMatch = line.match(/[Cc]ategor[ií]a[:\s\-*]+(.+)/i);
-          if (valueMatch) {
-            categoryName = valueMatch[1].trim();
-            break;
-          }
-        }
+      if (!description && /[Dd]escripci[oó]n/i.test(line)) {
+        const match = line.match(/[Dd]escripci[oó]n[:\s\-*]+(.+)/i);
+        if (match) description = match[1].trim();
       }
-
-      // Find status
-      const paymentStatus = normalizedText.toLowerCase().includes('pendiente') ? 'pendiente' : 'pagado';
-
-      // Find impact (balance remaining)
-      let impact = '';
-      const impactMatch = normalizedText.match(/[Tt]e quedan?\s*:?\s*(\$?[\d,.\s]+)/i);
-      if (impactMatch) {
-        impact = `Balance: ${impactMatch[1].trim()}`;
+      if (!categoryName && /[Cc]ategor[ií]a/i.test(line)) {
+        const match = line.match(/[Cc]ategor[ií]a[:\s\-*]+(.+)/i);
+        if (match) categoryName = match[1].trim();
       }
+      // Early exit if all fields found
+      if (amount && description && categoryName) break;
+    }
 
-      console.log('TALY Parse Debug:', { lines: lines.slice(0, 6), amount, description, categoryName });
+    const paymentStatus = content.toLowerCase().includes('pendiente') ? 'pendiente' : 'pagado';
+    const impactMatch = content.match(/[Tt]e quedan?\s*:?\s*(\$?[\d,.\s]+)/i);
 
-      if (amount > 0) {
-        setPendingExpense({
-          amount,
-          description: description || 'Sin descripcion',
-          categoryId: 0,
-          categoryName: categoryName || 'Sin categoria',
-          date: new Date().toISOString().split('T')[0],
-          paymentStatus,
-          impact: impact || undefined,
-        });
-        setConfirmationStatus('idle');
-      }
+    if (amount > 0) {
+      setPendingExpense({
+        amount,
+        description: description || 'Sin descripcion',
+        categoryId: 0,
+        categoryName: categoryName || 'Sin categoria',
+        date: new Date().toISOString().split('T')[0],
+        paymentStatus,
+        impact: impactMatch ? `Balance: ${impactMatch[1].trim()}` : undefined,
+      });
+      setConfirmationStatus('idle');
     }
   }, [messages, pendingExpense]);
 
@@ -209,6 +169,11 @@ export function ChatInterface() {
   const handleCancel = () => {
     setPendingExpense(null);
     setConfirmationStatus('idle');
+  };
+
+  const handleUpdateExpense = (updates: Partial<PendingExpense>) => {
+    if (!pendingExpense) return;
+    setPendingExpense({ ...pendingExpense, ...updates });
   };
 
   // Auto-scroll to bottom
@@ -290,6 +255,7 @@ export function ChatInterface() {
               expense={pendingExpense}
               onConfirm={handleConfirm}
               onCancel={handleCancel}
+              onUpdate={handleUpdateExpense}
               isLoading={isConfirming}
               status={confirmationStatus}
             />
@@ -302,7 +268,7 @@ export function ChatInterface() {
       </ScrollArea>
 
       {/* Input Area */}
-      <div className="border-t bg-background p-4">
+      <div className="border-t p-4">
         <form onSubmit={handleSubmit} className="relative max-w-3xl mx-auto">
           <div className="relative flex items-end gap-2">
             <Textarea
@@ -572,45 +538,115 @@ function ErrorMessage({ error, onRetry }: ErrorMessageProps) {
 }
 
 // =============================================================================
-// CONFIRMATION CARD
+// CONFIRMATION CARD (Editable)
 // =============================================================================
 
 interface ConfirmationCardProps {
   expense: PendingExpense;
   onConfirm: () => void;
   onCancel: () => void;
+  onUpdate: (updates: Partial<PendingExpense>) => void;
   isLoading: boolean;
   status: 'idle' | 'success' | 'error';
 }
 
-function ConfirmationCard({ expense, onConfirm, onCancel, isLoading, status }: ConfirmationCardProps) {
+function ConfirmationCard({ expense, onConfirm, onCancel, onUpdate, isLoading, status }: ConfirmationCardProps) {
+  const [isEditing, setIsEditing] = React.useState(false);
+
   return (
     <div className="flex gap-3 sm:gap-4">
       <Avatar role="assistant" />
       <Card className="flex-1 max-w-md border-primary/20 bg-primary/5">
         <CardContent className="p-4">
-          <div className="flex items-center gap-2 mb-3">
-            <Check className="h-4 w-4 text-primary" />
-            <span className="font-medium text-sm">Confirmar gasto</span>
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-primary" />
+              <span className="font-medium text-sm">Confirmar gasto</span>
+            </div>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsEditing(!isEditing)}
+              className="h-8 px-2 text-xs"
+              disabled={isLoading}
+            >
+              {isEditing ? 'Listo' : 'Editar'}
+            </Button>
           </div>
 
-          <div className="space-y-2 text-sm mb-4">
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Monto:</span>
-              <span className="font-semibold">${expense.amount.toLocaleString('es-AR')}</span>
+          <div className="space-y-3 text-sm mb-4">
+            {/* Monto */}
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-muted-foreground shrink-0">Monto:</span>
+              {isEditing ? (
+                <Input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  value={expense.amount}
+                  onChange={(e) => onUpdate({ amount: parseFloat(e.target.value) || 0 })}
+                  className="h-8 w-32 text-right"
+                  aria-label="Monto del gasto"
+                />
+              ) : (
+                <span className="font-semibold">${expense.amount.toLocaleString('es-AR')}</span>
+              )}
             </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Descripcion:</span>
-              <span>{expense.description}</span>
+
+            {/* Descripcion */}
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-muted-foreground shrink-0">Descripcion:</span>
+              {isEditing ? (
+                <Input
+                  type="text"
+                  value={expense.description}
+                  onChange={(e) => onUpdate({ description: e.target.value })}
+                  className="h-8 flex-1 text-right"
+                  aria-label="Descripcion del gasto"
+                />
+              ) : (
+                <span className="truncate max-w-[180px]">{expense.description}</span>
+              )}
             </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Categoria:</span>
-              <span>{expense.categoryName}</span>
+
+            {/* Categoria */}
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-muted-foreground shrink-0">Categoria:</span>
+              {isEditing ? (
+                <Input
+                  type="text"
+                  value={expense.categoryName}
+                  onChange={(e) => onUpdate({ categoryName: e.target.value })}
+                  className="h-8 flex-1 text-right"
+                  aria-label="Categoria del gasto"
+                />
+              ) : (
+                <span className="truncate max-w-[180px]">{expense.categoryName}</span>
+              )}
             </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Estado:</span>
-              <span>{expense.paymentStatus === 'pagado' ? 'Pagado' : 'Pendiente'}</span>
+
+            {/* Estado */}
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-muted-foreground shrink-0">Estado:</span>
+              {isEditing ? (
+                <Select
+                  value={expense.paymentStatus}
+                  onValueChange={(value) => onUpdate({ paymentStatus: value as 'pagado' | 'pendiente' })}
+                >
+                  <SelectTrigger className="h-8 w-32" aria-label="Estado del pago">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="pagado">Pagado</SelectItem>
+                    <SelectItem value="pendiente">Pendiente</SelectItem>
+                  </SelectContent>
+                </Select>
+              ) : (
+                <span>{expense.paymentStatus === 'pagado' ? 'Pagado' : 'Pendiente'}</span>
+              )}
             </div>
+
             {expense.impact && (
               <div className="pt-2 border-t text-muted-foreground">
                 {expense.impact}
@@ -627,7 +663,7 @@ function ConfirmationCard({ expense, onConfirm, onCancel, isLoading, status }: C
           <div className="flex gap-2">
             <Button
               onClick={onConfirm}
-              disabled={isLoading}
+              disabled={isLoading || expense.amount <= 0}
               size="sm"
               className="flex-1 min-h-[44px]"
             >
