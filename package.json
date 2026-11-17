@@ -3,9 +3,11 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@mockatoo/connect-authjs": "^0.2.0",
     "@neondatabase/serverless": "^0.9.5",
     "@radix-ui/react-dialog": "^1.1.4",
     "@radix-ui/react-dropdown-menu": "^2.1.4",
@@ -42,5 +44,9 @@
     "singleQuote": true,
     "tabWidth": 2,
     "trailingComma": "none"
+  },
+  "devDependencies": {
+    "@next/env": "^15.5.7",
+    "@playwright/test": "^1.65.1"
   }
 }
