@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@mockatoo/connect-authjs':
-        specifier: ^0.2.0
-        version: 0.2.0(next-auth@5.0.0-beta.25(next@15.5.7(@playwright/test@1.65.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0))
+        specifier: ^0.2.1
+        version: 0.2.1(next-auth@5.0.0-beta.25(next@15.5.7(@playwright/test@1.65.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0))
       '@neondatabase/serverless':
         specifier: ^0.9.5
         version: 0.9.5
@@ -584,8 +584,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@mockatoo/connect-authjs@0.2.0':
-    resolution: {integrity: sha512-b1wWE+BqQvYtgpl8Oh/NAW0fB3/7+2j7mjNmMH6KA8VjdGR5+PeKEWxTcAMrAs9adnj/BO1dQCtrC7SurrrOsA==}
+  '@mockatoo/connect-authjs@0.2.1':
+    resolution: {integrity: sha512-WeM6u5HPOpjxAmA3s8K7qP1DrXTUHoBxupHGtfZCqLGbGlOlSM0xwkgmbwrAqkmgTOT9R6xUQ6azNWA0CPfcww==}
     peerDependencies:
       next-auth: ^5.0.0-beta.23
 
@@ -2149,7 +2149,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@mockatoo/connect-authjs@0.2.0(next-auth@5.0.0-beta.25(next@15.5.7(@playwright/test@1.65.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0))':
+  '@mockatoo/connect-authjs@0.2.1(next-auth@5.0.0-beta.25(next@15.5.7(@playwright/test@1.65.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0))':
     dependencies:
       next-auth: 5.0.0-beta.25(next@15.5.7(@playwright/test@1.65.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
 
